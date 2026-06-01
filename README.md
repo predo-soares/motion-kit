@@ -1,43 +1,60 @@
-# Astro Starter Kit: Minimal
+# motion-kit-astro
+
+Astro-native experiment for serving a custom `shadcn` registry with animated web components.
+
+This repo now exposes registry JSON from `public/r` and keeps the source items in `src/registry/new-york/blocks`.
+
+## Items
+
+- `card-stack`
+- `magnetic`
+- `magnetic-lit`
+- `split-hover`
+- `split-reveal`
+- `stacking-words`
+- `text-loop`
+- `text-repel`
+- `text-scramble`
+- `weight-wave`
+
+## Local test
+
+1. Start the registry host:
 
 ```sh
-pnpm create astro@latest -- --template minimal
+pnpm dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+2. In another Astro project, add the local registry namespace:
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```sh
+pnpm dlx shadcn@latest registry add @motion-kit=http://localhost:4321/r/{name}.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+3. Install one of the items:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```sh
+pnpm dlx shadcn@latest add @motion-kit/magnetic
+pnpm dlx shadcn@latest add @motion-kit/text-loop
+pnpm dlx shadcn@latest add @motion-kit/card-stack
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
+4. Import the installed files in the consumer app:
 
-## 🧞 Commands
+```astro
+---
+import "@/components/motion-kit/magnetic-element.ts"
+---
 
-All commands are run from the root of the project, from a terminal:
+<motion-magnetic>
+  <button>Hover me</button>
+</motion-magnetic>
+```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+## Notes
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- A block is included in the registry when it defines `src/registry/new-york/blocks/<name>/component.json`.
+- Run `pnpm registry:compose` to rebuild `registry.json` and `public/r/registry.json` from those manifests.
+- The registry files served from `public/r` are still static JSON.
+- The distributed items are Custom Elements and helper files, not React components.
+- `pnpm registry:build` is reserved for later validation against the `shadcn` builder.
