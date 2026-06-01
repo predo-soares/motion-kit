@@ -1,0 +1,14 @@
+{
+  "name": "marquee",
+  "type": "registry:component",
+  "title": "Marquee",
+  "description": "Scroll-aware infinite marquee. Place any HTML inside — content is duplicated to ensure seamless looping, with speed that reacts to scroll velocity.",
+  "dependencies": ["gsap"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/marquee/marquee-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/marquee-element.ts"
+    }
+  ]
+}

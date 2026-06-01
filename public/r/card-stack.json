@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "card-stack",
+  "title": "Card Stack",
+  "description": "Scroll-driven sticky card stack with GSAP ScrollTrigger. Includes the CardStackItem companion.",
+  "dependencies": [
+    "gsap"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/card-stack/card-stack.astro",
+      "content": "---\nexport interface Props {\n  /**\n   * Scale difference between stacked cards.\n   * @default 0.05\n   */\n  scaleFactor?: number\n  /**\n   * Vertical pixel offset between stacked cards.\n   * @default 10\n   */\n  offset?: number\n  /**\n   * Distance from top of scroller where the first card pins.\n   * @default 0\n   */\n  topOffset?: number\n  /**\n   * CSS selector for a custom scroll container. Defaults to window.\n   */\n  scrollElement?: string\n  class?: string\n}\n\nconst {\n  scaleFactor = 0.05,\n  offset = 10,\n  topOffset = 0,\n  scrollElement,\n  class: className = \"\",\n} = Astro.props\n---\n\n<div\n  data-card-stack\n  data-scale-factor={scaleFactor}\n  data-offset={offset}\n  data-top-offset={topOffset}\n  data-scroll-element={scrollElement}\n  class={\"relative w-full\" + (className ? \" \" + className : \"\")}\n>\n  <slot />\n</div>\n\n<script>\n  import { gsap } from \"gsap\"\n  import { ScrollTrigger } from \"gsap/ScrollTrigger\"\n\n  gsap.registerPlugin(ScrollTrigger)\n\n  document.querySelectorAll<HTMLElement>(\"[data-card-stack]\").forEach((container) => {\n    const scaleFactor = Number(container.dataset.scaleFactor ?? 0.05)\n    const offset = Number(container.dataset.offset ?? 10)\n    const topOffset = Number(container.dataset.topOffset ?? 0)\n    const scrollElementSelector = container.dataset.scrollElement ?? \"\"\n\n    const cards = Array.from(\n      container.querySelectorAll<HTMLElement>(\".card-stack-item\"),\n    )\n    if (!cards.length) return\n\n    const resolvedScroller = scrollElementSelector\n      ? document.querySelector<HTMLElement>(scrollElementSelector)\n      : null\n    const scroller = resolvedScroller ?? window\n\n    const scrollerHeight =\n      scroller instanceof HTMLElement ? scroller.clientHeight : window.innerHeight\n\n    const lastCard = cards[cards.length - 1]\n    const targetPos = topOffset + (cards.length - 1) * offset\n    const extraPadding = Math.max(0, scrollerHeight - lastCard.offsetHeight - targetPos)\n\n    if (extraPadding > 0) {\n      gsap.set(container, { paddingBottom: extraPadding })\n    }\n\n    const ctx = gsap.context(() => {\n      cards.forEach((card, index) => {\n        const cardTop = topOffset + index * offset\n\n        gsap.set(card, {\n          transformOrigin: \"top center\",\n          zIndex: index,\n          position: \"sticky\",\n          top: `${cardTop}px`,\n        })\n\n        if (index < cards.length - 1) {\n          gsap.timeline({\n            scrollTrigger: {\n              trigger: card,\n              start: `top top+=${cardTop}`,\n              endTrigger: container,\n              end: \"bottom bottom\",\n              scrub: true,\n              scroller,\n              invalidateOnRefresh: true,\n            },\n          }).to(card, {\n            scale: 1 - (cards.length - 1 - index) * scaleFactor,\n            ease: \"none\",\n          })\n        }\n      })\n    }, container)\n  })\n</script>\n",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/card-stack.astro"
+    },
+    {
+      "path": "src/registry/new-york/blocks/card-stack/card-stack-item.astro",
+      "content": "---\nexport interface Props {\n  class?: string\n  style?: string\n  [key: string]: unknown\n}\n\nconst { class: className = \"\", style, ...rest } = Astro.props\n---\n\n<div\n  class={\"card-stack-item\" + (className ? \" \" + className : \"\")}\n  {style}\n  {...rest}\n>\n  <slot />\n</div>\n\n<style>\n  .card-stack-item {\n    position: relative;\n    display: flex;\n    flex-direction: column;\n    will-change: transform;\n  }\n</style>\n",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/card-stack-item.astro"
+    }
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "radial-gallery",
+  "type": "registry:component",
+  "title": "Radial Gallery",
+  "description": "Circular rotating image gallery. Items are evenly spaced around a ring that spins continuously. Peek the ring below the fold by setting the offset attribute.",
+  "dependencies": ["lit", "gsap"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/radial-gallery/radial-gallery-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/radial-gallery-element.ts"
+    }
+  ]
+}

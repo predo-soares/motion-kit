@@ -1,0 +1,14 @@
+{
+  "name": "slideshow",
+  "type": "registry:component",
+  "title": "Slideshow",
+  "description": "Horizontal parallax slideshow with thumbnail navigation. Each slide transitions with a counterpart inner-image parallax offset.",
+  "dependencies": ["lit", "gsap"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/slideshow/slideshow-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/slideshow-element.ts"
+    }
+  ]
+}

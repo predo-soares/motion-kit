@@ -1,0 +1,14 @@
+{
+  "name": "logo-carousel",
+  "type": "registry:component",
+  "title": "Logo Carousel",
+  "description": "Cycling logo carousel distributed across columns. Logos blur-and-slide between items at a configurable interval with a staggered column offset.",
+  "dependencies": ["lit", "gsap"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/logo-carousel/logo-carousel-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/logo-carousel-element.ts"
+    }
+  ]
+}

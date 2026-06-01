@@ -1,0 +1,14 @@
+{
+  "name": "infinite-physics-gallery",
+  "type": "registry:component",
+  "title": "Infinite Physics Gallery",
+  "description": "Infinite physics-based 2D image/video gallery. Drag or scroll to navigate a virtual grid with inertia and edge auto-scroll.",
+  "dependencies": ["lit", "gsap"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/infinite-physics-gallery/infinite-physics-gallery-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/infinite-physics-gallery-element.ts"
+    }
+  ]
+}
