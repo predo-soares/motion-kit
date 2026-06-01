@@ -1,0 +1,126 @@
+---
+import ComponentBrowserShell from "@/components/docs/component-browser-shell.astro";
+import CodeSnippet from "@/components/docs/code-snippet.astro";
+import ComponentPreviewScripts from "@/components/docs/component-preview-scripts.astro";
+import SiteLayout from "@/layouts/site-layout.astro";
+import {
+  componentCatalog,
+  type ComponentCatalogEntry,
+} from "@/lib/component-catalog";
+
+export function getStaticPaths() {
+  return componentCatalog.map((component) => ({
+    params: { slug: component.slug },
+    props: { component },
+  }));
+}
+
+interface Props {
+  component: ComponentCatalogEntry;
+}
+
+const { component } = Astro.props;
+
+const demoModules = import.meta.glob<{ default: any }>(
+  "../../components/demos/*-demo.astro",
+  { eager: true },
+);
+const demoModule =
+  demoModules[`../../components/demos/${component.slug}-demo.astro`];
+
+if (!demoModule) {
+  throw new Error(`Missing demo partial for "${component.slug}".`);
+}
+
+const DemoComponent = demoModule.default;
+
+const installCommand = `pnpm dlx shadcn@latest add https://motion-kit-astro.vercel.app/r/${component.slug}.json`;
+const importSnippet = component.files
+  .map(({ target }) => {
+    const aliasPath = target.startsWith("src/")
+      ? `@/${target.slice(4)}`
+      : target;
+    return `import "${aliasPath}";`;
+  })
+  .join("\n");
+---
+
+<SiteLayout
+  title={`${component.title} — Motion Kit`}
+  description={component.summary}
+>
+  <ComponentBrowserShell currentSlug={component.slug}>
+    <article class="flex w-full max-w-[600px] min-w-0 flex-col gap-10 pb-16">
+      <header class="flex flex-col gap-5">
+        <div class="flex flex-col gap-2">
+          <p
+            class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400"
+          >
+            {component.group}
+          </p>
+          <h1
+            class="text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl"
+          >
+            {component.title}
+          </h1>
+        </div>
+        <p class="max-w-3xl text-base leading-7 text-slate-600 sm:text-lg">
+          {component.summary}
+        </p>
+        {
+          component.dependencies.length ? (
+            <ul class="flex flex-wrap gap-2">
+              {component.dependencies.map((dependency) => (
+                <li class="rounded-full border border-slate-200 bg-white px-3 py-1 text-sm font-medium text-slate-600">
+                  {dependency}
+                </li>
+              ))}
+            </ul>
+          ) : null
+        }
+      </header>
+
+      <section class="flex flex-col gap-5">
+        <header class="flex flex-col gap-2">
+          <h2 class="text-2xl font-semibold tracking-tight text-slate-950">
+            Installation
+          </h2>
+          <p class="text-sm leading-6 text-slate-500">
+            Install the registry item, then import the generated custom element
+            files where you want to use the component.
+          </p>
+        </header>
+
+        <div class="grid w-full min-w-0 gap-5">
+          <section class="flex min-w-0 flex-col gap-3">
+            <h3 class="text-base font-medium tracking-tight text-slate-900">
+              1. Install the component
+            </h3>
+            <CodeSnippet code={installCommand} label="Command" />
+          </section>
+
+          <section class="flex min-w-0 flex-col gap-3">
+            <h3 class="text-base font-medium tracking-tight text-slate-900">
+              2. Import the component
+            </h3>
+            <CodeSnippet code={importSnippet} label="Imports" />
+          </section>
+        </div>
+      </section>
+
+      <section class="flex flex-col gap-5 w-full">
+        <header class="flex flex-col gap-2">
+          <h2 class="text-2xl font-semibold tracking-tight text-slate-950">
+            Usage
+          </h2>
+          <p class="text-sm leading-6 text-slate-500">
+            The live preview below is interactive. Use replay or fullscreen
+            directly inside the demo surface.
+          </p>
+        </header>
+        <DemoComponent />
+      </section>
+    </article>
+  </ComponentBrowserShell>
+  <ComponentPreviewScripts />
+</SiteLayout>
