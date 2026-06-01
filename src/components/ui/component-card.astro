@@ -1,0 +1,137 @@
+---
+import refreshIcon from "@tabler/icons/outline/refresh.svg?raw";
+
+interface Props {
+  title?: string;
+  description?: string;
+  /**
+   * Makes the preview area a fixed-height scrollable container.
+   * Pass a unique id so scroll-driven components (e.g. CardStack)
+   * can target it with scrollElement="#{id}".
+   */
+  scrollable?: boolean;
+  id?: string;
+  showTitle?: boolean;
+  showReplay?: boolean;
+}
+
+const {
+  title,
+  description,
+  scrollable = false,
+  id,
+  showTitle = false,
+  showReplay = true,
+} = Astro.props;
+const hasControls = Astro.slots.has("controls");
+const hasHeader = Boolean((showTitle && title) || showReplay);
+const showTitlePill = Boolean(showTitle && title);
+const previewBackgroundClass =
+  "bg-slate-50 [background-image:radial-gradient(circle,rgba(203,213,225,0.9)_1px,transparent_1.2px)] [background-size:32px_32px]";
+---
+
+<figure
+  data-component-card
+  class="relative m-0 flex flex-col border border-slate-200 rounded-3xl overflow-hidden bg-slate-50 cursor-zoom-in"
+>
+  <!-- Header: title + actions -->
+  {
+    hasHeader ? (
+      <div
+        class={`pointer-events-none absolute z-20 inset-x-0 top-0 flex items-center gap-4 px-3 py-3 ${showTitlePill ? "justify-between" : "justify-end"}`}
+      >
+        {showTitlePill ? (
+          <div class="px-2 border border-slate-200 rounded-2xl bg-white text-slate-600">
+            <span class="text-sm font-medium text-slate-800 tracking-tight">
+              {title}
+            </span>
+          </div>
+        ) : null}
+        {showReplay ? (
+          <div class="flex items-center gap-2 pointer-events-auto">
+            <button
+              type="button"
+              data-card-action="replay"
+              class="flex-shrink-0 inline-flex items-center justify-center w-7 h-7 border border-slate-200 rounded-2xl bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900 cursor-pointer transition-colors"
+              aria-label="Replay"
+            >
+              <span
+                aria-hidden="true"
+                class="[&_svg]:block [&_svg]:h-3 [&_svg]:w-3"
+                set:html={refreshIcon}
+              />
+            </button>
+          </div>
+        ) : null}
+      </div>
+    ) : null
+  }
+
+  <!-- Preview -->
+  {
+    scrollable ? (
+      <div
+        id={id}
+        data-preview
+        class={`relative h-[480px] overflow-y-auto overscroll-contain ${previewBackgroundClass}`}
+      >
+        <div data-preview-content class="min-h-full">
+          <slot />
+        </div>
+
+        {description ? (
+          <figcaption class="pointer-events-none absolute inset-x-0 bottom-0 z-10 overflow-hidden">
+            <motion-progressive-blur
+              aria-hidden="true"
+              direction="bottom"
+              blur-layers="3"
+              blur-intensity="0.23"
+              fade-color="rgba(248, 250, 252, 0.9)"
+              class="absolute inset-x-0 bottom-0 h-[72%] block"
+            />
+
+            <div class="relative z-10 px-6 pb-4 pt-12 text-center text-xs text-slate-500 italic">
+              {description}
+            </div>
+          </figcaption>
+        ) : null}
+      </div>
+    ) : (
+      <div
+        data-preview
+        class={`relative flex-1 z-0 flex items-center justify-center min-h-[420px] ${previewBackgroundClass}`}
+      >
+        <div data-preview-content class="w-full">
+          <slot />
+        </div>
+
+        {description ? (
+          <figcaption class="pointer-events-none absolute inset-x-0 bottom-0 z-10 overflow-hidden">
+            <motion-progressive-blur
+              aria-hidden="true"
+              direction="bottom"
+              blur-layers="3"
+              blur-intensity="0.23"
+              fade-color="rgba(248, 250, 252, 0.9)"
+              class="absolute inset-x-0 bottom-0 h-[72%] block"
+            />
+
+            <div class="relative z-10 px-6 pb-4 pt-12 text-center text-xs text-slate-500 italic">
+              {description}
+            </div>
+          </figcaption>
+        ) : null}
+      </div>
+    )
+  }
+
+  {
+    hasControls ? (
+      <div class="relative w-full  z-0 bg-white border-t border-slate-100">
+        <div class="px-5 py-4 max-w-[600px] mx-auto">
+          <slot name="controls" />
+        </div>
+      </div>
+    ) : null
+  }
+</figure>
