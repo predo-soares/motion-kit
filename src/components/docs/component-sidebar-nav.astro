@@ -1,0 +1,46 @@
+---
+import { componentGroups } from "@/lib/component-catalog";
+
+interface Props {
+  currentSlug?: string;
+}
+
+const { currentSlug } = Astro.props;
+---
+
+<nav aria-label="Components" class="flex flex-col gap-8">
+  {
+    componentGroups.map((group) => (
+      <section class="flex flex-col gap-3">
+        <header class="px-3">
+          <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">
+            {group.name}
+          </p>
+        </header>
+        <ul class="flex flex-col gap-1">
+          {group.items.map((component) => {
+            const isActive = component.slug === currentSlug;
+
+            return (
+              <li>
+                <a
+                  href={`/components/${component.slug}`}
+                  class:list={[
+                    "block rounded-2xl px-3 py-2 transition-colors",
+                    isActive
+                      ? "bg-slate-900 text-white"
+                      : "text-slate-600 hover:bg-slate-100 hover:text-slate-900",
+                  ]}
+                >
+                  <span class="block text-sm font-medium tracking-tight">
+                    {component.title}
+                  </span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    ))
+  }
+</nav>

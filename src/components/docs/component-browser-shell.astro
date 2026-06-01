@@ -1,0 +1,119 @@
+---
+import ComponentSidebarNav from "@/components/docs/component-sidebar-nav.astro";
+
+interface Props {
+  currentSlug: string;
+}
+
+const { currentSlug } = Astro.props;
+---
+
+<div data-component-browser-shell class="min-h-screen">
+  <div class="mx-auto max-w-[1400px] px-4 py-6 lg:px-6 lg:py-8">
+    <div class="flex items-center justify-between gap-4 border-b border-slate-200 pb-4 lg:hidden">
+      <a href="/" class="text-sm font-semibold tracking-tight text-slate-900">
+        Motion Kit
+      </a>
+      <button
+        type="button"
+        data-sidebar-open
+        class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:border-slate-300 hover:text-slate-900"
+      >
+        Browse Components
+      </button>
+    </div>
+
+    <div
+      data-sidebar-overlay
+      class="pointer-events-none fixed inset-0 z-40 bg-slate-900/30 opacity-0 transition-opacity duration-200 lg:hidden"
+    ></div>
+
+    <div class="mt-6 lg:mt-0 lg:grid lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-10">
+      <aside
+        data-sidebar-panel
+        class="fixed inset-y-0 left-0 z-50 flex w-[86vw] max-w-sm -translate-x-full flex-col border-r border-slate-200 bg-white px-4 py-5 transition-transform duration-200 lg:sticky lg:top-6 lg:z-auto lg:h-[calc(100vh-3rem)] lg:w-auto lg:max-w-none lg:translate-x-0 lg:overflow-y-auto lg:border-r-0 lg:bg-transparent lg:px-0 lg:py-8"
+      >
+        <div class="mb-6 flex items-center justify-between gap-4 lg:mb-8">
+          <div class="flex flex-col gap-1">
+            <a
+              href="/"
+              class="text-base font-semibold tracking-tight text-slate-900"
+            >
+              Motion Kit
+            </a>
+            <p class="text-sm text-slate-500">Astro component browser</p>
+          </div>
+          <button
+            type="button"
+            data-sidebar-close
+            class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-600 transition-colors hover:border-slate-300 hover:text-slate-900 lg:hidden"
+          >
+            Close
+          </button>
+        </div>
+
+        <div class="mb-6 lg:mb-8">
+          <a
+            href="/"
+            class="inline-flex rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-600 transition-colors hover:border-slate-300 hover:text-slate-900"
+          >
+            Overview
+          </a>
+        </div>
+
+        <ComponentSidebarNav currentSlug={currentSlug} />
+      </aside>
+
+      <main class="min-w-0 pt-8 lg:pt-8">
+        <slot />
+      </main>
+    </div>
+  </div>
+</div>
+
+<script>
+  const shell = document.querySelector("[data-component-browser-shell]");
+
+  if (shell instanceof HTMLElement) {
+    const panel = shell.querySelector("[data-sidebar-panel]");
+    const overlay = shell.querySelector("[data-sidebar-overlay]");
+    const openButton = shell.querySelector("[data-sidebar-open]");
+    const closeButton = shell.querySelector("[data-sidebar-close]");
+    const navLinks = shell.querySelectorAll("aside a");
+
+    let previousOverflow = "";
+
+    const setOpen = (open) => {
+      if (!(panel instanceof HTMLElement) || !(overlay instanceof HTMLElement)) {
+        return;
+      }
+
+      panel.classList.toggle("-translate-x-full", !open);
+      overlay.classList.toggle("pointer-events-none", !open);
+      overlay.classList.toggle("opacity-0", !open);
+
+      if (open) {
+        previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = previousOverflow;
+      }
+    };
+
+    openButton?.addEventListener("click", () => setOpen(true));
+    closeButton?.addEventListener("click", () => setOpen(false));
+    overlay?.addEventListener("click", () => setOpen(false));
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => setOpen(false));
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") setOpen(false);
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 1024) setOpen(false);
+    });
+  }
+</script>
