@@ -1,0 +1,74 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+---
+
+<ComponentCard description="Animated diagonal glass panels with refraction and chromatic aberration over an image.">
+  <div class="relative w-full aspect-video rounded-xl overflow-hidden">
+    <motion-glass-pane
+      image="https://picsum.photos/seed/glasspane/800/500"
+      refraction="1"
+      chromatic-aberration="1"
+      panel-width="0.82"
+      wave-frequency="2"
+      wave-amplitude="0.05"
+      speed="0.65"
+      class="absolute inset-0"
+    ></motion-glass-pane>
+  </div>
+  <div slot="controls" class="mk-controls">
+    <mk-slider
+      label="Refraction"
+      min="0"
+      max="3"
+      step="0.1"
+      value="1"
+      data-target="motion-glass-pane"
+      data-attr="refraction"
+    ></mk-slider>
+    <mk-slider
+      label="CA"
+      min="0"
+      max="3"
+      step="0.1"
+      value="1"
+      data-target="motion-glass-pane"
+      data-attr="chromatic-aberration"
+    ></mk-slider>
+    <mk-slider
+      label="Width"
+      min="0.1"
+      max="2"
+      step="0.05"
+      value="0.82"
+      data-target="motion-glass-pane"
+      data-attr="panel-width"
+    ></mk-slider>
+    <mk-slider
+      label="Wave Freq"
+      min="0"
+      max="10"
+      step="0.5"
+      value="2"
+      data-target="motion-glass-pane"
+      data-attr="wave-frequency"
+    ></mk-slider>
+    <mk-slider
+      label="Wave Amp"
+      min="0"
+      max="0.2"
+      step="0.005"
+      value="0.05"
+      data-target="motion-glass-pane"
+      data-attr="wave-amplitude"
+    ></mk-slider>
+    <mk-slider
+      label="Speed"
+      min="0"
+      max="2"
+      step="0.05"
+      value="0.65"
+      data-target="motion-glass-pane"
+      data-attr="speed"
+    ></mk-slider>
+  </div>
+</ComponentCard>

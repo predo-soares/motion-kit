@@ -1,0 +1,72 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+---
+
+<ComponentCard description="Scroll the page to see the marquee speed up. Content is slotted. Drop any HTML inside.">
+  <div class="w-full flex flex-col gap-4 py-8 overflow-hidden">
+    <motion-marquee gap="24" duration="14">
+      <span
+        class="px-4 py-2 rounded-full border border-slate-200 bg-white text-sm font-medium text-slate-700 whitespace-nowrap"
+      >
+        Motion Kit
+      </span>
+      <span
+        class="px-4 py-2 rounded-full border border-slate-200 bg-white text-sm font-medium text-slate-700 whitespace-nowrap"
+      >
+        Web Components
+      </span>
+      <span
+        class="px-4 py-2 rounded-full border border-violet-200 bg-violet-50 text-sm font-medium text-violet-700 whitespace-nowrap"
+      >
+        GSAP
+      </span>
+      <span
+        class="px-4 py-2 rounded-full border border-slate-200 bg-white text-sm font-medium text-slate-700 whitespace-nowrap"
+      >
+        Lit
+      </span>
+      <span
+        class="px-4 py-2 rounded-full border border-orange-200 bg-orange-50 text-sm font-medium text-orange-700 whitespace-nowrap"
+      >
+        Astro Registry
+      </span>
+      <span
+        class="px-4 py-2 rounded-full border border-slate-200 bg-white text-sm font-medium text-slate-700 whitespace-nowrap"
+      >
+        shadcn
+      </span>
+      <span
+        class="px-4 py-2 rounded-full border border-sky-200 bg-sky-50 text-sm font-medium text-sky-700 whitespace-nowrap"
+      >
+        ScrollTrigger
+      </span>
+    </motion-marquee>
+    <motion-marquee gap="24" duration="18" reversed>
+      <span
+        class="px-4 py-2 rounded-full border border-slate-200 bg-white text-sm font-medium text-slate-700 whitespace-nowrap"
+      >
+        Infinite Loop
+      </span>
+      <span
+        class="px-4 py-2 rounded-full border border-pink-200 bg-pink-50 text-sm font-medium text-pink-700 whitespace-nowrap"
+      >
+        Velocity Boost
+      </span>
+      <span
+        class="px-4 py-2 rounded-full border border-slate-200 bg-white text-sm font-medium text-slate-700 whitespace-nowrap"
+      >
+        Reversed
+      </span>
+      <span
+        class="px-4 py-2 rounded-full border border-emerald-200 bg-emerald-50 text-sm font-medium text-emerald-700 whitespace-nowrap"
+      >
+        Any HTML
+      </span>
+      <span
+        class="px-4 py-2 rounded-full border border-slate-200 bg-white text-sm font-medium text-slate-700 whitespace-nowrap"
+      >
+        Framework-agnostic
+      </span>
+    </motion-marquee>
+  </div>
+</ComponentCard>

@@ -1,0 +1,16 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+---
+
+<ComponentCard description="Cycles through an array of strings with a blurred vertical slide.">
+  <div class="flex items-center justify-center py-12">
+    <p class="text-4xl font-bold text-slate-900 flex items-baseline gap-2">
+      We
+      <motion-text-loop
+        texts='["Design","Develop","Deploy","Delight"]'
+        interval="2000"
+        class="text-violet-600"
+      ></motion-text-loop>
+    </p>
+  </div>
+</ComponentCard>

@@ -1,0 +1,13 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+---
+
+<ComponentCard description="Logos cycle through each column at a staggered interval with blur and slide transitions.">
+  <div class="flex items-center justify-center">
+    <motion-logo-carousel
+      logos='[{"src":"https://picsum.photos/seed/lc1/120/60","alt":"Brand A"},{"src":"https://picsum.photos/seed/lc2/120/60","alt":"Brand B"},{"src":"https://picsum.photos/seed/lc3/120/60","alt":"Brand C"},{"src":"https://picsum.photos/seed/lc4/120/60","alt":"Brand D"},{"src":"https://picsum.photos/seed/lc5/120/60","alt":"Brand E"},{"src":"https://picsum.photos/seed/lc6/120/60","alt":"Brand F"}]'
+      columns="3"
+      cycle-interval="2200"
+    ></motion-logo-carousel>
+  </div>
+</ComponentCard>

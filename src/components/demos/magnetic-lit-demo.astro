@@ -1,0 +1,22 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+---
+
+<ComponentCard description="<motion-magnetic> as a Custom Element. Drop it in any framework or plain HTML.">
+  <div class="flex items-center justify-center gap-8 py-8">
+    <motion-magnetic duration="1" ease="elastic.out(1, 0.3)">
+      <button
+        class="px-6 py-3 rounded-full bg-violet-600 text-white text-sm font-medium cursor-pointer select-none"
+      >
+        Hover me (Lit)
+      </button>
+    </motion-magnetic>
+    <motion-magnetic duration="0.5" ease="elastic.out(1, 0.5)">
+      <div
+        class="w-16 h-16 rounded-2xl bg-pink-500 flex items-center justify-center text-white text-2xl cursor-pointer select-none"
+      >
+        ✦
+      </div>
+    </motion-magnetic>
+  </div>
+</ComponentCard>

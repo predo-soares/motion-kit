@@ -1,0 +1,15 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+---
+
+<ComponentCard description="Images orbit along a circular ring. Set offset to peek it from below the fold.">
+  <motion-radial-gallery
+    items='[{"src":"https://picsum.photos/seed/rg1/160/160"},{"src":"https://picsum.photos/seed/rg2/160/160"},{"src":"https://picsum.photos/seed/rg3/160/160"},{"src":"https://picsum.photos/seed/rg4/160/160"},{"src":"https://picsum.photos/seed/rg5/160/160"},{"src":"https://picsum.photos/seed/rg6/160/160"}]'
+    radius="840"
+    duration="70"
+    element-size="160"
+    gap="100"
+    offset="-600"
+    class="h-[360px] w-full"
+  ></motion-radial-gallery>
+</ComponentCard>

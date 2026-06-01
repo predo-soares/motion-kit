@@ -1,0 +1,16 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+---
+
+<ComponentCard description="Characters split into two stacked layers that swap on hover.">
+  <div class="flex items-center justify-center gap-10 py-12">
+    <motion-split-hover
+      text="Hover me"
+      class="text-4xl font-bold text-slate-900 cursor-default select-none"
+    ></motion-split-hover>
+    <motion-split-hover
+      text="Motion Kit"
+      class="text-4xl font-bold text-violet-600 cursor-default select-none"
+    ></motion-split-hover>
+  </div>
+</ComponentCard>

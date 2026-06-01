@@ -1,0 +1,44 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+---
+
+<ComponentCard description="Move your cursor to paint fluid that reveals a second image underneath.">
+  <div class="relative w-full aspect-video rounded-xl overflow-hidden">
+    <motion-fluid-image-reveal
+      base-image="https://picsum.photos/seed/fir-base/640/400"
+      reveal-image="https://picsum.photos/seed/fir-reveal/640/400"
+      dissipation="0.96"
+      blend-softness="0.22"
+      class="absolute inset-0"
+    ></motion-fluid-image-reveal>
+  </div>
+  <div slot="controls" class="mk-controls">
+    <mk-slider
+      label="Dissipation"
+      min="0.8"
+      max="1"
+      step="0.005"
+      value="0.96"
+      data-target="motion-fluid-image-reveal"
+      data-attr="dissipation"
+    ></mk-slider>
+    <mk-slider
+      label="Softness"
+      min="0.02"
+      max="0.48"
+      step="0.01"
+      value="0.22"
+      data-target="motion-fluid-image-reveal"
+      data-attr="blend-softness"
+    ></mk-slider>
+    <mk-slider
+      label="Splat Size"
+      min="0.001"
+      max="0.025"
+      step="0.001"
+      value="0.005"
+      data-target="motion-fluid-image-reveal"
+      data-attr="pointer-size"
+    ></mk-slider>
+  </div>
+</ComponentCard>

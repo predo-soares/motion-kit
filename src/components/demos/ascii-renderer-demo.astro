@@ -1,0 +1,48 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+---
+
+<ComponentCard description="WebGL image rendered as an animated ASCII dot-grid with scanline displacement.">
+  <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-[#17181A]">
+    <motion-ascii-renderer
+      image="https://picsum.photos/seed/ascii1/600/400"
+      density="25"
+      strength="3"
+      color="#00ff00"
+      background-color="#17181A"
+      class="absolute inset-0"
+    ></motion-ascii-renderer>
+  </div>
+  <div slot="controls" class="mk-controls">
+    <mk-slider
+      label="Density"
+      min="5"
+      max="50"
+      step="1"
+      value="25"
+      data-target="motion-ascii-renderer"
+      data-attr="density"
+    ></mk-slider>
+    <mk-slider
+      label="Strength"
+      min="0.5"
+      max="8"
+      step="0.1"
+      value="3"
+      data-target="motion-ascii-renderer"
+      data-attr="strength"
+    ></mk-slider>
+    <mk-color
+      label="Color"
+      value="#00ff00"
+      data-target="motion-ascii-renderer"
+      data-attr="color"
+    ></mk-color>
+    <mk-color
+      label="Background"
+      value="#17181a"
+      data-target="motion-ascii-renderer"
+      data-attr="background-color"
+    ></mk-color>
+  </div>
+</ComponentCard>

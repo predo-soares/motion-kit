@@ -1,0 +1,22 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+---
+
+<ComponentCard description="Words or characters repel from the pointer with a distance-based falloff.">
+  <div class="flex flex-col items-center justify-center gap-6 py-12">
+    <motion-text-repel
+      text="Move your cursor here"
+      mode="words"
+      strength="24"
+      radius="180"
+      class="text-3xl font-bold text-slate-900 select-none"
+    ></motion-text-repel>
+    <motion-text-repel
+      text="CHARACTERS"
+      mode="chars"
+      strength="32"
+      radius="120"
+      class="text-4xl font-black tracking-widest text-violet-600 select-none"
+    ></motion-text-repel>
+  </div>
+</ComponentCard>

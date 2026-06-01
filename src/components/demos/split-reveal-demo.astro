@@ -1,0 +1,28 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+---
+
+<ComponentCard description="Masks text and reveals lines, words, or characters on mount or scroll.">
+  <div class="flex flex-col items-center justify-center gap-4 p-8">
+    <div>
+      <motion-split-reveal
+        text="Lines reveal upward from a mask."
+        mode="lines"
+        class="text-2xl font-bold text-slate-900"
+        delay="0.1"
+      ></motion-split-reveal>
+      <motion-split-reveal
+        text="Words arrive one by one in sequence."
+        mode="words"
+        class="text-2xl font-bold text-slate-600"
+        delay="0.4"
+      ></motion-split-reveal>
+      <motion-split-reveal
+        text="CHARS"
+        mode="chars"
+        class="text-5xl font-black tracking-widest text-violet-600"
+        delay="0.8"
+      ></motion-split-reveal>
+    </div>
+  </div>
+</ComponentCard>

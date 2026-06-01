@@ -1,0 +1,14 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+---
+
+<ComponentCard description="Scrambles characters on hover before settling back to the original text.">
+  <div class="flex items-center justify-center gap-8 py-12">
+    <motion-text-scramble
+      text="HOVER THIS"
+      class="text-3xl font-bold tracking-widest text-orange-500 cursor-default select-none"
+      characters="!@#$%^&*01"
+      cycles="8"
+    ></motion-text-scramble>
+  </div>
+</ComponentCard>

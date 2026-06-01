@@ -1,0 +1,32 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+---
+
+<ComponentCard
+  description="Each line's words slide in from the right as you scroll. Scroll the preview below."
+  scrollable
+  id="stacking-words-preview"
+>
+  <div class="px-8">
+    <div class="flex items-center justify-center h-[440px] border-b border-slate-100">
+      <p class="text-slate-400 text-sm tracking-wide">↓ Scroll to reveal</p>
+    </div>
+    <div class="py-16 space-y-10">
+      <motion-stacking-words
+        text="Motion Kit gives you beautiful animated components for any framework."
+        start="top 90%"
+        end="top 35%"
+        scroll-element="#stacking-words-preview"
+        class="text-3xl font-bold text-slate-900 leading-snug"
+      ></motion-stacking-words>
+      <motion-stacking-words
+        text="Install via shadcn. No framework lock-in."
+        start="top 90%"
+        end="top 50%"
+        scroll-element="#stacking-words-preview"
+        class="text-2xl font-semibold text-violet-600 leading-snug"
+      ></motion-stacking-words>
+    </div>
+    <div class="h-32"></div>
+  </div>
+</ComponentCard>

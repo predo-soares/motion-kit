@@ -1,0 +1,10 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+---
+
+<ComponentCard description="Click a thumbnail or use the navigation to transition between slides. The inner image parallaxes opposite the slide direction.">
+  <motion-slideshow
+    images='[{"src":"https://picsum.photos/seed/ss1/800/480","alt":"Slide 1"},{"src":"https://picsum.photos/seed/ss2/800/480","alt":"Slide 2"},{"src":"https://picsum.photos/seed/ss3/800/480","alt":"Slide 3"},{"src":"https://picsum.photos/seed/ss4/800/480","alt":"Slide 4"}]'
+    class="w-full aspect-video"
+  ></motion-slideshow>
+</ComponentCard>

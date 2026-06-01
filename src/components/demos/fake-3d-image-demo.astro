@@ -1,0 +1,47 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+---
+
+<ComponentCard description="Depth-map parallax effect. Move the cursor to shift the image against a grayscale depth map.">
+  <div class="flex items-center justify-center py-6">
+    <div class="relative w-full aspect-video rounded-xl overflow-hidden">
+      <motion-fake-3d-image
+        color-src="https://picsum.photos/seed/f3d-color/600/400"
+        depth-src="https://picsum.photos/seed/f3d-depth/600/400"
+        x-threshold="8"
+        y-threshold="8"
+        sensitivity="0.25"
+        class="absolute inset-0"
+      ></motion-fake-3d-image>
+    </div>
+  </div>
+  <div slot="controls" class="mk-controls">
+    <mk-slider
+      label="X Depth"
+      min="1"
+      max="20"
+      step="0.5"
+      value="8"
+      data-target="motion-fake-3d-image"
+      data-attr="x-threshold"
+    ></mk-slider>
+    <mk-slider
+      label="Y Depth"
+      min="1"
+      max="20"
+      step="0.5"
+      value="8"
+      data-target="motion-fake-3d-image"
+      data-attr="y-threshold"
+    ></mk-slider>
+    <mk-slider
+      label="Sensitivity"
+      min="0.05"
+      max="1"
+      step="0.05"
+      value="0.25"
+      data-target="motion-fake-3d-image"
+      data-attr="sensitivity"
+    ></mk-slider>
+  </div>
+</ComponentCard>
