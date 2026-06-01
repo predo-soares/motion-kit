@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "text-repel",
+  "type": "registry:component",
+  "title": "Text Repel",
+  "description": "Splits text into words or characters that repel from the pointer. Framework-agnostic Custom Element.",
+  "dependencies": ["lit", "gsap"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/text-repel/text-repel-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/text-repel-element.ts"
+    }
+  ]
+}

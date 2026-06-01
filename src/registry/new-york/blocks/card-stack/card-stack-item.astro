@@ -1,0 +1,26 @@
+---
+export interface Props {
+  class?: string
+  style?: string
+  [key: string]: unknown
+}
+
+const { class: className = "", style, ...rest } = Astro.props
+---
+
+<div
+  class={"card-stack-item" + (className ? " " + className : "")}
+  {style}
+  {...rest}
+>
+  <slot />
+</div>
+
+<style>
+  .card-stack-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    will-change: transform;
+  }
+</style>

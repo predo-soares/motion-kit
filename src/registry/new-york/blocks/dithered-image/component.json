@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "dithered-image",
+  "type": "registry:component",
+  "title": "Dithered Image",
+  "description": "OGL WebGL dithered image renderer with Bayer, halftone and void-and-cluster threshold maps.",
+  "dependencies": ["lit", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/dithered-image/dithered-image-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/dithered-image-element.ts"
+    }
+  ]
+}

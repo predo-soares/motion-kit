@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "marquee",
+  "type": "registry:component",
+  "title": "Marquee",
+  "description": "Scroll-velocity-boosted infinite marquee. Vanilla Custom Element — no Lit dependency.",
+  "dependencies": ["gsap"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/marquee/marquee-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/marquee-element.ts"
+    }
+  ]
+}

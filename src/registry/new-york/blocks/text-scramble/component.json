@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "text-scramble",
+  "type": "registry:component",
+  "title": "Text Scramble",
+  "description": "Scrambles characters on hover before settling back to the original text. Framework-agnostic Custom Element.",
+  "dependencies": ["lit", "gsap"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/text-scramble/text-scramble-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/text-scramble-element.ts"
+    }
+  ]
+}

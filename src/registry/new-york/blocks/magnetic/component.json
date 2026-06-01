@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "magnetic",
+  "type": "registry:component",
+  "title": "Magnetic",
+  "description": "Native custom element with GSAP-powered magnetic hover motion and no Lit dependency.",
+  "dependencies": ["gsap"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/magnetic/magnetic-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/magnetic-element.ts"
+    }
+  ]
+}

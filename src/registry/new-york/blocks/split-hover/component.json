@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "split-hover",
+  "type": "registry:component",
+  "title": "Split Hover",
+  "description": "Splits text into characters and animates stacked layers on hover for a seamless swap. Framework-agnostic Custom Element.",
+  "dependencies": ["lit", "gsap"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/split-hover/split-hover-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/split-hover-element.ts"
+    }
+  ]
+}

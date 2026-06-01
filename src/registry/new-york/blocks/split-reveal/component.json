@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "split-reveal",
+  "type": "registry:component",
+  "title": "Split Reveal",
+  "description": "Masks text and reveals lines, words, or characters on mount or scroll. Framework-agnostic Custom Element.",
+  "dependencies": ["lit", "gsap"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/split-reveal/split-reveal-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/split-reveal-element.ts"
+    }
+  ]
+}

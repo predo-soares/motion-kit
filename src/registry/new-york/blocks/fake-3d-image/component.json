@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "fake-3d-image",
+  "type": "registry:component",
+  "title": "Fake 3D Image",
+  "description": "OGL depth-map parallax effect — move the cursor to shift the image by a grayscale depth map.",
+  "dependencies": ["lit", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/fake-3d-image/fake-3d-image-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/fake-3d-image-element.ts"
+    }
+  ]
+}

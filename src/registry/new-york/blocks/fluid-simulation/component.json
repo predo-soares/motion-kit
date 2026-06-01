@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "fluid-simulation",
+  "type": "registry:component",
+  "title": "Fluid Simulation",
+  "description": "OGL GPU fluid simulation — move the cursor to paint fluid. Animates autonomously while idle.",
+  "dependencies": ["lit", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/fluid-simulation/fluid-simulation-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/fluid-simulation-element.ts"
+    }
+  ]
+}

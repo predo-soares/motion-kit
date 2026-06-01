@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "logo-carousel",
+  "type": "registry:component",
+  "title": "Logo Carousel",
+  "description": "Grid of logos that cycles through items with a blurred vertical swap animation. Framework-agnostic Custom Element.",
+  "dependencies": ["lit", "gsap"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/logo-carousel/logo-carousel-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/logo-carousel-element.ts"
+    }
+  ]
+}

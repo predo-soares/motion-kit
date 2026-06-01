@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "card-3d",
+  "type": "registry:component",
+  "title": "Card 3D",
+  "description": "OGL-powered 3D card with rounded corners and mouse-tracking parallax rotation.",
+  "dependencies": ["lit", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/card-3d/card-3d-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/card-3d-element.ts"
+    }
+  ]
+}

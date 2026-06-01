@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stacking-words",
+  "type": "registry:component",
+  "title": "Stacking Words",
+  "description": "Splits text into lines and slides each line's words in from the right on scroll. Framework-agnostic Custom Element.",
+  "dependencies": ["lit", "gsap"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/stacking-words/stacking-words-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/stacking-words-element.ts"
+    }
+  ]
+}

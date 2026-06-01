@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "progressive-blur",
+  "type": "registry:component",
+  "title": "Progressive Blur",
+  "description": "Native custom element that stacks masked backdrop-blur layers to create a directional progressive blur.",
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/progressive-blur/progressive-blur-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/progressive-blur-element.ts"
+    }
+  ]
+}

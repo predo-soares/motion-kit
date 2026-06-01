@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "glass-logo",
+  "type": "registry:component",
+  "title": "Glass Logo",
+  "description": "OGL WebGL2 glass lens over an animated procedural swirl — silhouette driven by an SVG SDF.",
+  "dependencies": ["lit", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/glass-logo/glass-logo-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/glass-logo-element.ts"
+    }
+  ]
+}

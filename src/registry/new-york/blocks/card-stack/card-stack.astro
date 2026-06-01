@@ -1,0 +1,122 @@
+---
+export interface Props {
+  /**
+   * Scale difference between stacked cards.
+   * @default 0.05
+   */
+  scaleFactor?: number
+  /**
+   * Vertical gap between cards in the document flow.
+   * Does not change the final stacked offset.
+   * @default 0
+   */
+  gap?: number
+  /**
+   * Vertical pixel offset between stacked cards.
+   * @default 10
+   */
+  offset?: number
+  /**
+   * Distance from top of scroller where the first card pins.
+   * @default 0
+   */
+  topOffset?: number
+  /**
+   * CSS selector for a custom scroll container. Defaults to window.
+   */
+  scrollElement?: string
+  class?: string
+}
+
+const {
+  scaleFactor = 0.05,
+  gap = 0,
+  offset = 10,
+  topOffset = 0,
+  scrollElement,
+  class: className = "",
+} = Astro.props
+---
+
+<div
+  data-card-stack
+  data-scale-factor={scaleFactor}
+  data-gap={gap}
+  data-offset={offset}
+  data-top-offset={topOffset}
+  data-scroll-element={scrollElement}
+  class={"relative w-full" + (className ? " " + className : "")}
+>
+  <slot />
+</div>
+
+<script>
+  import { gsap } from "gsap"
+  import { ScrollTrigger } from "gsap/ScrollTrigger"
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  document.querySelectorAll<HTMLElement>("[data-card-stack]").forEach((container) => {
+    const scaleFactor = Number(container.dataset.scaleFactor ?? 0.05)
+    const gap = Number(container.dataset.gap ?? 0)
+    const offset = Number(container.dataset.offset ?? 10)
+    const topOffset = Number(container.dataset.topOffset ?? 0)
+    const scrollElementSelector = container.dataset.scrollElement ?? ""
+
+    const cards = Array.from(
+      container.querySelectorAll<HTMLElement>(".card-stack-item"),
+    )
+    if (!cards.length) return
+
+    const resolvedScroller = scrollElementSelector
+      ? document.querySelector<HTMLElement>(scrollElementSelector)
+      : null
+    const scroller = resolvedScroller ?? window
+
+    const scrollerHeight =
+      scroller instanceof HTMLElement ? scroller.clientHeight : window.innerHeight
+
+    const lastCard = cards[cards.length - 1]
+    const targetPos = topOffset + (cards.length - 1) * offset
+    const totalGap = Math.max(0, cards.length - 1) * gap
+    const extraPadding = Math.max(
+      0,
+      scrollerHeight - lastCard.offsetHeight - targetPos - totalGap,
+    )
+
+    if (extraPadding > 0) {
+      gsap.set(container, { paddingBottom: extraPadding })
+    }
+
+    const ctx = gsap.context(() => {
+      cards.forEach((card, index) => {
+        const cardTop = topOffset + index * offset
+
+        gsap.set(card, {
+          transformOrigin: "top center",
+          zIndex: index,
+          position: "sticky",
+          top: `${cardTop}px`,
+          marginBottom: index < cards.length - 1 ? `${gap}px` : "0px",
+        })
+
+        if (index < cards.length - 1) {
+          gsap.timeline({
+            scrollTrigger: {
+              trigger: card,
+              start: `top top+=${cardTop}`,
+              endTrigger: container,
+              end: "bottom bottom",
+              scrub: true,
+              scroller,
+              invalidateOnRefresh: true,
+            },
+          }).to(card, {
+            scale: 1 - (cards.length - 1 - index) * scaleFactor,
+            ease: "none",
+          })
+        }
+      })
+    }, container)
+  })
+</script>

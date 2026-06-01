@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "text-loop",
+  "type": "registry:component",
+  "title": "Text Loop",
+  "description": "Cycles through an array of text strings with a blurred vertical slide transition. Framework-agnostic Custom Element.",
+  "dependencies": ["lit", "gsap"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/text-loop/text-loop-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/text-loop-element.ts"
+    }
+  ]
+}

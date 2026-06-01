@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "fluid-image-reveal",
+  "type": "registry:component",
+  "title": "Fluid Image Reveal",
+  "description": "OGL fluid simulation used as a mask to reveal a second image beneath as you move the cursor.",
+  "dependencies": ["lit", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/fluid-image-reveal/fluid-image-reveal-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/fluid-image-reveal-element.ts"
+    }
+  ]
+}

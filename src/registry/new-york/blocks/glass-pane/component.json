@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "glass-pane",
+  "type": "registry:component",
+  "title": "Glass Pane",
+  "description": "OGL animated glass panel strips with refraction, chromatic aberration and wave distortion over an image.",
+  "dependencies": ["lit", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/glass-pane/glass-pane-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/glass-pane-element.ts"
+    }
+  ]
+}

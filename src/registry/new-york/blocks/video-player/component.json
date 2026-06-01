@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "video-player",
+  "type": "registry:component",
+  "title": "Video Player",
+  "description": "Custom video player with play/pause, a hover-expanding scrubber, mute, and GSAP Flip fullscreen expand animation.",
+  "dependencies": ["lit", "gsap"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/video-player/video-player-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/video-player-element.ts"
+    }
+  ]
+}

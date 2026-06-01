@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "weight-wave",
+  "type": "registry:component",
+  "title": "Weight Wave",
+  "description": "Hover-reactive text effect that smoothly increases font weight with a falloff across neighboring characters. Requires a variable font.",
+  "dependencies": ["lit", "gsap"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/weight-wave/weight-wave-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/weight-wave-element.ts"
+    }
+  ]
+}

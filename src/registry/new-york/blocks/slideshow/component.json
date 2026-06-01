@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "slideshow",
+  "type": "registry:component",
+  "title": "Slideshow",
+  "description": "Full-bleed image slideshow with parallax slide transitions and thumbnail navigation. Framework-agnostic Custom Element.",
+  "dependencies": ["lit", "gsap"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/slideshow/slideshow-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/slideshow-element.ts"
+    }
+  ]
+}
