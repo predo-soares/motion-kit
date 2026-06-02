@@ -1,5 +1,7 @@
 ---
 import refreshIcon from "@tabler/icons/outline/refresh.svg?raw";
+import maximizeIcon from "@tabler/icons/outline/maximize.svg?raw";
+import minimizeIcon from "@tabler/icons/outline/minimize.svg?raw";
 
 interface Props {
   title?: string;
@@ -24,7 +26,6 @@ const {
   showReplay = true,
 } = Astro.props;
 const hasControls = Astro.slots.has("controls");
-const hasHeader = Boolean((showTitle && title) || showReplay);
 const showTitlePill = Boolean(showTitle && title);
 const previewBackgroundClass =
   "bg-slate-50 [background-image:radial-gradient(circle,rgba(203,213,225,0.9)_1px,transparent_1.2px)] [background-size:32px_32px]";
@@ -32,51 +33,71 @@ const previewBackgroundClass =
 
 <figure
   data-component-card
-  class="relative m-0 flex flex-col border border-slate-200 rounded-3xl overflow-hidden bg-slate-50 cursor-zoom-in"
+  class="relative m-0 flex flex-col border border-slate-200/50 rounded-4xl overflow-hidden bg-slate-50"
 >
   <!-- Header: title + actions -->
-  {
-    hasHeader ? (
-      <div
-        class={`pointer-events-none absolute z-20 inset-x-0 top-0 flex items-center gap-4 px-3 py-3 ${showTitlePill ? "justify-between" : "justify-end"}`}
+  <div
+    class={`pointer-events-none absolute z-20 inset-x-0 top-0 flex items-center gap-4 px-3 py-3 ${showTitlePill ? "justify-between" : "justify-end"}`}
+  >
+    {
+      showTitlePill ? (
+        <div class="pointer-events-auto px-2 border border-slate-200 rounded-2xl bg-white text-slate-600">
+          <span class="text-sm font-medium text-slate-800 tracking-tight">
+            {title}
+          </span>
+        </div>
+      ) : null
+    }
+    <div class="flex items-center gap-2 pointer-events-auto">
+      {
+        showReplay ? (
+          <button
+            type="button"
+            data-card-action="replay"
+            class="flex-shrink-0 inline-flex items-center justify-center w-7 h-7 border border-slate-200 rounded-2xl bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900 cursor-pointer transition-colors"
+            aria-label="Replay"
+          >
+            <span
+              aria-hidden="true"
+              class="[&_svg]:block [&_svg]:h-3 [&_svg]:w-3"
+              set:html={refreshIcon}
+            />
+          </button>
+        ) : null
+      }
+      <button
+        type="button"
+        data-card-action="fullscreen"
+        class="flex-shrink-0 inline-flex items-center justify-center w-7 h-7 border border-slate-200 rounded-2xl bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900 cursor-pointer transition-colors"
+        aria-label="Toggle fullscreen"
       >
-        {showTitlePill ? (
-          <div class="px-2 border border-slate-200 rounded-2xl bg-white text-slate-600">
-            <span class="text-sm font-medium text-slate-800 tracking-tight">
-              {title}
-            </span>
-          </div>
-        ) : null}
-        {showReplay ? (
-          <div class="flex items-center gap-2 pointer-events-auto">
-            <button
-              type="button"
-              data-card-action="replay"
-              class="flex-shrink-0 inline-flex items-center justify-center w-7 h-7 border border-slate-200 rounded-2xl bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900 cursor-pointer transition-colors"
-              aria-label="Replay"
-            >
-              <span
-                aria-hidden="true"
-                class="[&_svg]:block [&_svg]:h-3 [&_svg]:w-3"
-                set:html={refreshIcon}
-              />
-            </button>
-          </div>
-        ) : null}
-      </div>
-    ) : null
-  }
+        <span
+          aria-hidden="true"
+          data-icon-open
+          class="[&_svg]:block [&_svg]:h-3 [&_svg]:w-3"
+          set:html={maximizeIcon}
+        />
+        <span
+          aria-hidden="true"
+          data-icon-close
+          class="[&_svg]:block [&_svg]:h-3 [&_svg]:w-3"
+          set:html={minimizeIcon}
+        />
+      </button>
+    </div>
+  </div>
 
   <!-- Preview -->
   {
     scrollable ? (
       <div
-        id={id}
         data-preview
-        class={`relative h-[480px] overflow-y-auto overscroll-contain ${previewBackgroundClass}`}
+        class={`relative flex-1 z-0 flex items-center justify-center min-h-[420px] ${previewBackgroundClass}`}
       >
-        <div data-preview-content class="min-h-full">
-          <slot />
+        <div id={id} class="h-[420px] overflow-y-auto w-fit">
+          <div data-preview-content class="min-h-full">
+            <slot />
+          </div>
         </div>
 
         {description ? (
@@ -99,7 +120,7 @@ const previewBackgroundClass =
     ) : (
       <div
         data-preview
-        class={`relative flex-1 z-0 flex items-center justify-center min-h-[420px] ${previewBackgroundClass}`}
+        class={`relative flex-1 min-h-[420px] z-0 flex items-center justify-center ${previewBackgroundClass}`}
       >
         <div data-preview-content class="w-full">
           <slot />
@@ -110,13 +131,13 @@ const previewBackgroundClass =
             <motion-progressive-blur
               aria-hidden="true"
               direction="bottom"
-              blur-layers="3"
-              blur-intensity="0.23"
-              fade-color="rgba(248, 250, 252, 0.9)"
-              class="absolute inset-x-0 bottom-0 h-[72%] block"
+              blur-layers="5"
+              blur-intensity="0.20"
+              fade-color="rgba(256, 256, 256, 0.7)"
+              class="absolute inset-x-0 bottom-0 h-[100%] block"
             />
 
-            <div class="relative z-10 px-6 pb-4 pt-12 text-center text-xs text-slate-500 italic">
+            <div class="relative z-10 px-6 pb-3 pt-5 text-balance text-center text-xs text-slate-900 italic">
               {description}
             </div>
           </figcaption>
@@ -127,8 +148,25 @@ const previewBackgroundClass =
 
   {
     hasControls ? (
-      <div class="relative w-full  z-0 bg-white border-t border-slate-100">
-        <div class="px-5 py-4 max-w-[600px] mx-auto">
+      <div class="relative w-full z-0 bg-white border-t border-slate-100/20">
+        <div class="p-3 max-w-[600px] mx-auto">
+          <div class="mb-3 flex items-center justify-between">
+            <div class="text-base  text-slate-400">Props</div>
+
+            <button
+              type="button"
+              data-card-action="reset-props"
+              class="inline-flex h-7 w-7 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-900"
+              aria-label="Reset props"
+            >
+              <span
+                aria-hidden="true"
+                class="[&_svg]:block [&_svg]:h-3 [&_svg]:w-3"
+                set:html={refreshIcon}
+              />
+            </button>
+          </div>
+
           <slot name="controls" />
         </div>
       </div>
