@@ -1,4 +1,4 @@
-type ComponentGroup = "Interaction" | "Text" | "Showcase" | "Canvas";
+type ComponentGroup = "Canvas" | "Interaction" | "Showcase" | "Text";
 
 interface ComponentManifestFile {
   path: string;
@@ -50,7 +50,7 @@ export interface ComponentCatalogGroup {
 }
 
 const manifestModules = import.meta.glob<ComponentManifest>(
-  "../registry/new-york/blocks/*/component.json",
+  "../registry/**/*/component.json",
   { eager: true, import: "default" },
 );
 
@@ -63,44 +63,43 @@ const seeds: ComponentSeed[] = [
   { slug: "flip-card-stack", group: "Interaction" },
   { slug: "flip-grid", group: "Interaction" },
   { slug: "floating-menu", group: "Interaction" },
+  { slug: "image-trail", group: "Interaction" },
   { slug: "magnetic", group: "Interaction" },
-  { slug: "magnetic-lit", group: "Interaction" },
   { slug: "marquee", group: "Interaction" },
+  { slug: "split-hover", group: "Text" },
+  { slug: "split-reveal", group: "Text" },
+  { slug: "stacking-words", group: "Text" },
   { slug: "text-loop", group: "Text" },
   { slug: "text-scramble", group: "Text" },
   { slug: "text-repel", group: "Text" },
   { slug: "weight-wave", group: "Text" },
-  { slug: "split-hover", group: "Text" },
-  { slug: "split-reveal", group: "Text" },
-  { slug: "stacking-words", group: "Text" },
-  { slug: "logo-carousel", group: "Showcase" },
-  { slug: "slideshow", group: "Showcase" },
-  { slug: "radial-gallery", group: "Showcase" },
-  { slug: "image-trail", group: "Interaction" },
-  { slug: "infinite-physics-gallery", group: "Showcase" },
   { slug: "infinite-gallery", group: "Showcase" },
+  { slug: "infinite-physics-gallery", group: "Showcase" },
+  { slug: "logo-carousel", group: "Showcase" },
+  { slug: "radial-gallery", group: "Showcase" },
+  { slug: "slideshow", group: "Showcase" },
   { slug: "video-player", group: "Showcase" },
+  { slug: "ascii-renderer", group: "Canvas" },
   { slug: "card-3d", group: "Canvas" },
   { slug: "dithered-image", group: "Canvas" },
   { slug: "fake-3d-image", group: "Canvas" },
-  { slug: "pixelated-image", group: "Canvas" },
-  { slug: "fluid-simulation", group: "Canvas" },
   { slug: "fluid-image-reveal", group: "Canvas" },
+  { slug: "fluid-simulation", group: "Canvas" },
   { slug: "glass-logo", group: "Canvas" },
-  { slug: "glass-slideshow", group: "Canvas" },
   { slug: "glass-pane", group: "Canvas" },
+  { slug: "glass-slideshow", group: "Canvas" },
   { slug: "glitter-cloth", group: "Canvas" },
   { slug: "globe", group: "Canvas" },
   { slug: "god-rays", group: "Canvas" },
   { slug: "halo", group: "Canvas" },
-  { slug: "ascii-renderer", group: "Canvas" },
+  { slug: "pixelated-image", group: "Canvas" },
 ];
 
 const groupOrder: ComponentGroup[] = [
-  "Interaction",
-  "Text",
-  "Showcase",
   "Canvas",
+  "Interaction",
+  "Showcase",
+  "Text",
 ];
 
 export const componentCatalog: ComponentCatalogEntry[] = seeds.map(
