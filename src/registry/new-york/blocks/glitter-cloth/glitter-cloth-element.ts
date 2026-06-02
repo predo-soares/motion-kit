@@ -149,6 +149,10 @@ export class MotionGlitterCloth extends LitElement {
   private _raf = 0
   private _cancelled = false
   private _uniforms?: UniformState
+  private _renderer?: Renderer
+  private _geometry?: Triangle
+  private _program?: Program
+  private _mesh?: Mesh
 
   override firstUpdated() {
     this._init(this.shadowRoot!.querySelector("canvas")!)
@@ -156,8 +160,7 @@ export class MotionGlitterCloth extends LitElement {
 
   override disconnectedCallback() {
     super.disconnectedCallback()
-    this._cancelled = true
-    cancelAnimationFrame(this._raf)
+    this._cleanup()
   }
 
   override updated(changed: Map<string, unknown>) {
@@ -196,12 +199,28 @@ export class MotionGlitterCloth extends LitElement {
   }
 
   replay() {
-    this._cancelled = true
-    cancelAnimationFrame(this._raf)
+    this._cleanup()
     this._init(this.shadowRoot!.querySelector("canvas")!)
   }
 
+  private _cleanup() {
+    this._cancelled = true
+    cancelAnimationFrame(this._raf)
+    this._raf = 0
+
+    this._mesh?.setParent(null)
+    this._program?.remove()
+    this._geometry?.remove()
+
+    this._mesh = undefined
+    this._program = undefined
+    this._geometry = undefined
+    this._renderer = undefined
+    this._uniforms = undefined
+  }
+
   private _init(canvas: HTMLCanvasElement) {
+    this._cleanup()
     this._cancelled = false
 
     const renderer = new Renderer({
@@ -218,6 +237,8 @@ export class MotionGlitterCloth extends LitElement {
     camera.position.z = 1
     const scene = new Transform()
     const geometry = new Triangle(gl)
+    this._renderer = renderer
+    this._geometry = geometry
 
     const primarySrgb = toRgb(this.color, DEFAULT_PRIMARY)
     const paletteSrgb = derivePalette(primarySrgb)
@@ -420,8 +441,10 @@ export class MotionGlitterCloth extends LitElement {
       depthTest: false,
       depthWrite: false,
     })
+    this._program = program
 
     const mesh = new Mesh(gl, { geometry, program })
+    this._mesh = mesh
     mesh.setParent(scene)
 
     let previousTime = 0
