@@ -266,6 +266,18 @@
     if (event.key === "Escape") {
       closeFullscreenCard();
     } else if (event.key === "f" || event.key === "F") {
+      const typing = event.composedPath().some((node) => {
+        if (!(node instanceof HTMLElement)) return false;
+        return (
+          node.tagName === "INPUT" ||
+          node.tagName === "TEXTAREA" ||
+          node.tagName === "SELECT" ||
+          node.isContentEditable ||
+          node.getAttribute("role") === "textbox"
+        );
+      });
+      if (typing) return;
+
       if (fullscreenState) {
         closeFullscreenCard();
       } else if (hoveredCard) {
