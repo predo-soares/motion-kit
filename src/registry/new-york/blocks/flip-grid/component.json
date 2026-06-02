@@ -1,0 +1,74 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "flip-grid",
+  "type": "registry:component",
+  "title": "Flip Grid",
+  "description": "A FLIP-powered grid that animates reordering and layout changes. Framework-agnostic Custom Elements.",
+  "dependencies": ["gsap"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/flip-grid/flip-grid-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/flip-grid-element.ts"
+    },
+    {
+      "path": "src/registry/new-york/blocks/flip-grid/flip-grid-item-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/flip-grid-item-element.ts"
+    }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/flip-grid-element.ts\";\nimport \"@/components/motion-kit/flip-grid-item-element.ts\";\n---\n\n<motion-flip-grid\n  columns=\"3\"\n  duration=\"0.5\"\n  ease=\"power2.inOut\"\n  stagger=\"0\"\n  gap=\"1rem\"\n  class=\"w-full\"\n>\n  <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 1</div>\n  <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 2</div>\n  <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 3</div>\n  <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 4</div>\n</motion-flip-grid>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/flip-grid-element.ts\";\nimport \"@/components/motion-kit/flip-grid-item-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-flip-grid\n      columns={3}\n      duration={0.5}\n      ease=\"power2.inOut\"\n      stagger={0}\n      gap=\"1rem\"\n      className=\"w-full\"\n    >\n      <div className=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 1</div>\n      <div className=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 2</div>\n      <div className=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 3</div>\n      <div className=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 4</div>\n    </motion-flip-grid>\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/flip-grid-element.ts\";\nimport \"@/components/motion-kit/flip-grid-item-element.ts\";\n</script>\n\n<template>\n  <motion-flip-grid\n    :columns=\"3\"\n    :duration=\"0.5\"\n    ease=\"power2.inOut\"\n    :stagger=\"0\"\n    gap=\"1rem\"\n    class=\"w-full\"\n  >\n    <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 1</div>\n    <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 2</div>\n    <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 3</div>\n    <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 4</div>\n  </motion-flip-grid>\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/flip-grid-element.ts\";\n  import \"@/components/motion-kit/flip-grid-item-element.ts\";\n</script>\n\n<motion-flip-grid\n  columns={3}\n  duration={0.5}\n  ease=\"power2.inOut\"\n  stagger={0}\n  gap=\"1rem\"\n  class=\"w-full\"\n>\n  <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 1</div>\n  <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 2</div>\n  <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 3</div>\n  <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 4</div>\n</motion-flip-grid>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/flip-grid-element.js\"></script>\n<script type=\"module\" src=\"/components/motion-kit/flip-grid-item-element.js\"></script>\n\n<motion-flip-grid\n  columns=\"3\"\n  duration=\"0.5\"\n  ease=\"power2.inOut\"\n  stagger=\"0\"\n  gap=\"1rem\"\n  class=\"w-full\"\n>\n  <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 1</div>\n  <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 2</div>\n  <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 3</div>\n  <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 4</div>\n</motion-flip-grid>"
+    }
+  ],
+  "props": [
+    {
+      "name": "columns",
+      "type": "number",
+      "default": "0",
+      "description": "Number of columns in the grid (0 for auto-layout)."
+    },
+    {
+      "name": "duration",
+      "type": "number",
+      "default": "0.5",
+      "description": "Animation duration in seconds."
+    },
+    {
+      "name": "ease",
+      "type": "string",
+      "default": "\"power2.inOut\"",
+      "description": "GSAP easing function for animations."
+    },
+    {
+      "name": "stagger",
+      "type": "number",
+      "default": "0",
+      "description": "Stagger delay in seconds between item animations."
+    },
+    {
+      "name": "gap",
+      "type": "string",
+      "default": "\"\"",
+      "description": "CSS gap value between grid items."
+    }
+  ]
+}

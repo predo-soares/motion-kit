@@ -1,0 +1,19 @@
+{
+  "name": "flip-grid",
+  "type": "registry:component",
+  "title": "Flip Grid",
+  "description": "A FLIP-powered grid that animates reordering and layout changes. Framework-agnostic Custom Elements.",
+  "dependencies": ["gsap"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/flip-grid/flip-grid-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/flip-grid-element.ts"
+    },
+    {
+      "path": "src/registry/new-york/blocks/flip-grid/flip-grid-item-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/flip-grid-item-element.ts"
+    }
+  ]
+}
