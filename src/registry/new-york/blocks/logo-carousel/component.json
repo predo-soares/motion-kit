@@ -11,5 +11,47 @@
       "type": "registry:component",
       "target": "src/components/motion-kit/logo-carousel-element.ts"
     }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/logo-carousel-element.ts\";\n---\n\n<motion-logo-carousel\n  logos='[{\"src\":\"/logos/a.svg\",\"alt\":\"A\"},{\"src\":\"/logos/b.svg\",\"alt\":\"B\"}]'\n  columns=\"3\"\n  cycle-interval=\"2000\"\n></motion-logo-carousel>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/logo-carousel-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-logo-carousel\n      logos='[{\"src\":\"/logos/a.svg\",\"alt\":\"A\"},{\"src\":\"/logos/b.svg\",\"alt\":\"B\"}]'\n      columns=\"3\"\n      cycle-interval=\"2000\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/logo-carousel-element.ts\";\n</script>\n\n<template>\n  <motion-logo-carousel\n    :logos='JSON.stringify([{\"src\":\"/logos/a.svg\",\"alt\":\"A\"},{\"src\":\"/logos/b.svg\",\"alt\":\"B\"}])'\n    columns=\"3\"\n    cycle-interval=\"2000\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/logo-carousel-element.ts\";\n</script>\n\n<motion-logo-carousel\n  logos='[{\"src\":\"/logos/a.svg\",\"alt\":\"A\"},{\"src\":\"/logos/b.svg\",\"alt\":\"B\"}]'\n  columns=\"3\"\n  cycle-interval=\"2000\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/logo-carousel-element.js\"></script>\n\n<motion-logo-carousel\n  logos='[{\"src\":\"/logos/a.svg\",\"alt\":\"A\"},{\"src\":\"/logos/b.svg\",\"alt\":\"B\"}]'\n  columns=\"3\"\n  cycle-interval=\"2000\"\n></motion-logo-carousel>"
+    }
+  ],
+  "props": [
+    {
+      "name": "logos",
+      "type": "string",
+      "default": "\"[]\"",
+      "description": "JSON array of logo objects with src, alt, and name properties."
+    },
+    {
+      "name": "columns",
+      "type": "number",
+      "default": "2",
+      "description": "Number of columns to distribute logos into."
+    },
+    {
+      "name": "cycle-interval",
+      "type": "number",
+      "default": "2000",
+      "description": "Milliseconds between logo cycles."
+    }
   ]
 }
