@@ -1,0 +1,14 @@
+{
+  "name": "flip-card-stack",
+  "type": "registry:component",
+  "title": "Flip Card Stack",
+  "description": "A draggable card stack where the top card snaps to the back after a threshold drag. Framework-agnostic Custom Element.",
+  "dependencies": ["gsap"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/flip-card-stack/flip-card-stack-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/flip-card-stack-element.ts"
+    }
+  ]
+}
