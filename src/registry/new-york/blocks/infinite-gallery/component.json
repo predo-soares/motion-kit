@@ -23,7 +23,7 @@
     },
     {
       "label": "Vue",
-      "code": "<script setup>\nimport \"@/components/motion-kit/infinite-gallery-element.ts\";\n</script>\n\n<template>\n  <motion-infinite-gallery\n    :images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n    speed=\"1\"\n    visible-count=\"8\"\n    class=\"h-[600px] w-full\"\n  />\n</template>"
+      "code": "<script setup>\nimport \"`@/components/motion-kit/infinite-gallery-element.ts`\";\n</script>\n\n<template>\n  <motion-infinite-gallery\n    :images='JSON.stringify([{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}])'\n    speed=\"1\"\n    visible-count=\"8\"\n    class=\"h-[600px] w-full\"\n  />\n</template>"
     },
     {
       "label": "Svelte",
