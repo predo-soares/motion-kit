@@ -16,5 +16,59 @@
       "type": "registry:component",
       "target": "src/components/motion-kit/card-stack-item-element.ts"
     }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/card-stack-element.ts\";\nimport \"@/components/motion-kit/card-stack-item-element.ts\";\n---\n\n<motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 1</h2>\n    <p>Content for the first card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n    <h2>Card 2</h2>\n    <p>Content for the second card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 3</h2>\n    <p>Content for the third card</p>\n  </motion-card-stack-item>\n</motion-card-stack>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/card-stack-element.ts\";\nimport \"@/components/motion-kit/card-stack-item-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n      <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n        <h2>Card 1</h2>\n        <p>Content for the first card</p>\n      </motion-card-stack-item>\n      <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n        <h2>Card 2</h2>\n        <p>Content for the second card</p>\n      </motion-card-stack-item>\n      <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n        <h2>Card 3</h2>\n        <p>Content for the third card</p>\n      </motion-card-stack-item>\n    </motion-card-stack>\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/card-stack-element.ts\";\nimport \"@/components/motion-kit/card-stack-item-element.ts\";\n</script>\n\n<template>\n  <motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n    <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n      <h2>Card 1</h2>\n      <p>Content for the first card</p>\n    </motion-card-stack-item>\n    <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n      <h2>Card 2</h2>\n      <p>Content for the second card</p>\n    </motion-card-stack-item>\n    <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n      <h2>Card 3</h2>\n      <p>Content for the third card</p>\n    </motion-card-stack-item>\n  </motion-card-stack>\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/card-stack-element.ts\";\n  import \"@/components/motion-kit/card-stack-item-element.ts\";\n</script>\n\n<motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 1</h2>\n    <p>Content for the first card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n    <h2>Card 2</h2>\n    <p>Content for the second card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 3</h2>\n    <p>Content for the third card</p>\n  </motion-card-stack-item>\n</motion-card-stack>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/card-stack-element.js\"></script>\n<script type=\"module\" src=\"/components/motion-kit/card-stack-item-element.js\"></script>\n\n<motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 1</h2>\n    <p>Content for the first card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n    <h2>Card 2</h2>\n    <p>Content for the second card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 3</h2>\n    <p>Content for the third card</p>\n  </motion-card-stack-item>\n</motion-card-stack>"
+    }
+  ],
+  "props": [
+    {
+      "name": "scale-factor",
+      "type": "number",
+      "default": "0.05",
+      "description": "How much each card scales down per card (0.05 = 5% smaller each step)."
+    },
+    {
+      "name": "gap",
+      "type": "number",
+      "default": "0",
+      "description": "Vertical gap between stacked cards in pixels."
+    },
+    {
+      "name": "offset",
+      "type": "number",
+      "default": "10",
+      "description": "Vertical offset between card positions in pixels."
+    },
+    {
+      "name": "top-offset",
+      "type": "number",
+      "default": "0",
+      "description": "Initial top offset for the first card in pixels."
+    },
+    {
+      "name": "scroll-element",
+      "type": "string",
+      "default": "\"\"",
+      "description": "CSS selector for the scrollable container (defaults to window scroll)."
+    }
   ]
 }
