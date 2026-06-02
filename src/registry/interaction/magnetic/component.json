@@ -1,0 +1,51 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "magnetic",
+  "type": "registry:component",
+  "title": "Magnetic",
+  "description": "Framework-agnostic <motion-magnetic> Custom Element with spring physics, powered by Lit and GSAP.",
+  "dependencies": ["lit", "gsap"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/magnetic/magnetic-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/magnetic-element.ts"
+    }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/magnetic-element.ts\";\n---\n\n<motion-magnetic duration=\"1.2\">\n  <button>Hover me</button>\n</motion-magnetic>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/magnetic-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-magnetic duration=\"1.2\">\n      <button>Hover me</button>\n    </motion-magnetic>\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/magnetic-element.ts\";\n</script>\n\n<template>\n  <motion-magnetic duration=\"1.2\">\n    <button>Hover me</button>\n  </motion-magnetic>\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/magnetic-element.ts\";\n</script>\n\n<motion-magnetic duration=\"1.2\">\n  <button>Hover me</button>\n</motion-magnetic>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/magnetic-element.js\"></script>\n\n<motion-magnetic duration=\"1.2\">\n  <button>Hover me</button>\n</motion-magnetic>"
+    }
+  ],
+  "props": [
+    {
+      "name": "duration",
+      "type": "number",
+      "default": "1",
+      "description": "Animation duration in seconds."
+    },
+    {
+      "name": "ease",
+      "type": "string",
+      "default": "\"elastic.out(1, 0.3)\"",
+      "description": "GSAP easing function string."
+    }
+  ]
+}
