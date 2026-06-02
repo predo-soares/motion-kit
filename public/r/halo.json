@@ -1,0 +1,14 @@
+{
+  "name": "halo",
+  "type": "registry:component",
+  "title": "Halo",
+  "description": "Atmospheric scattering based halo effect with dynamic camera rotation and sun light simulation. Lit Custom Element.",
+  "dependencies": ["lit", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/halo/halo-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/halo-element.ts"
+    }
+  ]
+}
