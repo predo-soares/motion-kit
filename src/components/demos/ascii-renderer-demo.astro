@@ -3,7 +3,7 @@ import ComponentCard from "@/components/ui/component-card.astro";
 ---
 
 <ComponentCard description="WebGL image rendered as an animated ASCII dot-grid with scanline displacement.">
-  <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-[#17181A]">
+  <div class="relative h-[420px] w-full overflow-hidden rounded-[2rem] bg-[#17181A]">
     <motion-ascii-renderer
       image="https://picsum.photos/seed/ascii1/600/400"
       density="25"
@@ -17,7 +17,7 @@ import ComponentCard from "@/components/ui/component-card.astro";
     <mk-slider
       label="Density"
       min="5"
-      max="50"
+      max="100"
       step="1"
       value="25"
       data-target="motion-ascii-renderer"
