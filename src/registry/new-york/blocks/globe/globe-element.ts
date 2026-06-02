@@ -545,8 +545,6 @@ export class MotionGlobe extends LitElement {
       return new Vec3(r, g, b);
     };
 
-     const uniforms = {
-
     const uniforms = {
       uTime: { value: 0 },
       uResolution: { value: new Vec2(1, 1) },
