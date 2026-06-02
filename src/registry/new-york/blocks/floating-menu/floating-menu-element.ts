@@ -391,8 +391,14 @@ export class MotionFloatingMenu extends LitElement {
   private _isOpen = false;
   private _timeline: gsap.core.Timeline | null = null;
   private _ctx: gsap.Context | null = null;
+  private _listeningForEscape = false;
   private _resizeHandler = () => {
     void this._initTimeline();
+  };
+  private _handleDocumentKeydown = (event: KeyboardEvent) => {
+    if (event.key !== "Escape" || !this._isOpen) return;
+    event.preventDefault();
+    this._toggle();
   };
 
   override connectedCallback() {
@@ -404,6 +410,7 @@ export class MotionFloatingMenu extends LitElement {
   override disconnectedCallback() {
     super.disconnectedCallback();
     window.removeEventListener("resize", this._resizeHandler);
+    this._setDocumentEscapeListener(false);
     this._cleanupAnimation();
   }
 
@@ -458,10 +465,21 @@ export class MotionFloatingMenu extends LitElement {
   }
 
   private _cleanupAnimation() {
+    this._setDocumentEscapeListener(false);
     this._timeline?.kill();
     this._timeline = null;
     this._ctx?.revert();
     this._ctx = null;
+  }
+
+  private _setDocumentEscapeListener(active: boolean) {
+    if (active === this._listeningForEscape) return;
+    this._listeningForEscape = active;
+    if (active) {
+      document.addEventListener("keydown", this._handleDocumentKeydown);
+      return;
+    }
+    document.removeEventListener("keydown", this._handleDocumentKeydown);
   }
 
   private _setOverlayInteractivity(active: boolean) {
@@ -551,10 +569,12 @@ export class MotionFloatingMenu extends LitElement {
         onReverseComplete: () => {
           this._setOverlayInteractivity(false);
           this._isOpen = false;
+          this._setDocumentEscapeListener(false);
         },
         onComplete: () => {
           this._setOverlayInteractivity(true);
           this._isOpen = true;
+          this._setDocumentEscapeListener(true);
         },
       });
 
@@ -593,9 +613,11 @@ export class MotionFloatingMenu extends LitElement {
     if (this._isOpen) {
       this._timeline?.progress(1);
       this._setOverlayInteractivity(true);
+      this._setDocumentEscapeListener(true);
       return;
     }
 
+    this._setDocumentEscapeListener(false);
     this._setOverlayInteractivity(false);
   }
 
@@ -630,7 +652,6 @@ export class MotionFloatingMenu extends LitElement {
         data-slot="overlay"
         class="overlay"
         @click=${this._toggle}
-        @keydown=${this._handleOverlayKeydown}
         role="button"
         tabindex="-1"
         aria-label="Close menu"
