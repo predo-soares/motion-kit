@@ -1,0 +1,93 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "glass-slideshow",
+  "type": "registry:component",
+  "title": "Glass Slideshow",
+  "description": "An OGL-powered slideshow with liquid glass image transitions, chromatic fringing, and optional autoplay. Lit Custom Element.",
+  "dependencies": ["lit", "gsap", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/glass-slideshow/glass-slideshow-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/glass-slideshow-element.ts"
+    }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/glass-slideshow-element.ts\";\n\nconst slides = [\n  { src: \"/images/slide1.jpg\", alt: \"Slide 1\" },\n  { src: \"/images/slide2.jpg\", alt: \"Slide 2\" },\n  { src: \"/images/slide3.jpg\", alt: \"Slide 3\" }\n];\n---\n\n<motion-glass-slideshow\n  images={JSON.stringify(slides)}\n  index={0}\n  transition-duration={2000}\n  intensity={1}\n  distortion={1}\n  chromatic-aberration={1}\n  refraction={1}\n  autoplay={true}\n  autoplay-interval={5000}\n  class=\"w-full h-[600px]\"\n/>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/glass-slideshow-element.ts\";\n\nconst slides = [\n  { src: \"/images/slide1.jpg\", alt: \"Slide 1\" },\n  { src: \"/images/slide2.jpg\", alt: \"Slide 2\" },\n  { src: \"/images/slide3.jpg\", alt: \"Slide 3\" }\n];\n\nexport default function Page() {\n  return (\n    <motion-glass-slideshow\n      images={JSON.stringify(slides)}\n      index={0}\n      transition-duration={2000}\n      intensity={1}\n      distortion={1}\n      chromatic-aberration={1}\n      refraction={1}\n      autoplay={true}\n      autoplay-interval={5000}\n      className=\"w-full h-[600px]\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/glass-slideshow-element.ts\";\n\nconst slides = [\n  { src: \"/images/slide1.jpg\", alt: \"Slide 1\" },\n  { src: \"/images/slide2.jpg\", alt: \"Slide 2\" },\n  { src: \"/images/slide3.jpg\", alt: \"Slide 3\" }\n];\n</script>\n\n<template>\n  <motion-glass-slideshow\n    :images=\"JSON.stringify(slides)\"\n    :index=\"0\"\n    :transition-duration=\"2000\"\n    :intensity=\"1\"\n    :distortion=\"1\"\n    :chromatic-aberration=\"1\"\n    :refraction=\"1\"\n    :autoplay=\"true\"\n    :autoplay-interval=\"5000\"\n    class=\"w-full h-[600px]\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/glass-slideshow-element.ts\";\n\n  const slides = [\n    { src: \"/images/slide1.jpg\", alt: \"Slide 1\" },\n    { src: \"/images/slide2.jpg\", alt: \"Slide 2\" },\n    { src: \"/images/slide3.jpg\", alt: \"Slide 3\" }\n  ];\n</script>\n\n<motion-glass-slideshow\n  images={JSON.stringify(slides)}\n  index={0}\n  transition-duration={2000}\n  intensity={1}\n  distortion={1}\n  chromatic-aberration={1}\n  refraction={1}\n  autoplay={true}\n  autoplay-interval={5000}\n  class=\"w-full h-[600px]\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/glass-slideshow-element.js\"></script>\n\n<motion-glass-slideshow\n  images='[{\"src\":\"/images/slide1.jpg\",\"alt\":\"Slide 1\"},{\"src\":\"/images/slide2.jpg\",\"alt\":\"Slide 2\"},{\"src\":\"/images/slide3.jpg\",\"alt\":\"Slide 3\"}]'\n  index=\"0\"\n  transition-duration=\"2000\"\n  intensity=\"1\"\n  distortion=\"1\"\n  chromatic-aberration=\"1\"\n  refraction=\"1\"\n  autoplay=\"true\"\n  autoplay-interval=\"5000\"\n  class=\"w-full h-[600px]\"\n/>"
+    }
+  ],
+  "props": [
+    {
+      "name": "images",
+      "type": "string (JSON)",
+      "default": "\"[]\"",
+      "description": "JSON array of slide objects with src (URL) and optional alt text."
+    },
+    {
+      "name": "index",
+      "type": "number",
+      "default": "0",
+      "description": "Current slide index (updates on transition when autoplay is false)."
+    },
+    {
+      "name": "transition-duration",
+      "type": "number",
+      "default": "2000",
+      "description": "Duration of the glass transition effect in milliseconds."
+    },
+    {
+      "name": "intensity",
+      "type": "number",
+      "default": "1",
+      "description": "Overall intensity of the glass distortion and refraction effects."
+    },
+    {
+      "name": "distortion",
+      "type": "number",
+      "default": "1",
+      "description": "Strength of the liquid distortion during transitions."
+    },
+    {
+      "name": "chromatic-aberration",
+      "type": "number",
+      "default": "1",
+      "description": "Intensity of RGB color splitting at refracted edges."
+    },
+    {
+      "name": "refraction",
+      "type": "number",
+      "default": "1",
+      "description": "Strength of the glass lens refraction effect."
+    },
+    {
+      "name": "autoplay",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether to automatically advance slides."
+    },
+    {
+      "name": "autoplay-interval",
+      "type": "number",
+      "default": "5000",
+      "description": "Time between automatic slide advances in milliseconds."
+    }
+  ]
+}
