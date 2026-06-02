@@ -11,5 +11,59 @@
       "type": "registry:component",
       "target": "src/components/motion-kit/fake-3d-image-element.ts"
     }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/fake-3d-image-element.ts\";\n---\n\n<motion-fake-3d-image\n  color-src=\"/path/to/image.jpg\"\n  depth-src=\"/path/to/depth-map.jpg\"\n  x-threshold=\"8\"\n  y-threshold=\"8\"\n  sensitivity=\"0.25\"\n  class=\"w-full h-[400px]\"\n/>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/fake-3d-image-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-fake-3d-image\n      colorSrc=\"/path/to/image.jpg\"\n      depthSrc=\"/path/to/depth-map.jpg\"\n      xThreshold={8}\n      yThreshold={8}\n      sensitivity={0.25}\n      className=\"w-full h-[400px]\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/fake-3d-image-element.ts\";\n</script>\n\n<template>\n  <motion-fake-3d-image\n    color-src=\"/path/to/image.jpg\"\n    depth-src=\"/path/to/depth-map.jpg\"\n    :x-threshold=\"8\"\n    :y-threshold=\"8\"\n    :sensitivity=\"0.25\"\n    class=\"w-full h-[400px]\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/fake-3d-image-element.ts\";\n</script>\n\n<motion-fake-3d-image\n  colorSrc=\"/path/to/image.jpg\"\n  depthSrc=\"/path/to/depth-map.jpg\"\n  xThreshold={8}\n  yThreshold={8}\n  sensitivity={0.25}\n  class=\"w-full h-[400px]\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/fake-3d-image-element.js\"></script>\n\n<motion-fake-3d-image\n  color-src=\"/path/to/image.jpg\"\n  depth-src=\"/path/to/depth-map.jpg\"\n  x-threshold=\"8\"\n  y-threshold=\"8\"\n  sensitivity=\"0.25\"\n  class=\"w-full h-[400px]\"\n/>"
+    }
+  ],
+  "props": [
+    {
+      "name": "color-src",
+      "type": "string",
+      "default": "\"\"",
+      "description": "URL of the color image to display."
+    },
+    {
+      "name": "depth-src",
+      "type": "string",
+      "default": "\"\"",
+      "description": "URL of the grayscale depth map (white = near, black = far)."
+    },
+    {
+      "name": "x-threshold",
+      "type": "number",
+      "default": "8",
+      "description": "Parallax strength threshold on X axis."
+    },
+    {
+      "name": "y-threshold",
+      "type": "number",
+      "default": "8",
+      "description": "Parallax strength threshold on Y axis."
+    },
+    {
+      "name": "sensitivity",
+      "type": "number",
+      "default": "0.25",
+      "description": "Mouse movement sensitivity (0 to 1)."
+    }
   ]
 }
