@@ -545,7 +545,7 @@ export class MotionGlobe extends LitElement {
       return new Vec3(r, g, b);
     };
 
-    console.log(resolvedFresnelConfig);
+     const uniforms = {
 
     const uniforms = {
       uTime: { value: 0 },
