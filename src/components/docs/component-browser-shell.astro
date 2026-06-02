@@ -10,14 +10,17 @@ const { currentSlug } = Astro.props;
 
 <div data-component-browser-shell class="min-h-screen">
   <div class="mx-auto max-w-[1400px] px-4 py-6 lg:px-6 lg:py-8">
-    <div class="flex items-center justify-between gap-4 border-b border-slate-200 pb-4 lg:hidden">
+    <div
+      class="flex items-center justify-between gap-4 border-b border-slate-200 pb-4 lg:hidden"
+    >
       <a href="/" class="text-sm font-semibold tracking-tight text-slate-900">
         Motion Kit
       </a>
       <button
         type="button"
         data-sidebar-open
-        class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:border-slate-300 hover:text-slate-900"
+        title="Browse Components"
+        class="inline-flex select-none items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:border-slate-300 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300"
       >
         Browse Components
       </button>
@@ -26,12 +29,15 @@ const { currentSlug } = Astro.props;
     <div
       data-sidebar-overlay
       class="pointer-events-none fixed inset-0 z-40 bg-slate-900/30 opacity-0 transition-opacity duration-200 lg:hidden"
-    ></div>
+    >
+    </div>
 
-    <div class="mt-6 lg:mt-0 lg:grid lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-10">
+    <div
+      class="mt-6 lg:mt-0 lg:grid lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-10"
+    >
       <aside
         data-sidebar-panel
-        class="fixed inset-y-0 left-0 z-50 flex w-[86vw] max-w-sm -translate-x-full flex-col border-r border-slate-200 bg-white px-4 py-5 transition-transform duration-200 lg:sticky lg:top-6 lg:z-auto lg:h-[calc(100vh-3rem)] lg:w-auto lg:max-w-none lg:translate-x-0 lg:overflow-y-auto lg:border-r-0 lg:bg-transparent lg:px-0 lg:py-8"
+        class="fixed inset-y-0 left-0 z-50 flex w-[86vw] max-w-sm -translate-x-full flex-col overflow-hidden border-r border-slate-200 bg-white px-4 py-5 transition-transform duration-200 lg:sticky lg:top-6 lg:z-auto lg:h-[calc(100vh-3rem)] lg:w-auto lg:max-w-none lg:translate-x-0 lg:border-r-0 lg:bg-transparent lg:px-0 lg:py-8"
       >
         <div class="mb-6 flex items-center justify-between gap-4 lg:mb-8">
           <div class="flex flex-col gap-1">
@@ -41,27 +47,38 @@ const { currentSlug } = Astro.props;
             >
               Motion Kit
             </a>
-            <p class="text-sm text-slate-500">Astro component browser</p>
+            <p class="text-sm text-slate-500 max-w-[20ch] text-balance">
+              Browse light weight web components
+            </p>
           </div>
           <button
             type="button"
             data-sidebar-close
-            class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-600 transition-colors hover:border-slate-300 hover:text-slate-900 lg:hidden"
+            title="Close sidebar"
+            class="inline-flex select-none items-center justify-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-600 transition-colors hover:border-slate-300 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 lg:hidden"
           >
             Close
           </button>
         </div>
 
-        <div class="mb-6 lg:mb-8">
-          <a
-            href="/"
-            class="inline-flex rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-600 transition-colors hover:border-slate-300 hover:text-slate-900"
+        <div class="relative min-h-0 flex-1">
+          <div
+            data-scroll-fade="top"
+            class="pointer-events-none absolute inset-x-0 top-0 z-10 h-8 bg-linear-to-b from-white via-white/90 to-transparent opacity-0 transition-opacity duration-150"
           >
-            Overview
-          </a>
+          </div>
+          <div
+            data-sidebar-scroll
+            class="component-sidebar-scroll h-full overflow-y-auto pb-2"
+          >
+            <ComponentSidebarNav currentSlug={currentSlug} />
+          </div>
+          <div
+            data-scroll-fade="bottom"
+            class="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-10 bg-linear-to-t from-white via-white/90 to-transparent opacity-0 transition-opacity duration-150"
+          >
+          </div>
         </div>
-
-        <ComponentSidebarNav currentSlug={currentSlug} />
       </aside>
 
       <main class="min-w-0 pt-8 lg:pt-8">
@@ -80,11 +97,36 @@ const { currentSlug } = Astro.props;
     const openButton = shell.querySelector("[data-sidebar-open]");
     const closeButton = shell.querySelector("[data-sidebar-close]");
     const navLinks = shell.querySelectorAll("aside a");
+    const scrollArea = shell.querySelector("[data-sidebar-scroll]");
+    const topFade = shell.querySelector('[data-scroll-fade="top"]');
+    const bottomFade = shell.querySelector('[data-scroll-fade="bottom"]');
 
     let previousOverflow = "";
 
+    const updateScrollFades = () => {
+      if (
+        !(scrollArea instanceof HTMLElement) ||
+        !(topFade instanceof HTMLElement) ||
+        !(bottomFade instanceof HTMLElement)
+      ) {
+        return;
+      }
+
+      const hasOverflow = scrollArea.scrollHeight - scrollArea.clientHeight > 1;
+      const isAtTop = scrollArea.scrollTop <= 1;
+      const isAtBottom =
+        scrollArea.scrollTop + scrollArea.clientHeight >=
+        scrollArea.scrollHeight - 1;
+
+      topFade.classList.toggle("opacity-0", !hasOverflow || isAtTop);
+      bottomFade.classList.toggle("opacity-0", !hasOverflow || isAtBottom);
+    };
+
     const setOpen = (open) => {
-      if (!(panel instanceof HTMLElement) || !(overlay instanceof HTMLElement)) {
+      if (
+        !(panel instanceof HTMLElement) ||
+        !(overlay instanceof HTMLElement)
+      ) {
         return;
       }
 
@@ -98,11 +140,16 @@ const { currentSlug } = Astro.props;
       } else {
         document.body.style.overflow = previousOverflow;
       }
+
+      window.requestAnimationFrame(updateScrollFades);
     };
 
     openButton?.addEventListener("click", () => setOpen(true));
     closeButton?.addEventListener("click", () => setOpen(false));
     overlay?.addEventListener("click", () => setOpen(false));
+    scrollArea?.addEventListener("scroll", updateScrollFades, {
+      passive: true,
+    });
 
     navLinks.forEach((link) => {
       link.addEventListener("click", () => setOpen(false));
@@ -114,6 +161,22 @@ const { currentSlug } = Astro.props;
 
     window.addEventListener("resize", () => {
       if (window.innerWidth >= 1024) setOpen(false);
+      updateScrollFades();
     });
+
+    window.requestAnimationFrame(updateScrollFades);
   }
 </script>
+
+<style>
+  .component-sidebar-scroll {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .component-sidebar-scroll::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+</style>
