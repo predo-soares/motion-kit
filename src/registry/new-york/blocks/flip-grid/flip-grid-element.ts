@@ -61,6 +61,7 @@ class MotionFlipGrid extends HTMLElement {
     // For layout-related attributes, capture state BEFORE the attribute value
     // takes effect in the layout, then schedule the animation.
     if (oldValue === newValue) return
+    if (name !== "columns" && name !== "gap") return
 
     // Capture immediately (synchronously) before any layout recalculations
     this._captureBeforeChange()
