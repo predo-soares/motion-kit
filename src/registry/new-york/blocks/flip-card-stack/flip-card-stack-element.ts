@@ -100,9 +100,9 @@ class MotionFlipCardStack extends HTMLElement {
       if (this._handlers.has(card)) return
 
       const handlers: PointerHandlers = {
-        down: (event) => this._handlePointerDown(event, index),
-        move: (event) => this._handlePointerMove(event, index),
-        up: (event) => this._handlePointerEnd(event, index),
+        down: (event) => this._handlePointerDown(event, this._cards.indexOf(card)),
+        move: (event) => this._handlePointerMove(event, this._cards.indexOf(card)),
+        up: (event) => this._handlePointerEnd(event, this._cards.indexOf(card)),
       }
 
       this._handlers.set(card, handlers)
