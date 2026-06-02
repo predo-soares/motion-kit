@@ -1,9 +1,21 @@
-type ComponentGroup = "Interaction" | "Text" | "Showcase" | "WebGL";
+type ComponentGroup = "Interaction" | "Text" | "Showcase" | "Canvas";
 
 interface ComponentManifestFile {
   path: string;
   type: string;
   target: string;
+}
+
+export interface PropEntry {
+  name: string;
+  type: string;
+  default: string;
+  description: string;
+}
+
+export interface UsageTab {
+  label: string;
+  code: string;
 }
 
 interface ComponentManifest {
@@ -12,6 +24,8 @@ interface ComponentManifest {
   description: string;
   dependencies?: string[];
   files: ComponentManifestFile[];
+  usage?: UsageTab[];
+  props?: PropEntry[];
 }
 
 interface ComponentSeed {
@@ -26,6 +40,8 @@ export interface ComponentCatalogEntry {
   summary: string;
   dependencies: string[];
   files: ComponentManifestFile[];
+  usage?: UsageTab[];
+  props?: PropEntry[];
 }
 
 export interface ComponentCatalogGroup {
@@ -44,6 +60,9 @@ const manifestsBySlug = Object.fromEntries(
 
 const seeds: ComponentSeed[] = [
   { slug: "card-stack", group: "Interaction" },
+  { slug: "flip-card-stack", group: "Interaction" },
+  { slug: "flip-grid", group: "Interaction" },
+  { slug: "floating-menu", group: "Interaction" },
   { slug: "magnetic", group: "Interaction" },
   { slug: "magnetic-lit", group: "Interaction" },
   { slug: "marquee", group: "Interaction" },
@@ -57,23 +76,31 @@ const seeds: ComponentSeed[] = [
   { slug: "logo-carousel", group: "Showcase" },
   { slug: "slideshow", group: "Showcase" },
   { slug: "radial-gallery", group: "Showcase" },
+  { slug: "image-trail", group: "Interaction" },
   { slug: "infinite-physics-gallery", group: "Showcase" },
+  { slug: "infinite-gallery", group: "Showcase" },
   { slug: "video-player", group: "Showcase" },
-  { slug: "card-3d", group: "WebGL" },
-  { slug: "dithered-image", group: "WebGL" },
-  { slug: "fake-3d-image", group: "WebGL" },
-  { slug: "fluid-simulation", group: "WebGL" },
-  { slug: "fluid-image-reveal", group: "WebGL" },
-  { slug: "glass-logo", group: "WebGL" },
-  { slug: "glass-pane", group: "WebGL" },
-  { slug: "ascii-renderer", group: "WebGL" },
+  { slug: "card-3d", group: "Canvas" },
+  { slug: "dithered-image", group: "Canvas" },
+  { slug: "fake-3d-image", group: "Canvas" },
+  { slug: "pixelated-image", group: "Canvas" },
+  { slug: "fluid-simulation", group: "Canvas" },
+  { slug: "fluid-image-reveal", group: "Canvas" },
+  { slug: "glass-logo", group: "Canvas" },
+  { slug: "glass-slideshow", group: "Canvas" },
+  { slug: "glass-pane", group: "Canvas" },
+  { slug: "glitter-cloth", group: "Canvas" },
+  { slug: "globe", group: "Canvas" },
+  { slug: "god-rays", group: "Canvas" },
+  { slug: "halo", group: "Canvas" },
+  { slug: "ascii-renderer", group: "Canvas" },
 ];
 
 const groupOrder: ComponentGroup[] = [
   "Interaction",
   "Text",
   "Showcase",
-  "WebGL",
+  "Canvas",
 ];
 
 export const componentCatalog: ComponentCatalogEntry[] = seeds.map(
@@ -91,6 +118,8 @@ export const componentCatalog: ComponentCatalogEntry[] = seeds.map(
       summary: manifest.description,
       dependencies: manifest.dependencies ?? [],
       files: manifest.files,
+      usage: manifest.usage,
+      props: manifest.props,
     };
   },
 );

@@ -47,8 +47,22 @@
   --corner-shape-default: squircle;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgb(148 163 184 / 0.3);
+}
+
+button {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 * {
@@ -71,7 +85,21 @@ body.mk-card-fullscreen-open {
 [data-component-card][data-fullscreen-active="true"] {
   position: fixed;
   z-index: 121;
-  cursor: zoom-out;
+  overflow: visible;
+}
+
+[data-component-card] [data-card-action="fullscreen"] [data-icon-close] {
+  display: none;
+}
+[data-component-card][data-fullscreen-active="true"]
+  [data-card-action="fullscreen"]
+  [data-icon-open] {
+  display: none;
+}
+[data-component-card][data-fullscreen-active="true"]
+  [data-card-action="fullscreen"]
+  [data-icon-close] {
+  display: inline-flex;
 }
 
 [data-component-card][data-fullscreen-active="true"] [data-preview] {
@@ -80,7 +108,7 @@ body.mk-card-fullscreen-open {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* ─── Component controls panel ─────────────────────────────────── */
@@ -106,7 +134,9 @@ body.mk-card-fullscreen-open {
   padding: 0.25rem 0.625rem 0.25rem 0.5rem;
   border-radius: 0.6rem;
 }
-.mk-row--color .mk-label { flex: 1; }
+.mk-row--color .mk-label {
+  flex: 1;
+}
 
 .mk-row--select {
   display: flex;
@@ -116,7 +146,9 @@ body.mk-card-fullscreen-open {
   padding: 0.25rem;
   border-radius: 0.6rem;
 }
-.mk-row--select .mk-label { padding-left: 0.25rem; }
+.mk-row--select .mk-label {
+  padding-left: 0.25rem;
+}
 
 .mk-label {
   font-size: 10px;
@@ -155,7 +187,9 @@ body.mk-card-fullscreen-open {
   cursor: pointer;
   border: 2px solid white;
   box-shadow: 0 0 0 1.5px rgb(203 213 225);
-  transition: background 150ms, box-shadow 150ms;
+  transition:
+    background 150ms,
+    box-shadow 150ms;
 }
 .mk-range:hover::-webkit-slider-thumb {
   background: rgb(148 163 184);
@@ -169,7 +203,9 @@ body.mk-card-fullscreen-open {
   cursor: pointer;
   border: 2px solid white;
   box-shadow: 0 0 0 1.5px rgb(203 213 225);
-  transition: background 150ms, box-shadow 150ms;
+  transition:
+    background 150ms,
+    box-shadow 150ms;
 }
 .mk-range:hover::-moz-range-thumb {
   background: rgb(148 163 184);
@@ -228,4 +264,54 @@ body.mk-card-fullscreen-open {
   *::after {
     corner-shape: var(--corner-shape-default);
   }
+}
+
+/* ─── Progressive blur utilities ─────────────────────────────────── */
+@utility progressive-blur {
+  --pb-direction: to bottom;
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: -1;
+  height: 80px;
+  pointer-events: none;
+
+  &::before,
+  &::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+  }
+
+  &::before {
+    backdrop-filter: blur(4px);
+    mask-image: linear-gradient(
+      var(--pb-direction),
+      black 0%,
+      black 40%,
+      transparent 100%
+    );
+  }
+
+  &::after {
+    backdrop-filter: blur(8px);
+    mask-image: linear-gradient(
+      var(--pb-direction),
+      transparent 40%,
+      black 60%,
+      transparent 100%
+    );
+  }
+}
+
+@utility progressive-blur-top {
+  --pb-direction: to bottom;
+  top: 0;
+  bottom: auto;
+}
+
+@utility progressive-blur-bottom {
+  --pb-direction: to top;
+  top: auto;
+  bottom: 0;
 }
