@@ -1,0 +1,87 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "glitter-cloth",
+  "type": "registry:component",
+  "title": "Glitter Cloth",
+  "description": "An OGL shader surface with animated silk folds, glitter sparkle, and vignette depth shading. Lit Custom Element.",
+  "dependencies": ["lit", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/glitter-cloth/glitter-cloth-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/glitter-cloth-element.ts"
+    }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/glitter-cloth-element.ts\";\n---\n\n<motion-glitter-cloth\n  color=\"#ff6900\"\n  speed={1}\n  brightness={1}\n  blend-strength={0.02}\n  noise-scale={4}\n  vignette-strength={15}\n  vignette-power={0.25}\n  vignette-opacity={1}\n  class=\"w-full h-[500px]\"\n/>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/glitter-cloth-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-glitter-cloth\n      color=\"#ff6900\"\n      speed={1}\n      brightness={1}\n      blend-strength={0.02}\n      noise-scale={4}\n      vignette-strength={15}\n      vignette-power={0.25}\n      vignette-opacity={1}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/glitter-cloth-element.ts\";\n</script>\n\n<template>\n  <motion-glitter-cloth\n    color=\"#ff6900\"\n    :speed=\"1\"\n    :brightness=\"1\"\n    :blend-strength=\"0.02\"\n    :noise-scale=\"4\"\n    :vignette-strength=\"15\"\n    :vignette-power=\"0.25\"\n    :vignette-opacity=\"1\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/glitter-cloth-element.ts\";\n</script>\n\n<motion-glitter-cloth\n  color=\"#ff6900\"\n  speed={1}\n  brightness={1}\n  blend-strength={0.02}\n  noise-scale={4}\n  vignette-strength={15}\n  vignette-power={0.25}\n  vignette-opacity={1}\n  class=\"w-full h-[500px]\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/glitter-cloth-element.js\"></script>\n\n<motion-glitter-cloth\n  color=\"#ff6900\"\n  speed=\"1\"\n  brightness=\"1\"\n  blend-strength=\"0.02\"\n  noise-scale=\"4\"\n  vignette-strength=\"15\"\n  vignette-power=\"0.25\"\n  vignette-opacity=\"1\"\n  class=\"w-full h-[500px]\"\n/>"
+    }
+  ],
+  "props": [
+    {
+      "name": "color",
+      "type": "string",
+      "default": "\"#ff6900\"",
+      "description": "Primary color of the glitter cloth (accent and shadow colors are auto-derived)."
+    },
+    {
+      "name": "speed",
+      "type": "number",
+      "default": "1",
+      "description": "Animation speed of the cloth folds and sparkle."
+    },
+    {
+      "name": "brightness",
+      "type": "number",
+      "default": "1",
+      "description": "Overall brightness multiplier of the fabric."
+    },
+    {
+      "name": "blend-strength",
+      "type": "number",
+      "default": "0.02",
+      "description": "How strongly the noise blends with the base color (vividLight mode)."
+    },
+    {
+      "name": "noise-scale",
+      "type": "number",
+      "default": "4",
+      "description": "Scale of the noise texture (lower = larger grain)."
+    },
+    {
+      "name": "vignette-strength",
+      "type": "number",
+      "default": "15",
+      "description": "Intensity of the vignette darkening at edges."
+    },
+    {
+      "name": "vignette-power",
+      "type": "number",
+      "default": "0.25",
+      "description": "Power curve of the vignette falloff."
+    },
+    {
+      "name": "vignette-opacity",
+      "type": "number",
+      "default": "1",
+      "description": "Opacity of the vignette effect (0 = disabled)."
+    }
+  ]
+}
