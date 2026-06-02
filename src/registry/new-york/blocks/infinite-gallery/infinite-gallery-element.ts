@@ -121,6 +121,9 @@ export class MotionInfiniteGallery extends LitElement {
   private _setVisibleCount?: (count: number) => void
 
   override firstUpdated() {
+    if (!this.hasAttribute("tabindex")) {
+      this.tabIndex = 0
+    }
     const canvas = this.shadowRoot?.querySelector("canvas")
     if (canvas instanceof HTMLCanvasElement) {
       this._init(canvas)
@@ -400,7 +403,7 @@ export class MotionInfiniteGallery extends LitElement {
     }
 
     canvas.addEventListener("wheel", handleWheel, { passive: false })
-    window.addEventListener("keydown", handleKeyDown)
+    this.addEventListener("keydown", handleKeyDown)
 
     const autoPlayInterval = window.setInterval(() => {
       if (Date.now() - lastInteraction > 3000) {
@@ -568,7 +571,7 @@ export class MotionInfiniteGallery extends LitElement {
       window.cancelAnimationFrame(raf)
       window.clearInterval(autoPlayInterval)
       canvas.removeEventListener("wheel", handleWheel)
-      window.removeEventListener("keydown", handleKeyDown)
+      this.removeEventListener("keydown", handleKeyDown)
       this._setImageItems = undefined
       this._setVisibleCount = undefined
 
