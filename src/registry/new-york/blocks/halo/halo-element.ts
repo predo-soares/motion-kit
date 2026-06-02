@@ -56,6 +56,7 @@ export class MotionHalo extends LitElement {
   @property({ type: Number }) intensity = 1
 
   private _raf = 0
+  private _cancelled = false
   private _uniforms?: {
     uScale: { value: number }
     uOffset: { value: Vec2 }
@@ -76,6 +77,7 @@ export class MotionHalo extends LitElement {
 
   override disconnectedCallback() {
     super.disconnectedCallback()
+    this._cancelled = true
     cancelAnimationFrame(this._raf)
   }
 
@@ -112,6 +114,7 @@ export class MotionHalo extends LitElement {
   }
 
   private _init(canvas: HTMLCanvasElement) {
+    this._cancelled = false
     cancelAnimationFrame(this._raf)
 
     const renderer = new Renderer({
@@ -371,6 +374,8 @@ export class MotionHalo extends LitElement {
 
     let previous = 0
     const tick = (now: number) => {
+      if (this._cancelled) return
+
       const w = Math.max(1, canvas.clientWidth)
       const h = Math.max(1, canvas.clientHeight)
       const bufW = Math.round(w * renderer.dpr)
