@@ -19,7 +19,7 @@
     },
     {
       "label": "React",
-      "code": "import \"@/components/motion-kit/radial-gallery-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-radial-gallery\n      items='[{\"src\":\"/img/1.jpg\"},{\"src\":\"/img/2.jpg\"}]'\n      radius=\"480\"\n      duration=\"24\"\n      element-size=\"160\"\n      class=\"h-[360px] w-full overflow-hidden\"\n    />\n  );\n}"
+      "code": "import \"`@/components/motion-kit/radial-gallery-element.ts`\";\n\nexport default function Page() {\n  return (\n    <motion-radial-gallery\n      items='[{\"src\":\"/img/1.jpg\"},{\"src\":\"/img/2.jpg\"}]'\n      radius=\"480\"\n      duration=\"24\"\n      element-size=\"160\"\n      className=\"h-[360px] w-full overflow-hidden\"\n    />\n  );\n}"
     },
     {
       "label": "Vue",
