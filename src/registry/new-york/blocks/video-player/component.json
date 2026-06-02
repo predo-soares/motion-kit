@@ -11,5 +11,65 @@
       "type": "registry:component",
       "target": "src/components/motion-kit/video-player-element.ts"
     }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/video-player-element.ts\";\n---\n\n<motion-video-player\n  src=\"https://example.com/video.mp4\"\n  poster=\"https://example.com/poster.jpg\"\n  class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n></motion-video-player>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/video-player-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-video-player\n      src=\"https://example.com/video.mp4\"\n      poster=\"https://example.com/poster.jpg\"\n      class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/video-player-element.ts\";\n</script>\n\n<template>\n  <motion-video-player\n    src=\"https://example.com/video.mp4\"\n    poster=\"https://example.com/poster.jpg\"\n    class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/video-player-element.ts\";\n</script>\n\n<motion-video-player\n  src=\"https://example.com/video.mp4\"\n  poster=\"https://example.com/poster.jpg\"\n  class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/video-player-element.js\"></script>\n\n<motion-video-player\n  src=\"https://example.com/video.mp4\"\n  poster=\"https://example.com/poster.jpg\"\n  class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n></motion-video-player>"
+    }
+  ],
+  "props": [
+    {
+      "name": "src",
+      "type": "string",
+      "default": "\"\"",
+      "description": "URL of the video file to play."
+    },
+    {
+      "name": "poster",
+      "type": "string",
+      "default": "\"\"",
+      "description": "URL of the poster image to display before playback."
+    },
+    {
+      "name": "autoplay",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to start playing automatically."
+    },
+    {
+      "name": "muted",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the video starts muted."
+    },
+    {
+      "name": "loop",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to loop the video when it ends."
+    },
+    {
+      "name": "hide-controls",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to hide all controls (play/pause, scrubber, etc.)."
+    }
   ]
 }
