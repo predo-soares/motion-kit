@@ -1,0 +1,336 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+
+const globeMarkers = JSON.stringify([
+  {
+    location: [-22.9068, -43.1729],
+    label: "Rio de Janeiro",
+    color: "#4fb7ff",
+  },
+  {
+    location: [40.7128, -74.006],
+    label: "New York",
+    color: "#4fb7ff",
+  },
+  {
+    location: [23.6978, 120.9605],
+    label: "Taiwan",
+    color: "#4fb7ff",
+  },
+]);
+---
+
+<ComponentCard description="A Fresnel globe with halo atmosphere, land-point sampling, draggable rotation, and projected marker labels.">
+  <div class="relative h-[420px] w-full overflow-hidden rounded-[2rem] bg-transparent">
+    <motion-globe
+      id="globe-main"
+      markers={globeMarkers}
+      radius="2.15"
+      offset-x="0.12"
+      point-count="21500"
+      point-size="0.06"
+      land-point-color="#59caff"
+      class="absolute inset-0"
+    ></motion-globe>
+
+    <div class="absolute top-4 left-4 z-10 flex max-w-[13rem] flex-col rounded-[1.75rem] border border-slate-200/80 bg-white/70 p-2 backdrop-blur-sm">
+      <p class="px-2 pb-1 text-[12px] font-medium tracking-tight text-slate-400">
+        Navigation
+      </p>
+      <div class="flex flex-col">
+        <button
+          type="button"
+          data-globe-focus="auto"
+          data-active="true"
+          class="inline-flex rounded-3xl p-0.5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+        >
+          <span class="inline-flex rounded-3xl px-3 py-1.5 text-[13px] font-medium tracking-tight whitespace-nowrap transition-colors duration-150 data-[active=true]:bg-slate-900 data-[active=true]:text-white text-slate-600 hover:bg-slate-100 hover:text-slate-900" data-active="true">
+            Auto Rotate
+          </span>
+        </button>
+        <button
+          type="button"
+          data-globe-focus="rio"
+          class="inline-flex rounded-3xl p-0.5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+        >
+          <span class="inline-flex rounded-3xl px-3 py-1.5 text-[13px] font-medium tracking-tight transition-colors duration-150 data-[active=true]:bg-slate-900 data-[active=true]:text-white text-slate-600 hover:bg-slate-100 hover:text-slate-900" data-active="false">
+            Rio de Janeiro
+          </span>
+        </button>
+        <button
+          type="button"
+          data-globe-focus="new-york"
+          class="inline-flex rounded-3xl p-0.5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+        >
+          <span class="inline-flex rounded-3xl px-3 py-1.5 text-[13px] font-medium tracking-tight transition-colors duration-150 data-[active=true]:bg-slate-900 data-[active=true]:text-white text-slate-600 hover:bg-slate-100 hover:text-slate-900" data-active="false">
+            New York
+          </span>
+        </button>
+        <button
+          type="button"
+          data-globe-focus="taiwan"
+          class="inline-flex rounded-3xl p-0.5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+        >
+          <span class="inline-flex rounded-3xl px-3 py-1.5 text-[13px] font-medium tracking-tight transition-colors duration-150 data-[active=true]:bg-slate-900 data-[active=true]:text-white text-slate-600 hover:bg-slate-100 hover:text-slate-900" data-active="false">
+            Taiwan
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div slot="controls" class="mk-controls">
+    <mk-slider
+      label="Radius"
+      min="1"
+      max="3.5"
+      step="0.05"
+      value="2.15"
+      data-target="#globe-main"
+      data-attr="radius"
+    ></mk-slider>
+    <mk-slider
+      label="Points"
+      min="4000"
+      max="32000"
+      step="500"
+      value="21500"
+      data-target="#globe-main"
+      data-attr="point-count"
+    ></mk-slider>
+    <mk-slider
+      label="Point Size"
+      min="0.02"
+      max="0.12"
+      step="0.005"
+      value="0.06"
+      data-target="#globe-main"
+      data-attr="point-size"
+    ></mk-slider>
+    <mk-color
+      label="Land"
+      value="#59caff"
+      data-target="#globe-main"
+      data-attr="land-point-color"
+    ></mk-color>
+    <mk-select
+      label="Auto Rotate"
+      value="true"
+      data-globe-prop="autoRotate"
+    >
+      <option value="true" selected>On</option>
+      <option value="false">Off</option>
+    </mk-select>
+    <mk-select
+      label="Lock Polar"
+      value="true"
+      data-globe-prop="lockedPolarAngle"
+    >
+      <option value="false">Off</option>
+      <option value="true" selected>On</option>
+    </mk-select>
+    <mk-color
+      label="Base"
+      value="#0f3161"
+      data-globe-config="fresnelConfig"
+      data-globe-field="color"
+    ></mk-color>
+    <mk-color
+      label="Rim"
+      value="#6fd3ff"
+      data-globe-config="fresnelConfig"
+      data-globe-field="rimColor"
+    ></mk-color>
+    <mk-slider
+      label="Rim Power"
+      min="1"
+      max="24"
+      step="0.25"
+      value="12"
+      data-globe-config="fresnelConfig"
+      data-globe-field="rimPower"
+      data-globe-type="number"
+    ></mk-slider>
+    <mk-slider
+      label="Rim Intensity"
+      min="0"
+      max="3"
+      step="0.05"
+      value="0.95"
+      data-globe-config="fresnelConfig"
+      data-globe-field="rimIntensity"
+      data-globe-type="number"
+    ></mk-slider>
+    <mk-color
+      label="Atmosphere"
+      value="#5ac8fa"
+      data-globe-config="atmosphereConfig"
+      data-globe-field="color"
+    ></mk-color>
+    <mk-slider
+      label="Atmo Scale"
+      min="1"
+      max="1.6"
+      step="0.01"
+      value="1.22"
+      data-globe-config="atmosphereConfig"
+      data-globe-field="scale"
+      data-globe-type="number"
+    ></mk-slider>
+    <mk-slider
+      label="Atmo Power"
+      min="1"
+      max="30"
+      step="0.25"
+      value="19.5"
+      data-globe-config="atmosphereConfig"
+      data-globe-field="power"
+      data-globe-type="number"
+    ></mk-slider>
+    <mk-slider
+      label="Atmo Coef"
+      min="0"
+      max="2"
+      step="0.05"
+      value="1.05"
+      data-globe-config="atmosphereConfig"
+      data-globe-field="coefficient"
+      data-globe-type="number"
+    ></mk-slider>
+    <mk-slider
+      label="Atmo Intensity"
+      min="0"
+      max="3"
+      step="0.05"
+      value="0.72"
+      data-globe-config="atmosphereConfig"
+      data-globe-field="intensity"
+      data-globe-type="number"
+    ></mk-slider>
+  </div>
+</ComponentCard>
+
+<script>
+  const globe = document.querySelector("#globe-main");
+  const buttons = Array.from(document.querySelectorAll("[data-globe-focus]"));
+  const propertyControls = Array.from(document.querySelectorAll("[data-globe-prop]"));
+  const configControls = Array.from(document.querySelectorAll("[data-globe-config]"));
+  const card = globe?.closest("[data-component-card]");
+
+  const focusTargets = {
+    rio: [-22.9068, -43.1729],
+    "new-york": [40.7128, -74.006],
+    taiwan: [23.6978, 120.9605],
+  };
+
+  const syncActiveButton = (nextKey) => {
+    buttons.forEach((button) => {
+      const isActive = button.dataset.globeFocus === nextKey ? "true" : "false";
+      button.dataset.active = isActive;
+      button.firstElementChild?.setAttribute("data-active", isActive);
+    });
+  };
+
+  const applyFocus = (nextKey) => {
+    if (!globe) return;
+
+    if (nextKey === "auto") {
+      globe.focusOn = null;
+      globe.autoRotate = readBooleanProp("autoRotate", true);
+      syncActiveButton("auto");
+      return;
+    }
+
+    const focusTarget = focusTargets[nextKey];
+    if (!focusTarget) return;
+
+    globe.autoRotate = false;
+    globe.focusOn = focusTarget;
+    syncActiveButton(nextKey);
+  };
+
+  const readControlValue = (control) => {
+    const rawValue = control.value ?? control.getAttribute("value");
+    if (rawValue == null || rawValue === "") return null;
+
+    if (control.dataset.globeType === "number") {
+      const parsed = Number(rawValue);
+      return Number.isFinite(parsed) ? parsed : null;
+    }
+
+    return rawValue;
+  };
+
+  const readBooleanProp = (prop, fallback) => {
+    const control = propertyControls.find((item) => item.dataset.globeProp === prop);
+    if (!control) return fallback;
+    const rawValue = control.value ?? control.getAttribute("value");
+    if (rawValue == null) return fallback;
+    return String(rawValue) === "true";
+  };
+
+  const applyPropertyControl = (control) => {
+    if (!globe) return;
+    const prop = control.dataset.globeProp;
+    if (!prop) return;
+    const rawValue = control.value ?? control.getAttribute("value");
+    if (rawValue == null) return;
+    globe[prop] = String(rawValue) === "true";
+
+    if (prop === "autoRotate" && globe.focusOn === null) {
+      globe.autoRotate = globe[prop];
+    }
+  };
+
+  const applyConfigControl = (control) => {
+    if (!globe) return;
+    const configName = control.dataset.globeConfig;
+    const field = control.dataset.globeField;
+    if (!configName || !field) return;
+    const nextValue = readControlValue(control);
+    if (nextValue == null) return;
+
+    globe[configName] = {
+      ...(globe[configName] ?? {}),
+      [field]: nextValue,
+    };
+  };
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      applyFocus(button.dataset.globeFocus ?? "auto");
+    });
+  });
+
+  propertyControls.forEach((control) => {
+    control.addEventListener("input", () => {
+      applyPropertyControl(control);
+    });
+  });
+
+  configControls.forEach((control) => {
+    control.addEventListener("input", () => {
+      applyConfigControl(control);
+    });
+  });
+
+  card?.querySelector("[data-card-action='reset-props']")?.addEventListener("click", () => {
+    window.requestAnimationFrame(() => {
+      propertyControls.forEach((control) => {
+        applyPropertyControl(control);
+      });
+      configControls.forEach((control) => {
+        applyConfigControl(control);
+      });
+      applyFocus("auto");
+    });
+  });
+
+  propertyControls.forEach((control) => {
+    applyPropertyControl(control);
+  });
+  configControls.forEach((control) => {
+    applyConfigControl(control);
+  });
+  applyFocus("auto");
+</script>

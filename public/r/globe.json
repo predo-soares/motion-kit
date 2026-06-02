@@ -1,0 +1,19 @@
+{
+  "name": "globe",
+  "type": "registry:component",
+  "title": "Globe",
+  "description": "A Fresnel-lit globe with rim glow, haloed atmosphere, land mesh detail, and marker layers for data storytelling. Lit Custom Element.",
+  "dependencies": ["lit", "ogl", "gsap"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/globe/globe-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/globe-element.ts"
+    },
+    {
+      "path": "src/registry/new-york/blocks/globe/land-texture.png",
+      "type": "registry:file",
+      "target": "public/motion-kit/globe/land-texture.png"
+    }
+  ]
+}
