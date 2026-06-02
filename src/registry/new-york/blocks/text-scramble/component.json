@@ -11,5 +11,65 @@
       "type": "registry:component",
       "target": "src/components/motion-kit/text-scramble-element.ts"
     }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/text-scramble-element.ts\";\n---\n\n<motion-text-scramble text=\"Hello World\"></motion-text-scramble>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/text-scramble-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-text-scramble text=\"Hello World\" />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/text-scramble-element.ts\";\n</script>\n\n<template>\n  <motion-text-scramble text=\"Hello World\" />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/text-scramble-element.ts\";\n</script>\n\n<motion-text-scramble text=\"Hello World\" />"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/text-scramble-element.js\"></script>\n\n<motion-text-scramble text=\"Hello World\"></motion-text-scramble>"
+    }
+  ],
+  "props": [
+    {
+      "name": "text",
+      "type": "string",
+      "default": "\"\"",
+      "description": "The text content to display and scramble."
+    },
+    {
+      "name": "hover-target",
+      "type": "string",
+      "default": "\"\"",
+      "description": "CSS selector for an external element that triggers the effect. Defaults to this element."
+    },
+    {
+      "name": "scramble-duration",
+      "type": "number",
+      "default": "0.6",
+      "description": "Duration of the scramble animation in seconds."
+    },
+    {
+      "name": "stagger",
+      "type": "number",
+      "default": "0.03",
+      "description": "Delay between each character's animation in seconds."
+    },
+    {
+      "name": "cycles",
+      "type": "number",
+      "default": "12",
+      "description": "Number of random character cycles before settling."
+    },
+    {
+      "name": "characters",
+      "type": "string",
+      "default": "\"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*\"",
+      "description": "Character pool to use for scrambling effect."
+    }
   ]
 }
