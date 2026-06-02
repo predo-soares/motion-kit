@@ -1,0 +1,19 @@
+---
+import CodeTabs from "./code-tabs.astro";
+
+interface Props {
+  /** The shadcn command without a package manager prefix, e.g. "shadcn@latest add <url>" */
+  command: string;
+}
+
+const { command } = Astro.props;
+
+const tabs = [
+  { label: "pnpm", code: `pnpm dlx ${command}` },
+  { label: "npm",  code: `npx ${command}` },
+  { label: "bun",  code: `bunx --bun ${command}` },
+  { label: "yarn", code: `yarn dlx ${command}` },
+];
+---
+
+<CodeTabs tabs={tabs} />
