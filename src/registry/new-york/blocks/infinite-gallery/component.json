@@ -37,9 +37,9 @@
   "props": [
     {
       "name": "images",
-      "type": "string[] | {src:string;alt?:string}[]",
+      "type": "string",
       "default": "[]",
-      "description": "Array of image URLs or objects with src and alt properties."
+      "description": "JSON-serialized array of image URLs or objects with src and optional alt properties."
     },
     {
       "name": "speed",
