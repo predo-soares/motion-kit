@@ -2,7 +2,7 @@ import { LitElement, html, css } from "lit"
 import { customElement, property } from "lit/decorators.js"
 import { gsap } from "gsap"
 import { SplitText } from "gsap/SplitText"
-import { registerPluginOnce, ensureMotionCoreEase } from "../../../../lib/helpers/gsap"
+import { registerPluginOnce, ensureMotionCoreEase } from "@/lib/helpers/gsap"
 
 /**
  * Splits text into characters and animates stacked layers on hover for a seamless swap.

@@ -1,13 +1,13 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "name": "magnetic-lit",
+  "name": "magnetic",
   "type": "registry:component",
-  "title": "Magnetic (Lit)",
+  "title": "Magnetic",
   "description": "Framework-agnostic <motion-magnetic> Custom Element with spring physics, powered by Lit and GSAP.",
   "dependencies": ["lit", "gsap"],
   "files": [
     {
-      "path": "src/registry/new-york/blocks/magnetic-lit/magnetic-element.ts",
+      "path": "src/registry/interaction/magnetic/magnetic-element.ts",
       "type": "registry:component",
       "target": "src/components/motion-kit/magnetic-element.ts"
     }
