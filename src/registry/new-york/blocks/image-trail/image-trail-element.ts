@@ -57,6 +57,14 @@ export class MotionImageTrail extends LitElement {
       height: 100%;
       overflow: hidden;
     }
+
+    .trail-image {
+      position: absolute;
+      pointer-events: none;
+      user-select: none;
+      will-change: transform;
+      transform-origin: 50% 50%;
+    }
   `
 
   @property({ type: Array }) images: string[] = []
@@ -189,9 +197,7 @@ export class MotionImageTrail extends LitElement {
       if (pooled) return pooled
 
       const image = document.createElement("img")
-      image.className =
-        "pointer-events-none select-none absolute will-change-transform"
-      image.style.transformOrigin = "50% 50%"
+      image.className = "trail-image"
       image.draggable = false
       return image
     }
@@ -200,8 +206,7 @@ export class MotionImageTrail extends LitElement {
       gsap.killTweensOf(image)
       image.remove()
       image.removeAttribute("style")
-      image.className =
-        "pointer-events-none select-none absolute will-change-transform"
+      image.className = "trail-image"
       if (this._pool.length < POOL_CAP) {
         this._pool.push(image)
       }
