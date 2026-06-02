@@ -1,0 +1,57 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pixelated-image",
+  "type": "registry:component",
+  "title": "Pixelated Image",
+  "description": "OGL image revealer that starts as coarse blocks and sharpens to full resolution over time.",
+  "dependencies": ["lit", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/pixelated-image/pixelated-image-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/pixelated-image-element.ts"
+    }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/pixelated-image-element.ts\";\n---\n\n<motion-pixelated-image\n  image=\"https://picsum.photos/seed/pixelated/800/600\"\n  initial-grid-size=\"6\"\n  step-duration=\"0.15\"\n></motion-pixelated-image>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/pixelated-image-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-pixelated-image\n      image=\"https://picsum.photos/seed/pixelated/800/600\"\n      initial-grid-size=\"6\"\n      step-duration=\"0.15\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/pixelated-image-element.ts\";\n</script>\n\n<template>\n  <motion-pixelated-image\n    image=\"https://picsum.photos/seed/pixelated/800/600\"\n    initial-grid-size=\"6\"\n    step-duration=\"0.15\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/pixelated-image-element.ts\";\n</script>\n\n<motion-pixelated-image\n  image=\"https://picsum.photos/seed/pixelated/800/600\"\n  initial-grid-size=\"6\"\n  step-duration=\"0.15\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/pixelated-image-element.js\"></script>\n\n<motion-pixelated-image\n  image=\"https://picsum.photos/seed/pixelated/800/600\"\n  initial-grid-size=\"6\"\n  step-duration=\"0.15\"\n></motion-pixelated-image>"
+    }
+  ],
+  "props": [
+    {
+      "name": "image",
+      "type": "string",
+      "default": "\"\"",
+      "description": "Image source URL used for the depixelation reveal."
+    },
+    {
+      "name": "initial-grid-size",
+      "type": "number",
+      "default": "6",
+      "description": "Starting vertical grid size before each depixelation step doubles it."
+    },
+    {
+      "name": "step-duration",
+      "type": "number",
+      "default": "0.15",
+      "description": "Seconds each depixelation step lasts before the grid doubles again."
+    }
+  ]
+}
