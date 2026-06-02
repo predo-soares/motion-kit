@@ -11,5 +11,71 @@
       "type": "registry:component",
       "target": "src/components/motion-kit/split-reveal-element.ts"
     }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/split-reveal-element.ts\";\n---\n\n<motion-split-reveal text=\"Hello World\" mode=\"lines\"></motion-split-reveal>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/split-reveal-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-split-reveal text=\"Hello World\" mode=\"lines\" />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/split-reveal-element.ts\";\n</script>\n\n<template>\n  <motion-split-reveal text=\"Hello World\" mode=\"lines\" />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/split-reveal-element.ts\";\n</script>\n\n<motion-split-reveal text=\"Hello World\" mode=\"lines\" />"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/split-reveal-element.js\"></script>\n\n<motion-split-reveal text=\"Hello World\" mode=\"lines\"></motion-split-reveal>"
+    }
+  ],
+  "props": [
+    {
+      "name": "text",
+      "type": "string",
+      "default": "\"\"",
+      "description": "The text content to display and animate."
+    },
+    {
+      "name": "mode",
+      "type": "\"lines\" | \"words\" | \"chars\"",
+      "default": "\"lines\"",
+      "description": "How to split the text for reveal animation."
+    },
+    {
+      "name": "delay",
+      "type": "number",
+      "default": "0",
+      "description": "Initial delay in seconds before animation starts (not for scroll-triggered)."
+    },
+    {
+      "name": "trigger-on-scroll",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to trigger reveal when element scrolls into view."
+    },
+    {
+      "name": "scroll-element",
+      "type": "string",
+      "default": "\"\"",
+      "description": "CSS selector for scrollable container (defaults to window)."
+    },
+    {
+      "name": "duration",
+      "type": "number",
+      "default": "0",
+      "description": "Animation duration in seconds (0 = auto based on mode)."
+    },
+    {
+      "name": "stagger",
+      "type": "number",
+      "default": "0",
+      "description": "Stagger delay between split items in seconds (0 = auto based on mode)."
+    }
   ]
 }
