@@ -1,0 +1,14 @@
+{
+  "name": "infinite-gallery",
+  "type": "registry:component",
+  "title": "Infinite Gallery",
+  "description": "A 3D gallery that endlessly scrolls through textured planes with cloth-like distortion and scroll-driven transitions. Lit Custom Element.",
+  "dependencies": ["lit", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/infinite-gallery/infinite-gallery-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/infinite-gallery-element.ts"
+    }
+  ]
+}

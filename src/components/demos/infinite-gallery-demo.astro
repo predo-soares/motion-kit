@@ -1,0 +1,34 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+---
+
+<ComponentCard description="Scroll or press the arrow keys to drive the tunnel. Planes wrap infinitely and blend fade/blur by depth.">
+  <div class="relative h-[420px] w-full overflow-hidden rounded-[2rem] bg-[#08090d]">
+    <motion-infinite-gallery
+      images='["https://picsum.photos/seed/mkig1/900/1200","https://picsum.photos/seed/mkig2/900/1200","https://picsum.photos/seed/mkig3/900/1200","https://picsum.photos/seed/mkig4/900/1200","https://picsum.photos/seed/mkig5/900/1200","https://picsum.photos/seed/mkig6/900/1200","https://picsum.photos/seed/mkig7/900/1200","https://picsum.photos/seed/mkig8/900/1200"]'
+      speed="1"
+      visible-count="8"
+      class="absolute inset-0"
+    ></motion-infinite-gallery>
+  </div>
+  <div slot="controls" class="mk-controls">
+    <mk-slider
+      label="Speed"
+      min="0.2"
+      max="2.5"
+      step="0.05"
+      value="1"
+      data-target="motion-infinite-gallery"
+      data-attr="speed"
+    ></mk-slider>
+    <mk-slider
+      label="Visible"
+      min="3"
+      max="14"
+      step="1"
+      value="8"
+      data-target="motion-infinite-gallery"
+      data-attr="visible-count"
+    ></mk-slider>
+  </div>
+</ComponentCard>
