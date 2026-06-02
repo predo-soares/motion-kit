@@ -1,0 +1,14 @@
+{
+  "name": "floating-menu",
+  "type": "registry:component",
+  "title": "Floating Menu",
+  "description": "A floating GSAP-powered navigation menu with staggered link reveals and animated toggle lines. Lit Custom Element.",
+  "dependencies": ["lit", "gsap"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/floating-menu/floating-menu-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/floating-menu-element.ts"
+    }
+  ]
+}
