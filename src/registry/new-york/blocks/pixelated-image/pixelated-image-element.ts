@@ -28,6 +28,12 @@ export class MotionPixelatedImage extends LitElement {
 
   private _raf = 0
   private _cancelled = false
+  private _imageToken = 0
+  private _renderer?: Renderer
+  private _geometry?: Triangle
+  private _program?: Program
+  private _mesh?: Mesh
+  private _texture?: Texture
   private _setImageSource?: (source: string) => void
   private _setRuntimeConfig?: (config: RuntimeConfig) => void
 
@@ -37,8 +43,7 @@ export class MotionPixelatedImage extends LitElement {
 
   override disconnectedCallback() {
     super.disconnectedCallback()
-    this._cancelled = true
-    cancelAnimationFrame(this._raf)
+    this._cleanup()
   }
 
   override updated(changed: Map<string, unknown>) {
@@ -58,12 +63,35 @@ export class MotionPixelatedImage extends LitElement {
   }
 
   replay() {
-    this._cancelled = true
-    cancelAnimationFrame(this._raf)
+    this._cleanup()
     this._init(this.shadowRoot!.querySelector("canvas")!)
   }
 
+  private _cleanup() {
+    this._cancelled = true
+    this._imageToken += 1
+    cancelAnimationFrame(this._raf)
+    this._raf = 0
+    this._setImageSource = undefined
+    this._setRuntimeConfig = undefined
+
+    const gl = this._renderer?.gl
+    const texture = this._texture
+    if (gl && texture?.texture) gl.deleteTexture(texture.texture)
+
+    this._geometry?.remove()
+    this._program?.remove()
+    this._mesh?.setParent(null)
+
+    this._texture = undefined
+    this._mesh = undefined
+    this._program = undefined
+    this._geometry = undefined
+    this._renderer = undefined
+  }
+
   private _init(canvas: HTMLCanvasElement) {
+    this._cleanup()
     this._cancelled = false
 
     const renderer = new Renderer({
@@ -96,6 +124,9 @@ export class MotionPixelatedImage extends LitElement {
       generateMipmaps: false,
       flipY: true,
     })
+    this._renderer = renderer
+    this._geometry = geometry
+    this._texture = imageTexture
 
     const resolutionUniform = new Vec2(1, 1)
     const textureSizeUniform = new Vec2(1, 1)
@@ -137,15 +168,14 @@ export class MotionPixelatedImage extends LitElement {
       if (shouldReset) resetState()
     }
 
-    let imageToken = 0
     this._setImageSource = (source) => {
-      imageToken += 1
-      const token = imageToken
+      this._imageToken += 1
+      const token = this._imageToken
       const img = new Image()
       img.crossOrigin = "anonymous"
       img.decoding = "async"
       img.onload = () => {
-        if (token !== imageToken) return
+        if (token !== this._imageToken || this._cancelled) return
         imageTexture.image = img
         textureSizeUniform.set(
           img.naturalWidth || img.width || 1,
@@ -206,8 +236,10 @@ export class MotionPixelatedImage extends LitElement {
       depthTest: false,
       depthWrite: false,
     })
+    this._program = program
 
     const mesh = new Mesh(gl, { geometry, program })
+    this._mesh = mesh
     mesh.setParent(scene)
 
     let previous = 0
