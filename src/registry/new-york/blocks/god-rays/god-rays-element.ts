@@ -50,6 +50,7 @@ export class MotionGodRays extends LitElement {
   @property({ type: Number }) intensity = 1
 
   private _raf = 0
+  private _cancelled = false
   private _uniforms?: {
     uColor: { value: Vec3 }
     uBackgroundColor: { value: Vec3 }
@@ -76,6 +77,7 @@ export class MotionGodRays extends LitElement {
 
   override disconnectedCallback() {
     super.disconnectedCallback()
+    this._cancelled = true
     cancelAnimationFrame(this._raf)
   }
 
@@ -133,6 +135,7 @@ export class MotionGodRays extends LitElement {
   }
 
   private _init(canvas: HTMLCanvasElement) {
+    this._cancelled = false
     cancelAnimationFrame(this._raf)
 
     const renderer = new Renderer({
@@ -355,6 +358,8 @@ export class MotionGodRays extends LitElement {
 
     let previous = 0
     const tick = (now: number) => {
+      if (this._cancelled) return
+
       const w = Math.max(1, canvas.clientWidth)
       const h = Math.max(1, canvas.clientHeight)
       const bufW = Math.round(w * renderer.dpr)
