@@ -11,5 +11,35 @@
       "type": "registry:component",
       "target": "src/components/motion-kit/slideshow-element.ts"
     }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/slideshow-element.ts\";\n---\n\n<motion-slideshow\n  images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n  class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n></motion-slideshow>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/slideshow-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-slideshow\n      images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n      class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/slideshow-element.ts\";\n</script>\n\n<template>\n  <motion-slideshow\n    :images='JSON.stringify([{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}])'\n    class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/slideshow-element.ts\";\n</script>\n\n<motion-slideshow\n  images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n  class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/slideshow-element.js\"></script>\n\n<motion-slideshow\n  images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n  class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n></motion-slideshow>"
+    }
+  ],
+  "props": [
+    {
+      "name": "images",
+      "type": "string",
+      "default": "\"[]\"",
+      "description": "JSON array of image objects with src and alt properties."
+    }
   ]
 }
