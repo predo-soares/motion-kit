@@ -8,16 +8,16 @@ interface Props {
 const { currentSlug } = Astro.props;
 ---
 
-<nav aria-label="Components" class="flex flex-col gap-8">
+<nav aria-label="Components" class="flex flex-col gap-7 pb-4">
   {
     componentGroups.map((group) => (
-      <section class="flex flex-col gap-3">
-        <header class="px-3">
-          <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">
+      <section class="flex flex-col gap-1">
+        <header>
+          <p class="text-[12px] font-medium tracking-tight text-slate-400">
             {group.name}
           </p>
         </header>
-        <ul class="flex flex-col gap-1">
+        <ul class="flex flex-col">
           {group.items.map((component) => {
             const isActive = component.slug === currentSlug;
 
@@ -26,13 +26,17 @@ const { currentSlug } = Astro.props;
                 <a
                   href={`/components/${component.slug}`}
                   class:list={[
-                    "block rounded-2xl px-3 py-2 transition-colors",
-                    isActive
-                      ? "bg-slate-900 text-white"
-                      : "text-slate-600 hover:bg-slate-100 hover:text-slate-900",
+                    "group inline-flex rounded-3xl  p-0.5  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 focus-visible:ring-offset-2 focus-visible:ring-offset-white",
                   ]}
                 >
-                  <span class="block text-sm font-medium tracking-tight">
+                  <span
+                    class:list={[
+                      "inline-flex rounded-3xl px-3 py-1.5 text-[13px] font-medium tracking-tight transition-colors duration-150",
+                      isActive
+                        ? "bg-slate-900 text-white"
+                        : "text-slate-600 group-hover:bg-slate-100 group-hover:text-slate-900",
+                    ]}
+                  >
                     {component.title}
                   </span>
                 </a>

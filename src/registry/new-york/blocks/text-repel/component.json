@@ -11,5 +11,77 @@
       "type": "registry:component",
       "target": "src/components/motion-kit/text-repel-element.ts"
     }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/text-repel-element.ts\";\n---\n\n<motion-text-repel text=\"Hover over me\" mode=\"words\"></motion-text-repel>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/text-repel-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-text-repel text=\"Hover over me\" mode=\"words\" />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/text-repel-element.ts\";\n</script>\n\n<template>\n  <motion-text-repel text=\"Hover over me\" mode=\"words\" />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/text-repel-element.ts\";\n</script>\n\n<motion-text-repel text=\"Hover over me\" mode=\"words\" />"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/text-repel-element.js\"></script>\n\n<motion-text-repel text=\"Hover over me\" mode=\"words\"></motion-text-repel>"
+    }
+  ],
+  "props": [
+    {
+      "name": "text",
+      "type": "string",
+      "default": "\"\"",
+      "description": "The text content to display and animate."
+    },
+    {
+      "name": "mode",
+      "type": "\"words\" | \"chars\"",
+      "default": "\"words\"",
+      "description": "Whether to split by words or characters."
+    },
+    {
+      "name": "strength",
+      "type": "number",
+      "default": "18",
+      "description": "Maximum distance in pixels to repel text elements."
+    },
+    {
+      "name": "radius",
+      "type": "number",
+      "default": "160",
+      "description": "Radius around the cursor where repel effect is active."
+    },
+    {
+      "name": "falloff-power",
+      "type": "number",
+      "default": "1.5",
+      "description": "Power curve for falloff (higher = sharper falloff)."
+    },
+    {
+      "name": "duration",
+      "type": "number",
+      "default": "0.45",
+      "description": "Animation duration in seconds."
+    },
+    {
+      "name": "ease",
+      "type": "string",
+      "default": "\"power3.out\"",
+      "description": "GSAP easing function for the animation."
+    },
+    {
+      "name": "hover-target",
+      "type": "string",
+      "default": "\"\"",
+      "description": "CSS selector for an external hover target. Defaults to this element."
+    }
   ]
 }

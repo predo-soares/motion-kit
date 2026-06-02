@@ -1,0 +1,129 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "god-rays",
+  "type": "registry:component",
+  "title": "God Rays",
+  "description": "High-performance procedural god rays effect with customizable colors, pulsating intensity, and distortion. Lit Custom Element.",
+  "dependencies": ["lit", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/god-rays/god-rays-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/god-rays-element.ts"
+    }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/god-rays-element.ts\";\n---\n\n<motion-god-rays\n  color=\"#FFFFFF\"\n  background-color=\"#17181A\"\n  anchor-x={0.5}\n  anchor-y={1.2}\n  direction-x={0}\n  direction-y={-1}\n  speed={1}\n  light-spread={1}\n  ray-length={1}\n  pulsating={false}\n  fade-distance={1}\n  saturation={1}\n  noise-amount={0}\n  distortion={0}\n  intensity={1}\n  class=\"w-full h-[500px]\"\n/>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/god-rays-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-god-rays\n      color=\"#FFFFFF\"\n      background-color=\"#17181A\"\n      anchor-x={0.5}\n      anchor-y={1.2}\n      direction-x={0}\n      direction-y={-1}\n      speed={1}\n      light-spread={1}\n      ray-length={1}\n      pulsating={false}\n      fade-distance={1}\n      saturation={1}\n      noise-amount={0}\n      distortion={0}\n      intensity={1}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/god-rays-element.ts\";\n</script>\n\n<template>\n  <motion-god-rays\n    color=\"#FFFFFF\"\n    background-color=\"#17181A\"\n    :anchor-x=\"0.5\"\n    :anchor-y=\"1.2\"\n    :direction-x=\"0\"\n    :direction-y=\"-1\"\n    :speed=\"1\"\n    :light-spread=\"1\"\n    :ray-length=\"1\"\n    :pulsating=\"false\"\n    :fade-distance=\"1\"\n    :saturation=\"1\"\n    :noise-amount=\"0\"\n    :distortion=\"0\"\n    :intensity=\"1\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/god-rays-element.ts\";\n</script>\n\n<motion-god-rays\n  color=\"#FFFFFF\"\n  background-color=\"#17181A\"\n  anchor-x={0.5}\n  anchor-y={1.2}\n  direction-x={0}\n  direction-y={-1}\n  speed={1}\n  light-spread={1}\n  ray-length={1}\n  pulsating={false}\n  fade-distance={1}\n  saturation={1}\n  noise-amount={0}\n  distortion={0}\n  intensity={1}\n  class=\"w-full h-[500px]\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/god-rays-element.js\"></script>\n\n<motion-god-rays\n  color=\"#FFFFFF\"\n  background-color=\"#17181A\"\n  anchor-x=\"0.5\"\n  anchor-y=\"1.2\"\n  direction-x=\"0\"\n  direction-y=\"-1\"\n  speed=\"1\"\n  light-spread=\"1\"\n  ray-length=\"1\"\n  pulsating=\"false\"\n  fade-distance=\"1\"\n  saturation=\"1\"\n  noise-amount=\"0\"\n  distortion=\"0\"\n  intensity=\"1\"\n  class=\"w-full h-[500px]\"\n/>"
+    }
+  ],
+  "props": [
+    {
+      "name": "color",
+      "type": "string",
+      "default": "\"#FFFFFF\"",
+      "description": "Color of the god rays light source."
+    },
+    {
+      "name": "background-color",
+      "type": "string",
+      "default": "\"#17181A\"",
+      "description": "Background color of the canvas."
+    },
+    {
+      "name": "anchor-x",
+      "type": "number",
+      "default": "0.5",
+      "description": "X position of the light source (0-1 range)."
+    },
+    {
+      "name": "anchor-y",
+      "type": "number",
+      "default": "1.2",
+      "description": "Y position of the light source (can be outside 0-1 range)."
+    },
+    {
+      "name": "direction-x",
+      "type": "number",
+      "default": "0",
+      "description": "X component of the ray direction vector."
+    },
+    {
+      "name": "direction-y",
+      "type": "number",
+      "default": "-1",
+      "description": "Y component of the ray direction vector (downward)."
+    },
+    {
+      "name": "speed",
+      "type": "number",
+      "default": "1",
+      "description": "Animation speed of the ray shimmer."
+    },
+    {
+      "name": "light-spread",
+      "type": "number",
+      "default": "1",
+      "description": "How much the light spreads from the source."
+    },
+    {
+      "name": "ray-length",
+      "type": "number",
+      "default": "1",
+      "description": "Maximum length of the rays."
+    },
+    {
+      "name": "pulsating",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the rays pulsate over time."
+    },
+    {
+      "name": "fade-distance",
+      "type": "number",
+      "default": "1",
+      "description": "Distance at which rays fade out."
+    },
+    {
+      "name": "saturation",
+      "type": "number",
+      "default": "1",
+      "description": "Color saturation of the rays (1 = full, 0 = grayscale)."
+    },
+    {
+      "name": "noise-amount",
+      "type": "number",
+      "default": "0",
+      "description": "Amount of noise variation in the rays."
+    },
+    {
+      "name": "distortion",
+      "type": "number",
+      "default": "0",
+      "description": "Strength of the sine-wave distortion."
+    },
+    {
+      "name": "intensity",
+      "type": "number",
+      "default": "1",
+      "description": "Overall brightness and intensity of the rays."
+    }
+  ]
+}

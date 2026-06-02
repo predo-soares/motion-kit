@@ -11,5 +11,59 @@
       "type": "registry:component",
       "target": "src/components/motion-kit/ascii-renderer-element.ts"
     }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/ascii-renderer-element.ts\";\n---\n\n<motion-ascii-renderer\n  image=\"/images/your-image.jpg\"\n  density={25.0}\n  strength={3.0}\n  color=\"#00ff00\"\n  background-color=\"#17181A\"\n  class=\"w-full h-[400px]\"\n/>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/ascii-renderer-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-ascii-renderer\n      image=\"/images/your-image.jpg\"\n      density={25.0}\n      strength={3.0}\n      color=\"#00ff00\"\n      background-color=\"#17181A\"\n      class=\"w-full h-[400px]\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/ascii-renderer-element.ts\";\n</script>\n\n<template>\n  <motion-ascii-renderer\n    image=\"/images/your-image.jpg\"\n    :density=\"25.0\"\n    :strength=\"3.0\"\n    color=\"#00ff00\"\n    background-color=\"#17181A\"\n    class=\"w-full h-[400px]\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/ascii-renderer-element.ts\";\n</script>\n\n<motion-ascii-renderer\n  image=\"/images/your-image.jpg\"\n  density={25.0}\n  strength={3.0}\n  color=\"#00ff00\"\n  background-color=\"#17181A\"\n  class=\"w-full h-[400px]\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/ascii-renderer-element.js\"></script>\n\n<motion-ascii-renderer\n  image=\"/images/your-image.jpg\"\n  density=\"25.0\"\n  strength=\"3.0\"\n  color=\"#00ff00\"\n  background-color=\"#17181A\"\n  class=\"w-full h-[400px]\"\n/>"
+    }
+  ],
+  "props": [
+    {
+      "name": "image",
+      "type": "string",
+      "default": "\"\"",
+      "description": "URL of the image to render as ASCII."
+    },
+    {
+      "name": "density",
+      "type": "number",
+      "default": "25.0",
+      "description": "Density of the ASCII character grid (higher = more characters)."
+    },
+    {
+      "name": "strength",
+      "type": "number",
+      "default": "3.0",
+      "description": "Intensity of the ASCII character brightness based on image luminance."
+    },
+    {
+      "name": "color",
+      "type": "string",
+      "default": "\"#00ff00\"",
+      "description": "Color of the ASCII characters (any CSS color value)."
+    },
+    {
+      "name": "background-color",
+      "type": "string",
+      "default": "\"#17181A\"",
+      "description": "Background color behind the ASCII characters (any CSS color value)."
+    }
   ]
 }

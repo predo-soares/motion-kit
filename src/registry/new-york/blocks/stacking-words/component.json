@@ -11,5 +11,71 @@
       "type": "registry:component",
       "target": "src/components/motion-kit/stacking-words-element.ts"
     }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/stacking-words-element.ts\";\n---\n\n<motion-stacking-words\n  text=\"Every word arrives on its own.\"\n  start=\"top 90%\"\n  end=\"top 30%\"\n></motion-stacking-words>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/stacking-words-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-stacking-words\n      text=\"Every word arrives on its own.\"\n      start=\"top 90%\"\n      end=\"top 30%\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/stacking-words-element.ts\";\n</script>\n\n<template>\n  <motion-stacking-words\n    text=\"Every word arrives on its own.\"\n    start=\"top 90%\"\n    end=\"top 30%\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/stacking-words-element.ts\";\n</script>\n\n<motion-stacking-words\n  text=\"Every word arrives on its own.\"\n  start=\"top 90%\"\n  end=\"top 30%\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/stacking-words-element.js\"></script>\n\n<motion-stacking-words\n  text=\"Every word arrives on its own.\"\n  start=\"top 90%\"\n  end=\"top 30%\"\n></motion-stacking-words>"
+    }
+  ],
+  "props": [
+    {
+      "name": "text",
+      "type": "string",
+      "default": "\"\"",
+      "description": "The text content to display and animate."
+    },
+    {
+      "name": "start",
+      "type": "string",
+      "default": "\"top 90%\"",
+      "description": "ScrollTrigger start position (when animation begins)."
+    },
+    {
+      "name": "end",
+      "type": "string",
+      "default": "\"top 30%\"",
+      "description": "ScrollTrigger end position (when animation completes)."
+    },
+    {
+      "name": "scrub",
+      "type": "number",
+      "default": "1.234",
+      "description": "Scrub duration in seconds for smooth scroll linking."
+    },
+    {
+      "name": "stagger",
+      "type": "number",
+      "default": "0.21",
+      "description": "Delay between each word's animation in seconds."
+    },
+    {
+      "name": "ease",
+      "type": "string",
+      "default": "\"power3.out\"",
+      "description": "GSAP easing function for the animation."
+    },
+    {
+      "name": "scroll-element",
+      "type": "string",
+      "default": "\"\"",
+      "description": "CSS selector for scrollable container (defaults to window)."
+    }
   ]
 }

@@ -1,0 +1,72 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+---
+
+<ComponentCard description="Atmospheric scattering halo with adjustable orbit speed, camera distance, and sun direction.">
+  <div class="relative h-[420px] w-full overflow-hidden rounded-[2rem] bg-[#17181A]">
+    <motion-halo
+      scale="1"
+      rotation-speed="0.42"
+      background-color="#090b10"
+      camera-distance="3"
+      sun-x="-0.3"
+      sun-y="0.2"
+      sun-z="1"
+      intensity="1.2"
+      class="absolute inset-0"
+    ></motion-halo>
+  </div>
+  <div slot="controls" class="mk-controls">
+    <mk-color
+      label="Background"
+      value="#090b10"
+      data-target="motion-halo"
+      data-attr="background-color"
+    ></mk-color>
+    <mk-slider
+      label="Rotate"
+      min="0"
+      max="2"
+      step="0.05"
+      value="0.42"
+      data-target="motion-halo"
+      data-attr="rotation-speed"
+    ></mk-slider>
+    <mk-slider
+      label="Camera"
+      min="1.2"
+      max="5"
+      step="0.1"
+      value="3"
+      data-target="motion-halo"
+      data-attr="camera-distance"
+    ></mk-slider>
+    <mk-slider
+      label="Sun X"
+      min="-1"
+      max="1"
+      step="0.05"
+      value="-0.3"
+      data-target="motion-halo"
+      data-attr="sun-x"
+    ></mk-slider>
+    <mk-slider
+      label="Sun Y"
+      min="-1"
+      max="1"
+      step="0.05"
+      value="0.2"
+      data-target="motion-halo"
+      data-attr="sun-y"
+    ></mk-slider>
+    <mk-slider
+      label="Intensity"
+      min="0"
+      max="2"
+      step="0.05"
+      value="1.2"
+      data-target="motion-halo"
+      data-attr="intensity"
+    ></mk-slider>
+  </div>
+</ComponentCard>

@@ -11,5 +11,35 @@
       "type": "registry:component",
       "target": "src/components/motion-kit/split-hover-element.ts"
     }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/split-hover-element.ts\";\n---\n\n<motion-split-hover text=\"Hover me\"></motion-split-hover>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/split-hover-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-split-hover text=\"Hover me\" />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/split-hover-element.ts\";\n</script>\n\n<template>\n  <motion-split-hover text=\"Hover me\" />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/split-hover-element.ts\";\n</script>\n\n<motion-split-hover text=\"Hover me\" />"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/split-hover-element.js\"></script>\n\n<motion-split-hover text=\"Hover me\"></motion-split-hover>"
+    }
+  ],
+  "props": [
+    {
+      "name": "text",
+      "type": "string",
+      "default": "\"\"",
+      "description": "The text content to display and animate."
+    }
   ]
 }

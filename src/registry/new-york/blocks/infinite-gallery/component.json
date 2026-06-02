@@ -1,0 +1,69 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "infinite-gallery",
+  "type": "registry:component",
+  "title": "Infinite Gallery",
+  "description": "A 3D gallery that endlessly scrolls through textured planes with cloth-like distortion and scroll-driven transitions. Lit Custom Element.",
+  "dependencies": ["lit", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/infinite-gallery/infinite-gallery-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/infinite-gallery-element.ts"
+    }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/infinite-gallery-element.ts\";\n---\n\n<motion-infinite-gallery\n  images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n  speed=\"1\"\n  visible-count=\"8\"\n  class=\"h-[600px] w-full\"\n></motion-infinite-gallery>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/infinite-gallery-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-infinite-gallery\n      images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n      speed=\"1\"\n      visible-count=\"8\"\n      class=\"h-[600px] w-full\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"`@/components/motion-kit/infinite-gallery-element.ts`\";\n</script>\n\n<template>\n  <motion-infinite-gallery\n    :images='JSON.stringify([{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}])'\n    speed=\"1\"\n    visible-count=\"8\"\n    class=\"h-[600px] w-full\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/infinite-gallery-element.ts\";\n</script>\n\n<motion-infinite-gallery\n  images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n  speed=\"1\"\n  visible-count=\"8\"\n  class=\"h-[600px] w-full\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/infinite-gallery-element.js\"></script>\n\n<motion-infinite-gallery\n  images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n  speed=\"1\"\n  visible-count=\"8\"\n  class=\"h-[600px] w-full\"\n></motion-infinite-gallery>"
+    }
+  ],
+  "props": [
+    {
+      "name": "images",
+      "type": "string",
+      "default": "[]",
+      "description": "JSON-serialized array of image URLs or objects with src and optional alt properties."
+    },
+    {
+      "name": "speed",
+      "type": "number",
+      "default": "1",
+      "description": "Scroll speed multiplier."
+    },
+    {
+      "name": "visible-count",
+      "type": "number",
+      "default": "8",
+      "description": "Number of image planes visible at once."
+    },
+    {
+      "name": "fade-settings",
+      "type": "object",
+      "default": "{fadeIn:{start:0.01,end:0.25},fadeOut:{start:0.43,end:0.46}}",
+      "description": "Fade transition zones (normalized 0-1)."
+    },
+    {
+      "name": "blur-settings",
+      "type": "object",
+      "default": "{blurIn:{start:0,end:0.2},blurOut:{start:0.43,end:0.46},maxBlur:8}",
+      "description": "Blur transition zones and maximum blur amount."
+    }
+  ]
+}

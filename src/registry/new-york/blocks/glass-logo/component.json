@@ -11,5 +11,95 @@
       "type": "registry:component",
       "target": "src/components/motion-kit/glass-logo-element.ts"
     }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/glass-logo-element.ts\";\n\nconst svgLogo = `<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"50\" cy=\"50\" r=\"40\" fill=\"white\"/></svg>`;\n---\n\n<motion-glass-logo\n  svg-source={svgLogo}\n  speed={1}\n  scale={1}\n  rotation={0}\n  refraction={1}\n  chromatic-aberration={1}\n  blur={1}\n  swirl-color-a=\"#222326\"\n  swirl-color-b=\"#ff6900\"\n  class=\"w-full h-[400px]\"\n/>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/glass-logo-element.ts\";\n\nconst svgLogo = `<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"50\" cy=\"50\" r=\"40\" fill=\"white\"/></svg>`;\n\nexport default function Page() {\n  return (\n    <motion-glass-logo\n      svg-source={svgLogo}\n      speed={1}\n      scale={1}\n      rotation={0}\n      refraction={1}\n      chromatic-aberration={1}\n      blur={1}\n      swirl-color-a=\"#222326\"\n      swirl-color-b=\"#ff6900\"\n      className=\"w-full h-[400px]\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/glass-logo-element.ts\";\n\nconst svgLogo = `<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"50\" cy=\"50\" r=\"40\" fill=\"white\"/></svg>`;\n</script>\n\n<template>\n  <motion-glass-logo\n    :svg-source=\"svgLogo\"\n    :speed=\"1\"\n    :scale=\"1\"\n    :rotation=\"0\"\n    :refraction=\"1\"\n    :chromatic-aberration=\"1\"\n    :blur=\"1\"\n    swirl-color-a=\"#222326\"\n    swirl-color-b=\"#ff6900\"\n    class=\"w-full h-[400px]\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/glass-logo-element.ts\";\n\n  const svgLogo = `<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"50\" cy=\"50\" r=\"40\" fill=\"white\"/></svg>`;\n</script>\n\n<motion-glass-logo\n  svg-source={svgLogo}\n  speed={1}\n  scale={1}\n  rotation={0}\n  refraction={1}\n  chromatic-aberration={1}\n  blur={1}\n  swirl-color-a=\"#222326\"\n  swirl-color-b=\"#ff6900\"\n  class=\"w-full h-[400px]\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/glass-logo-element.js\"></script>\n\n<motion-glass-logo\n  svg-source=\"<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='40' fill='white'/></svg>\"\n  speed=\"1\"\n  scale=\"1\"\n  rotation=\"0\"\n  refraction=\"1\"\n  chromatic-aberration=\"1\"\n  blur=\"1\"\n  swirl-color-a=\"#222326\"\n  swirl-color-b=\"#ff6900\"\n  class=\"w-full h-[400px]\"\n/>"
+    }
+  ],
+  "props": [
+    {
+      "name": "svg-source",
+      "type": "string",
+      "default": "\"<svg>...</svg>\"",
+      "description": "SVG markup to render as a glass lens (defaults to a logo shape)."
+    },
+    {
+      "name": "speed",
+      "type": "number",
+      "default": "1",
+      "description": "Animation speed of the swirl background."
+    },
+    {
+      "name": "scale",
+      "type": "number",
+      "default": "1",
+      "description": "Scale of the logo within the canvas."
+    },
+    {
+      "name": "offset-x",
+      "type": "number",
+      "default": "0",
+      "description": "Horizontal offset of the logo center."
+    },
+    {
+      "name": "offset-y",
+      "type": "number",
+      "default": "0",
+      "description": "Vertical offset of the logo center."
+    },
+    {
+      "name": "rotation",
+      "type": "number",
+      "default": "0",
+      "description": "Rotation angle of the logo in degrees."
+    },
+    {
+      "name": "refraction",
+      "type": "number",
+      "default": "1",
+      "description": "Strength of the glass lens refraction effect."
+    },
+    {
+      "name": "chromatic-aberration",
+      "type": "number",
+      "default": "1",
+      "description": "Intensity of RGB color splitting at edges."
+    },
+    {
+      "name": "blur",
+      "type": "number",
+      "default": "1",
+      "description": "Blur amount of the refracted background."
+    },
+    {
+      "name": "swirl-color-a",
+      "type": "string",
+      "default": "\"#222326\"",
+      "description": "First color for the animated swirl gradient."
+    },
+    {
+      "name": "swirl-color-b",
+      "type": "string",
+      "default": "\"#ff6900\"",
+      "description": "Second color for the animated swirl gradient."
+    }
   ]
 }

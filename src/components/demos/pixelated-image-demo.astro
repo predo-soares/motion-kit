@@ -1,0 +1,35 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+---
+
+<ComponentCard description="Animated depixelation reveal that doubles the sampling grid until the image resolves to full detail.">
+  <div class="relative h-[420px] w-full overflow-hidden rounded-[2rem]">
+    <motion-pixelated-image
+      id="pixelated-main"
+      image="https://picsum.photos/seed/pixelated-main/800/600"
+      initial-grid-size="6"
+      step-duration="0.15"
+      class="absolute inset-0"
+    ></motion-pixelated-image>
+  </div>
+  <div slot="controls" class="mk-controls">
+    <mk-slider
+      label="Start Grid"
+      min="1"
+      max="24"
+      step="1"
+      value="6"
+      data-target="#pixelated-main"
+      data-attr="initial-grid-size"
+    ></mk-slider>
+    <mk-slider
+      label="Step Duration"
+      min="0.03"
+      max="0.6"
+      step="0.01"
+      value="0.15"
+      data-target="#pixelated-main"
+      data-attr="step-duration"
+    ></mk-slider>
+  </div>
+</ComponentCard>

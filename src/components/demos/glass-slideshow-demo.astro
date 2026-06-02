@@ -1,0 +1,81 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+
+const images = JSON.stringify([
+  { src: "https://picsum.photos/seed/glass-slideshow-1/1200/900", alt: "Slide 1" },
+  { src: "https://picsum.photos/seed/glass-slideshow-2/1200/900", alt: "Slide 2" },
+  { src: "https://picsum.photos/seed/glass-slideshow-3/1200/900", alt: "Slide 3" },
+  { src: "https://picsum.photos/seed/glass-slideshow-4/1200/900", alt: "Slide 4" },
+]);
+---
+
+<ComponentCard description="A liquid glass transition blends between slides with noise-driven refraction, chromatic fringing, and autoplay.">
+  <motion-glass-slideshow
+    id="glass-slideshow-main"
+    images={images}
+    class="block h-[420px] w-full overflow-hidden rounded-[2rem]"
+    transition-duration="1800"
+    intensity="1.2"
+    distortion="1.1"
+    chromatic-aberration="0.9"
+    refraction="1.2"
+    autoplay
+    autoplay-interval="2800"
+  ></motion-glass-slideshow>
+  <div slot="controls" class="mk-controls">
+    <mk-slider
+      label="Duration"
+      min="400"
+      max="4000"
+      step="100"
+      value="1800"
+      data-target="#glass-slideshow-main"
+      data-attr="transition-duration"
+    ></mk-slider>
+    <mk-slider
+      label="Intensity"
+      min="0.2"
+      max="2"
+      step="0.05"
+      value="1.2"
+      data-target="#glass-slideshow-main"
+      data-attr="intensity"
+    ></mk-slider>
+    <mk-slider
+      label="Distortion"
+      min="0"
+      max="2.5"
+      step="0.05"
+      value="1.1"
+      data-target="#glass-slideshow-main"
+      data-attr="distortion"
+    ></mk-slider>
+    <mk-slider
+      label="CA"
+      min="0"
+      max="2.5"
+      step="0.05"
+      value="0.9"
+      data-target="#glass-slideshow-main"
+      data-attr="chromatic-aberration"
+    ></mk-slider>
+    <mk-slider
+      label="Refraction"
+      min="0"
+      max="2.5"
+      step="0.05"
+      value="1.2"
+      data-target="#glass-slideshow-main"
+      data-attr="refraction"
+    ></mk-slider>
+    <mk-slider
+      label="Autoplay"
+      min="800"
+      max="6000"
+      step="100"
+      value="2800"
+      data-target="#glass-slideshow-main"
+      data-attr="autoplay-interval"
+    ></mk-slider>
+  </div>
+</ComponentCard>

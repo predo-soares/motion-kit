@@ -1,0 +1,78 @@
+---
+export interface Tab {
+  label: string;
+  code: string;
+}
+
+interface Props {
+  tabs: Tab[];
+}
+
+const { tabs } = Astro.props;
+const multiTab = tabs.length > 1;
+---
+
+<div data-code-tabs class="overflow-hidden rounded-2xl border border-slate-200">
+  <div class="flex items-center border-b border-slate-100 bg-white">
+    {multiTab ? (
+      tabs.map((tab, i) => (
+        <button
+          type="button"
+          data-tab-btn={i}
+          title={tab.label}
+          class:list={[
+            "shrink-0 select-none px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300",
+            i === 0 ? "text-slate-900" : "text-slate-400 hover:text-slate-700",
+          ]}
+        >{tab.label}</button>
+      ))
+    ) : (
+      <span class="flex-1 px-3 py-2 text-xs text-slate-500">{tabs[0]?.label}</span>
+    )}
+    <button
+      type="button"
+      data-copy-text={tabs[0]?.code}
+      data-copy-btn
+      title="Copy to clipboard"
+      class="ml-auto shrink-0 select-none px-3 py-2 text-xs font-medium text-slate-500 transition-colors hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300"
+    >Copy</button>
+  </div>
+  {tabs.map((tab, i) => (
+    <pre
+      data-tab-panel={i}
+      class:list={[
+        "overflow-x-auto bg-slate-50 px-3 py-2.5 text-[13px] leading-6 text-slate-800",
+        i !== 0 && "hidden",
+      ]}
+    ><code>{tab.code}</code></pre>
+  ))}
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-code-tabs]").forEach((el) => {
+    const buttons = Array.from(el.querySelectorAll<HTMLButtonElement>("[data-tab-btn]"));
+    const panels = Array.from(el.querySelectorAll<HTMLElement>("[data-tab-panel]"));
+    const copyBtn = el.querySelector<HTMLButtonElement>("[data-copy-btn]");
+
+    if (!buttons.length) return;
+
+    const setActive = (index: number) => {
+      buttons.forEach((btn, i) => {
+        btn.classList.toggle("text-slate-900", i === index);
+        btn.classList.toggle("text-slate-400", i !== index);
+        btn.classList.toggle("hover:text-slate-700", i !== index);
+      });
+      panels.forEach((panel, i) => {
+        panel.classList.toggle("hidden", i !== index);
+      });
+      if (copyBtn) {
+        copyBtn.dataset.copyText =
+          panels[index]?.querySelector("code")?.textContent ?? "";
+      }
+    };
+
+    buttons.forEach((btn, i) => {
+      btn.addEventListener("click", () => setActive(i));
+    });
+  });
+</script>

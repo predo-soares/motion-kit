@@ -1,0 +1,14 @@
+{
+  "name": "glass-slideshow",
+  "type": "registry:component",
+  "title": "Glass Slideshow",
+  "description": "An OGL-powered slideshow with liquid glass image transitions, chromatic fringing, and optional autoplay. Lit Custom Element.",
+  "dependencies": ["lit", "gsap", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/glass-slideshow/glass-slideshow-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/glass-slideshow-element.ts"
+    }
+  ]
+}

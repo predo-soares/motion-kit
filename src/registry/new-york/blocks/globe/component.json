@@ -1,0 +1,128 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "globe",
+  "type": "registry:component",
+  "title": "Globe",
+  "description": "A Fresnel-lit globe with rim glow, haloed atmosphere, land mesh detail, and marker layers for data storytelling. Lit Custom Element.",
+  "dependencies": ["lit", "ogl", "gsap"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/globe/globe-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/globe-element.ts"
+    },
+    {
+      "path": "src/registry/new-york/blocks/globe/land-texture.png",
+      "type": "registry:file",
+      "target": "public/motion-kit/globe/land-texture.png"
+    }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/globe-element.ts\";\n\nconst markers = [\n  { location: [40.7128, -74.006], label: \"New York\" },\n  { location: [51.5074, -0.1278], label: \"London\" },\n  { location: [35.6762, 139.6503], label: \"Tokyo\" }\n];\n\nconst fresnelConfig = {\n  color: \"#0F3161\",\n  rimColor: \"#6FD3FF\",\n  rimPower: 12,\n  rimIntensity: 0.95\n};\n\nconst atmosphereConfig = {\n  color: \"#5AC8FA\",\n  scale: 1.22,\n  power: 19.5,\n  coefficient: 1.05,\n  intensity: 0.72\n};\n---\n\n<motion-globe\n  radius={2.15}\n  scale={1}\n  markers={markers}\n  fresnel-config={JSON.stringify(fresnelConfig)}\n  atmosphere-config={JSON.stringify(atmosphereConfig)}\n  point-count={21500}\n  point-size={0.06}\n  auto-rotate={true}\n  class=\"w-full h-[600px]\"\n/>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/globe-element.ts\";\n\nconst markers = [\n  { location: [40.7128, -74.006], label: \"New York\" },\n  { location: [51.5074, -0.1278], label: \"London\" },\n  { location: [35.6762, 139.6503], label: \"Tokyo\" }\n];\n\nconst fresnelConfig = {\n  color: \"#0F3161\",\n  rimColor: \"#6FD3FF\",\n  rimPower: 12,\n  rimIntensity: 0.95\n};\n\nconst atmosphereConfig = {\n  color: \"#5AC8FA\",\n  scale: 1.22,\n  power: 19.5,\n  coefficient: 1.05,\n  intensity: 0.72\n};\n\nexport default function Page() {\n  return (\n    <motion-globe\n      radius={2.15}\n      scale={1}\n      markers={markers}\n      fresnel-config={JSON.stringify(fresnelConfig)}\n      atmosphere-config={JSON.stringify(atmosphereConfig)}\n      point-count={21500}\n      point-size={0.06}\n      auto-rotate={true}\n      className=\"w-full h-[600px]\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/globe-element.ts\";\n\nconst markers = [\n  { location: [40.7128, -74.006], label: \"New York\" },\n  { location: [51.5074, -0.1278], label: \"London\" },\n  { location: [35.6762, 139.6503], label: \"Tokyo\" }\n];\n\nconst fresnelConfig = {\n  color: \"#0F3161\",\n  rimColor: \"#6FD3FF\",\n  rimPower: 12,\n  rimIntensity: 0.95\n};\n\nconst atmosphereConfig = {\n  color: \"#5AC8FA\",\n  scale: 1.22,\n  power: 19.5,\n  coefficient: 1.05,\n  intensity: 0.72\n};\n</script>\n\n<template>\n  <motion-globe\n    :radius=\"2.15\"\n    :scale=\"1\"\n    :markers=\"markers\"\n    :fresnel-config=\"JSON.stringify(fresnelConfig)\"\n    :atmosphere-config=\"JSON.stringify(atmosphereConfig)\"\n    :point-count=\"21500\"\n    :point-size=\"0.06\"\n    :auto-rotate=\"true\"\n    class=\"w-full h-[600px]\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/globe-element.ts\";\n\n  const markers = [\n    { location: [40.7128, -74.006], label: \"New York\" },\n    { location: [51.5074, -0.1278], label: \"London\" },\n    { location: [35.6762, 139.6503], label: \"Tokyo\" }\n  ];\n\n  const fresnelConfig = {\n    color: \"#0F3161\",\n    rimColor: \"#6FD3FF\",\n    rimPower: 12,\n    rimIntensity: 0.95\n  };\n\n  const atmosphereConfig = {\n    color: \"#5AC8FA\",\n    scale: 1.22,\n    power: 19.5,\n    coefficient: 1.05,\n    intensity: 0.72\n  };\n</script>\n\n<motion-globe\n  radius={2.15}\n  scale={1}\n  markers={markers}\n  fresnel-config={JSON.stringify(fresnelConfig)}\n  atmosphere-config={JSON.stringify(atmosphereConfig)}\n  point-count={21500}\n  point-size={0.06}\n  auto-rotate={true}\n  class=\"w-full h-[600px]\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/globe-element.js\"></script>\n\n<motion-globe\n  radius=\"2.15\"\n  scale=\"1\"\n  markers='[{\"location\":[40.7128,-74.006],\"label\":\"New York\"},{\"location\":[51.5074,-0.1278],\"label\":\"London\"},{\"location\":[35.6762,139.6503],\"label\":\"Tokyo\"}]'\n  fresnel-config='{\"color\":\"#0F3161\",\"rimColor\":\"#6FD3FF\",\"rimPower\":12,\"rimIntensity\":0.95}'\n  atmosphere-config='{\"color\":\"#5AC8FA\",\"scale\":1.22,\"power\":19.5,\"coefficient\":1.05,\"intensity\":0.72}'\n  point-count=\"21500\"\n  point-size=\"0.06\"\n  auto-rotate=\"true\"\n  class=\"w-full h-[600px]\"\n/>"
+    }
+  ],
+  "props": [
+    {
+      "name": "radius",
+      "type": "number",
+      "default": "2.15",
+      "description": "Base radius of the globe sphere."
+    },
+    {
+      "name": "scale",
+      "type": "number",
+      "default": "1",
+      "description": "Display scale of the globe."
+    },
+    {
+      "name": "offset-x",
+      "type": "number",
+      "default": "0",
+      "description": "Horizontal offset of the globe center."
+    },
+    {
+      "name": "offset-y",
+      "type": "number",
+      "default": "0",
+      "description": "Vertical offset of the globe center."
+    },
+    {
+      "name": "rotation",
+      "type": "number",
+      "default": "0",
+      "description": "Initial rotation angle in degrees."
+    },
+    {
+      "name": "fresnel-config",
+      "type": "object (JSON)",
+      "default": "{}",
+      "description": "JSON object with color, rimColor, rimPower, and rimIntensity for the fresnel rim lighting."
+    },
+    {
+      "name": "atmosphere-config",
+      "type": "object (JSON)",
+      "default": "{}",
+      "description": "JSON object with color, scale, power, coefficient, and intensity for the atmospheric glow."
+    },
+    {
+      "name": "point-count",
+      "type": "number",
+      "default": "21500",
+      "description": "Number of dots representing the land surface."
+    },
+    {
+      "name": "point-size",
+      "type": "number",
+      "default": "0.06",
+      "description": "Size of individual land surface dots."
+    },
+    {
+      "name": "land-point-color",
+      "type": "string",
+      "default": "\"#f77114\"",
+      "description": "Color of the dots representing land masses."
+    },
+    {
+      "name": "auto-rotate",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether the globe automatically rotates."
+    },
+    {
+      "name": "locked-polar-angle",
+      "type": "boolean",
+      "default": "true",
+      "description": "Whether to lock the polar angle (prevents flipping upside down)."
+    },
+    {
+      "name": "markers",
+      "type": "array",
+      "default": "[]",
+      "description": "Array of marker objects with location [lat, lon], optional size, color, and label."
+    },
+    {
+      "name": "focus-on",
+      "type": "array",
+      "default": "null",
+      "description": "Location [lat, lon] to smoothly rotate the globe toward."
+    }
+  ]
+}

@@ -11,5 +11,71 @@
       "type": "registry:component",
       "target": "src/components/motion-kit/fluid-image-reveal-element.ts"
     }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/fluid-image-reveal-element.ts\";\n---\n\n<motion-fluid-image-reveal\n  base-image=\"/images/before.jpg\"\n  reveal-image=\"/images/after.jpg\"\n  dissipation={0.96}\n  pointer-size={0.005}\n  blend-softness={0.22}\n  class=\"w-full h-[500px]\"\n/>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/fluid-image-reveal-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-fluid-image-reveal\n      base-image=\"/images/before.jpg\"\n      reveal-image=\"/images/after.jpg\"\n      dissipation={0.96}\n      pointer-size={0.005}\n      blend-softness={0.22}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/fluid-image-reveal-element.ts\";\n</script>\n\n<template>\n  <motion-fluid-image-reveal\n    base-image=\"/images/before.jpg\"\n    reveal-image=\"/images/after.jpg\"\n    :dissipation=\"0.96\"\n    :pointer-size=\"0.005\"\n    :blend-softness=\"0.22\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/fluid-image-reveal-element.ts\";\n</script>\n\n<motion-fluid-image-reveal\n  base-image=\"/images/before.jpg\"\n  reveal-image=\"/images/after.jpg\"\n  dissipation={0.96}\n  pointer-size={0.005}\n  blend-softness={0.22}\n  class=\"w-full h-[500px]\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/fluid-image-reveal-element.js\"></script>\n\n<motion-fluid-image-reveal\n  base-image=\"/images/before.jpg\"\n  reveal-image=\"/images/after.jpg\"\n  dissipation=\"0.96\"\n  pointer-size=\"0.005\"\n  blend-softness=\"0.22\"\n  class=\"w-full h-[500px]\"\n/>"
+    }
+  ],
+  "props": [
+    {
+      "name": "base-image",
+      "type": "string",
+      "default": "\"\"",
+      "description": "URL of the base image that is initially visible."
+    },
+    {
+      "name": "reveal-image",
+      "type": "string",
+      "default": "\"\"",
+      "description": "URL of the image to reveal through the fluid mask."
+    },
+    {
+      "name": "dissipation",
+      "type": "number",
+      "default": "0.96",
+      "description": "How quickly the fluid density dissipates over time (lower = faster fade)."
+    },
+    {
+      "name": "pointer-size",
+      "type": "number",
+      "default": "0.005",
+      "description": "Size of the cursor's influence on the fluid simulation."
+    },
+    {
+      "name": "velocity-dissipation",
+      "type": "number",
+      "default": "0.96",
+      "description": "How quickly fluid velocity dissipates (affects swirl duration)."
+    },
+    {
+      "name": "pressure-iterations",
+      "type": "number",
+      "default": "10",
+      "description": "Number of pressure solver iterations (higher = more accurate but slower)."
+    },
+    {
+      "name": "blend-softness",
+      "type": "number",
+      "default": "0.22",
+      "description": "Softness of the edge between the two images in the blend zone."
+    }
   ]
 }

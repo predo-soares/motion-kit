@@ -11,5 +11,65 @@
       "type": "registry:component",
       "target": "src/components/motion-kit/dithered-image-element.ts"
     }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/dithered-image-element.ts\";\n---\n\n<motion-dithered-image\n  image=\"/path/to/image.jpg\"\n  dither-map=\"bayer4x4\"\n  pixel-size=\"1\"\n  color=\"#ff6900\"\n  background-color=\"#17181A\"\n  threshold=\"0.0\"\n  class=\"w-full h-[400px]\"\n/>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/dithered-image-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-dithered-image\n      image=\"/path/to/image.jpg\"\n      ditherMap=\"bayer4x4\"\n      pixelSize={1}\n      color=\"#ff6900\"\n      backgroundColor=\"#17181A\"\n      threshold={0.0}\n      className=\"w-full h-[400px]\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/dithered-image-element.ts\";\n</script>\n\n<template>\n  <motion-dithered-image\n    image=\"/path/to/image.jpg\"\n    dither-map=\"bayer4x4\"\n    :pixel-size=\"1\"\n    color=\"#ff6900\"\n    background-color=\"#17181A\"\n    :threshold=\"0.0\"\n    class=\"w-full h-[400px]\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/dithered-image-element.ts\";\n</script>\n\n<motion-dithered-image\n  image=\"/path/to/image.jpg\"\n  ditherMap=\"bayer4x4\"\n  pixelSize={1}\n  color=\"#ff6900\"\n  backgroundColor=\"#17181A\"\n  threshold={0.0}\n  class=\"w-full h-[400px]\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/dithered-image-element.js\"></script>\n\n<motion-dithered-image\n  image=\"/path/to/image.jpg\"\n  dither-map=\"bayer4x4\"\n  pixel-size=\"1\"\n  color=\"#ff6900\"\n  background-color=\"#17181A\"\n  threshold=\"0.0\"\n  class=\"w-full h-[400px]\"\n/>"
+    }
+  ],
+  "props": [
+    {
+      "name": "image",
+      "type": "string",
+      "default": "\"\"",
+      "description": "URL of the image to dither."
+    },
+    {
+      "name": "dither-map",
+      "type": "bayer4x4 | bayer8x8 | halftone | voidAndCluster",
+      "default": "\"bayer4x4\"",
+      "description": "Type of dithering threshold map to use."
+    },
+    {
+      "name": "pixel-size",
+      "type": "number",
+      "default": "1",
+      "description": "Size of dithering pixels in screen pixels."
+    },
+    {
+      "name": "color",
+      "type": "string",
+      "default": "\"#ff6900\"",
+      "description": "Foreground color for the dithered pixels."
+    },
+    {
+      "name": "background-color",
+      "type": "string",
+      "default": "\"#17181A\"",
+      "description": "Background color for the dithered image."
+    },
+    {
+      "name": "threshold",
+      "type": "number",
+      "default": "0.0",
+      "description": "Brightness threshold offset (-1 to 1)."
+    }
   ]
 }

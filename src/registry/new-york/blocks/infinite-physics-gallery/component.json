@@ -11,5 +11,77 @@
       "type": "registry:component",
       "target": "src/components/motion-kit/infinite-physics-gallery-element.ts"
     }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/infinite-physics-gallery-element.ts\";\n---\n\n<motion-infinite-physics-gallery\n  items='[{\"type\":\"image\",\"src\":\"/1.jpg\"},{\"type\":\"image\",\"src\":\"/2.jpg\"}]'\n  cell-width=\"320\"\n  cell-height=\"400\"\n  class=\"h-[480px] w-full rounded-2xl overflow-hidden\"\n></motion-infinite-physics-gallery>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/infinite-physics-gallery-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-infinite-physics-gallery\n      items='[{\"type\":\"image\",\"src\":\"/1.jpg\"},{\"type\":\"image\",\"src\":\"/2.jpg\"}]'\n      cell-width=\"320\"\n      cell-height=\"400\"\n      class=\"h-[480px] w-full rounded-2xl overflow-hidden\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/infinite-physics-gallery-element.ts\";\n</script>\n\n<template>\n  <motion-infinite-physics-gallery\n    :items='JSON.stringify([{\"type\":\"image\",\"src\":\"/1.jpg\"},{\"type\":\"image\",\"src\":\"/2.jpg\"}])'\n    cell-width=\"320\"\n    cell-height=\"400\"\n    class=\"h-[480px] w-full rounded-2xl overflow-hidden\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/infinite-physics-gallery-element.ts\";\n</script>\n\n<motion-infinite-physics-gallery\n  items='[{\"type\":\"image\",\"src\":\"/1.jpg\"},{\"type\":\"image\",\"src\":\"/2.jpg\"}]'\n  cell-width=\"320\"\n  cell-height=\"400\"\n  class=\"h-[480px] w-full rounded-2xl overflow-hidden\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/infinite-physics-gallery-element.js\"></script>\n\n<motion-infinite-physics-gallery\n  items='[{\"type\":\"image\",\"src\":\"/1.jpg\"},{\"type\":\"image\",\"src\":\"/2.jpg\"}]'\n  cell-width=\"320\"\n  cell-height=\"400\"\n  class=\"h-[480px] w-full rounded-2xl overflow-hidden\"\n></motion-infinite-physics-gallery>"
+    }
+  ],
+  "props": [
+    {
+      "name": "items",
+      "type": "string",
+      "default": "\"[]\"",
+      "description": "JSON array of media items: [{type:\"image|video\",src:\"...\",alt:\"...\"}]."
+    },
+    {
+      "name": "cell-width",
+      "type": "number",
+      "default": "320",
+      "description": "Cell width in pixels."
+    },
+    {
+      "name": "cell-height",
+      "type": "number",
+      "default": "400",
+      "description": "Cell height in pixels."
+    },
+    {
+      "name": "gap",
+      "type": "number",
+      "default": "24",
+      "description": "Gap between cells in pixels."
+    },
+    {
+      "name": "friction",
+      "type": "number",
+      "default": "0.95",
+      "description": "Base inertia friction (0–1)."
+    },
+    {
+      "name": "wheel-speed",
+      "type": "number",
+      "default": "2",
+      "description": "Wheel speed multiplier."
+    },
+    {
+      "name": "edge-threshold",
+      "type": "number",
+      "default": "100",
+      "description": "Edge auto-scroll threshold in pixels."
+    },
+    {
+      "name": "edge-scroll-speed",
+      "type": "number",
+      "default": "2",
+      "description": "Edge auto-scroll speed."
+    }
   ]
 }

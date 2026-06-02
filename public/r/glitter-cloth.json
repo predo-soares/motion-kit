@@ -1,0 +1,14 @@
+{
+  "name": "glitter-cloth",
+  "type": "registry:component",
+  "title": "Glitter Cloth",
+  "description": "An OGL shader surface with animated silk folds, glitter sparkle, and vignette depth shading. Lit Custom Element.",
+  "dependencies": ["lit", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/glitter-cloth/glitter-cloth-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/glitter-cloth-element.ts"
+    }
+  ]
+}

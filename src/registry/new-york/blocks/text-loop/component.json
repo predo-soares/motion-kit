@@ -11,5 +11,41 @@
       "type": "registry:component",
       "target": "src/components/motion-kit/text-loop-element.ts"
     }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/text-loop-element.ts\";\n---\n\n<motion-text-loop\n  texts='[\"Design\",\"Develop\",\"Deploy\"]'\n  interval=\"2000\"\n></motion-text-loop>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/text-loop-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-text-loop\n      texts='[\"Design\",\"Develop\",\"Deploy\"]'\n      interval=\"2000\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/text-loop-element.ts\";\n</script>\n\n<template>\n  <motion-text-loop\n    :texts='JSON.stringify([\"Design\", \"Develop\", \"Deploy\"])'\n    interval=\"2000\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/text-loop-element.ts\";\n</script>\n\n<motion-text-loop\n  texts='[\"Design\",\"Develop\",\"Deploy\"]'\n  interval=\"2000\"\n></motion-text-loop>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/text-loop-element.js\"></script>\n\n<motion-text-loop\n  texts='[\"Design\",\"Develop\",\"Deploy\"]'\n  interval=\"2000\"\n></motion-text-loop>"
+    }
+  ],
+  "props": [
+    {
+      "name": "texts",
+      "type": "string[]",
+      "default": "[]",
+      "description": "Array of strings to cycle through. Pass as a JSON array string."
+    },
+    {
+      "name": "interval",
+      "type": "number",
+      "default": "2000",
+      "description": "Milliseconds between transitions."
+    }
   ]
 }

@@ -16,12 +16,24 @@
   import "@/registry/new-york/blocks/marquee/marquee-element.ts";
   import "@/registry/new-york/blocks/logo-carousel/logo-carousel-element.ts";
   import "@/registry/new-york/blocks/slideshow/slideshow-element.ts";
+  import "@/registry/new-york/blocks/flip-card-stack/flip-card-stack-element.ts";
+  import "@/registry/new-york/blocks/flip-grid/flip-grid-element.ts";
+  import "@/registry/new-york/blocks/flip-grid/flip-grid-item-element.ts";
+  import "@/registry/new-york/blocks/floating-menu/floating-menu-element.ts";
+  import "@/registry/new-york/blocks/glass-slideshow/glass-slideshow-element.ts";
+  import "@/registry/new-york/blocks/glitter-cloth/glitter-cloth-element.ts";
+  import "@/registry/new-york/blocks/globe/globe-element.ts";
+  import "@/registry/new-york/blocks/god-rays/god-rays-element.ts";
+  import "@/registry/new-york/blocks/halo/halo-element.ts";
+  import "@/registry/new-york/blocks/image-trail/image-trail-element.ts";
+  import "@/registry/new-york/blocks/infinite-gallery/infinite-gallery-element.ts";
   import "@/registry/new-york/blocks/radial-gallery/radial-gallery-element.ts";
   import "@/registry/new-york/blocks/infinite-physics-gallery/infinite-physics-gallery-element.ts";
   import "@/registry/new-york/blocks/video-player/video-player-element.ts";
   import "@/registry/new-york/blocks/card-3d/card-3d-element.ts";
   import "@/registry/new-york/blocks/dithered-image/dithered-image-element.ts";
   import "@/registry/new-york/blocks/fake-3d-image/fake-3d-image-element.ts";
+  import "@/registry/new-york/blocks/pixelated-image/pixelated-image-element.ts";
   import "@/registry/new-york/blocks/fluid-simulation/fluid-simulation-element.ts";
   import "@/registry/new-york/blocks/fluid-image-reveal/fluid-image-reveal-element.ts";
   import "@/registry/new-york/blocks/glass-logo/glass-logo-element.ts";
@@ -43,16 +55,14 @@
   };
 
   let fullscreenState: FullscreenCardState | null = null;
+  let hoveredCard: HTMLElement | null = null;
 
-  const isIgnoredFullscreenTarget = (event: Event) =>
-    event.composedPath().some((node) => {
-      if (!(node instanceof HTMLElement)) return false;
-      return Boolean(
-        node.matches(
-          "button, a, input, select, textarea, label, summary, [contenteditable='true'], [data-card-fullscreen-ignore]",
-        ),
-      );
-    });
+  document.addEventListener("mouseover", (event) => {
+    hoveredCard =
+      (event.target as HTMLElement | null)?.closest(
+        "[data-component-card]",
+      ) ?? null;
+  });
 
   const replayPreview = (card: HTMLElement) => {
     const preview = card.querySelector("[data-preview]");
@@ -76,6 +86,59 @@
     window.setTimeout(() => {
       button.textContent = original;
     }, 1800);
+  };
+
+  const getControlTarget = (control: HTMLElement) => {
+    const card = control.closest("figure");
+    const preview = card?.querySelector("[data-preview]");
+    if (!preview) return null;
+    return preview.querySelector(control.dataset.target ?? "");
+  };
+
+  const applyControlValue = (control: HTMLElement) => {
+    const attr = control.dataset.attr;
+    if (!attr) return;
+
+    const target = getControlTarget(control);
+    if (!target) return;
+
+    const value = String((control as any).value ?? "");
+    target.setAttribute(attr, value);
+  };
+
+  const getDefaultControlValue = (control: HTMLElement) => {
+    if (control.tagName === "MK-SLIDER") {
+      const defaultValue = control.getAttribute("value");
+      return defaultValue === null ? null : Number(defaultValue);
+    }
+
+    if (control.tagName === "MK-COLOR") {
+      return control.getAttribute("value");
+    }
+
+    if (control.tagName === "MK-SELECT") {
+      const selectedOption = control.querySelector(
+        "option[selected]",
+      ) as HTMLOptionElement | null;
+      const firstOption = control.querySelector("option");
+      return selectedOption?.value ?? firstOption?.value ?? null;
+    }
+
+    return (control as HTMLInputElement).defaultValue ?? null;
+  };
+
+  const resetPreviewProps = (card: HTMLElement) => {
+    const controls = card.querySelectorAll("[data-attr]");
+
+    controls.forEach((control) => {
+      if (!(control instanceof HTMLElement)) return;
+
+      const defaultValue = getDefaultControlValue(control);
+      if (defaultValue === null) return;
+
+      (control as any).value = defaultValue;
+      control.dispatchEvent(new Event("input", { bubbles: true, composed: true }));
+    });
   };
 
   const closeFullscreenCard = () => {
@@ -200,47 +263,69 @@
   };
 
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeFullscreenCard();
+    if (event.key === "Escape") {
+      closeFullscreenCard();
+    } else if (event.key === "f" || event.key === "F") {
+      const typing = event.composedPath().some((node) => {
+        if (!(node instanceof HTMLElement)) return false;
+        return (
+          node.tagName === "INPUT" ||
+          node.tagName === "TEXTAREA" ||
+          node.tagName === "SELECT" ||
+          node.isContentEditable ||
+          node.getAttribute("role") === "textbox"
+        );
+      });
+      if (typing) return;
+
+      if (fullscreenState) {
+        closeFullscreenCard();
+      } else if (hoveredCard) {
+        openFullscreenCard(hoveredCard);
+      }
+    }
   });
 
   document.addEventListener("click", (event) => {
     const target = event.target as HTMLElement | null;
     if (!target) return;
 
-    const replayButton = target.closest(
-      "[data-card-action='replay']",
-    ) as HTMLButtonElement | null;
+    const replayButton = target.closest("[data-card-action='replay']");
     if (replayButton) {
       const card = replayButton.closest("[data-component-card]");
       if (card instanceof HTMLElement) replayPreview(card);
       return;
     }
 
-    const copyButton = target.closest("[data-copy-text]") as
-      | HTMLButtonElement
-      | null;
+    const resetPropsButton = target.closest("[data-card-action='reset-props']");
+    if (resetPropsButton) {
+      const card = resetPropsButton.closest("[data-component-card]");
+      if (card instanceof HTMLElement) resetPreviewProps(card);
+      return;
+    }
+
+    const copyButton = target.closest("[data-copy-text]") as HTMLButtonElement | null;
     if (copyButton) {
       void copyText(copyButton);
       return;
     }
 
-    if (window.getSelection()?.toString()) return;
-    if (isIgnoredFullscreenTarget(event)) return;
-
-    if (fullscreenState) {
-      const card = target.closest("[data-component-card]") as HTMLElement | null;
-      const backdrop = target.closest("[data-card-backdrop]");
-
-      if (backdrop || card === fullscreenState.card) {
-        closeFullscreenCard();
+    const fullscreenButton = target.closest("[data-card-action='fullscreen']");
+    if (fullscreenButton) {
+      const card = fullscreenButton.closest("[data-component-card]");
+      if (card instanceof HTMLElement) {
+        if (fullscreenState?.card === card) {
+          closeFullscreenCard();
+        } else {
+          openFullscreenCard(card);
+        }
       }
       return;
     }
 
-    const card = target.closest("[data-component-card]") as HTMLElement | null;
-    if (!card) return;
-
-    openFullscreenCard(card);
+    if (target.closest("[data-card-backdrop]")) {
+      closeFullscreenCard();
+    }
   });
 
   document.addEventListener("input", (event) => {
@@ -248,22 +333,7 @@
       value?: unknown;
       dataset: DOMStringMap;
     };
-    const attr = element.dataset?.attr;
-    if (!attr) return;
-
-    const card = element.closest("figure");
-    const preview = card?.querySelector("[data-preview]");
-    if (!preview) return;
-
-    const target = preview.querySelector(element.dataset.target ?? "");
-    if (!target) return;
-
-    const value = String((element as any).value ?? "");
-    target.setAttribute(attr, value);
-
-    const valueElement = element
-      .closest("label")
-      ?.querySelector(".ctrl-val") as HTMLElement | null;
-    if (valueElement) valueElement.textContent = value;
+    if (!element.dataset?.attr) return;
+    applyControlValue(element);
   });
 </script>

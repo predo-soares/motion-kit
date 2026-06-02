@@ -11,5 +11,71 @@
       "type": "registry:component",
       "target": "src/components/motion-kit/radial-gallery-element.ts"
     }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/radial-gallery-element.ts\";\n---\n\n<motion-radial-gallery\n  items='[{\"src\":\"/img/1.jpg\"},{\"src\":\"/img/2.jpg\"}]'\n  radius=\"480\"\n  duration=\"24\"\n  element-size=\"160\"\n  class=\"h-[360px] w-full overflow-hidden\"\n></motion-radial-gallery>"
+    },
+    {
+      "label": "React",
+      "code": "import \"`@/components/motion-kit/radial-gallery-element.ts`\";\n\nexport default function Page() {\n  return (\n    <motion-radial-gallery\n      items='[{\"src\":\"/img/1.jpg\"},{\"src\":\"/img/2.jpg\"}]'\n      radius=\"480\"\n      duration=\"24\"\n      element-size=\"160\"\n      className=\"h-[360px] w-full overflow-hidden\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/radial-gallery-element.ts\";\n</script>\n\n<template>\n  <motion-radial-gallery\n    :items='JSON.stringify([{\"src\":\"/img/1.jpg\"},{\"src\":\"/img/2.jpg\"}])'\n    radius=\"480\"\n    duration=\"24\"\n    element-size=\"160\"\n    class=\"h-[360px] w-full overflow-hidden\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/radial-gallery-element.ts\";\n</script>\n\n<motion-radial-gallery\n  items='[{\"src\":\"/img/1.jpg\"},{\"src\":\"/img/2.jpg\"}]'\n  radius=\"480\"\n  duration=\"24\"\n  element-size=\"160\"\n  class=\"h-[360px] w-full overflow-hidden\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/radial-gallery-element.js\"></script>\n\n<motion-radial-gallery\n  items='[{\"src\":\"/img/1.jpg\"},{\"src\":\"/img/2.jpg\"}]'\n  radius=\"480\"\n  duration=\"24\"\n  element-size=\"160\"\n  class=\"h-[360px] w-full overflow-hidden\"\n></motion-radial-gallery>"
+    }
+  ],
+  "props": [
+    {
+      "name": "items",
+      "type": "string",
+      "default": "\"[]\"",
+      "description": "JSON array of image objects with src and alt properties."
+    },
+    {
+      "name": "radius",
+      "type": "number",
+      "default": "600",
+      "description": "Radius of the circle in pixels."
+    },
+    {
+      "name": "duration",
+      "type": "number",
+      "default": "20",
+      "description": "Duration of one full rotation in seconds."
+    },
+    {
+      "name": "reversed",
+      "type": "boolean",
+      "default": "false",
+      "description": "Rotate counter-clockwise."
+    },
+    {
+      "name": "offset",
+      "type": "number",
+      "default": "0",
+      "description": "Extra pixels to offset the ring center below the visible area."
+    },
+    {
+      "name": "gap",
+      "type": "number",
+      "default": "0",
+      "description": "Gap between items in pixels."
+    },
+    {
+      "name": "element-size",
+      "type": "number",
+      "default": "100",
+      "description": "Estimated item width in pixels for circumference calculations."
+    }
   ]
 }

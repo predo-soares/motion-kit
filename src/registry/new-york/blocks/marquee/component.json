@@ -11,5 +11,59 @@
       "type": "registry:component",
       "target": "src/components/motion-kit/marquee-element.ts"
     }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/marquee-element.ts\";\n---\n\n<motion-marquee gap=\"32\" duration=\"10\">\n  <img src=\"/logo-a.svg\" alt=\"A\" />\n  <img src=\"/logo-b.svg\" alt=\"B\" />\n</motion-marquee>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/marquee-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-marquee gap=\"32\" duration=\"10\">\n      <img src=\"/logo-a.svg\" alt=\"A\" />\n      <img src=\"/logo-b.svg\" alt=\"B\" />\n    </motion-marquee>\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/marquee-element.ts\";\n</script>\n\n<template>\n  <motion-marquee gap=\"32\" duration=\"10\">\n    <img src=\"/logo-a.svg\" alt=\"A\" />\n    <img src=\"/logo-b.svg\" alt=\"B\" />\n  </motion-marquee>\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/marquee-element.ts\";\n</script>\n\n<motion-marquee gap=\"32\" duration=\"10\">\n  <img src=\"/logo-a.svg\" alt=\"A\" />\n  <img src=\"/logo-b.svg\" alt=\"B\" />\n</motion-marquee>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/marquee-element.js\"></script>\n\n<motion-marquee gap=\"32\" duration=\"10\">\n  <img src=\"/logo-a.svg\" alt=\"A\" />\n  <img src=\"/logo-b.svg\" alt=\"B\" />\n</motion-marquee>"
+    }
+  ],
+  "props": [
+    {
+      "name": "gap",
+      "type": "number",
+      "default": "32",
+      "description": "Space between items in pixels."
+    },
+    {
+      "name": "duration",
+      "type": "number",
+      "default": "5",
+      "description": "Seconds for one full loop at rest."
+    },
+    {
+      "name": "velocity",
+      "type": "number",
+      "default": "0.5",
+      "description": "Scroll velocity multiplier for the speed boost effect."
+    },
+    {
+      "name": "repeat",
+      "type": "number",
+      "default": "3",
+      "description": "Number of times to duplicate the slotted content for a seamless loop."
+    },
+    {
+      "name": "reversed",
+      "type": "boolean",
+      "default": "false",
+      "description": "Present to reverse the scroll direction."
+    }
   ]
 }

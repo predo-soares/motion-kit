@@ -1,0 +1,14 @@
+{
+  "name": "god-rays",
+  "type": "registry:component",
+  "title": "God Rays",
+  "description": "High-performance procedural god rays effect with customizable colors, pulsating intensity, and distortion. Lit Custom Element.",
+  "dependencies": ["lit", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/new-york/blocks/god-rays/god-rays-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/god-rays-element.ts"
+    }
+  ]
+}

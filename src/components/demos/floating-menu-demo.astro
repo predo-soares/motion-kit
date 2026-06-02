@@ -1,0 +1,51 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+
+const menuGroups = JSON.stringify([
+  {
+    title: "Explore",
+    links: [
+      { label: "Components", href: "#" },
+      { label: "Registry", href: "#" },
+      { label: "Examples", href: "#" },
+    ],
+  },
+  {
+    title: "Studio",
+    variant: "muted",
+    links: [
+      { label: "Projects", href: "#" },
+      { label: "Playground", href: "#" },
+      { label: "Themes", href: "#" },
+    ],
+  },
+  {
+    title: "Support",
+    links: [
+      { label: "Docs", href: "#" },
+      { label: "Changelog", href: "#" },
+      { label: "Contact", href: "#" },
+    ],
+  },
+]);
+
+const logoHtml = `
+  <div style="display:flex;align-items:center;">
+    <span style="font-size:0.875rem;font-weight:600;color:#0f172a;">Motion Kit</span>
+  </div>
+`;
+
+const primaryButton = JSON.stringify({ label: "Start", href: "#" });
+const secondaryButton = JSON.stringify({ label: "Docs", href: "#" });
+---
+
+<ComponentCard
+  description="Open the floating menu to reveal grouped navigation links with staggered GSAP transitions."
+>
+  <motion-floating-menu
+    class="w-full"
+    menu-groups={menuGroups}
+    logo-html={logoHtml}
+    primary-button={primaryButton}
+    secondary-button={secondaryButton}></motion-floating-menu>
+</ComponentCard>

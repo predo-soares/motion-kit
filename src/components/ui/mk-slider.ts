@@ -90,13 +90,13 @@ export class MkSlider extends LitElement {
       justify-content: space-between;
       gap: 0.75rem;
       pointer-events: none;
-      opacity: 0.55;
+      opacity: 0.95;
       z-index: 1;
       transition: opacity 150ms;
     }
     :host(:hover) .labels,
     :host(:focus-within) .labels {
-      opacity: 0.95;
+      opacity: 1;
     }
 
     .lname {

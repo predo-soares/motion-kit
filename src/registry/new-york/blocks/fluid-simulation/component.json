@@ -11,5 +11,65 @@
       "type": "registry:component",
       "target": "src/components/motion-kit/fluid-simulation-element.ts"
     }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/fluid-simulation-element.ts\";\n---\n\n<motion-fluid-simulation\n  color=\"#ff6900\"\n  background-color=\"#17181A\"\n  dissipation={0.96}\n  pointer-size={0.005}\n  class=\"w-full h-[500px]\"\n/>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/fluid-simulation-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-fluid-simulation\n      color=\"#ff6900\"\n      background-color=\"#17181A\"\n      dissipation={0.96}\n      pointer-size={0.005}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/fluid-simulation-element.ts\";\n</script>\n\n<template>\n  <motion-fluid-simulation\n    color=\"#ff6900\"\n    background-color=\"#17181A\"\n    :dissipation=\"0.96\"\n    :pointer-size=\"0.005\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/fluid-simulation-element.ts\";\n</script>\n\n<motion-fluid-simulation\n  color=\"#ff6900\"\n  background-color=\"#17181A\"\n  dissipation={0.96}\n  pointer-size={0.005}\n  class=\"w-full h-[500px]\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/fluid-simulation-element.js\"></script>\n\n<motion-fluid-simulation\n  color=\"#ff6900\"\n  background-color=\"#17181A\"\n  dissipation=\"0.96\"\n  pointer-size=\"0.005\"\n  class=\"w-full h-[500px]\"\n/>"
+    }
+  ],
+  "props": [
+    {
+      "name": "dissipation",
+      "type": "number",
+      "default": "0.96",
+      "description": "How quickly the fluid density dissipates over time (lower = faster fade)."
+    },
+    {
+      "name": "pointer-size",
+      "type": "number",
+      "default": "0.005",
+      "description": "Size of the cursor's influence on the fluid simulation."
+    },
+    {
+      "name": "color",
+      "type": "string",
+      "default": "\"#ff6900\"",
+      "description": "Color of the fluid being painted (any CSS color value)."
+    },
+    {
+      "name": "background-color",
+      "type": "string",
+      "default": "\"#17181A\"",
+      "description": "Background color of the canvas (any CSS color value)."
+    },
+    {
+      "name": "velocity-dissipation",
+      "type": "number",
+      "default": "0.96",
+      "description": "How quickly fluid velocity dissipates (affects swirl duration)."
+    },
+    {
+      "name": "pressure-iterations",
+      "type": "number",
+      "default": "10",
+      "description": "Number of pressure solver iterations (higher = more accurate but slower)."
+    }
   ]
 }

@@ -11,5 +11,71 @@
       "type": "registry:component",
       "target": "src/components/motion-kit/weight-wave-element.ts"
     }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/weight-wave-element.ts\";\n---\n\n<motion-weight-wave text=\"Hover me\"></motion-weight-wave>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/weight-wave-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-weight-wave text=\"Hover me\" />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/weight-wave-element.ts\";\n</script>\n\n<template>\n  <motion-weight-wave text=\"Hover me\" />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/weight-wave-element.ts\";\n</script>\n\n<motion-weight-wave text=\"Hover me\" />"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/weight-wave-element.js\"></script>\n\n<motion-weight-wave text=\"Hover me\"></motion-weight-wave>"
+    }
+  ],
+  "props": [
+    {
+      "name": "text",
+      "type": "string",
+      "default": "\"\"",
+      "description": "The text content to display and animate."
+    },
+    {
+      "name": "base-weight",
+      "type": "number",
+      "default": "350",
+      "description": "Base font weight when not hovering."
+    },
+    {
+      "name": "hover-weight",
+      "type": "number",
+      "default": "750",
+      "description": "Font weight at cursor position."
+    },
+    {
+      "name": "influence-radius",
+      "type": "number",
+      "default": "3",
+      "description": "Number of neighboring characters affected by the wave."
+    },
+    {
+      "name": "falloff-power",
+      "type": "number",
+      "default": "1.5",
+      "description": "Power curve for weight falloff (higher = sharper falloff)."
+    },
+    {
+      "name": "duration",
+      "type": "number",
+      "default": "1.0",
+      "description": "Animation duration in seconds."
+    },
+    {
+      "name": "ease",
+      "type": "string",
+      "default": "\"power3.out\"",
+      "description": "GSAP easing function for the animation."
+    }
   ]
 }

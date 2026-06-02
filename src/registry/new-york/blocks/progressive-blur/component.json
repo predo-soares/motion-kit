@@ -10,5 +10,53 @@
       "type": "registry:component",
       "target": "src/components/motion-kit/progressive-blur-element.ts"
     }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/progressive-blur-element.ts\";\n---\n\n<motion-progressive-blur\n  direction=\"bottom\"\n  blur-layers=\"7\"\n  blur-intensity=\"1\"\n  fade-color=\"#17181A\"\n  class=\"w-full h-[200px]\"\n/>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/progressive-blur-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-progressive-blur\n      direction=\"bottom\"\n      blur-layers=\"7\"\n      blur-intensity=\"1\"\n      fade-color=\"#17181A\"\n      className=\"w-full h-[200px]\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/progressive-blur-element.ts\";\n</script>\n\n<template>\n  <motion-progressive-blur\n    direction=\"bottom\"\n    blur-layers=\"7\"\n    blur-intensity=\"1\"\n    fade-color=\"#17181A\"\n    class=\"w-full h-[200px]\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/progressive-blur-element.ts\";\n</script>\n\n<motion-progressive-blur\n  direction=\"bottom\"\n  blur-layers=\"7\"\n  blur-intensity=\"1\"\n  fade-color=\"#17181A\"\n  class=\"w-full h-[200px]\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/progressive-blur-element.js\"></script>\n\n<motion-progressive-blur\n  direction=\"bottom\"\n  blur-layers=\"7\"\n  blur-intensity=\"1\"\n  fade-color=\"#17181A\"\n  class=\"w-full h-[200px]\"\n/>"
+    }
+  ],
+  "props": [
+    {
+      "name": "direction",
+      "type": "string",
+      "default": "\"bottom\"",
+      "description": "Direction of the blur gradient: 'top', 'right', 'bottom', or 'left'."
+    },
+    {
+      "name": "blur-layers",
+      "type": "number",
+      "default": "7",
+      "description": "Number of blur layers (2-7, more layers = smoother gradient)."
+    },
+    {
+      "name": "blur-intensity",
+      "type": "number",
+      "default": "1",
+      "description": "Multiplier for the blur strength of each layer."
+    },
+    {
+      "name": "fade-color",
+      "type": "string",
+      "default": "\"\"",
+      "description": "Optional color to fade into at the end of the blur gradient."
+    }
   ]
 }
