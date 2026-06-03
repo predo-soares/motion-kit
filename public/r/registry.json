@@ -146,82 +146,6 @@
       ]
     },
     {
-      "name": "card-stack",
-      "type": "registry:component",
-      "title": "Card Stack",
-      "description": "Scroll-driven sticky card stack with GSAP ScrollTrigger. Nest <motion-card-stack-item> elements inside.",
-      "dependencies": [
-        "lit",
-        "gsap"
-      ],
-      "files": [
-        {
-          "path": "src/registry/new-york/blocks/card-stack/card-stack-element.ts",
-          "type": "registry:component",
-          "target": "src/components/motion-kit/card-stack-element.ts"
-        },
-        {
-          "path": "src/registry/new-york/blocks/card-stack/card-stack-item-element.ts",
-          "type": "registry:component",
-          "target": "src/components/motion-kit/card-stack-item-element.ts"
-        }
-      ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/card-stack-element.ts\";\nimport \"@/components/motion-kit/card-stack-item-element.ts\";\n---\n\n<motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 1</h2>\n    <p>Content for the first card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n    <h2>Card 2</h2>\n    <p>Content for the second card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 3</h2>\n    <p>Content for the third card</p>\n  </motion-card-stack-item>\n</motion-card-stack>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/card-stack-element.ts\";\nimport \"@/components/motion-kit/card-stack-item-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n      <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n        <h2>Card 1</h2>\n        <p>Content for the first card</p>\n      </motion-card-stack-item>\n      <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n        <h2>Card 2</h2>\n        <p>Content for the second card</p>\n      </motion-card-stack-item>\n      <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n        <h2>Card 3</h2>\n        <p>Content for the third card</p>\n      </motion-card-stack-item>\n    </motion-card-stack>\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/card-stack-element.ts\";\nimport \"@/components/motion-kit/card-stack-item-element.ts\";\n</script>\n\n<template>\n  <motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n    <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n      <h2>Card 1</h2>\n      <p>Content for the first card</p>\n    </motion-card-stack-item>\n    <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n      <h2>Card 2</h2>\n      <p>Content for the second card</p>\n    </motion-card-stack-item>\n    <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n      <h2>Card 3</h2>\n      <p>Content for the third card</p>\n    </motion-card-stack-item>\n  </motion-card-stack>\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/card-stack-element.ts\";\n  import \"@/components/motion-kit/card-stack-item-element.ts\";\n</script>\n\n<motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 1</h2>\n    <p>Content for the first card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n    <h2>Card 2</h2>\n    <p>Content for the second card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 3</h2>\n    <p>Content for the third card</p>\n  </motion-card-stack-item>\n</motion-card-stack>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/card-stack-element.js\"></script>\n<script type=\"module\" src=\"/components/motion-kit/card-stack-item-element.js\"></script>\n\n<motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 1</h2>\n    <p>Content for the first card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n    <h2>Card 2</h2>\n    <p>Content for the second card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 3</h2>\n    <p>Content for the third card</p>\n  </motion-card-stack-item>\n</motion-card-stack>"
-        }
-      ],
-      "props": [
-        {
-          "name": "scale-factor",
-          "type": "number",
-          "default": "0.05",
-          "description": "How much each card scales down per card (0.05 = 5% smaller each step)."
-        },
-        {
-          "name": "gap",
-          "type": "number",
-          "default": "0",
-          "description": "Vertical gap between stacked cards in pixels."
-        },
-        {
-          "name": "offset",
-          "type": "number",
-          "default": "10",
-          "description": "Vertical offset between card positions in pixels."
-        },
-        {
-          "name": "top-offset",
-          "type": "number",
-          "default": "0",
-          "description": "Initial top offset for the first card in pixels."
-        },
-        {
-          "name": "scroll-element",
-          "type": "string",
-          "default": "\"\"",
-          "description": "CSS selector for the scrollable container (defaults to window scroll)."
-        }
-      ]
-    },
-    {
       "name": "dithered-image",
       "type": "registry:component",
       "title": "Dithered Image",
@@ -366,216 +290,6 @@
           "type": "number",
           "default": "0.25",
           "description": "Mouse movement sensitivity (0 to 1)."
-        }
-      ]
-    },
-    {
-      "name": "flip-card-stack",
-      "type": "registry:component",
-      "title": "Flip Card Stack",
-      "description": "A draggable card stack where the top card snaps to the back after a threshold drag. Framework-agnostic Custom Element.",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "path": "src/registry/new-york/blocks/flip-card-stack/flip-card-stack-element.ts",
-          "type": "registry:component",
-          "target": "src/components/motion-kit/flip-card-stack-element.ts"
-        }
-      ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/flip-card-stack-element.ts\";\n---\n\n<motion-flip-card-stack\n  stack-offset=\"8\"\n  stack-rotation=\"-10\"\n  drag-threshold=\"80\"\n  duration=\"0.3\"\n  ease=\"power2.out\"\n  class=\"inline-grid relative w-[320px] h-[480px]\"\n>\n  <div class=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n    <h2>Card 1</h2>\n  </div>\n  <div class=\"flip-grid-item w-full h-full bg-slate-50 rounded-2xl p-6\">\n    <h2>Card 2</h2>\n  </div>\n  <div class=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n    <h2>Card 3</h2>\n  </div>\n</motion-flip-card-stack>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/flip-card-stack-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-flip-card-stack\n      stackOffset={8}\n      stackRotation={-10}\n      dragThreshold={80}\n      duration={0.3}\n      ease=\"power2.out\"\n      className=\"inline-grid relative w-[320px] h-[480px]\"\n    >\n      <div className=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n        <h2>Card 1</h2>\n      </div>\n      <div className=\"flip-grid-item w-full h-full bg-slate-50 rounded-2xl p-6\">\n        <h2>Card 2</h2>\n      </div>\n      <div className=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n        <h2>Card 3</h2>\n      </div>\n    </motion-flip-card-stack>\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/flip-card-stack-element.ts\";\n</script>\n\n<template>\n  <motion-flip-card-stack\n    :stack-offset=\"8\"\n    :stack-rotation=\"-10\"\n    :drag-threshold=\"80\"\n    :duration=\"0.3\"\n    ease=\"power2.out\"\n    class=\"inline-grid relative w-[320px] h-[480px]\"\n  >\n    <div class=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n      <h2>Card 1</h2>\n    </div>\n    <div class=\"flip-grid-item w-full h-full bg-slate-50 rounded-2xl p-6\">\n      <h2>Card 2</h2>\n    </div>\n    <div class=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n      <h2>Card 3</h2>\n    </div>\n  </motion-flip-card-stack>\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/flip-card-stack-element.ts\";\n</script>\n\n<motion-flip-card-stack\n  stackOffset={8}\n  stackRotation={-10}\n  dragThreshold={80}\n  duration={0.3}\n  ease=\"power2.out\"\n  class=\"inline-grid relative w-[320px] h-[480px]\"\n>\n  <div class=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n    <h2>Card 1</h2>\n  </div>\n  <div class=\"flip-grid-item w-full h-full bg-slate-50 rounded-2xl p-6\">\n    <h2>Card 2</h2>\n  </div>\n  <div class=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n    <h2>Card 3</h2>\n  </div>\n</motion-flip-card-stack>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/flip-card-stack-element.js\"></script>\n\n<motion-flip-card-stack\n  stack-offset=\"8\"\n  stack-rotation=\"-10\"\n  drag-threshold=\"80\"\n  duration=\"0.3\"\n  ease=\"power2.out\"\n  class=\"inline-grid relative w-[320px] h-[480px]\"\n>\n  <div class=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n    <h2>Card 1</h2>\n  </div>\n  <div class=\"flip-grid-item w-full h-full bg-slate-50 rounded-2xl p-6\">\n    <h2>Card 2</h2>\n  </div>\n  <div class=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n    <h2>Card 3</h2>\n  </div>\n</motion-flip-card-stack>"
-        }
-      ],
-      "props": [
-        {
-          "name": "stack-offset",
-          "type": "number",
-          "default": "8",
-          "description": "Vertical offset (in pixels) between stacked cards."
-        },
-        {
-          "name": "stack-rotation",
-          "type": "number",
-          "default": "-10",
-          "description": "Rotation angle (in degrees) for each card in the stack."
-        },
-        {
-          "name": "drag-threshold",
-          "type": "number",
-          "default": "80",
-          "description": "Distance (in pixels) the card must be dragged before it snaps to the back."
-        },
-        {
-          "name": "duration",
-          "type": "number",
-          "default": "0.3",
-          "description": "Animation duration in seconds."
-        },
-        {
-          "name": "ease",
-          "type": "string",
-          "default": "\"power2.out\"",
-          "description": "GSAP easing function for card animations."
-        }
-      ]
-    },
-    {
-      "name": "flip-grid",
-      "type": "registry:component",
-      "title": "Flip Grid",
-      "description": "A FLIP-powered grid that animates reordering and layout changes. Framework-agnostic Custom Elements.",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "path": "src/registry/new-york/blocks/flip-grid/flip-grid-element.ts",
-          "type": "registry:component",
-          "target": "src/components/motion-kit/flip-grid-element.ts"
-        },
-        {
-          "path": "src/registry/new-york/blocks/flip-grid/flip-grid-item-element.ts",
-          "type": "registry:component",
-          "target": "src/components/motion-kit/flip-grid-item-element.ts"
-        }
-      ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/flip-grid-element.ts\";\nimport \"@/components/motion-kit/flip-grid-item-element.ts\";\n---\n\n<motion-flip-grid\n  columns=\"3\"\n  duration=\"0.5\"\n  ease=\"power2.inOut\"\n  stagger=\"0\"\n  gap=\"1rem\"\n  class=\"w-full\"\n>\n  <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 1</div>\n  <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 2</div>\n  <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 3</div>\n  <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 4</div>\n</motion-flip-grid>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/flip-grid-element.ts\";\nimport \"@/components/motion-kit/flip-grid-item-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-flip-grid\n      columns={3}\n      duration={0.5}\n      ease=\"power2.inOut\"\n      stagger={0}\n      gap=\"1rem\"\n      className=\"w-full\"\n    >\n      <div className=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 1</div>\n      <div className=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 2</div>\n      <div className=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 3</div>\n      <div className=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 4</div>\n    </motion-flip-grid>\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/flip-grid-element.ts\";\nimport \"@/components/motion-kit/flip-grid-item-element.ts\";\n</script>\n\n<template>\n  <motion-flip-grid\n    :columns=\"3\"\n    :duration=\"0.5\"\n    ease=\"power2.inOut\"\n    :stagger=\"0\"\n    gap=\"1rem\"\n    class=\"w-full\"\n  >\n    <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 1</div>\n    <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 2</div>\n    <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 3</div>\n    <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 4</div>\n  </motion-flip-grid>\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/flip-grid-element.ts\";\n  import \"@/components/motion-kit/flip-grid-item-element.ts\";\n</script>\n\n<motion-flip-grid\n  columns={3}\n  duration={0.5}\n  ease=\"power2.inOut\"\n  stagger={0}\n  gap=\"1rem\"\n  class=\"w-full\"\n>\n  <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 1</div>\n  <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 2</div>\n  <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 3</div>\n  <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 4</div>\n</motion-flip-grid>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/flip-grid-element.js\"></script>\n<script type=\"module\" src=\"/components/motion-kit/flip-grid-item-element.js\"></script>\n\n<motion-flip-grid\n  columns=\"3\"\n  duration=\"0.5\"\n  ease=\"power2.inOut\"\n  stagger=\"0\"\n  gap=\"1rem\"\n  class=\"w-full\"\n>\n  <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 1</div>\n  <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 2</div>\n  <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 3</div>\n  <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 4</div>\n</motion-flip-grid>"
-        }
-      ],
-      "props": [
-        {
-          "name": "columns",
-          "type": "number",
-          "default": "0",
-          "description": "Number of columns in the grid (0 for auto-layout)."
-        },
-        {
-          "name": "duration",
-          "type": "number",
-          "default": "0.5",
-          "description": "Animation duration in seconds."
-        },
-        {
-          "name": "ease",
-          "type": "string",
-          "default": "\"power2.inOut\"",
-          "description": "GSAP easing function for animations."
-        },
-        {
-          "name": "stagger",
-          "type": "number",
-          "default": "0",
-          "description": "Stagger delay in seconds between item animations."
-        },
-        {
-          "name": "gap",
-          "type": "string",
-          "default": "\"\"",
-          "description": "CSS gap value between grid items."
-        }
-      ]
-    },
-    {
-      "name": "floating-menu",
-      "type": "registry:component",
-      "title": "Floating Menu",
-      "description": "A floating GSAP-powered navigation menu with staggered link reveals and animated toggle lines. Lit Custom Element.",
-      "dependencies": [
-        "lit",
-        "gsap"
-      ],
-      "files": [
-        {
-          "path": "src/registry/new-york/blocks/floating-menu/floating-menu-element.ts",
-          "type": "registry:component",
-          "target": "src/components/motion-kit/floating-menu-element.ts"
-        }
-      ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/floating-menu-element.ts\";\n\nconst menuGroups = [\n  {\n    title: \"Explore\",\n    links: [\n      { label: \"Home\", href: \"/\" },\n      { label: \"About\", href: \"/about\" },\n      { label: \"Contact\", href: \"/contact\" }\n    ]\n  },\n  {\n    title: \"Resources\",\n    variant: \"muted\",\n    links: [\n      { label: \"Blog\", href: \"/blog\" },\n      { label: \"Docs\", href: \"/docs\" }\n    ]\n  }\n];\n\nconst logoHtml = `<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg>`;\n---\n\n<motion-floating-menu\n  menu-groups={JSON.stringify(menuGroups)}\n  logo-html={logoHtml}\n  primary-button={JSON.stringify({ label: \"Get Started\", href: \"/start\" })}\n  secondary-button={JSON.stringify({ label: \"Login\", href: \"/login\" })}\n  class=\"w-full\"\n/>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/floating-menu-element.ts\";\n\nconst menuGroups = [\n  {\n    title: \"Explore\",\n    links: [\n      { label: \"Home\", href: \"/\" },\n      { label: \"About\", href: \"/about\" },\n      { label: \"Contact\", href: \"/contact\" }\n    ]\n  },\n  {\n    title: \"Resources\",\n    variant: \"muted\",\n    links: [\n      { label: \"Blog\", href: \"/blog\" },\n      { label: \"Docs\", href: \"/docs\" }\n    ]\n  }\n];\n\nconst logoHtml = `<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg>`;\n\nexport default function Page() {\n  return (\n    <motion-floating-menu\n      menu-groups={JSON.stringify(menuGroups)}\n      logo-html={logoHtml}\n      primary-button={JSON.stringify({ label: \"Get Started\", href: \"/start\" })}\n      secondary-button={JSON.stringify({ label: \"Login\", href: \"/login\" })}\n      className=\"w-full\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/floating-menu-element.ts\";\n\nconst menuGroups = [\n  {\n    title: \"Explore\",\n    links: [\n      { label: \"Home\", href: \"/\" },\n      { label: \"About\", href: \"/about\" },\n      { label: \"Contact\", href: \"/contact\" }\n    ]\n  },\n  {\n    title: \"Resources\",\n    variant: \"muted\",\n    links: [\n      { label: \"Blog\", href: \"/blog\" },\n      { label: \"Docs\", href: \"/docs\" }\n    ]\n  }\n];\n\nconst logoHtml = `<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg>`;\n</script>\n\n<template>\n  <motion-floating-menu\n    :menu-groups=\"JSON.stringify(menuGroups)\"\n    :logo-html=\"logoHtml\"\n    :primary-button=\"JSON.stringify({ label: 'Get Started', href: '/start' })\"\n    :secondary-button=\"JSON.stringify({ label: 'Login', href: '/login' })\"\n    class=\"w-full\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/floating-menu-element.ts\";\n\n  const menuGroups = [\n    {\n      title: \"Explore\",\n      links: [\n        { label: \"Home\", href: \"/\" },\n        { label: \"About\", href: \"/about\" },\n        { label: \"Contact\", href: \"/contact\" }\n      ]\n    },\n    {\n      title: \"Resources\",\n      variant: \"muted\",\n      links: [\n        { label: \"Blog\", href: \"/blog\" },\n        { label: \"Docs\", href: \"/docs\" }\n      ]\n    }\n  ];\n\n  const logoHtml = `<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg>`;\n</script>\n\n<motion-floating-menu\n  menu-groups={JSON.stringify(menuGroups)}\n  logo-html={logoHtml}\n  primary-button={JSON.stringify({ label: \"Get Started\", href: \"/start\" })}\n  secondary-button={JSON.stringify({ label: \"Login\", href: \"/login\" })}\n  class=\"w-full\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/floating-menu-element.js\"></script>\n\n<motion-floating-menu\n  menu-groups='[{\"title\":\"Explore\",\"links\":[{\"label\":\"Home\",\"href\":\"/\"},{\"label\":\"About\",\"href\":\"/about\"}]},{\"title\":\"Resources\",\"variant\":\"muted\",\"links\":[{\"label\":\"Blog\",\"href\":\"/blog\"}]}]'\n  logo-html=\"<svg width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><circle cx='12' cy='12' r='10'/></svg>\"\n  primary-button='{\"label\":\"Get Started\",\"href\":\"/start\"}'\n  secondary-button='{\"label\":\"Login\",\"href\":\"/login\"}'\n  class=\"w-full\"\n/>"
-        }
-      ],
-      "props": [
-        {
-          "name": "menu-groups",
-          "type": "string (JSON)",
-          "default": "\"[]\"",
-          "description": "JSON string array of menu groups. Each group has title, optional variant ('default' or 'muted'), and links array with label and href."
-        },
-        {
-          "name": "logo-html",
-          "type": "string",
-          "default": "\"\"",
-          "description": "HTML string for the logo displayed in the header (SVG or image tag)."
-        },
-        {
-          "name": "primary-button",
-          "type": "string (JSON)",
-          "default": "\"\"",
-          "description": "JSON string with label and href for the primary CTA button."
-        },
-        {
-          "name": "secondary-button",
-          "type": "string (JSON)",
-          "default": "\"\"",
-          "description": "JSON string with label and href for the secondary button (hidden on mobile)."
         }
       ]
     },
@@ -1490,6 +1204,871 @@
       ]
     },
     {
+      "name": "interactive-grid",
+      "type": "registry:component",
+      "title": "Interactive Grid",
+      "description": "Physics-based grid simulation that distorts an image in response to cursor movement. Each grid cell tracks mouse velocity and decays back to rest over time. Lit Custom Element.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "path": "src/registry/canvas/interactive-grid/interactive-grid-element.ts",
+          "type": "registry:component",
+          "target": "src/components/motion-kit/interactive-grid-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/interactive-grid-element.ts\";\n---\n\n<motion-interactive-grid\n  src=\"/path/to/image.jpg\"\n  grid={15}\n  mouse-size={0.15}\n  strength={0.35}\n  relaxation={0.9}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/interactive-grid-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-interactive-grid\n      src=\"/path/to/image.jpg\"\n      grid={15}\n      mouse-size={0.15}\n      strength={0.35}\n      relaxation={0.9}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/interactive-grid-element.ts\";\n</script>\n\n<template>\n  <motion-interactive-grid\n    src=\"/path/to/image.jpg\"\n    :grid=\"15\"\n    :mouse-size=\"0.15\"\n    :strength=\"0.35\"\n    :relaxation=\"0.9\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/interactive-grid-element.ts\";\n</script>\n\n<motion-interactive-grid\n  src=\"/path/to/image.jpg\"\n  grid={15}\n  mouse-size={0.15}\n  strength={0.35}\n  relaxation={0.9}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/interactive-grid-element.js\"></script>\n\n<motion-interactive-grid\n  src=\"/path/to/image.jpg\"\n  grid=\"15\"\n  mouse-size=\"0.15\"\n  strength=\"0.35\"\n  relaxation=\"0.9\"\n  class=\"w-full h-[500px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "src",
+          "type": "string",
+          "default": "",
+          "description": "The image source URL to apply the distortion effect to."
+        },
+        {
+          "name": "grid",
+          "type": "number",
+          "default": "15",
+          "description": "Grid resolution — number of cells per row/column. Higher values create finer distortion detail."
+        },
+        {
+          "name": "mouse-size",
+          "type": "number",
+          "default": "0.15",
+          "description": "Radius of mouse influence as a fraction of the grid size (0–1)."
+        },
+        {
+          "name": "strength",
+          "type": "number",
+          "default": "0.35",
+          "description": "Strength of the distortion effect. Higher values produce more dramatic warping."
+        },
+        {
+          "name": "relaxation",
+          "type": "number",
+          "default": "0.9",
+          "description": "How quickly cells return to rest after the cursor leaves (0–1). Values closer to 1 decay more slowly."
+        }
+      ]
+    },
+    {
+      "name": "lava-lamp",
+      "type": "registry:component",
+      "title": "Lava Lamp",
+      "description": "Raymarched metaball blobs rendered with a smooth-min SDF and Fresnel edge lighting. Creates a fluid, organic lava lamp animation. Lit Custom Element.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "path": "src/registry/canvas/lava-lamp/lava-lamp-element.ts",
+          "type": "registry:component",
+          "target": "src/components/motion-kit/lava-lamp-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/lava-lamp-element.ts\";\n---\n\n<motion-lava-lamp\n  color=\"#17181A\"\n  fresnel-color=\"#ff6900\"\n  speed=\"1.0\"\n  fresnel-power=\"3.0\"\n  radius=\"1\"\n  smoothness=\"0.1\"\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/lava-lamp-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-lava-lamp\n      color=\"#17181A\"\n      fresnel-color=\"#ff6900\"\n      speed={1.0}\n      fresnel-power={3.0}\n      radius={1}\n      smoothness={0.1}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/lava-lamp-element.ts\";\n</script>\n\n<template>\n  <motion-lava-lamp\n    color=\"#17181A\"\n    fresnel-color=\"#ff6900\"\n    :speed=\"1.0\"\n    :fresnel-power=\"3.0\"\n    :radius=\"1\"\n    :smoothness=\"0.1\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/lava-lamp-element.ts\";\n</script>\n\n<motion-lava-lamp\n  color=\"#17181A\"\n  fresnel-color=\"#ff6900\"\n  speed={1.0}\n  fresnel-power={3.0}\n  radius={1}\n  smoothness={0.1}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/lava-lamp-element.js\"></script>\n\n<motion-lava-lamp\n  color=\"#17181A\"\n  fresnel-color=\"#ff6900\"\n  speed=\"1.0\"\n  fresnel-power=\"3.0\"\n  radius=\"1\"\n  smoothness=\"0.1\"\n  class=\"w-full h-[500px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "color",
+          "type": "string",
+          "default": "#17181A",
+          "description": "Base body color of the lava blobs."
+        },
+        {
+          "name": "fresnel-color",
+          "type": "string",
+          "default": "#ff6900",
+          "description": "Color applied at blob edges via the Fresnel effect."
+        },
+        {
+          "name": "speed",
+          "type": "number",
+          "default": "1.0",
+          "description": "Animation speed multiplier."
+        },
+        {
+          "name": "fresnel-power",
+          "type": "number",
+          "default": "3.0",
+          "description": "Controls the sharpness of the Fresnel edge glow."
+        },
+        {
+          "name": "radius",
+          "type": "number",
+          "default": "1",
+          "description": "Base radius of the blobs."
+        },
+        {
+          "name": "smoothness",
+          "type": "number",
+          "default": "0.1",
+          "description": "Smoothness of the blob blending (metaball merge factor)."
+        },
+        {
+          "name": "scale",
+          "type": "number",
+          "default": "1",
+          "description": "Scale multiplier for the lava field."
+        },
+        {
+          "name": "rotation",
+          "type": "number",
+          "default": "0",
+          "description": "Lava field rotation in degrees."
+        },
+        {
+          "name": "offset-x",
+          "type": "number",
+          "default": "0",
+          "description": "Horizontal offset in normalized viewport units."
+        },
+        {
+          "name": "offset-y",
+          "type": "number",
+          "default": "0",
+          "description": "Vertical offset in normalized viewport units."
+        }
+      ]
+    },
+    {
+      "name": "neural-noise",
+      "type": "registry:component",
+      "title": "Neural Noise",
+      "description": "Animated CPPN-based neural noise rendered in WebGL. Produces continuously evolving organic color patterns driven by a compositional pattern-producing network. Lit Custom Element.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "path": "src/registry/canvas/neural-noise/neural-noise-element.ts",
+          "type": "registry:component",
+          "target": "src/components/motion-kit/neural-noise-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/neural-noise-element.ts\";\n---\n\n<motion-neural-noise\n  speed={1}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/neural-noise-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-neural-noise\n      speed={1}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/neural-noise-element.ts\";\n</script>\n\n<template>\n  <motion-neural-noise\n    :speed=\"1\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/neural-noise-element.ts\";\n</script>\n\n<motion-neural-noise\n  speed={1}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/neural-noise-element.js\"></script>\n\n<motion-neural-noise\n  speed=\"1\"\n  class=\"w-full h-[500px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "speed",
+          "type": "number",
+          "default": "1",
+          "description": "Animation speed multiplier. Higher values make the pattern evolve faster."
+        }
+      ]
+    },
+    {
+      "name": "pixelated-image",
+      "type": "registry:component",
+      "title": "Pixelated Image",
+      "description": "OGL image revealer that starts as coarse blocks and sharpens to full resolution over time.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "path": "src/registry/new-york/blocks/pixelated-image/pixelated-image-element.ts",
+          "type": "registry:component",
+          "target": "src/components/motion-kit/pixelated-image-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/pixelated-image-element.ts\";\n---\n\n<motion-pixelated-image\n  image=\"https://picsum.photos/seed/pixelated/800/600\"\n  initial-grid-size=\"6\"\n  step-duration=\"0.15\"\n></motion-pixelated-image>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/pixelated-image-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-pixelated-image\n      image=\"https://picsum.photos/seed/pixelated/800/600\"\n      initial-grid-size=\"6\"\n      step-duration=\"0.15\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/pixelated-image-element.ts\";\n</script>\n\n<template>\n  <motion-pixelated-image\n    image=\"https://picsum.photos/seed/pixelated/800/600\"\n    initial-grid-size=\"6\"\n    step-duration=\"0.15\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/pixelated-image-element.ts\";\n</script>\n\n<motion-pixelated-image\n  image=\"https://picsum.photos/seed/pixelated/800/600\"\n  initial-grid-size=\"6\"\n  step-duration=\"0.15\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/pixelated-image-element.js\"></script>\n\n<motion-pixelated-image\n  image=\"https://picsum.photos/seed/pixelated/800/600\"\n  initial-grid-size=\"6\"\n  step-duration=\"0.15\"\n></motion-pixelated-image>"
+        }
+      ],
+      "props": [
+        {
+          "name": "image",
+          "type": "string",
+          "default": "\"\"",
+          "description": "Image source URL used for the depixelation reveal."
+        },
+        {
+          "name": "initial-grid-size",
+          "type": "number",
+          "default": "6",
+          "description": "Starting vertical grid size before each depixelation step doubles it."
+        },
+        {
+          "name": "step-duration",
+          "type": "number",
+          "default": "0.15",
+          "description": "Seconds each depixelation step lasts before the grid doubles again."
+        }
+      ]
+    },
+    {
+      "name": "plasma-grid",
+      "type": "registry:component",
+      "title": "Plasma Grid",
+      "description": "Animated plasma grid effect rendered in WebGL. Creates a checkerboard grid pattern with flowing plasma noise gradients. Colors are customizable via props. Lit Custom Element.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "path": "src/registry/canvas/plasma-grid/plasma-grid-element.ts",
+          "type": "registry:component",
+          "target": "src/components/motion-kit/plasma-grid-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/plasma-grid-element.ts\";\n---\n\n<motion-plasma-grid\n  color=\"#17181A\"\n  highlight-color=\"#FF6900\"\n  speed={0.5}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/plasma-grid-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-plasma-grid\n      color=\"#17181A\"\n      highlight-color=\"#FF6900\"\n      speed={0.5}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/plasma-grid-element.ts\";\n</script>\n\n<template>\n  <motion-plasma-grid\n    color=\"#17181A\"\n    highlight-color=\"#FF6900\"\n    :speed=\"0.5\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/plasma-grid-element.ts\";\n</script>\n\n<motion-plasma-grid\n  color=\"#17181A\"\n  highlight-color=\"#FF6900\"\n  speed={0.5}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/plasma-grid-element.js\"></script>\n\n<motion-plasma-grid\n  color=\"#17181A\"\n  highlight-color=\"#FF6900\"\n  speed=\"0.5\"\n  class=\"w-full h-[500px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "color",
+          "type": "string",
+          "default": "#17181A",
+          "description": "The base background color of the effect."
+        },
+        {
+          "name": "highlight-color",
+          "type": "string",
+          "default": "#FF6900",
+          "description": "The color used for the plasma noise gradients."
+        },
+        {
+          "name": "speed",
+          "type": "number",
+          "default": "0.5",
+          "description": "Animation speed multiplier. Higher values make the plasma flow faster."
+        }
+      ]
+    },
+    {
+      "name": "rubiks-cube",
+      "type": "registry:component",
+      "title": "Rubik's Cube",
+      "description": "A 3D Rubik's Cube that continuously rotates and scrambles itself with smooth face animations. Features a Fresnel rim glow shader and interactive orbit controls. Lit Custom Element.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "path": "src/registry/canvas/rubiks-cube/rubiks-cube-element.ts",
+          "type": "registry:component",
+          "target": "src/components/motion-kit/rubiks-cube-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/rubiks-cube-element.ts\";\n---\n\n<motion-rubiks-cube\n  color=\"#17181A\"\n  rim-color=\"#FF6900\"\n  rim-power=\"6\"\n  rim-intensity=\"1.5\"\n  duration=\"1.5\"\n  gap=\"0.015\"\n  radius=\"0.125\"\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/rubiks-cube-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-rubiks-cube\n      color=\"#17181A\"\n      rim-color=\"#FF6900\"\n      rim-power={6}\n      rim-intensity={1.5}\n      duration={1.5}\n      gap={0.015}\n      radius={0.125}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/rubiks-cube-element.ts\";\n</script>\n\n<template>\n  <motion-rubiks-cube\n    color=\"#17181A\"\n    rim-color=\"#FF6900\"\n    :rim-power=\"6\"\n    :rim-intensity=\"1.5\"\n    :duration=\"1.5\"\n    :gap=\"0.015\"\n    :radius=\"0.125\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/rubiks-cube-element.ts\";\n</script>\n\n<motion-rubiks-cube\n  color=\"#17181A\"\n  rim-color=\"#FF6900\"\n  rim-power={6}\n  rim-intensity={1.5}\n  duration={1.5}\n  gap={0.015}\n  radius={0.125}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/rubiks-cube-element.js\"></script>\n\n<motion-rubiks-cube\n  color=\"#17181A\"\n  rim-color=\"#FF6900\"\n  rim-power=\"6\"\n  rim-intensity=\"1.5\"\n  duration=\"1.5\"\n  gap=\"0.015\"\n  radius=\"0.125\"\n  class=\"w-full h-[500px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "color",
+          "type": "string",
+          "default": "#17181A",
+          "description": "Base body color of each cubelet."
+        },
+        {
+          "name": "rim-color",
+          "type": "string",
+          "default": "#FF6900",
+          "description": "Accent color applied by the Fresnel rim shader."
+        },
+        {
+          "name": "rim-power",
+          "type": "number",
+          "default": "6",
+          "description": "Controls how tight the Fresnel rim hug is. Higher values yield a thinner outline."
+        },
+        {
+          "name": "rim-intensity",
+          "type": "number",
+          "default": "1.5",
+          "description": "Intensity multiplier for the Fresnel rim color."
+        },
+        {
+          "name": "duration",
+          "type": "number",
+          "default": "1.5",
+          "description": "Seconds it takes to complete a face rotation."
+        },
+        {
+          "name": "gap",
+          "type": "number",
+          "default": "0.015",
+          "description": "Gap between cubelets to accentuate separation."
+        },
+        {
+          "name": "radius",
+          "type": "number",
+          "default": "0.125",
+          "description": "Corner radius for softened cube edges."
+        },
+        {
+          "name": "scale",
+          "type": "number",
+          "default": "1",
+          "description": "Scale multiplier for the cube."
+        },
+        {
+          "name": "rotation",
+          "type": "number",
+          "default": "0",
+          "description": "Cube rotation in degrees (Z-axis)."
+        },
+        {
+          "name": "offset-x",
+          "type": "number",
+          "default": "0",
+          "description": "Horizontal cube offset in normalized viewport units."
+        },
+        {
+          "name": "offset-y",
+          "type": "number",
+          "default": "0",
+          "description": "Vertical cube offset in normalized viewport units."
+        }
+      ]
+    },
+    {
+      "name": "specular-band",
+      "type": "registry:component",
+      "title": "Specular Band",
+      "description": "Animated specular band effect with lens distortion and hue-shifted color palettes. Creates flowing, organic light bands with adaptive blending for different background brightness levels. Lit Custom Element.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "path": "src/registry/canvas/specular-band/specular-band-element.ts",
+          "type": "registry:component",
+          "target": "src/components/motion-kit/specular-band-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/specular-band-element.ts\";\n---\n\n<motion-specular-band\n  color=\"#FF6900\"\n  background-color=\"#17181A\"\n  speed={1.0}\n  distortion={0.2}\n  hue-shift={30}\n  intensity={1.0}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/specular-band-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-specular-band\n      color=\"#FF6900\"\n      background-color=\"#17181A\"\n      speed={1.0}\n      distortion={0.2}\n      hue-shift={30}\n      intensity={1.0}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/specular-band-element.ts\";\n</script>\n\n<template>\n  <motion-specular-band\n    color=\"#FF6900\"\n    background-color=\"#17181A\"\n    :speed=\"1.0\"\n    :distortion=\"0.2\"\n    :hue-shift=\"30\"\n    :intensity=\"1.0\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/specular-band-element.ts\";\n</script>\n\n<motion-specular-band\n  color=\"#FF6900\"\n  background-color=\"#17181A\"\n  speed={1.0}\n  distortion={0.2}\n  hueShift={30}\n  intensity={1.0}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/specular-band-element.js\"></script>\n\n<motion-specular-band\n  color=\"#FF6900\"\n  background-color=\"#17181A\"\n  speed=\"1.0\"\n  distortion=\"0.2\"\n  hue-shift=\"30\"\n  intensity=\"1.0\"\n  class=\"w-full h-[500px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "color",
+          "type": "string",
+          "default": "#FF6900",
+          "description": "Base color of the specular bands."
+        },
+        {
+          "name": "background-color",
+          "type": "string",
+          "default": "#17181A",
+          "description": "Color of the background."
+        },
+        {
+          "name": "speed",
+          "type": "number",
+          "default": "1.0",
+          "description": "Animation speed multiplier."
+        },
+        {
+          "name": "distortion",
+          "type": "number",
+          "default": "0.2",
+          "description": "Lens distortion intensity."
+        },
+        {
+          "name": "hue-shift",
+          "type": "number",
+          "default": "30.0",
+          "description": "Amount of hue shift for secondary bands (in degrees)."
+        },
+        {
+          "name": "intensity",
+          "type": "number",
+          "default": "1.0",
+          "description": "Global intensity/brightness of the effect."
+        }
+      ]
+    },
+    {
+      "name": "water-ripple",
+      "type": "registry:component",
+      "title": "Water Ripple",
+      "description": "Interactive water ripple effect on images. Creates realistic ripple distortions that follow pointer movement with expanding wave animations. Lit Custom Element.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "path": "src/registry/canvas/water-ripple/water-ripple-element.ts",
+          "type": "registry:component",
+          "target": "src/components/motion-kit/water-ripple-element.ts"
+        },
+        {
+          "path": "public/motion-kit/water-ripple/brush.png",
+          "type": "registry:file",
+          "target": "public/motion-kit/water-ripple/brush.png"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/water-ripple-element.ts\";\n---\n\n<motion-water-ripple\n  src=\"/path/to/image.jpg\"\n  brush-size={100}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/water-ripple-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-water-ripple\n      src=\"/path/to/image.jpg\"\n      brush-size={100}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/water-ripple-element.ts\";\n</script>\n\n<template>\n  <motion-water-ripple\n    src=\"/path/to/image.jpg\"\n    :brush-size=\"100\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/water-ripple-element.ts\";\n</script>\n\n<motion-water-ripple\n  src=\"/path/to/image.jpg\"\n  brush-size={100}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/water-ripple-element.js\"></script>\n\n<motion-water-ripple\n  src=\"/path/to/image.jpg\"\n  brush-size=\"100\"\n  class=\"w-full h-[500px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "src",
+          "type": "string",
+          "default": "",
+          "description": "The image source URL to apply the water ripple effect to."
+        },
+        {
+          "name": "brush-size",
+          "type": "number",
+          "default": "100",
+          "description": "Size of the ripple brush in pixels. Larger values create bigger ripples."
+        }
+      ]
+    },
+    {
+      "name": "card-stack",
+      "type": "registry:component",
+      "title": "Card Stack",
+      "description": "Scroll-driven sticky card stack with GSAP ScrollTrigger. Nest <motion-card-stack-item> elements inside.",
+      "dependencies": [
+        "lit",
+        "gsap"
+      ],
+      "files": [
+        {
+          "path": "src/registry/new-york/blocks/card-stack/card-stack-element.ts",
+          "type": "registry:component",
+          "target": "src/components/motion-kit/card-stack-element.ts"
+        },
+        {
+          "path": "src/registry/new-york/blocks/card-stack/card-stack-item-element.ts",
+          "type": "registry:component",
+          "target": "src/components/motion-kit/card-stack-item-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/card-stack-element.ts\";\nimport \"@/components/motion-kit/card-stack-item-element.ts\";\n---\n\n<motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 1</h2>\n    <p>Content for the first card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n    <h2>Card 2</h2>\n    <p>Content for the second card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 3</h2>\n    <p>Content for the third card</p>\n  </motion-card-stack-item>\n</motion-card-stack>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/card-stack-element.ts\";\nimport \"@/components/motion-kit/card-stack-item-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n      <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n        <h2>Card 1</h2>\n        <p>Content for the first card</p>\n      </motion-card-stack-item>\n      <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n        <h2>Card 2</h2>\n        <p>Content for the second card</p>\n      </motion-card-stack-item>\n      <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n        <h2>Card 3</h2>\n        <p>Content for the third card</p>\n      </motion-card-stack-item>\n    </motion-card-stack>\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/card-stack-element.ts\";\nimport \"@/components/motion-kit/card-stack-item-element.ts\";\n</script>\n\n<template>\n  <motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n    <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n      <h2>Card 1</h2>\n      <p>Content for the first card</p>\n    </motion-card-stack-item>\n    <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n      <h2>Card 2</h2>\n      <p>Content for the second card</p>\n    </motion-card-stack-item>\n    <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n      <h2>Card 3</h2>\n      <p>Content for the third card</p>\n    </motion-card-stack-item>\n  </motion-card-stack>\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/card-stack-element.ts\";\n  import \"@/components/motion-kit/card-stack-item-element.ts\";\n</script>\n\n<motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 1</h2>\n    <p>Content for the first card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n    <h2>Card 2</h2>\n    <p>Content for the second card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 3</h2>\n    <p>Content for the third card</p>\n  </motion-card-stack-item>\n</motion-card-stack>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/card-stack-element.js\"></script>\n<script type=\"module\" src=\"/components/motion-kit/card-stack-item-element.js\"></script>\n\n<motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 1</h2>\n    <p>Content for the first card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n    <h2>Card 2</h2>\n    <p>Content for the second card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 3</h2>\n    <p>Content for the third card</p>\n  </motion-card-stack-item>\n</motion-card-stack>"
+        }
+      ],
+      "props": [
+        {
+          "name": "scale-factor",
+          "type": "number",
+          "default": "0.05",
+          "description": "How much each card scales down per card (0.05 = 5% smaller each step)."
+        },
+        {
+          "name": "gap",
+          "type": "number",
+          "default": "0",
+          "description": "Vertical gap between stacked cards in pixels."
+        },
+        {
+          "name": "offset",
+          "type": "number",
+          "default": "10",
+          "description": "Vertical offset between card positions in pixels."
+        },
+        {
+          "name": "top-offset",
+          "type": "number",
+          "default": "0",
+          "description": "Initial top offset for the first card in pixels."
+        },
+        {
+          "name": "scroll-element",
+          "type": "string",
+          "default": "\"\"",
+          "description": "CSS selector for the scrollable container (defaults to window scroll)."
+        }
+      ]
+    },
+    {
+      "name": "flip-card-stack",
+      "type": "registry:component",
+      "title": "Flip Card Stack",
+      "description": "A draggable card stack where the top card snaps to the back after a threshold drag. Framework-agnostic Custom Element.",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "path": "src/registry/new-york/blocks/flip-card-stack/flip-card-stack-element.ts",
+          "type": "registry:component",
+          "target": "src/components/motion-kit/flip-card-stack-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/flip-card-stack-element.ts\";\n---\n\n<motion-flip-card-stack\n  stack-offset=\"8\"\n  stack-rotation=\"-10\"\n  drag-threshold=\"80\"\n  duration=\"0.3\"\n  ease=\"power2.out\"\n  class=\"inline-grid relative w-[320px] h-[480px]\"\n>\n  <div class=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n    <h2>Card 1</h2>\n  </div>\n  <div class=\"flip-grid-item w-full h-full bg-slate-50 rounded-2xl p-6\">\n    <h2>Card 2</h2>\n  </div>\n  <div class=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n    <h2>Card 3</h2>\n  </div>\n</motion-flip-card-stack>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/flip-card-stack-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-flip-card-stack\n      stackOffset={8}\n      stackRotation={-10}\n      dragThreshold={80}\n      duration={0.3}\n      ease=\"power2.out\"\n      className=\"inline-grid relative w-[320px] h-[480px]\"\n    >\n      <div className=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n        <h2>Card 1</h2>\n      </div>\n      <div className=\"flip-grid-item w-full h-full bg-slate-50 rounded-2xl p-6\">\n        <h2>Card 2</h2>\n      </div>\n      <div className=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n        <h2>Card 3</h2>\n      </div>\n    </motion-flip-card-stack>\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/flip-card-stack-element.ts\";\n</script>\n\n<template>\n  <motion-flip-card-stack\n    :stack-offset=\"8\"\n    :stack-rotation=\"-10\"\n    :drag-threshold=\"80\"\n    :duration=\"0.3\"\n    ease=\"power2.out\"\n    class=\"inline-grid relative w-[320px] h-[480px]\"\n  >\n    <div class=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n      <h2>Card 1</h2>\n    </div>\n    <div class=\"flip-grid-item w-full h-full bg-slate-50 rounded-2xl p-6\">\n      <h2>Card 2</h2>\n    </div>\n    <div class=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n      <h2>Card 3</h2>\n    </div>\n  </motion-flip-card-stack>\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/flip-card-stack-element.ts\";\n</script>\n\n<motion-flip-card-stack\n  stackOffset={8}\n  stackRotation={-10}\n  dragThreshold={80}\n  duration={0.3}\n  ease=\"power2.out\"\n  class=\"inline-grid relative w-[320px] h-[480px]\"\n>\n  <div class=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n    <h2>Card 1</h2>\n  </div>\n  <div class=\"flip-grid-item w-full h-full bg-slate-50 rounded-2xl p-6\">\n    <h2>Card 2</h2>\n  </div>\n  <div class=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n    <h2>Card 3</h2>\n  </div>\n</motion-flip-card-stack>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/flip-card-stack-element.js\"></script>\n\n<motion-flip-card-stack\n  stack-offset=\"8\"\n  stack-rotation=\"-10\"\n  drag-threshold=\"80\"\n  duration=\"0.3\"\n  ease=\"power2.out\"\n  class=\"inline-grid relative w-[320px] h-[480px]\"\n>\n  <div class=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n    <h2>Card 1</h2>\n  </div>\n  <div class=\"flip-grid-item w-full h-full bg-slate-50 rounded-2xl p-6\">\n    <h2>Card 2</h2>\n  </div>\n  <div class=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n    <h2>Card 3</h2>\n  </div>\n</motion-flip-card-stack>"
+        }
+      ],
+      "props": [
+        {
+          "name": "stack-offset",
+          "type": "number",
+          "default": "8",
+          "description": "Vertical offset (in pixels) between stacked cards."
+        },
+        {
+          "name": "stack-rotation",
+          "type": "number",
+          "default": "-10",
+          "description": "Rotation angle (in degrees) for each card in the stack."
+        },
+        {
+          "name": "drag-threshold",
+          "type": "number",
+          "default": "80",
+          "description": "Distance (in pixels) the card must be dragged before it snaps to the back."
+        },
+        {
+          "name": "duration",
+          "type": "number",
+          "default": "0.3",
+          "description": "Animation duration in seconds."
+        },
+        {
+          "name": "ease",
+          "type": "string",
+          "default": "\"power2.out\"",
+          "description": "GSAP easing function for card animations."
+        }
+      ]
+    },
+    {
+      "name": "flip-grid",
+      "type": "registry:component",
+      "title": "Flip Grid",
+      "description": "A FLIP-powered grid that animates reordering and layout changes. Framework-agnostic Custom Elements.",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "path": "src/registry/new-york/blocks/flip-grid/flip-grid-element.ts",
+          "type": "registry:component",
+          "target": "src/components/motion-kit/flip-grid-element.ts"
+        },
+        {
+          "path": "src/registry/new-york/blocks/flip-grid/flip-grid-item-element.ts",
+          "type": "registry:component",
+          "target": "src/components/motion-kit/flip-grid-item-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/flip-grid-element.ts\";\nimport \"@/components/motion-kit/flip-grid-item-element.ts\";\n---\n\n<motion-flip-grid\n  columns=\"3\"\n  duration=\"0.5\"\n  ease=\"power2.inOut\"\n  stagger=\"0\"\n  gap=\"1rem\"\n  class=\"w-full\"\n>\n  <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 1</div>\n  <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 2</div>\n  <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 3</div>\n  <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 4</div>\n</motion-flip-grid>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/flip-grid-element.ts\";\nimport \"@/components/motion-kit/flip-grid-item-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-flip-grid\n      columns={3}\n      duration={0.5}\n      ease=\"power2.inOut\"\n      stagger={0}\n      gap=\"1rem\"\n      className=\"w-full\"\n    >\n      <div className=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 1</div>\n      <div className=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 2</div>\n      <div className=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 3</div>\n      <div className=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 4</div>\n    </motion-flip-grid>\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/flip-grid-element.ts\";\nimport \"@/components/motion-kit/flip-grid-item-element.ts\";\n</script>\n\n<template>\n  <motion-flip-grid\n    :columns=\"3\"\n    :duration=\"0.5\"\n    ease=\"power2.inOut\"\n    :stagger=\"0\"\n    gap=\"1rem\"\n    class=\"w-full\"\n  >\n    <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 1</div>\n    <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 2</div>\n    <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 3</div>\n    <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 4</div>\n  </motion-flip-grid>\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/flip-grid-element.ts\";\n  import \"@/components/motion-kit/flip-grid-item-element.ts\";\n</script>\n\n<motion-flip-grid\n  columns={3}\n  duration={0.5}\n  ease=\"power2.inOut\"\n  stagger={0}\n  gap=\"1rem\"\n  class=\"w-full\"\n>\n  <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 1</div>\n  <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 2</div>\n  <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 3</div>\n  <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 4</div>\n</motion-flip-grid>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/flip-grid-element.js\"></script>\n<script type=\"module\" src=\"/components/motion-kit/flip-grid-item-element.js\"></script>\n\n<motion-flip-grid\n  columns=\"3\"\n  duration=\"0.5\"\n  ease=\"power2.inOut\"\n  stagger=\"0\"\n  gap=\"1rem\"\n  class=\"w-full\"\n>\n  <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 1</div>\n  <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 2</div>\n  <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 3</div>\n  <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 4</div>\n</motion-flip-grid>"
+        }
+      ],
+      "props": [
+        {
+          "name": "columns",
+          "type": "number",
+          "default": "0",
+          "description": "Number of columns in the grid (0 for auto-layout)."
+        },
+        {
+          "name": "duration",
+          "type": "number",
+          "default": "0.5",
+          "description": "Animation duration in seconds."
+        },
+        {
+          "name": "ease",
+          "type": "string",
+          "default": "\"power2.inOut\"",
+          "description": "GSAP easing function for animations."
+        },
+        {
+          "name": "stagger",
+          "type": "number",
+          "default": "0",
+          "description": "Stagger delay in seconds between item animations."
+        },
+        {
+          "name": "gap",
+          "type": "string",
+          "default": "\"\"",
+          "description": "CSS gap value between grid items."
+        }
+      ]
+    },
+    {
+      "name": "floating-menu",
+      "type": "registry:component",
+      "title": "Floating Menu",
+      "description": "A floating GSAP-powered navigation menu with staggered link reveals and animated toggle lines. Lit Custom Element.",
+      "dependencies": [
+        "lit",
+        "gsap"
+      ],
+      "files": [
+        {
+          "path": "src/registry/new-york/blocks/floating-menu/floating-menu-element.ts",
+          "type": "registry:component",
+          "target": "src/components/motion-kit/floating-menu-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/floating-menu-element.ts\";\n\nconst menuGroups = [\n  {\n    title: \"Explore\",\n    links: [\n      { label: \"Home\", href: \"/\" },\n      { label: \"About\", href: \"/about\" },\n      { label: \"Contact\", href: \"/contact\" }\n    ]\n  },\n  {\n    title: \"Resources\",\n    variant: \"muted\",\n    links: [\n      { label: \"Blog\", href: \"/blog\" },\n      { label: \"Docs\", href: \"/docs\" }\n    ]\n  }\n];\n\nconst logoHtml = `<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg>`;\n---\n\n<motion-floating-menu\n  menu-groups={JSON.stringify(menuGroups)}\n  logo-html={logoHtml}\n  primary-button={JSON.stringify({ label: \"Get Started\", href: \"/start\" })}\n  secondary-button={JSON.stringify({ label: \"Login\", href: \"/login\" })}\n  class=\"w-full\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/floating-menu-element.ts\";\n\nconst menuGroups = [\n  {\n    title: \"Explore\",\n    links: [\n      { label: \"Home\", href: \"/\" },\n      { label: \"About\", href: \"/about\" },\n      { label: \"Contact\", href: \"/contact\" }\n    ]\n  },\n  {\n    title: \"Resources\",\n    variant: \"muted\",\n    links: [\n      { label: \"Blog\", href: \"/blog\" },\n      { label: \"Docs\", href: \"/docs\" }\n    ]\n  }\n];\n\nconst logoHtml = `<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg>`;\n\nexport default function Page() {\n  return (\n    <motion-floating-menu\n      menu-groups={JSON.stringify(menuGroups)}\n      logo-html={logoHtml}\n      primary-button={JSON.stringify({ label: \"Get Started\", href: \"/start\" })}\n      secondary-button={JSON.stringify({ label: \"Login\", href: \"/login\" })}\n      className=\"w-full\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/floating-menu-element.ts\";\n\nconst menuGroups = [\n  {\n    title: \"Explore\",\n    links: [\n      { label: \"Home\", href: \"/\" },\n      { label: \"About\", href: \"/about\" },\n      { label: \"Contact\", href: \"/contact\" }\n    ]\n  },\n  {\n    title: \"Resources\",\n    variant: \"muted\",\n    links: [\n      { label: \"Blog\", href: \"/blog\" },\n      { label: \"Docs\", href: \"/docs\" }\n    ]\n  }\n];\n\nconst logoHtml = `<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg>`;\n</script>\n\n<template>\n  <motion-floating-menu\n    :menu-groups=\"JSON.stringify(menuGroups)\"\n    :logo-html=\"logoHtml\"\n    :primary-button=\"JSON.stringify({ label: 'Get Started', href: '/start' })\"\n    :secondary-button=\"JSON.stringify({ label: 'Login', href: '/login' })\"\n    class=\"w-full\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/floating-menu-element.ts\";\n\n  const menuGroups = [\n    {\n      title: \"Explore\",\n      links: [\n        { label: \"Home\", href: \"/\" },\n        { label: \"About\", href: \"/about\" },\n        { label: \"Contact\", href: \"/contact\" }\n      ]\n    },\n    {\n      title: \"Resources\",\n      variant: \"muted\",\n      links: [\n        { label: \"Blog\", href: \"/blog\" },\n        { label: \"Docs\", href: \"/docs\" }\n      ]\n    }\n  ];\n\n  const logoHtml = `<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg>`;\n</script>\n\n<motion-floating-menu\n  menu-groups={JSON.stringify(menuGroups)}\n  logo-html={logoHtml}\n  primary-button={JSON.stringify({ label: \"Get Started\", href: \"/start\" })}\n  secondary-button={JSON.stringify({ label: \"Login\", href: \"/login\" })}\n  class=\"w-full\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/floating-menu-element.js\"></script>\n\n<motion-floating-menu\n  menu-groups='[{\"title\":\"Explore\",\"links\":[{\"label\":\"Home\",\"href\":\"/\"},{\"label\":\"About\",\"href\":\"/about\"}]},{\"title\":\"Resources\",\"variant\":\"muted\",\"links\":[{\"label\":\"Blog\",\"href\":\"/blog\"}]}]'\n  logo-html=\"<svg width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><circle cx='12' cy='12' r='10'/></svg>\"\n  primary-button='{\"label\":\"Get Started\",\"href\":\"/start\"}'\n  secondary-button='{\"label\":\"Login\",\"href\":\"/login\"}'\n  class=\"w-full\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "menu-groups",
+          "type": "string (JSON)",
+          "default": "\"[]\"",
+          "description": "JSON string array of menu groups. Each group has title, optional variant ('default' or 'muted'), and links array with label and href."
+        },
+        {
+          "name": "logo-html",
+          "type": "string",
+          "default": "\"\"",
+          "description": "HTML string for the logo displayed in the header (SVG or image tag)."
+        },
+        {
+          "name": "primary-button",
+          "type": "string (JSON)",
+          "default": "\"\"",
+          "description": "JSON string with label and href for the primary CTA button."
+        },
+        {
+          "name": "secondary-button",
+          "type": "string (JSON)",
+          "default": "\"\"",
+          "description": "JSON string with label and href for the secondary button (hidden on mobile)."
+        }
+      ]
+    },
+    {
       "name": "image-trail",
       "type": "registry:component",
       "title": "Image Trail",
@@ -1500,7 +2079,7 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/image-trail/image-trail-element.ts",
+          "path": "src/registry/interaction/image-trail/image-trail-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/image-trail-element.ts"
         }
@@ -1508,19 +2087,19 @@
       "usage": [
         {
           "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/image-trail-element.ts\";\n\nconst images = [\n  \"/images/trail-1.png\",\n  \"/images/trail-2.png\",\n  \"/images/trail-3.png\"\n];\n\nconst config = {\n  imageLifespan: 600,\n  removalTickMs: 16,\n  mouseThreshold: 40,\n  minMovementForImage: 5,\n  inDuration: 600,\n  outDuration: 800,\n  maxRotationFactor: 3,\n  baseRotation: 30,\n  speedSmoothingFactor: 0.25,\n  minImageSize: 260,\n  maxImageSize: 340,\n  staggerOut: 40\n};\n---\n\n<motion-image-trail\n  images={images}\n  config={config}\n  class=\"w-full h-[600px]\"\n/>"
+          "code": "---\nimport \"@/components/motion-kit/image-trail-element.ts\";\n\nconst images = [\n  \"/images/trail-1.png\",\n  \"/images/trail-2.png\",\n  \"/images/trail-3.png\"\n];\n\nconst config = {\n  imageLifespan: 600,\n  removalTickMs: 16,\n  mouseThreshold: 40,\n  minMovementForImage: 5,\n  inDuration: 600,\n  outDuration: 800,\n  maxRotationFactor: 3,\n  baseRotation: 30,\n  speedSmoothingFactor: 0.25,\n  minImageSize: 80,\n  maxImageSize: 120,\n  staggerOut: 40\n};\n---\n\n<motion-image-trail\n  images={images}\n  config={config}\n  class=\"w-full h-[600px]\"\n/>"
         },
         {
           "label": "React",
-          "code": "import \"@/components/motion-kit/image-trail-element.ts\";\n\nconst images = [\n  \"/images/trail-1.png\",\n  \"/images/trail-2.png\",\n  \"/images/trail-3.png\"\n];\n\nconst config = {\n  imageLifespan: 600,\n  removalTickMs: 16,\n  mouseThreshold: 40,\n  minMovementForImage: 5,\n  inDuration: 600,\n  outDuration: 800,\n  maxRotationFactor: 3,\n  baseRotation: 30,\n  speedSmoothingFactor: 0.25,\n  minImageSize: 260,\n  maxImageSize: 340,\n  staggerOut: 40\n};\n\nexport default function Page() {\n  return (\n    <motion-image-trail\n      images={images}\n      config={config}\n      className=\"w-full h-[600px]\"\n    />\n  );\n}"
+          "code": "import \"@/components/motion-kit/image-trail-element.ts\";\n\nconst images = [\n  \"/images/trail-1.png\",\n  \"/images/trail-2.png\",\n  \"/images/trail-3.png\"\n];\n\nconst config = {\n  imageLifespan: 600,\n  removalTickMs: 16,\n  mouseThreshold: 40,\n  minMovementForImage: 5,\n  inDuration: 600,\n  outDuration: 800,\n  maxRotationFactor: 3,\n  baseRotation: 30,\n  speedSmoothingFactor: 0.25,\n  minImageSize: 80,\n  maxImageSize: 120,\n  staggerOut: 40\n};\n\nexport default function Page() {\n  return (\n    <motion-image-trail\n      images={images}\n      config={config}\n      className=\"w-full h-[600px]\"\n    />\n  );\n}"
         },
         {
           "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/image-trail-element.ts\";\n\nconst images = [\n  \"/images/trail-1.png\",\n  \"/images/trail-2.png\",\n  \"/images/trail-3.png\"\n];\n\nconst config = {\n  imageLifespan: 600,\n  removalTickMs: 16,\n  mouseThreshold: 40,\n  minMovementForImage: 5,\n  inDuration: 600,\n  outDuration: 800,\n  maxRotationFactor: 3,\n  baseRotation: 30,\n  speedSmoothingFactor: 0.25,\n  minImageSize: 260,\n  maxImageSize: 340,\n  staggerOut: 40\n};\n</script>\n\n<template>\n  <motion-image-trail\n    :images=\"images\"\n    :config=\"config\"\n    class=\"w-full h-[600px]\"\n  />\n</template>"
+          "code": "<script setup>\nimport \"@/components/motion-kit/image-trail-element.ts\";\n\nconst images = [\n  \"/images/trail-1.png\",\n  \"/images/trail-2.png\",\n  \"/images/trail-3.png\"\n];\n\nconst config = {\n  imageLifespan: 600,\n  removalTickMs: 16,\n  mouseThreshold: 40,\n  minMovementForImage: 5,\n  inDuration: 600,\n  outDuration: 800,\n  maxRotationFactor: 3,\n  baseRotation: 30,\n  speedSmoothingFactor: 0.25,\n  minImageSize: 80,\n  maxImageSize: 120,\n  staggerOut: 40\n};\n</script>\n\n<template>\n  <motion-image-trail\n    :images=\"images\"\n    :config=\"config\"\n    class=\"w-full h-[600px]\"\n  />\n</template>"
         },
         {
           "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/image-trail-element.ts\";\n\n  const images = [\n    \"/images/trail-1.png\",\n    \"/images/trail-2.png\",\n    \"/images/trail-3.png\"\n  ];\n\n  const config = {\n    imageLifespan: 600,\n    removalTickMs: 16,\n    mouseThreshold: 40,\n    minMovementForImage: 5,\n    inDuration: 600,\n    outDuration: 800,\n    maxRotationFactor: 3,\n    baseRotation: 30,\n    speedSmoothingFactor: 0.25,\n    minImageSize: 260,\n    maxImageSize: 340,\n    staggerOut: 40\n  };\n</script>\n\n<motion-image-trail\n  images={images}\n  config={config}\n  class=\"w-full h-[600px]\"\n/>"
+          "code": "<script>\n  import \"@/components/motion-kit/image-trail-element.ts\";\n\n  const images = [\n    \"/images/trail-1.png\",\n    \"/images/trail-2.png\",\n    \"/images/trail-3.png\"\n  ];\n\n  const config = {\n    imageLifespan: 600,\n    removalTickMs: 16,\n    mouseThreshold: 40,\n    minMovementForImage: 5,\n    inDuration: 600,\n    outDuration: 800,\n    maxRotationFactor: 3,\n    baseRotation: 30,\n    speedSmoothingFactor: 0.25,\n    minImageSize: 80,\n    maxImageSize: 120,\n    staggerOut: 40\n  };\n</script>\n\n<motion-image-trail\n  images={images}\n  config={config}\n  class=\"w-full h-[600px]\"\n/>"
         },
         {
           "label": "HTML",
@@ -1539,6 +2118,129 @@
           "type": "object",
           "default": "{}",
           "description": "Configuration object with imageLifespan, removalTickMs, mouseThreshold, minMovementForImage, inDuration, outDuration, maxRotationFactor, baseRotation, speedSmoothingFactor, minImageSize, maxImageSize, and staggerOut options."
+        }
+      ]
+    },
+    {
+      "name": "magnetic",
+      "type": "registry:component",
+      "title": "Magnetic",
+      "description": "Framework-agnostic <motion-magnetic> Custom Element with spring physics, powered by Lit and GSAP.",
+      "dependencies": [
+        "lit",
+        "gsap"
+      ],
+      "files": [
+        {
+          "path": "src/registry/interaction/magnetic/magnetic-element.ts",
+          "type": "registry:component",
+          "target": "src/components/motion-kit/magnetic-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/magnetic-element.ts\";\n---\n\n<motion-magnetic duration=\"1.2\">\n  <button>Hover me</button>\n</motion-magnetic>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/magnetic-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-magnetic duration=\"1.2\">\n      <button>Hover me</button>\n    </motion-magnetic>\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/magnetic-element.ts\";\n</script>\n\n<template>\n  <motion-magnetic duration=\"1.2\">\n    <button>Hover me</button>\n  </motion-magnetic>\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/magnetic-element.ts\";\n</script>\n\n<motion-magnetic duration=\"1.2\">\n  <button>Hover me</button>\n</motion-magnetic>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/magnetic-element.js\"></script>\n\n<motion-magnetic duration=\"1.2\">\n  <button>Hover me</button>\n</motion-magnetic>"
+        }
+      ],
+      "props": [
+        {
+          "name": "duration",
+          "type": "number",
+          "default": "1",
+          "description": "Animation duration in seconds."
+        },
+        {
+          "name": "ease",
+          "type": "string",
+          "default": "\"elastic.out(1, 0.3)\"",
+          "description": "GSAP easing function string."
+        }
+      ]
+    },
+    {
+      "name": "marquee",
+      "type": "registry:component",
+      "title": "Marquee",
+      "description": "Scroll-velocity-boosted infinite marquee. Vanilla Custom Element — no Lit dependency.",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "path": "src/registry/new-york/blocks/marquee/marquee-element.ts",
+          "type": "registry:component",
+          "target": "src/components/motion-kit/marquee-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/marquee-element.ts\";\n---\n\n<motion-marquee gap=\"32\" duration=\"10\">\n  <img src=\"/logo-a.svg\" alt=\"A\" />\n  <img src=\"/logo-b.svg\" alt=\"B\" />\n</motion-marquee>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/marquee-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-marquee gap=\"32\" duration=\"10\">\n      <img src=\"/logo-a.svg\" alt=\"A\" />\n      <img src=\"/logo-b.svg\" alt=\"B\" />\n    </motion-marquee>\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/marquee-element.ts\";\n</script>\n\n<template>\n  <motion-marquee gap=\"32\" duration=\"10\">\n    <img src=\"/logo-a.svg\" alt=\"A\" />\n    <img src=\"/logo-b.svg\" alt=\"B\" />\n  </motion-marquee>\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/marquee-element.ts\";\n</script>\n\n<motion-marquee gap=\"32\" duration=\"10\">\n  <img src=\"/logo-a.svg\" alt=\"A\" />\n  <img src=\"/logo-b.svg\" alt=\"B\" />\n</motion-marquee>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/marquee-element.js\"></script>\n\n<motion-marquee gap=\"32\" duration=\"10\">\n  <img src=\"/logo-a.svg\" alt=\"A\" />\n  <img src=\"/logo-b.svg\" alt=\"B\" />\n</motion-marquee>"
+        }
+      ],
+      "props": [
+        {
+          "name": "gap",
+          "type": "number",
+          "default": "32",
+          "description": "Space between items in pixels."
+        },
+        {
+          "name": "duration",
+          "type": "number",
+          "default": "5",
+          "description": "Seconds for one full loop at rest."
+        },
+        {
+          "name": "velocity",
+          "type": "number",
+          "default": "0.5",
+          "description": "Scroll velocity multiplier for the speed boost effect."
+        },
+        {
+          "name": "repeat",
+          "type": "number",
+          "default": "3",
+          "description": "Number of times to duplicate the slotted content for a seamless loop."
+        },
+        {
+          "name": "reversed",
+          "type": "boolean",
+          "default": "false",
+          "description": "Present to reverse the scroll direction."
         }
       ]
     },
@@ -1569,7 +2271,7 @@
         },
         {
           "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/infinite-gallery-element.ts\";\n</script>\n\n<template>\n  <motion-infinite-gallery\n    :images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n    speed=\"1\"\n    visible-count=\"8\"\n    class=\"h-[600px] w-full\"\n  />\n</template>"
+          "code": "<script setup>\nimport \"`@/components/motion-kit/infinite-gallery-element.ts`\";\n</script>\n\n<template>\n  <motion-infinite-gallery\n    :images='JSON.stringify([{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}])'\n    speed=\"1\"\n    visible-count=\"8\"\n    class=\"h-[600px] w-full\"\n  />\n</template>"
         },
         {
           "label": "Svelte",
@@ -1583,9 +2285,9 @@
       "props": [
         {
           "name": "images",
-          "type": "string[] | {src:string;alt?:string}[]",
+          "type": "string",
           "default": "[]",
-          "description": "Array of image URLs or objects with src and alt properties."
+          "description": "JSON-serialized array of image URLs or objects with src and optional alt properties."
         },
         {
           "name": "speed",
@@ -1762,307 +2464,6 @@
       ]
     },
     {
-      "name": "magnetic",
-      "type": "registry:component",
-      "title": "Magnetic",
-      "description": "Native custom element with GSAP-powered magnetic hover motion and no Lit dependency.",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "path": "src/registry/new-york/blocks/magnetic/magnetic-element.ts",
-          "type": "registry:component",
-          "target": "src/components/motion-kit/magnetic-element.ts"
-        }
-      ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/magnetic-element.ts\";\n---\n\n<motion-magnetic-native duration=\"1\" strength=\"0.35\">\n  <button>Hover me</button>\n</motion-magnetic-native>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/magnetic-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-magnetic-native duration=\"1\" strength=\"0.35\">\n      <button>Hover me</button>\n    </motion-magnetic-native>\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/magnetic-element.ts\";\n</script>\n\n<template>\n  <motion-magnetic-native duration=\"1\" strength=\"0.35\">\n    <button>Hover me</button>\n  </motion-magnetic-native>\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/magnetic-element.ts\";\n</script>\n\n<motion-magnetic-native duration=\"1\" strength=\"0.35\">\n  <button>Hover me</button>\n</motion-magnetic-native>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/magnetic-element.js\"></script>\n\n<motion-magnetic-native duration=\"1\" strength=\"0.35\">\n  <button>Hover me</button>\n</motion-magnetic-native>"
-        }
-      ],
-      "props": [
-        {
-          "name": "duration",
-          "type": "number",
-          "default": "1",
-          "description": "Animation duration in seconds."
-        },
-        {
-          "name": "strength",
-          "type": "number",
-          "default": "1",
-          "description": "Movement multiplier applied to the cursor offset."
-        },
-        {
-          "name": "ease",
-          "type": "string",
-          "default": "\"elastic.out(1, 0.3)\"",
-          "description": "GSAP easing function string."
-        }
-      ]
-    },
-    {
-      "name": "magnetic-lit",
-      "type": "registry:component",
-      "title": "Magnetic (Lit)",
-      "description": "Framework-agnostic <motion-magnetic> Custom Element with spring physics, powered by Lit and GSAP.",
-      "dependencies": [
-        "lit",
-        "gsap"
-      ],
-      "files": [
-        {
-          "path": "src/registry/new-york/blocks/magnetic-lit/magnetic-element.ts",
-          "type": "registry:component",
-          "target": "src/components/motion-kit/magnetic-element.ts"
-        }
-      ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/magnetic-element.ts\";\n---\n\n<motion-magnetic duration=\"1.2\">\n  <button>Hover me</button>\n</motion-magnetic>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/magnetic-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-magnetic duration=\"1.2\">\n      <button>Hover me</button>\n    </motion-magnetic>\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/magnetic-element.ts\";\n</script>\n\n<template>\n  <motion-magnetic duration=\"1.2\">\n    <button>Hover me</button>\n  </motion-magnetic>\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/magnetic-element.ts\";\n</script>\n\n<motion-magnetic duration=\"1.2\">\n  <button>Hover me</button>\n</motion-magnetic>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/magnetic-element.js\"></script>\n\n<motion-magnetic duration=\"1.2\">\n  <button>Hover me</button>\n</motion-magnetic>"
-        }
-      ],
-      "props": [
-        {
-          "name": "duration",
-          "type": "number",
-          "default": "1",
-          "description": "Animation duration in seconds."
-        },
-        {
-          "name": "ease",
-          "type": "string",
-          "default": "\"elastic.out(1, 0.3)\"",
-          "description": "GSAP easing function string."
-        }
-      ]
-    },
-    {
-      "name": "marquee",
-      "type": "registry:component",
-      "title": "Marquee",
-      "description": "Scroll-velocity-boosted infinite marquee. Vanilla Custom Element — no Lit dependency.",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "path": "src/registry/new-york/blocks/marquee/marquee-element.ts",
-          "type": "registry:component",
-          "target": "src/components/motion-kit/marquee-element.ts"
-        }
-      ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/marquee-element.ts\";\n---\n\n<motion-marquee gap=\"32\" duration=\"10\">\n  <img src=\"/logo-a.svg\" alt=\"A\" />\n  <img src=\"/logo-b.svg\" alt=\"B\" />\n</motion-marquee>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/marquee-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-marquee gap=\"32\" duration=\"10\">\n      <img src=\"/logo-a.svg\" alt=\"A\" />\n      <img src=\"/logo-b.svg\" alt=\"B\" />\n    </motion-marquee>\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/marquee-element.ts\";\n</script>\n\n<template>\n  <motion-marquee gap=\"32\" duration=\"10\">\n    <img src=\"/logo-a.svg\" alt=\"A\" />\n    <img src=\"/logo-b.svg\" alt=\"B\" />\n  </motion-marquee>\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/marquee-element.ts\";\n</script>\n\n<motion-marquee gap=\"32\" duration=\"10\">\n  <img src=\"/logo-a.svg\" alt=\"A\" />\n  <img src=\"/logo-b.svg\" alt=\"B\" />\n</motion-marquee>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/marquee-element.js\"></script>\n\n<motion-marquee gap=\"32\" duration=\"10\">\n  <img src=\"/logo-a.svg\" alt=\"A\" />\n  <img src=\"/logo-b.svg\" alt=\"B\" />\n</motion-marquee>"
-        }
-      ],
-      "props": [
-        {
-          "name": "gap",
-          "type": "number",
-          "default": "32",
-          "description": "Space between items in pixels."
-        },
-        {
-          "name": "duration",
-          "type": "number",
-          "default": "5",
-          "description": "Seconds for one full loop at rest."
-        },
-        {
-          "name": "velocity",
-          "type": "number",
-          "default": "0.5",
-          "description": "Scroll velocity multiplier for the speed boost effect."
-        },
-        {
-          "name": "repeat",
-          "type": "number",
-          "default": "3",
-          "description": "Number of times to duplicate the slotted content for a seamless loop."
-        },
-        {
-          "name": "reversed",
-          "type": "boolean",
-          "default": "false",
-          "description": "Present to reverse the scroll direction."
-        }
-      ]
-    },
-    {
-      "name": "pixelated-image",
-      "type": "registry:component",
-      "title": "Pixelated Image",
-      "description": "OGL image revealer that starts as coarse blocks and sharpens to full resolution over time.",
-      "dependencies": [
-        "lit",
-        "ogl"
-      ],
-      "files": [
-        {
-          "path": "src/registry/new-york/blocks/pixelated-image/pixelated-image-element.ts",
-          "type": "registry:component",
-          "target": "src/components/motion-kit/pixelated-image-element.ts"
-        }
-      ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/pixelated-image-element.ts\";\n---\n\n<motion-pixelated-image\n  image=\"https://picsum.photos/seed/pixelated/800/600\"\n  initial-grid-size=\"6\"\n  step-duration=\"0.15\"\n></motion-pixelated-image>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/pixelated-image-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-pixelated-image\n      image=\"https://picsum.photos/seed/pixelated/800/600\"\n      initial-grid-size=\"6\"\n      step-duration=\"0.15\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/pixelated-image-element.ts\";\n</script>\n\n<template>\n  <motion-pixelated-image\n    image=\"https://picsum.photos/seed/pixelated/800/600\"\n    initial-grid-size=\"6\"\n    step-duration=\"0.15\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/pixelated-image-element.ts\";\n</script>\n\n<motion-pixelated-image\n  image=\"https://picsum.photos/seed/pixelated/800/600\"\n  initial-grid-size=\"6\"\n  step-duration=\"0.15\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/pixelated-image-element.js\"></script>\n\n<motion-pixelated-image\n  image=\"https://picsum.photos/seed/pixelated/800/600\"\n  initial-grid-size=\"6\"\n  step-duration=\"0.15\"\n></motion-pixelated-image>"
-        }
-      ],
-      "props": [
-        {
-          "name": "image",
-          "type": "string",
-          "default": "\"\"",
-          "description": "Image source URL used for the depixelation reveal."
-        },
-        {
-          "name": "initial-grid-size",
-          "type": "number",
-          "default": "6",
-          "description": "Starting vertical grid size before each depixelation step doubles it."
-        },
-        {
-          "name": "step-duration",
-          "type": "number",
-          "default": "0.15",
-          "description": "Seconds each depixelation step lasts before the grid doubles again."
-        }
-      ]
-    },
-    {
-      "name": "progressive-blur",
-      "type": "registry:component",
-      "title": "Progressive Blur",
-      "description": "Native custom element that stacks masked backdrop-blur layers to create a directional progressive blur.",
-      "files": [
-        {
-          "path": "src/registry/new-york/blocks/progressive-blur/progressive-blur-element.ts",
-          "type": "registry:component",
-          "target": "src/components/motion-kit/progressive-blur-element.ts"
-        }
-      ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/progressive-blur-element.ts\";\n---\n\n<motion-progressive-blur\n  direction=\"bottom\"\n  blur-layers=\"7\"\n  blur-intensity=\"1\"\n  fade-color=\"#17181A\"\n  class=\"w-full h-[200px]\"\n/>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/progressive-blur-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-progressive-blur\n      direction=\"bottom\"\n      blur-layers=\"7\"\n      blur-intensity=\"1\"\n      fade-color=\"#17181A\"\n      className=\"w-full h-[200px]\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/progressive-blur-element.ts\";\n</script>\n\n<template>\n  <motion-progressive-blur\n    direction=\"bottom\"\n    blur-layers=\"7\"\n    blur-intensity=\"1\"\n    fade-color=\"#17181A\"\n    class=\"w-full h-[200px]\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/progressive-blur-element.ts\";\n</script>\n\n<motion-progressive-blur\n  direction=\"bottom\"\n  blur-layers=\"7\"\n  blur-intensity=\"1\"\n  fade-color=\"#17181A\"\n  class=\"w-full h-[200px]\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/progressive-blur-element.js\"></script>\n\n<motion-progressive-blur\n  direction=\"bottom\"\n  blur-layers=\"7\"\n  blur-intensity=\"1\"\n  fade-color=\"#17181A\"\n  class=\"w-full h-[200px]\"\n/>"
-        }
-      ],
-      "props": [
-        {
-          "name": "direction",
-          "type": "string",
-          "default": "\"bottom\"",
-          "description": "Direction of the blur gradient: 'top', 'right', 'bottom', or 'left'."
-        },
-        {
-          "name": "blur-layers",
-          "type": "number",
-          "default": "7",
-          "description": "Number of blur layers (2-7, more layers = smoother gradient)."
-        },
-        {
-          "name": "blur-intensity",
-          "type": "number",
-          "default": "1",
-          "description": "Multiplier for the blur strength of each layer."
-        },
-        {
-          "name": "fade-color",
-          "type": "string",
-          "default": "\"\"",
-          "description": "Optional color to fade into at the end of the blur gradient."
-        }
-      ]
-    },
-    {
       "name": "radial-gallery",
       "type": "registry:component",
       "title": "Radial Gallery",
@@ -2085,7 +2486,7 @@
         },
         {
           "label": "React",
-          "code": "import \"@/components/motion-kit/radial-gallery-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-radial-gallery\n      items='[{\"src\":\"/img/1.jpg\"},{\"src\":\"/img/2.jpg\"}]'\n      radius=\"480\"\n      duration=\"24\"\n      element-size=\"160\"\n      class=\"h-[360px] w-full overflow-hidden\"\n    />\n  );\n}"
+          "code": "import \"`@/components/motion-kit/radial-gallery-element.ts`\";\n\nexport default function Page() {\n  return (\n    <motion-radial-gallery\n      items='[{\"src\":\"/img/1.jpg\"},{\"src\":\"/img/2.jpg\"}]'\n      radius=\"480\"\n      duration=\"24\"\n      element-size=\"160\"\n      className=\"h-[360px] w-full overflow-hidden\"\n    />\n  );\n}"
         },
         {
           "label": "Vue",
@@ -2189,6 +2590,83 @@
           "type": "string",
           "default": "\"[]\"",
           "description": "JSON array of image objects with src and alt properties."
+        }
+      ]
+    },
+    {
+      "name": "video-player",
+      "type": "registry:component",
+      "title": "Video Player",
+      "description": "Custom video player with play/pause, a hover-expanding scrubber, mute, and GSAP Flip fullscreen expand animation.",
+      "dependencies": [
+        "lit",
+        "gsap"
+      ],
+      "files": [
+        {
+          "path": "src/registry/new-york/blocks/video-player/video-player-element.ts",
+          "type": "registry:component",
+          "target": "src/components/motion-kit/video-player-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/video-player-element.ts\";\n---\n\n<motion-video-player\n  src=\"https://example.com/video.mp4\"\n  poster=\"https://example.com/poster.jpg\"\n  class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n></motion-video-player>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/video-player-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-video-player\n      src=\"https://example.com/video.mp4\"\n      poster=\"https://example.com/poster.jpg\"\n      class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/video-player-element.ts\";\n</script>\n\n<template>\n  <motion-video-player\n    src=\"https://example.com/video.mp4\"\n    poster=\"https://example.com/poster.jpg\"\n    class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/video-player-element.ts\";\n</script>\n\n<motion-video-player\n  src=\"https://example.com/video.mp4\"\n  poster=\"https://example.com/poster.jpg\"\n  class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/video-player-element.js\"></script>\n\n<motion-video-player\n  src=\"https://example.com/video.mp4\"\n  poster=\"https://example.com/poster.jpg\"\n  class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n></motion-video-player>"
+        }
+      ],
+      "props": [
+        {
+          "name": "src",
+          "type": "string",
+          "default": "\"\"",
+          "description": "URL of the video file to play."
+        },
+        {
+          "name": "poster",
+          "type": "string",
+          "default": "\"\"",
+          "description": "URL of the poster image to display before playback."
+        },
+        {
+          "name": "autoplay",
+          "type": "boolean",
+          "default": "false",
+          "description": "Whether to start playing automatically."
+        },
+        {
+          "name": "muted",
+          "type": "boolean",
+          "default": "true",
+          "description": "Whether the video starts muted."
+        },
+        {
+          "name": "loop",
+          "type": "boolean",
+          "default": "false",
+          "description": "Whether to loop the video when it ends."
+        },
+        {
+          "name": "hide-controls",
+          "type": "boolean",
+          "default": "false",
+          "description": "Whether to hide all controls (play/pause, scrubber, etc.)."
         }
       ]
     },
@@ -2621,83 +3099,6 @@
           "type": "string",
           "default": "\"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*\"",
           "description": "Character pool to use for scrambling effect."
-        }
-      ]
-    },
-    {
-      "name": "video-player",
-      "type": "registry:component",
-      "title": "Video Player",
-      "description": "Custom video player with play/pause, a hover-expanding scrubber, mute, and GSAP Flip fullscreen expand animation.",
-      "dependencies": [
-        "lit",
-        "gsap"
-      ],
-      "files": [
-        {
-          "path": "src/registry/new-york/blocks/video-player/video-player-element.ts",
-          "type": "registry:component",
-          "target": "src/components/motion-kit/video-player-element.ts"
-        }
-      ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/video-player-element.ts\";\n---\n\n<motion-video-player\n  src=\"https://example.com/video.mp4\"\n  poster=\"https://example.com/poster.jpg\"\n  class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n></motion-video-player>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/video-player-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-video-player\n      src=\"https://example.com/video.mp4\"\n      poster=\"https://example.com/poster.jpg\"\n      class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/video-player-element.ts\";\n</script>\n\n<template>\n  <motion-video-player\n    src=\"https://example.com/video.mp4\"\n    poster=\"https://example.com/poster.jpg\"\n    class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/video-player-element.ts\";\n</script>\n\n<motion-video-player\n  src=\"https://example.com/video.mp4\"\n  poster=\"https://example.com/poster.jpg\"\n  class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/video-player-element.js\"></script>\n\n<motion-video-player\n  src=\"https://example.com/video.mp4\"\n  poster=\"https://example.com/poster.jpg\"\n  class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n></motion-video-player>"
-        }
-      ],
-      "props": [
-        {
-          "name": "src",
-          "type": "string",
-          "default": "\"\"",
-          "description": "URL of the video file to play."
-        },
-        {
-          "name": "poster",
-          "type": "string",
-          "default": "\"\"",
-          "description": "URL of the poster image to display before playback."
-        },
-        {
-          "name": "autoplay",
-          "type": "boolean",
-          "default": "false",
-          "description": "Whether to start playing automatically."
-        },
-        {
-          "name": "muted",
-          "type": "boolean",
-          "default": "true",
-          "description": "Whether the video starts muted."
-        },
-        {
-          "name": "loop",
-          "type": "boolean",
-          "default": "false",
-          "description": "Whether to loop the video when it ends."
-        },
-        {
-          "name": "hide-controls",
-          "type": "boolean",
-          "default": "false",
-          "description": "Whether to hide all controls (play/pause, scrubber, etc.)."
         }
       ]
     },

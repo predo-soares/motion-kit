@@ -80,6 +80,13 @@ const seeds: ComponentSeed[] = [
   { slug: "slideshow", group: "Showcase" },
   { slug: "video-player", group: "Showcase" },
   { slug: "ascii-renderer", group: "Canvas" },
+  { slug: "lava-lamp", group: "Canvas" },
+  { slug: "rubiks-cube", group: "Canvas" },
+  { slug: "neural-noise", group: "Canvas" },
+  { slug: "plasma-grid", group: "Canvas" },
+  { slug: "specular-band", group: "Canvas" },
+  { slug: "interactive-grid", group: "Canvas" },
+  { slug: "water-ripple", group: "Canvas" },
   { slug: "card-3d", group: "Canvas" },
   { slug: "dithered-image", group: "Canvas" },
   { slug: "fake-3d-image", group: "Canvas" },
@@ -126,7 +133,11 @@ export const componentCatalog: ComponentCatalogEntry[] = seeds.map(
 export const componentGroups: ComponentCatalogGroup[] = groupOrder.map(
   (group) => ({
     name: group,
-    items: componentCatalog.filter((component) => component.group === group),
+    items: componentCatalog
+      .filter((component) => component.group === group)
+      .sort((a, b) =>
+        group === "Canvas" ? a.title.localeCompare(b.title) : 0,
+      ),
   }),
 );
 
