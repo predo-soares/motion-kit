@@ -1,0 +1,14 @@
+{
+  "name": "specular-band",
+  "type": "registry:component",
+  "title": "Specular Band",
+  "description": "Animated specular band effect with lens distortion and hue-shifted color palettes. Creates flowing, organic light bands with adaptive blending for different background brightness levels. Lit Custom Element.",
+  "dependencies": ["lit", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/canvas/specular-band/specular-band-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/specular-band-element.ts"
+    }
+  ]
+}
