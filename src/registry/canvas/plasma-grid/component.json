@@ -1,0 +1,57 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "plasma-grid",
+  "type": "registry:component",
+  "title": "Plasma Grid",
+  "description": "Animated plasma grid effect rendered in WebGL. Creates a checkerboard grid pattern with flowing plasma noise gradients. Colors are customizable via props. Lit Custom Element.",
+  "dependencies": ["lit", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/canvas/plasma-grid/plasma-grid-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/plasma-grid-element.ts"
+    }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/plasma-grid-element.ts\";\n---\n\n<motion-plasma-grid\n  color=\"#17181A\"\n  highlight-color=\"#FF6900\"\n  speed={0.5}\n  class=\"w-full h-[500px]\"\n/>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/plasma-grid-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-plasma-grid\n      color=\"#17181A\"\n      highlight-color=\"#FF6900\"\n      speed={0.5}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/plasma-grid-element.ts\";\n</script>\n\n<template>\n  <motion-plasma-grid\n    color=\"#17181A\"\n    highlight-color=\"#FF6900\"\n    :speed=\"0.5\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/plasma-grid-element.ts\";\n</script>\n\n<motion-plasma-grid\n  color=\"#17181A\"\n  highlight-color=\"#FF6900\"\n  speed={0.5}\n  class=\"w-full h-[500px]\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/plasma-grid-element.js\"></script>\n\n<motion-plasma-grid\n  color=\"#17181A\"\n  highlight-color=\"#FF6900\"\n  speed=\"0.5\"\n  class=\"w-full h-[500px]\"\n/>"
+    }
+  ],
+  "props": [
+    {
+      "name": "color",
+      "type": "string",
+      "default": "#17181A",
+      "description": "The base background color of the effect."
+    },
+    {
+      "name": "highlight-color",
+      "type": "string",
+      "default": "#FF6900",
+      "description": "The color used for the plasma noise gradients."
+    },
+    {
+      "name": "speed",
+      "type": "number",
+      "default": "0.5",
+      "description": "Animation speed multiplier. Higher values make the plasma flow faster."
+    }
+  ]
+}

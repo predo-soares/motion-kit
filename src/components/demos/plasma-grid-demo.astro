@@ -1,0 +1,37 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+---
+
+<ComponentCard description="Animated plasma grid effect — a checkerboard grid pattern with flowing plasma noise gradients.">
+  <div class="relative aspect-video w-full overflow-hidden rounded-[2rem] bg-[#17181A]">
+    <motion-plasma-grid
+      color="#17181A"
+      highlight-color="#6c87bc"
+      speed="0.5"
+      class="absolute inset-0"
+    ></motion-plasma-grid>
+  </div>
+  <div slot="controls" class="mk-controls">
+    <mk-color
+      label="Background"
+      value="#17181A"
+      data-target="motion-plasma-grid"
+      data-attr="color"
+    ></mk-color>
+    <mk-color
+      label="Highlight"
+      value="#6c87bc"
+      data-target="motion-plasma-grid"
+      data-attr="highlight-color"
+    ></mk-color>
+    <mk-slider
+      label="Speed"
+      min="0"
+      max="2"
+      step="0.05"
+      value="0.5"
+      data-target="motion-plasma-grid"
+      data-attr="speed"
+    ></mk-slider>
+  </div>
+</ComponentCard>
