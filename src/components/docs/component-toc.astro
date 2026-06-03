@@ -1,0 +1,82 @@
+---
+import type { ComponentCatalogEntry } from "@/lib/component-catalog";
+
+interface Props {
+  component: ComponentCatalogEntry;
+}
+
+const { component } = Astro.props;
+
+type TocItem = { id: string; label: string };
+
+const items: TocItem[] = [
+  { id: "preview", label: "Preview" },
+  { id: "installation", label: "Installation" },
+  ...(component.usage?.length ? [{ id: "usage", label: "Usage" }] : []),
+  ...(component.props?.length ? [{ id: "api-reference", label: "API Reference" }] : []),
+];
+---
+
+<nav aria-label="On this page" class="flex flex-col gap-2">
+  <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
+    On this page
+  </p>
+  <ul class="flex flex-col gap-0.5">
+    {
+      items.map(({ id, label }) => (
+        <li>
+          <a
+            href={`#${id}`}
+            data-toc-link={id}
+            class="block rounded-md px-2 py-1 text-sm text-slate-500 transition-colors hover:text-slate-900 data-[active]:text-slate-900 data-[active]:font-medium"
+          >
+            {label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<script>
+  const links = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>("[data-toc-link]"),
+  );
+
+  if (links.length) {
+    const ids = links.map((l) => l.dataset.tocLink!);
+    const sections = ids
+      .map((id) => document.getElementById(id))
+      .filter(Boolean) as HTMLElement[];
+
+    let current = ids[0];
+
+    const setActive = (id: string) => {
+      if (id === current) return;
+      current = id;
+      links.forEach((l) => {
+        if (l.dataset.tocLink === id) {
+          l.dataset.active = "";
+        } else {
+          delete l.dataset.active;
+        }
+      });
+    };
+
+    // Initialise the first link as active
+    links[0]?.setAttribute("data-active", "");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActive((entry.target as HTMLElement).id);
+          }
+        }
+      },
+      { rootMargin: "0px 0px -60% 0px", threshold: 0 },
+    );
+
+    sections.forEach((s) => observer.observe(s));
+  }
+</script>

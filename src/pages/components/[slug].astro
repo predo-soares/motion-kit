@@ -3,6 +3,8 @@ import ComponentBrowserShell from "@/components/docs/component-browser-shell.ast
 import ComponentPreviewScripts from "@/components/docs/component-preview-scripts.astro";
 import CodeTabs from "@/components/docs/code-tabs.astro";
 import PackageCommand from "@/components/docs/package-command.astro";
+import ComponentNav from "@/components/docs/component-nav.astro";
+import ComponentToc from "@/components/docs/component-toc.astro";
 import SiteLayout from "@/layouts/site-layout.astro";
 import infoCircleIcon from "@tabler/icons/outline/info-circle.svg?raw";
 import {
@@ -44,19 +46,22 @@ const installCommand = `shadcn@latest add https://motion-kit-astro.vercel.app/r/
   description={component.summary}
 >
   <ComponentBrowserShell currentSlug={component.slug}>
-    <article class="flex w-full max-w-[600px] min-w-0 flex-col gap-10 pb-16">
-      <header class="flex flex-col gap-3">
+    <article
+      class="flex items-center w-full min-w-0 max-w-3xl flex-col gap-10 pb-16"
+    >
+      <header id="overview" class="flex flex-col gap-3 w-full max-w-[600px]">
         <div class="flex flex-col gap-2">
-          <p
-            class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400"
-          >
+          <p class="text-xs font-semibold text-slate-400">
             {component.group}
           </p>
-          <h1
-            class="text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl"
-          >
-            {component.title}
-          </h1>
+          <div class="flex items-center justify-between gap-4">
+            <h1
+              class="text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl"
+            >
+              {component.title}
+            </h1>
+            <ComponentNav currentSlug={component.slug} />
+          </div>
         </div>
         <p class="max-w-3xl text-slate-600 text-sm text-balance">
           {component.summary}
@@ -74,76 +79,114 @@ const installCommand = `shadcn@latest add https://motion-kit-astro.vercel.app/r/
         }
       </header>
 
-      <section class="flex flex-col gap-3 w-full">
-        <h2 class="text-xl font-semibold tracking-tight text-slate-950">
+      <section id="preview" class="flex flex-col gap-3 w-full">
+        <h2
+          class="text-xl w-full mx-auto max-w-[600px] font-semibold tracking-tight text-slate-950"
+        >
           Preview
         </h2>
         <DemoComponent />
       </section>
 
-      <section class="flex flex-col gap-3">
+      <section id="installation" class="flex flex-col gap-3 w-full max-w-[600px]">
         <h2 class="text-xl font-semibold tracking-tight text-slate-950">
           Installation
         </h2>
         <PackageCommand command={installCommand} />
       </section>
 
-      {component.usage?.length ? (
-        <section class="flex flex-col gap-3">
-          <h2 class="text-xl font-semibold tracking-tight text-slate-950">Usage</h2>
-          <CodeTabs tabs={component.usage} />
-        </section>
-      ) : null}
+      {
+        component.usage?.length ? (
+          <section id="usage" class="flex flex-col gap-3 w-full max-w-[600px]">
+            <h2 class="text-xl font-semibold tracking-tight text-slate-950">
+              Usage
+            </h2>
+            <CodeTabs tabs={component.usage} />
+          </section>
+        ) : null
+      }
 
-      {component.props?.length ? (
-        <section class="flex flex-col gap-3">
-          <h2 class="text-xl font-semibold tracking-tight text-slate-950">API Reference</h2>
-          <div class="overflow-hidden rounded-2xl border border-slate-200">
-            <table class="w-full min-w-0 tabular-nums text-[13px]" aria-label="API reference">
-              <thead>
-                <tr class="border-b border-slate-200 bg-white text-left">
-                  <th class="px-3 py-2 text-xs font-medium text-slate-500">Attribute</th>
-                  <th class="px-3 py-2 text-xs font-medium text-slate-500">Type</th>
-                  <th class="px-3 py-2 text-xs font-medium text-slate-500">Default</th>
-                </tr>
-              </thead>
-              <tbody class="bg-slate-50">
-                {component.props.map((prop) => (
-                  <tr class="border-t border-slate-100">
-                    <td class="px-3 py-2.5 align-middle">
-                      <span class="inline-flex items-center gap-1">
-                        <code class="font-mono text-slate-800">{prop.name}</code>
-                        <button
-                          type="button"
-                          data-tooltip-trigger
-                          data-tooltip-id={`tip-${prop.name}`}
-                          title={prop.description}
-                          aria-label={`About ${prop.name}: ${prop.description}`}
-                          class="inline-flex text-slate-400 transition-colors hover:text-slate-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 rounded-full [&_svg]:block [&_svg]:h-3 [&_svg]:w-3"
-                        >
-                          <span set:html={infoCircleIcon} aria-hidden="true" />
-                        </button>
-                        <span
-                          id={`tip-${prop.name}`}
-                          role="tooltip"
-                          popover="manual"
-                          class="fixed m-0 w-max max-w-[220px] rounded-lg bg-slate-900 px-2.5 py-1.5 text-xs leading-relaxed text-white"
-                        >
-                          {prop.description}
-                          <span class="absolute top-full left-1/2 h-0 w-0 -translate-x-1/2 border-4 border-transparent border-t-slate-900" />
-                        </span>
-                      </span>
-                    </td>
-                    <td class="px-3 py-2.5 align-middle"><code class="font-mono text-slate-400">{prop.type}</code></td>
-                    <td class="px-3 py-2.5 align-middle"><code class="font-mono text-slate-400">{prop.default}</code></td>
+      {
+        component.props?.length ? (
+          <section id="api-reference" class="flex flex-col gap-3 w-full max-w-[600px]">
+            <h2 class="text-xl font-semibold tracking-tight text-slate-950">
+              API Reference
+            </h2>
+            <div class="overflow-hidden rounded-2xl border border-slate-200">
+              <table
+                class="w-full min-w-0 tabular-nums text-[13px]"
+                aria-label="API reference"
+              >
+                <thead>
+                  <tr class="border-b border-slate-200 bg-white text-left">
+                    <th class="px-3 py-2 text-xs font-medium text-slate-500">
+                      Attribute
+                    </th>
+                    <th class="px-3 py-2 text-xs font-medium text-slate-500">
+                      Type
+                    </th>
+                    <th class="px-3 py-2 text-xs font-medium text-slate-500">
+                      Default
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      ) : null}
+                </thead>
+                <tbody class="bg-slate-50">
+                  {component.props.map((prop) => (
+                    <tr class="border-t border-slate-100">
+                      <td class="px-3 py-2.5 align-middle">
+                        <span class="inline-flex items-center gap-1">
+                          <code class="font-mono text-slate-800">
+                            {prop.name}
+                          </code>
+                          <button
+                            type="button"
+                            data-tooltip-trigger
+                            data-tooltip-id={`tip-${prop.name}`}
+                            title={prop.description}
+                            aria-label={`About ${prop.name}: ${prop.description}`}
+                            class="inline-flex text-slate-400 transition-colors hover:text-slate-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 rounded-full [&_svg]:block [&_svg]:h-3 [&_svg]:w-3"
+                          >
+                            <span
+                              set:html={infoCircleIcon}
+                              aria-hidden="true"
+                            />
+                          </button>
+                          <span
+                            id={`tip-${prop.name}`}
+                            role="tooltip"
+                            popover="manual"
+                            class="fixed m-0 w-max max-w-[220px] rounded-lg bg-slate-900 px-2.5 py-1.5 text-xs leading-relaxed text-white"
+                          >
+                            {prop.description}
+                            <span class="absolute top-full left-1/2 h-0 w-0 -translate-x-1/2 border-4 border-transparent border-t-slate-900" />
+                          </span>
+                        </span>
+                      </td>
+                      <td class="px-3 py-2.5 align-middle">
+                        <code class="font-mono text-slate-400">
+                          {prop.type}
+                        </code>
+                      </td>
+                      <td class="px-3 py-2.5 align-middle">
+                        <code class="font-mono text-slate-400">
+                          {prop.default}
+                        </code>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        ) : null
+      }
+
+      <div class="w-full max-w-[600px]">
+        <ComponentNav currentSlug={component.slug} variant="footer" />
+      </div>
     </article>
+
+    <ComponentToc slot="aside" component={component} />
   </ComponentBrowserShell>
   <ComponentPreviewScripts />
 </SiteLayout>
@@ -154,15 +197,18 @@ const installCommand = `shadcn@latest add https://motion-kit-astro.vercel.app/r/
   );
 
   triggers.forEach((trigger) => {
-    const tooltip = document.getElementById(
-      trigger.dataset.tooltipId ?? "",
-    ) as (HTMLElement & { showPopover(): void; hidePopover(): void }) | null;
+    const tooltip = document.getElementById(trigger.dataset.tooltipId ?? "") as
+      | (HTMLElement & { showPopover(): void; hidePopover(): void })
+      | null;
     if (!tooltip) return;
 
     let closeTimer: ReturnType<typeof setTimeout> | null = null;
 
     const open = () => {
-      if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+      if (closeTimer) {
+        clearTimeout(closeTimer);
+        closeTimer = null;
+      }
       tooltip.showPopover();
       const r = trigger.getBoundingClientRect();
       tooltip.style.left = `${r.left + r.width / 2 - tooltip.offsetWidth / 2}px`;
@@ -201,7 +247,9 @@ const installCommand = `shadcn@latest add https://motion-kit-astro.vercel.app/r/
   [popover][role="tooltip"] {
     opacity: 0;
     transform: translateY(4px);
-    transition: opacity 150ms ease-out, transform 150ms ease-out;
+    transition:
+      opacity 150ms ease-out,
+      transform 150ms ease-out;
   }
   [popover][role="tooltip"]:popover-open {
     opacity: 1;
