@@ -92,7 +92,7 @@ const previewBackgroundClass =
     scrollable ? (
       <div
         data-preview
-        class={`relative flex-1 z-0 flex items-center justify-center min-h-[420px] ${previewBackgroundClass}`}
+        class={`relative flex-1 z-0 flex items-center justify-center aspect-video min-h-[420px] ${previewBackgroundClass}`}
       >
         <div id={id} class="h-[420px] overflow-y-auto w-fit">
           <div data-preview-content class="min-h-full">
@@ -120,7 +120,7 @@ const previewBackgroundClass =
     ) : (
       <div
         data-preview
-        class={`relative flex-1 min-h-[420px] z-0 flex items-center justify-center ${previewBackgroundClass}`}
+        class={`relative flex-1 min-h-[420px] aspect-video z-0 flex items-center justify-center ${previewBackgroundClass}`}
       >
         <div data-preview-content class="w-full">
           <slot />
