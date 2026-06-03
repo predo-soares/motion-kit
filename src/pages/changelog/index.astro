@@ -1,0 +1,125 @@
+---
+import { render } from "astro:content";
+
+import ComponentBrowserShell from "@/components/docs/component-browser-shell.astro";
+import DocsTableOfContents from "@/components/docs/docs-table-of-contents.astro";
+import SiteLayout from "@/layouts/site-layout.astro";
+import {
+  formatChangelogDate,
+  formatChangelogMonth,
+  getChangelogEntries,
+  getChangelogUrl,
+} from "@/lib/changelog";
+
+const NUMBER_OF_LATEST_ENTRIES = 2;
+const changelogEntries = await getChangelogEntries();
+const latestEntries = changelogEntries.slice(0, NUMBER_OF_LATEST_ENTRIES);
+const olderEntries = changelogEntries.slice(NUMBER_OF_LATEST_ENTRIES);
+const latestEntriesWithContent = await Promise.all(
+  latestEntries.map(async (entry) => ({
+    entry,
+    rendered: await render(entry),
+  })),
+);
+const tocItems = [
+  ...latestEntries.map((entry) => ({
+    href: `#${entry.id}`,
+    label: entry.data.title,
+  })),
+  ...(olderEntries.length > 0
+    ? [{ href: "#more-updates", label: "More updates" }]
+    : []),
+];
+---
+
+<SiteLayout
+  title="Motion Kit Changelog"
+  description="Latest updates and announcements around the Motion Kit Astro registry."
+>
+  <ComponentBrowserShell currentHref="/changelog">
+    <article class="flex w-full max-w-[600px] min-w-0 flex-col gap-10 pb-16">
+      <header class="flex flex-col gap-3">
+        <div class="flex flex-col gap-2">
+          <p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">
+            Docs
+          </p>
+          <h1 class="text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl">
+            Changelog
+          </h1>
+        </div>
+        <p class="max-w-3xl text-sm text-balance text-slate-600">
+          Latest updates and announcements around the Astro registry, docs shell, and component
+          release work.
+        </p>
+      </header>
+
+      <section class="flex flex-col gap-8">
+        {
+          latestEntriesWithContent.map(({ entry, rendered }) => {
+            const { Content } = rendered;
+
+            return (
+              <article
+                id={entry.id}
+                class="scroll-mt-24 border-b border-slate-200 pb-10 last:border-b-0 last:pb-0"
+              >
+                <div class="flex flex-col gap-3">
+                  <p class="text-sm text-slate-500">
+                    {formatChangelogDate(entry.data.date)}
+                  </p>
+                  <div class="flex flex-col gap-2">
+                    <h2 class="text-xl font-semibold tracking-tight text-slate-950">
+                      <a
+                        href={getChangelogUrl(entry)}
+                        class="transition-colors hover:text-slate-700"
+                      >
+                        {entry.data.title}
+                      </a>
+                    </h2>
+                    <p class="text-sm leading-6 text-slate-600">{entry.data.description}</p>
+                  </div>
+                </div>
+
+                <div class="mt-6 flex flex-col gap-4 text-sm leading-7 text-slate-700 [&_h2]:mt-4 [&_h2]:text-base [&_h2]:font-semibold [&_h2]:tracking-tight [&_h2]:text-slate-950 [&_p]:m-0 [&_ul]:m-0 [&_ul]:pl-5 [&_ul]:space-y-2 [&_li]:pl-1 [&_code]:rounded [&_code]:bg-slate-100 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-[0.9em]">
+                  <Content />
+                </div>
+              </article>
+            );
+          })
+        }
+      </section>
+
+      {
+        olderEntries.length > 0 ? (
+          <section id="more-updates" class="scroll-mt-24 flex flex-col gap-6">
+            <div class="flex flex-col gap-1">
+              <h2 class="text-2xl font-semibold tracking-tight text-slate-950">More Updates</h2>
+            </div>
+
+            <div class="grid auto-rows-fr gap-3 sm:grid-cols-2">
+              {olderEntries.map((entry) => (
+                <a
+                  href={getChangelogUrl(entry)}
+                  class="flex min-h-28 flex-col justify-center rounded-[1.35rem] bg-slate-950 px-5 py-4 text-slate-100 transition-colors hover:bg-slate-900"
+                >
+                  <span class="text-sm text-slate-500">
+                    {formatChangelogMonth(entry.data.date)}
+                  </span>
+                  <span class="mt-2 text-[1.05rem] font-medium leading-6 tracking-tight text-slate-300">
+                    {entry.data.title}
+                  </span>
+                </a>
+              ))}
+            </div>
+          </section>
+        ) : null
+      }
+    </article>
+
+    <Fragment slot="aside">
+      <div class="flex flex-col gap-6">
+        <DocsTableOfContents items={tocItems} />
+      </div>
+    </Fragment>
+  </ComponentBrowserShell>
+</SiteLayout>
