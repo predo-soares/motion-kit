@@ -1,0 +1,77 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+---
+
+<ComponentCard description="A 3D Rubik's Cube that continuously rotates and scrambles itself. Features a Fresnel rim glow and interactive orbit controls — drag to spin.">
+  <div class="relative aspect-video w-full overflow-hidden rounded-[2rem] bg-[#0e0f11]">
+    <motion-rubiks-cube
+      color="#17181A"
+      rim-color="#6c87bc"
+      rim-power="6"
+      rim-intensity="1.5"
+      duration="1.5"
+      gap="0.015"
+      radius="0.125"
+      class="absolute inset-0"
+    ></motion-rubiks-cube>
+  </div>
+  <div slot="controls" class="mk-controls">
+    <mk-slider
+      label="Duration"
+      min="0.3"
+      max="4"
+      step="0.1"
+      value="1.5"
+      data-target="motion-rubiks-cube"
+      data-attr="duration"
+    ></mk-slider>
+    <mk-slider
+      label="Gap"
+      min="0"
+      max="0.3"
+      step="0.005"
+      value="0.015"
+      data-target="motion-rubiks-cube"
+      data-attr="gap"
+    ></mk-slider>
+    <mk-slider
+      label="Radius"
+      min="0"
+      max="0.45"
+      step="0.005"
+      value="0.125"
+      data-target="motion-rubiks-cube"
+      data-attr="radius"
+    ></mk-slider>
+    <mk-slider
+      label="Rim Power"
+      min="1"
+      max="20"
+      step="0.5"
+      value="6"
+      data-target="motion-rubiks-cube"
+      data-attr="rim-power"
+    ></mk-slider>
+    <mk-slider
+      label="Rim Intensity"
+      min="0"
+      max="4"
+      step="0.1"
+      value="1.5"
+      data-target="motion-rubiks-cube"
+      data-attr="rim-intensity"
+    ></mk-slider>
+    <mk-color
+      label="Color"
+      value="#17181A"
+      data-target="motion-rubiks-cube"
+      data-attr="color"
+    ></mk-color>
+    <mk-color
+      label="Rim Color"
+      value="#6c87bc"
+      data-target="motion-rubiks-cube"
+      data-attr="rim-color"
+    ></mk-color>
+  </div>
+</ComponentCard>

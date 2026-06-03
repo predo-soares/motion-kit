@@ -1,0 +1,105 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "rubiks-cube",
+  "type": "registry:component",
+  "title": "Rubik's Cube",
+  "description": "A 3D Rubik's Cube that continuously rotates and scrambles itself with smooth face animations. Features a Fresnel rim glow shader and interactive orbit controls. Lit Custom Element.",
+  "dependencies": ["lit", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/canvas/rubiks-cube/rubiks-cube-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/rubiks-cube-element.ts"
+    }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/rubiks-cube-element.ts\";\n---\n\n<motion-rubiks-cube\n  color=\"#17181A\"\n  rim-color=\"#FF6900\"\n  rim-power=\"6\"\n  rim-intensity=\"1.5\"\n  duration=\"1.5\"\n  gap=\"0.015\"\n  radius=\"0.125\"\n  class=\"w-full h-[500px]\"\n/>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/rubiks-cube-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-rubiks-cube\n      color=\"#17181A\"\n      rim-color=\"#FF6900\"\n      rim-power={6}\n      rim-intensity={1.5}\n      duration={1.5}\n      gap={0.015}\n      radius={0.125}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/rubiks-cube-element.ts\";\n</script>\n\n<template>\n  <motion-rubiks-cube\n    color=\"#17181A\"\n    rim-color=\"#FF6900\"\n    :rim-power=\"6\"\n    :rim-intensity=\"1.5\"\n    :duration=\"1.5\"\n    :gap=\"0.015\"\n    :radius=\"0.125\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/rubiks-cube-element.ts\";\n</script>\n\n<motion-rubiks-cube\n  color=\"#17181A\"\n  rim-color=\"#FF6900\"\n  rim-power={6}\n  rim-intensity={1.5}\n  duration={1.5}\n  gap={0.015}\n  radius={0.125}\n  class=\"w-full h-[500px]\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/rubiks-cube-element.js\"></script>\n\n<motion-rubiks-cube\n  color=\"#17181A\"\n  rim-color=\"#FF6900\"\n  rim-power=\"6\"\n  rim-intensity=\"1.5\"\n  duration=\"1.5\"\n  gap=\"0.015\"\n  radius=\"0.125\"\n  class=\"w-full h-[500px]\"\n/>"
+    }
+  ],
+  "props": [
+    {
+      "name": "color",
+      "type": "string",
+      "default": "#17181A",
+      "description": "Base body color of each cubelet."
+    },
+    {
+      "name": "rim-color",
+      "type": "string",
+      "default": "#FF6900",
+      "description": "Accent color applied by the Fresnel rim shader."
+    },
+    {
+      "name": "rim-power",
+      "type": "number",
+      "default": "6",
+      "description": "Controls how tight the Fresnel rim hug is. Higher values yield a thinner outline."
+    },
+    {
+      "name": "rim-intensity",
+      "type": "number",
+      "default": "1.5",
+      "description": "Intensity multiplier for the Fresnel rim color."
+    },
+    {
+      "name": "duration",
+      "type": "number",
+      "default": "1.5",
+      "description": "Seconds it takes to complete a face rotation."
+    },
+    {
+      "name": "gap",
+      "type": "number",
+      "default": "0.015",
+      "description": "Gap between cubelets to accentuate separation."
+    },
+    {
+      "name": "radius",
+      "type": "number",
+      "default": "0.125",
+      "description": "Corner radius for softened cube edges."
+    },
+    {
+      "name": "scale",
+      "type": "number",
+      "default": "1",
+      "description": "Scale multiplier for the cube."
+    },
+    {
+      "name": "rotation",
+      "type": "number",
+      "default": "0",
+      "description": "Cube rotation in degrees (Z-axis)."
+    },
+    {
+      "name": "offset-x",
+      "type": "number",
+      "default": "0",
+      "description": "Horizontal cube offset in normalized viewport units."
+    },
+    {
+      "name": "offset-y",
+      "type": "number",
+      "default": "0",
+      "description": "Vertical cube offset in normalized viewport units."
+    }
+  ]
+}

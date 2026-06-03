@@ -1,0 +1,14 @@
+{
+  "name": "rubiks-cube",
+  "type": "registry:component",
+  "title": "Rubik's Cube",
+  "description": "A 3D Rubik's Cube that continuously rotates and scrambles itself with smooth face animations. Features a Fresnel rim glow shader and interactive orbit controls. Lit Custom Element.",
+  "dependencies": ["lit", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/canvas/rubiks-cube/rubiks-cube-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/rubiks-cube-element.ts"
+    }
+  ]
+}
