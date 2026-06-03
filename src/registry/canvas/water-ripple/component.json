@@ -1,0 +1,56 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "water-ripple",
+  "type": "registry:component",
+  "title": "Water Ripple",
+  "description": "Interactive water ripple effect on images. Creates realistic ripple distortions that follow pointer movement with expanding wave animations. Lit Custom Element.",
+  "dependencies": ["lit", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/canvas/water-ripple/water-ripple-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/water-ripple-element.ts"
+    },
+    {
+      "path": "public/motion-kit/water-ripple/brush.png",
+      "type": "registry:file",
+      "target": "public/motion-kit/water-ripple/brush.png"
+    }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/water-ripple-element.ts\";\n---\n\n<motion-water-ripple\n  src=\"/path/to/image.jpg\"\n  brush-size={100}\n  class=\"w-full h-[500px]\"\n/>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/water-ripple-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-water-ripple\n      src=\"/path/to/image.jpg\"\n      brush-size={100}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/water-ripple-element.ts\";\n</script>\n\n<template>\n  <motion-water-ripple\n    src=\"/path/to/image.jpg\"\n    :brush-size=\"100\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/water-ripple-element.ts\";\n</script>\n\n<motion-water-ripple\n  src=\"/path/to/image.jpg\"\n  brush-size={100}\n  class=\"w-full h-[500px]\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/water-ripple-element.js\"></script>\n\n<motion-water-ripple\n  src=\"/path/to/image.jpg\"\n  brush-size=\"100\"\n  class=\"w-full h-[500px]\"\n/>"
+    }
+  ],
+  "props": [
+    {
+      "name": "src",
+      "type": "string",
+      "default": "",
+      "description": "The image source URL to apply the water ripple effect to."
+    },
+    {
+      "name": "brush-size",
+      "type": "number",
+      "default": "100",
+      "description": "Size of the ripple brush in pixels. Larger values create bigger ripples."
+    }
+  ]
+}

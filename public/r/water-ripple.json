@@ -1,0 +1,19 @@
+{
+  "name": "water-ripple",
+  "type": "registry:component",
+  "title": "Water Ripple",
+  "description": "Interactive water ripple effect on images. Creates realistic ripple distortions that follow pointer movement with expanding wave animations. Lit Custom Element.",
+  "dependencies": ["lit", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/canvas/water-ripple/water-ripple-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/water-ripple-element.ts"
+    },
+    {
+      "path": "public/motion-kit/water-ripple/brush.png",
+      "type": "registry:file",
+      "target": "public/motion-kit/water-ripple/brush.png"
+    }
+  ]
+}

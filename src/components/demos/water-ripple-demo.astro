@@ -1,0 +1,24 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+---
+
+<ComponentCard description="Interactive water ripple effect — move your cursor over the image to create realistic ripple distortions with expanding wave animations.">
+  <div class="relative aspect-video w-full overflow-hidden rounded-[2rem]">
+    <motion-water-ripple
+      src="/images/demos/sample-10.jpg"
+      brush-size="100"
+      class="absolute inset-0"
+    ></motion-water-ripple>
+  </div>
+  <div slot="controls" class="mk-controls">
+    <mk-slider
+      label="Brush Size"
+      min="20"
+      max="200"
+      step="5"
+      value="100"
+      data-target="motion-water-ripple"
+      data-attr="brush-size"
+    ></mk-slider>
+  </div>
+</ComponentCard>
