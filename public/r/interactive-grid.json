@@ -1,0 +1,14 @@
+{
+  "name": "interactive-grid",
+  "type": "registry:component",
+  "title": "Interactive Grid",
+  "description": "Physics-based grid simulation that distorts an image in response to cursor movement. Each grid cell tracks mouse velocity and decays back to rest over time. Lit Custom Element.",
+  "dependencies": ["lit", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/canvas/interactive-grid/interactive-grid-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/interactive-grid-element.ts"
+    }
+  ]
+}

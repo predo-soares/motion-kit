@@ -1,0 +1,69 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "interactive-grid",
+  "type": "registry:component",
+  "title": "Interactive Grid",
+  "description": "Physics-based grid simulation that distorts an image in response to cursor movement. Each grid cell tracks mouse velocity and decays back to rest over time. Lit Custom Element.",
+  "dependencies": ["lit", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/canvas/interactive-grid/interactive-grid-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/interactive-grid-element.ts"
+    }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/interactive-grid-element.ts\";\n---\n\n<motion-interactive-grid\n  src=\"/path/to/image.jpg\"\n  grid={15}\n  mouse-size={0.15}\n  strength={0.35}\n  relaxation={0.9}\n  class=\"w-full h-[500px]\"\n/>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/interactive-grid-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-interactive-grid\n      src=\"/path/to/image.jpg\"\n      grid={15}\n      mouse-size={0.15}\n      strength={0.35}\n      relaxation={0.9}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/interactive-grid-element.ts\";\n</script>\n\n<template>\n  <motion-interactive-grid\n    src=\"/path/to/image.jpg\"\n    :grid=\"15\"\n    :mouse-size=\"0.15\"\n    :strength=\"0.35\"\n    :relaxation=\"0.9\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/interactive-grid-element.ts\";\n</script>\n\n<motion-interactive-grid\n  src=\"/path/to/image.jpg\"\n  grid={15}\n  mouse-size={0.15}\n  strength={0.35}\n  relaxation={0.9}\n  class=\"w-full h-[500px]\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/interactive-grid-element.js\"></script>\n\n<motion-interactive-grid\n  src=\"/path/to/image.jpg\"\n  grid=\"15\"\n  mouse-size=\"0.15\"\n  strength=\"0.35\"\n  relaxation=\"0.9\"\n  class=\"w-full h-[500px]\"\n/>"
+    }
+  ],
+  "props": [
+    {
+      "name": "src",
+      "type": "string",
+      "default": "",
+      "description": "The image source URL to apply the distortion effect to."
+    },
+    {
+      "name": "grid",
+      "type": "number",
+      "default": "15",
+      "description": "Grid resolution — number of cells per row/column. Higher values create finer distortion detail."
+    },
+    {
+      "name": "mouse-size",
+      "type": "number",
+      "default": "0.15",
+      "description": "Radius of mouse influence as a fraction of the grid size (0–1)."
+    },
+    {
+      "name": "strength",
+      "type": "number",
+      "default": "0.35",
+      "description": "Strength of the distortion effect. Higher values produce more dramatic warping."
+    },
+    {
+      "name": "relaxation",
+      "type": "number",
+      "default": "0.9",
+      "description": "How quickly cells return to rest after the cursor leaves (0–1). Values closer to 1 decay more slowly."
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+---
+
+<ComponentCard description="Physics-based grid simulation — move your cursor over the image to warp it. Each cell tracks mouse velocity and relaxes back to rest.">
+  <div class="relative aspect-video w-full overflow-hidden rounded-[2rem]">
+    <motion-interactive-grid
+      src="/images/demos/sample-9.jpg"
+      grid="15"
+      mouse-size="0.15"
+      strength="0.35"
+      relaxation="0.9"
+      class="absolute inset-0"
+    ></motion-interactive-grid>
+  </div>
+  <div slot="controls" class="mk-controls">
+    <mk-slider
+      label="Grid"
+      min="5"
+      max="40"
+      step="1"
+      value="15"
+      data-target="motion-interactive-grid"
+      data-attr="grid"
+    ></mk-slider>
+    <mk-slider
+      label="Mouse Size"
+      min="0.05"
+      max="0.5"
+      step="0.01"
+      value="0.15"
+      data-target="motion-interactive-grid"
+      data-attr="mouse-size"
+    ></mk-slider>
+    <mk-slider
+      label="Strength"
+      min="0.05"
+      max="1"
+      step="0.05"
+      value="0.35"
+      data-target="motion-interactive-grid"
+      data-attr="strength"
+    ></mk-slider>
+    <mk-slider
+      label="Relaxation"
+      min="0.5"
+      max="0.99"
+      step="0.01"
+      value="0.9"
+      data-target="motion-interactive-grid"
+      data-attr="relaxation"
+    ></mk-slider>
+  </div>
+</ComponentCard>
