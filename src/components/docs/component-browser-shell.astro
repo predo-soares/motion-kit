@@ -2,10 +2,12 @@
 import ComponentSidebarNav from "@/components/docs/component-sidebar-nav.astro";
 
 interface Props {
-  currentSlug: string;
+  currentSlug?: string;
+  currentHref?: string;
 }
 
-const { currentSlug } = Astro.props;
+const { currentSlug, currentHref } = Astro.props;
+const hasAside = Astro.slots.has("aside");
 ---
 
 <div data-component-browser-shell class="min-h-screen">
@@ -19,10 +21,10 @@ const { currentSlug } = Astro.props;
       <button
         type="button"
         data-sidebar-open
-        title="Browse Components"
+        title="Browse Docs"
         class="inline-flex select-none items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:border-slate-300 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300"
       >
-        Browse Components
+        Browse Docs
       </button>
     </div>
 
@@ -33,7 +35,12 @@ const { currentSlug } = Astro.props;
     </div>
 
     <div
-      class="mt-6 lg:mt-0 lg:grid lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-10"
+      class:list={[
+        "mt-6 lg:mt-0 lg:grid lg:gap-10",
+        hasAside
+          ? "lg:grid-cols-[280px_minmax(0,1fr)] xl:grid-cols-[280px_minmax(0,1fr)_18rem]"
+          : "lg:grid-cols-[280px_minmax(0,1fr)]",
+      ]}
     >
       <aside
         data-sidebar-panel
@@ -48,7 +55,7 @@ const { currentSlug } = Astro.props;
               Motion Kit
             </a>
             <p class="text-sm text-slate-500 max-w-[20ch] text-balance">
-              Browse light weight web components
+              Browse the docs and component catalog
             </p>
           </div>
           <button
@@ -71,7 +78,7 @@ const { currentSlug } = Astro.props;
             data-sidebar-scroll
             class="component-sidebar-scroll h-full overflow-y-auto pb-2"
           >
-            <ComponentSidebarNav currentSlug={currentSlug} />
+            <ComponentSidebarNav currentSlug={currentSlug} currentHref={currentHref} />
           </div>
           <div
             data-scroll-fade="bottom"
@@ -84,6 +91,16 @@ const { currentSlug } = Astro.props;
       <main class="min-w-0 pt-8 lg:pt-8">
         <slot />
       </main>
+
+      {
+        hasAside ? (
+          <aside class="hidden xl:flex xl:min-w-0 xl:flex-col xl:pt-8">
+            <div class="sticky top-8">
+              <slot name="aside" />
+            </div>
+          </aside>
+        ) : null
+      }
     </div>
   </div>
 </div>

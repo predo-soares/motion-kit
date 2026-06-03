@@ -3,12 +3,51 @@ import { componentGroups } from "@/lib/component-catalog";
 
 interface Props {
   currentSlug?: string;
+  currentHref?: string;
 }
 
-const { currentSlug } = Astro.props;
+const { currentSlug, currentHref } = Astro.props;
+
+const docsLinks = [
+  { href: "/components", label: "Components" },
+  { href: "/changelog", label: "Changelog" },
+];
 ---
 
 <nav aria-label="Components" class="flex flex-col gap-7 pb-4">
+  <section class="flex flex-col gap-1">
+    <header>
+      <p class="text-[12px] font-medium tracking-tight text-slate-400">Docs</p>
+    </header>
+    <ul class="flex flex-col">
+      {docsLinks.map((link) => {
+        const isActive = link.href === currentHref;
+
+        return (
+          <li>
+            <a
+              href={link.href}
+              class:list={[
+                "group inline-flex rounded-3xl p-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 focus-visible:ring-offset-2 focus-visible:ring-offset-white",
+              ]}
+            >
+              <span
+                class:list={[
+                  "inline-flex rounded-3xl px-3 py-1.5 text-[13px] font-medium tracking-tight transition-colors duration-150",
+                  isActive
+                    ? "bg-slate-900 text-white"
+                    : "text-slate-600 group-hover:bg-slate-100 group-hover:text-slate-900",
+                ]}
+              >
+                {link.label}
+              </span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </section>
+
   {
     componentGroups.map((group) => (
       <section class="flex flex-col gap-1">
