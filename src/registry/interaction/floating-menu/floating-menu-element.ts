@@ -26,27 +26,35 @@ type MenuGroup = {
 export class MotionFloatingMenu extends LitElement {
   static override styles = css`
     :host {
-      --menu-ink: #0f172a;
-      --menu-ink-soft: #334155;
-      --menu-muted: #64748b;
-      --menu-border: rgba(226, 232, 240, 0.9);
-      --menu-border-strong: rgba(203, 213, 225, 0.95);
-      --menu-surface: rgba(255, 255, 255, 0.92);
-      --menu-surface-strong: rgba(255, 255, 255, 0.98);
-      --menu-surface-muted: rgba(248, 250, 252, 0.94);
-      --menu-shadow:
-        0 28px 90px rgba(15, 23, 42, 0.08), 0 10px 30px rgba(15, 23, 42, 0.04);
+      --ink: #0f172a;
+      --ink-soft: #334155;
+      --ink-muted: #94a3b8;
+      --border: rgba(226, 232, 240, 0.9);
+      --border-strong: rgba(203, 213, 225, 0.95);
+      --surface: rgba(255, 255, 255, 0.94);
+      --surface-strong: rgba(255, 255, 255, 0.99);
+      --shadow:
+        0 28px 90px rgba(15, 23, 42, 0.08),
+        0 10px 30px rgba(15, 23, 42, 0.04);
+
       display: block;
       position: relative;
       width: 100%;
       min-height: 28rem;
       overflow: hidden;
-      color: var(--menu-ink);
+      color: var(--ink);
       border-radius: 2rem;
       background: #f8fafc;
+      font-family:
+        "Open Runde",
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        sans-serif;
     }
 
     * {
+      box-sizing: border-box;
       corner-shape: var(--corner-shape-default);
     }
 
@@ -69,12 +77,11 @@ export class MotionFloatingMenu extends LitElement {
       min-width: min(calc(100% - 1rem), 5rem);
       max-width: min(10rem, calc(100% - 1rem));
       transform: translateX(-50%);
-      border: 1px solid var(--menu-border);
+      border: 1px solid var(--border);
       border-radius: 1.75rem;
-      background: var(--menu-surface-strong);
-      color: var(--menu-ink);
-      box-shadow: var(--menu-shadow);
+      background: var(--surface-strong);
       backdrop-filter: blur(20px);
+      box-shadow: var(--shadow);
       overflow: visible;
     }
 
@@ -91,75 +98,56 @@ export class MotionFloatingMenu extends LitElement {
       box-sizing: border-box;
     }
 
+    /* ── Toggle ── */
     .toggleButton {
       position: relative;
-      display: flex;
-      height: 2.5rem;
+      display: inline-flex;
+      height: 2.25rem;
+      width: 2.25rem;
       align-items: center;
       justify-content: center;
-      gap: 0.125rem;
-      border: 1px solid transparent;
-      border-radius: 999px;
-      padding: 0 0.875rem 0 0.25rem;
-      background: transparent;
-      color: var(--menu-ink);
-      cursor: pointer;
-      transition:
-        background-color 0.25s ease,
-        border-color 0.25s ease,
-        color 0.25s ease,
-        transform 0.25s ease;
+      flex-shrink: 0;
       justify-self: start;
+      border: 1px solid var(--border);
+      border-radius: 0.625rem;
+      background: rgba(241, 245, 249, 0.92);
+      cursor: pointer;
+      padding: 0;
+      transition:
+        background 0.2s,
+        border-color 0.2s,
+        transform 0.2s;
     }
 
     .toggleButton:hover {
-      border-color: var(--menu-border);
-      background: rgba(248, 250, 252, 0.98);
+      background: #fff;
+      border-color: var(--border-strong);
       transform: translateY(-1px);
-    }
-
-    .toggleButton:hover .toggleLine,
-    .toggleButton:hover .toggleLabel {
-      color: var(--menu-ink);
-      background-color: var(--menu-ink);
     }
 
     .toggleIcon {
       position: relative;
       display: flex;
-      height: 2.5rem;
-      width: 2.5rem;
+      height: 2.25rem;
+      width: 2.25rem;
       align-items: center;
       justify-content: center;
-      border-radius: 999px;
-      background: rgba(241, 245, 249, 0.92);
-      box-shadow: inset 0 0 0 1px rgba(226, 232, 240, 0.9);
     }
 
     .toggleLine {
       position: absolute;
       height: 1px;
       width: 1rem;
-      background: var(--menu-ink);
-      transition:
-        background-color 0.25s ease,
-        color 0.25s ease;
+      background: var(--ink);
+      border-radius: 1px;
+      transform-origin: center;
     }
 
-    .toggleLabel {
-      margin-left: 0.25rem;
-      font-size: 0.8125rem;
-      font-weight: 500;
-      letter-spacing: -0.01em;
-      transition: color 0.25s ease;
-    }
-
+    /* ── Logo ── */
     .logoWrap {
       position: relative;
       justify-self: center;
-      backface-visibility: hidden;
       pointer-events: none;
-      align-self: center;
       min-width: 0;
       max-width: 100%;
     }
@@ -167,11 +155,13 @@ export class MotionFloatingMenu extends LitElement {
     .logo {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.5rem;
       max-width: 100%;
       white-space: nowrap;
+      color: var(--ink);
     }
 
+    /* ── Actions ── */
     .actions {
       display: flex;
       align-items: center;
@@ -180,138 +170,147 @@ export class MotionFloatingMenu extends LitElement {
       min-width: 0;
     }
 
-    .secondaryButton,
-    .primaryButton {
-      display: inline-flex;
-      height: 2.5rem;
+    .secondaryButton {
+      display: none;
+      height: 2.25rem;
       align-items: center;
       justify-content: center;
-      border: 1px solid var(--menu-border);
+      border: 1px solid var(--border);
       border-radius: 999px;
       padding: 0 1rem;
       font-size: 0.8125rem;
       font-weight: 500;
-      text-decoration: none;
       letter-spacing: -0.01em;
-      box-sizing: border-box;
-      transition:
-        background-color 0.25s ease,
-        border-color 0.25s ease,
-        color 0.25s ease,
-        transform 0.25s ease;
-    }
-
-    .secondaryButton {
-      display: none;
+      text-decoration: none;
+      color: var(--ink-soft);
       background: rgba(255, 255, 255, 0.78);
-      color: var(--menu-ink-soft);
+      white-space: nowrap;
+      transition:
+        background 0.2s,
+        border-color 0.2s,
+        color 0.2s,
+        transform 0.2s;
     }
 
     .secondaryButton:hover {
-      border-color: var(--menu-border-strong);
-      background: rgba(248, 250, 252, 1);
-      color: var(--menu-ink);
+      background: #fff;
+      border-color: var(--border-strong);
+      color: var(--ink);
       transform: translateY(-1px);
     }
 
     .primaryButton {
-      border-color: rgba(15, 23, 42, 0.9);
+      display: inline-flex;
+      height: 2.25rem;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(15, 23, 42, 0.9);
+      border-radius: 999px;
+      padding: 0 1rem;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      text-decoration: none;
       background: rgba(15, 23, 42, 0.96);
-      color: white;
+      color: #fff;
+      white-space: nowrap;
       box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+      transition:
+        background 0.2s,
+        border-color 0.2s,
+        transform 0.2s;
     }
 
     .primaryButton:hover {
-      background: rgba(30, 41, 59, 1);
-      border-color: rgba(30, 41, 59, 1);
+      background: #1e293b;
+      border-color: #1e293b;
       transform: translateY(-1px);
     }
 
+    /* ── Menu panel ── */
     .menuWrapper {
       height: 0;
       width: 100%;
       overflow: hidden;
       opacity: 0;
-      border-top: 1px solid var(--menu-border);
+      border-top: 1px solid var(--border);
       border-bottom-left-radius: 1.75rem;
       border-bottom-right-radius: 1.75rem;
-      box-sizing: border-box;
-      background: var(--menu-surface);
+      background: rgba(255, 255, 255, 0.92);
     }
 
     .grid {
       display: grid;
-      max-height: 65vh;
       grid-template-columns: 1fr;
-      gap: 0.875rem;
-      overflow-y: auto;
-      overscroll-behavior: contain;
-      padding: 1rem;
-      box-sizing: border-box;
+      padding: 1.25rem 1.25rem 1.75rem;
     }
 
+    /* ── Group ── */
     .group {
       display: flex;
       flex-direction: column;
-      gap: 0.875rem;
-      min-height: 100%;
-      border: 1px solid transparent;
-      border-radius: 1.5rem;
-      padding: 1rem;
-      background: rgba(255, 255, 255, 0.64);
-      transition:
-        background-color 0.25s ease,
-        border-color 0.25s ease,
-        transform 0.25s ease;
+      gap: 0.625rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
     }
 
-    .group:hover {
-      border-color: var(--menu-border);
-      background: rgba(255, 255, 255, 0.96);
-      transform: translateY(-1px);
+    .group:first-child {
+      padding-top: 0;
     }
 
-    .groupMuted {
-      border-color: var(--menu-border);
-      background: var(--menu-surface-muted);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    .group:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .groupHeader {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .groupNumber {
+      font-size: 0.5625rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: #cbd5e1;
     }
 
     .groupTitle {
       margin: 0;
-      font-size: 0.75rem;
+      font-size: 0.625rem;
       font-weight: 500;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(100, 116, 139, 0.88);
+      color: var(--ink-muted);
     }
 
+    /* ── Links ── */
     .linkList {
-      margin-top: 0.25rem;
       display: flex;
       flex-direction: column;
-      gap: 0.875rem;
+      gap: 0;
     }
 
     .link {
       position: relative;
-      display: block;
+      display: flex;
+      align-items: center;
       width: 100%;
-      border-radius: 1rem;
-      color: rgba(71, 85, 105, 1);
+      padding: 0.25rem 0;
+      color: #475569;
       text-decoration: none;
       font-size: 1.375rem;
       font-weight: 500;
       letter-spacing: -0.03em;
-      padding: 0.25rem 0;
+      line-height: 1.15;
       transition:
-        color 0.25s ease,
-        opacity 0.25s ease,
-        transform 0.25s ease;
+        color 0.2s,
+        transform 0.2s;
     }
 
     .link:hover {
-      color: var(--menu-ink);
+      color: var(--ink);
       transform: translateX(3px);
     }
 
@@ -321,6 +320,8 @@ export class MotionFloatingMenu extends LitElement {
       display: block;
       line-height: 1.1;
       overflow: hidden;
+      flex: 1;
+      min-width: 0;
     }
 
     .linkText {
@@ -328,29 +329,27 @@ export class MotionFloatingMenu extends LitElement {
       white-space: nowrap;
     }
 
-    .underline {
-      position: absolute;
-      left: 0;
-      bottom: -0.05rem;
-      height: 1px;
-      width: 100%;
-      transform: scaleX(0);
-      transform-origin: right;
-      background: rgba(15, 23, 42, 0.8);
-      transition: transform 0.3s ease;
+    .linkArrow {
+      flex-shrink: 0;
+      padding-left: 0.5rem;
+      font-size: 0.625rem;
+      letter-spacing: 0.06em;
+      color: #cbd5e1;
+      opacity: 0;
+      transform: translateX(-4px);
+      transition:
+        opacity 0.2s,
+        transform 0.2s,
+        color 0.2s;
     }
 
-    .link:hover .underline {
-      transform: scaleX(1);
-      transform-origin: left;
+    .link:hover .linkArrow {
+      opacity: 1;
+      transform: translateX(0);
+      color: #94a3b8;
     }
 
-    .divider {
-      margin: 0;
-      border: 0;
-      border-top: 1px solid rgba(226, 232, 240, 0.9);
-    }
-
+    /* ── Responsive ── */
     @media (min-width: 768px) {
       .root {
         top: 1rem;
@@ -367,11 +366,29 @@ export class MotionFloatingMenu extends LitElement {
       }
 
       .grid {
-        max-height: none;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 1rem;
-        padding: 1.125rem;
-        overflow: visible;
+        padding: 1.5rem 1.5rem 2rem;
+      }
+
+      .group {
+        padding: 0 1.5rem 0 0;
+        border-bottom: none;
+        border-right: 1px solid var(--border);
+      }
+
+      .group:first-child {
+        padding-left: 0;
+        padding-top: 0;
+      }
+
+      .group:last-child {
+        border-right: none;
+        padding-right: 0;
+        padding-left: 1.5rem;
+      }
+
+      .group:not(:first-child):not(:last-child) {
+        padding-left: 1.5rem;
       }
     }
 
@@ -539,9 +556,6 @@ export class MotionFloatingMenu extends LitElement {
     const horizontalInset = isMobile ? 16 : 32;
     const headerMinWidth = Math.ceil(header.scrollWidth + horizontalInset);
 
-    // GSAP resolves percentage width values against the parent node, which is a
-    // ShadowRoot here. Use explicit pixel widths so setup never asks
-    // `getComputedStyle()` for a non-Element parent.
     const maxWidthInitial = `${Math.max(
       Math.round(hostWidth * maxWidthInitialRatio),
       headerMinWidth,
@@ -669,7 +683,6 @@ export class MotionFloatingMenu extends LitElement {
               <span data-slot="line-1" class="toggleLine"></span>
               <span data-slot="line-2" class="toggleLine"></span>
             </div>
-            <span class="toggleLabel">Menu</span>
           </button>
 
           <div class="logoWrap">
@@ -705,33 +718,25 @@ export class MotionFloatingMenu extends LitElement {
         <div data-slot="menu-wrapper" class="menuWrapper">
           <div data-slot="grid" class="grid">
             ${groups.map(
-              (group) => html`
-                <div
-                  data-slot="group"
-                  class=${group.variant === "muted"
-                    ? "group groupMuted"
-                    : "group"}
-                >
-                  <h3 data-slot="group-title" class="groupTitle">
-                    ${group.title}
-                  </h3>
+              (group, i) => html`
+                <div data-slot="group" class="group">
+                  <div class="groupHeader">
+                    <span class="groupNumber"
+                      >${String(i + 1).padStart(2, "0")}</span
+                    >
+                    <h3 class="groupTitle">${group.title}</h3>
+                  </div>
                   <div class="linkList">
                     ${group.links.map(
-                      (link, index) => html`
+                      (link) => html`
                         <a href=${link.href} data-slot="link" class="link">
                           <span class="linkTextOuter">
                             <span data-slot="link-text" class="linkText">
                               ${link.label}
                             </span>
                           </span>
-                          <span
-                            data-slot="link-underline"
-                            class="underline"
-                          ></span>
+                          <span class="linkArrow">↗</span>
                         </a>
-                        ${index < group.links.length - 1
-                          ? html`<hr data-slot="divider" class="divider" />`
-                          : null}
                       `,
                     )}
                   </div>
