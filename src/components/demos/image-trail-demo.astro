@@ -3,13 +3,10 @@ import ComponentCard from "@/components/ui/component-card.astro";
 ---
 
 <ComponentCard description="Move the pointer through the frame to emit an image trail with pooled GSAP animations.">
-  <div class="relative h-[420px] w-full overflow-hidden rounded-[2rem] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.16),transparent_42%),linear-gradient(135deg,#0f172a,#020617)]">
+  <div class="relative h-[420px] w-full overflow-hidden rounded-[2rem]">
     <motion-image-trail
-      images='["https://picsum.photos/seed/it1/340/340","https://picsum.photos/seed/it2/340/340","https://picsum.photos/seed/it3/340/340","https://picsum.photos/seed/it4/340/340","https://picsum.photos/seed/it5/340/340"]'
+      images='["https://picsum.photos/seed/it1/120/120","https://picsum.photos/seed/it2/120/120","https://picsum.photos/seed/it3/120/120","https://picsum.photos/seed/it4/120/120","https://picsum.photos/seed/it5/120/120"]'
       class="absolute inset-0"
     ></motion-image-trail>
-    <div class="pointer-events-none absolute inset-x-0 top-10 text-center text-xs italic tracking-[0.18em] text-slate-300/80">
-      MOVE THROUGH THE LIGHT
-    </div>
   </div>
 </ComponentCard>

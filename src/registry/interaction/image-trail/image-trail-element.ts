@@ -33,8 +33,8 @@ const DEFAULT_CONFIG: Required<TrailConfig> = {
   maxRotationFactor: 3,
   baseRotation: 30,
   speedSmoothingFactor: 0.25,
-  minImageSize: 260,
-  maxImageSize: 340,
+  minImageSize: 80,
+  maxImageSize: 120,
   staggerOut: 40,
 }
 
