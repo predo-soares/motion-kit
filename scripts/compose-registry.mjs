@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, "..");
-const blocksDir = path.join(repoRoot, "src/registry/new-york/blocks");
+const blocksDir = path.join(repoRoot, "src/registry");
 const rootRegistryPath = path.join(repoRoot, "registry.json");
 const publicRegistryPath = path.join(repoRoot, "public/r/registry.json");
 
@@ -30,7 +30,8 @@ async function readComponentManifest(blockName) {
 
   const manifest = JSON.parse(raw);
 
-  if (manifest.name !== blockName) {
+  const leafName = path.basename(blockName);
+  if (manifest.name !== leafName) {
     throw new Error(
       `Component manifest name mismatch for "${blockName}": found "${manifest.name}".`,
     );
@@ -39,12 +40,23 @@ async function readComponentManifest(blockName) {
   return manifest;
 }
 
+async function collectBlockNames() {
+  const groups = (await readdir(blocksDir, { withFileTypes: true }))
+    .filter((e) => e.isDirectory())
+    .map((e) => e.name);
+
+  const names = [];
+  for (const group of groups) {
+    const entries = await readdir(path.join(blocksDir, group), { withFileTypes: true });
+    for (const entry of entries) {
+      if (entry.isDirectory()) names.push(path.join(group, entry.name));
+    }
+  }
+  return names.sort((a, b) => a.localeCompare(b));
+}
+
 async function main() {
-  const dirEntries = await readdir(blocksDir, { withFileTypes: true });
-  const blockNames = dirEntries
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name)
-    .sort((left, right) => left.localeCompare(right));
+  const blockNames = await collectBlockNames();
 
   const manifests = (await Promise.all(blockNames.map(readComponentManifest))).filter(
     Boolean,
