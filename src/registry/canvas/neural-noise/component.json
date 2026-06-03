@@ -1,0 +1,45 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "neural-noise",
+  "type": "registry:component",
+  "title": "Neural Noise",
+  "description": "Animated CPPN-based neural noise rendered in WebGL. Produces continuously evolving organic color patterns driven by a compositional pattern-producing network. Lit Custom Element.",
+  "dependencies": ["lit", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/canvas/neural-noise/neural-noise-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/neural-noise-element.ts"
+    }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/neural-noise-element.ts\";\n---\n\n<motion-neural-noise\n  speed={1}\n  class=\"w-full h-[500px]\"\n/>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/neural-noise-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-neural-noise\n      speed={1}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/neural-noise-element.ts\";\n</script>\n\n<template>\n  <motion-neural-noise\n    :speed=\"1\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/neural-noise-element.ts\";\n</script>\n\n<motion-neural-noise\n  speed={1}\n  class=\"w-full h-[500px]\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/neural-noise-element.js\"></script>\n\n<motion-neural-noise\n  speed=\"1\"\n  class=\"w-full h-[500px]\"\n/>"
+    }
+  ],
+  "props": [
+    {
+      "name": "speed",
+      "type": "number",
+      "default": "1",
+      "description": "Animation speed multiplier. Higher values make the pattern evolve faster."
+    }
+  ]
+}

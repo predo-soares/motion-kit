@@ -1,0 +1,23 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+---
+
+<ComponentCard description="Animated CPPN-based neural noise — continuously evolving organic color patterns driven by a compositional pattern-producing network.">
+  <div class="relative aspect-video w-full overflow-hidden rounded-[2rem]">
+    <motion-neural-noise
+      speed="1"
+      class="absolute inset-0"
+    ></motion-neural-noise>
+  </div>
+  <div slot="controls" class="mk-controls">
+    <mk-slider
+      label="Speed"
+      min="0"
+      max="4"
+      step="0.05"
+      value="1"
+      data-target="motion-neural-noise"
+      data-attr="speed"
+    ></mk-slider>
+  </div>
+</ComponentCard>
