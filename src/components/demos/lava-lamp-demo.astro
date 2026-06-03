@@ -1,0 +1,67 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+---
+
+<ComponentCard description="Raymarched metaball blobs with smooth-min SDF blending and Fresnel edge lighting — fluid, organic lava lamp motion.">
+  <div class="relative aspect-video w-full overflow-hidden rounded-[2rem] bg-[#0e0f11]">
+    <motion-lava-lamp
+      color="#17181A"
+      fresnel-color="#6c87bc"
+      speed="1.0"
+      fresnel-power="3.0"
+      radius="1"
+      smoothness="0.1"
+      class="absolute inset-0"
+    ></motion-lava-lamp>
+  </div>
+  <div slot="controls" class="mk-controls">
+    <mk-slider
+      label="Speed"
+      min="0"
+      max="3"
+      step="0.05"
+      value="1.0"
+      data-target="motion-lava-lamp"
+      data-attr="speed"
+    ></mk-slider>
+    <mk-slider
+      label="Radius"
+      min="0.2"
+      max="3"
+      step="0.05"
+      value="1"
+      data-target="motion-lava-lamp"
+      data-attr="radius"
+    ></mk-slider>
+    <mk-slider
+      label="Smoothness"
+      min="0.01"
+      max="0.5"
+      step="0.01"
+      value="0.1"
+      data-target="motion-lava-lamp"
+      data-attr="smoothness"
+    ></mk-slider>
+    <mk-slider
+      label="Fresnel Power"
+      min="0.5"
+      max="10"
+      step="0.1"
+      value="3.0"
+      data-target="motion-lava-lamp"
+      data-attr="fresnel-power"
+    ></mk-slider>
+    <mk-color
+      label="Color"
+      value="#17181A"
+      data-target="motion-lava-lamp"
+      data-attr="color"
+    ></mk-color>
+    <mk-color
+      label="Fresnel Color"
+      value="#6c87bc"
+      data-target="motion-lava-lamp"
+      data-attr="fresnel-color"
+    ></mk-color>
+  </div>
+</ComponentCard>

@@ -1,0 +1,14 @@
+{
+  "name": "lava-lamp",
+  "type": "registry:component",
+  "title": "Lava Lamp",
+  "description": "Raymarched metaball blobs rendered with a smooth-min SDF and Fresnel edge lighting. Creates a fluid, organic lava lamp animation. Lit Custom Element.",
+  "dependencies": ["lit", "ogl"],
+  "files": [
+    {
+      "path": "src/registry/canvas/lava-lamp/lava-lamp-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/lava-lamp-element.ts"
+    }
+  ]
+}
