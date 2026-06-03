@@ -3,7 +3,7 @@ import ComponentCard from "@/components/ui/component-card.astro";
 ---
 
 <ComponentCard description="Procedural crepuscular rays with color, spread, distortion, and pulsation controls.">
-  <div class="relative h-[420px] w-full overflow-hidden rounded-[2rem] bg-[#17181A]">
+  <div class="relative aspect-video w-full overflow-hidden rounded-[2rem] bg-[#17181A]">
     <motion-god-rays
       color="#fff4dd"
       background-color="#0f1115"
@@ -16,7 +16,7 @@ import ComponentCard from "@/components/ui/component-card.astro";
       ray-length="1.15"
       fade-distance="1.2"
       saturation="1"
-      distortion="0.18"
+      distortion="0"
       intensity="1.15"
       class="absolute inset-0"
     ></motion-god-rays>
@@ -66,7 +66,7 @@ import ComponentCard from "@/components/ui/component-card.astro";
       min="0"
       max="1"
       step="0.02"
-      value="0.18"
+      value="0"
       data-target="motion-god-rays"
       data-attr="distortion"
     ></mk-slider>

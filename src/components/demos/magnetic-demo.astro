@@ -2,21 +2,21 @@
 import ComponentCard from "@/components/ui/component-card.astro";
 ---
 
-<ComponentCard description="Native custom element with GSAP-powered magnetic motion. No Lit dependency.">
+<ComponentCard description="Framework-agnostic Custom Element with GSAP-powered spring physics.">
   <div class="flex items-center justify-center gap-8 py-8">
-    <motion-magnetic-native duration="1">
+    <motion-magnetic duration="1">
       <button
         class="px-6 py-3 rounded-full bg-slate-900 text-white text-sm font-medium cursor-pointer select-none"
       >
         Hover me
       </button>
-    </motion-magnetic-native>
-    <motion-magnetic-native duration="1" strength="0.35">
+    </motion-magnetic>
+    <motion-magnetic duration="1">
       <div
         class="w-16 h-16 rounded-2xl bg-orange-500 flex items-center justify-center text-white text-2xl cursor-pointer select-none"
       >
         ✦
       </div>
-    </motion-magnetic-native>
+    </motion-magnetic>
   </div>
 </ComponentCard>
