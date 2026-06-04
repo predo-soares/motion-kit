@@ -20,4 +20,90 @@ import ComponentCard from "@/components/ui/component-card.astro";
       class="text-2xl tracking-wide text-violet-600 cursor-default select-none"
     ></motion-weight-wave>
   </div>
+  <div slot="controls" class="mk-controls">
+    <mk-text-input
+      label="Text 1"
+      value="Weight Wave"
+      data-target="motion-weight-wave"
+      data-index="0"
+      data-attr="text"
+    ></mk-text-input>
+    <mk-slider
+      label="Base Weight 1"
+      min="100"
+      max="900"
+      step="50"
+      value="200"
+      data-target="motion-weight-wave"
+      data-index="0"
+      data-attr="base-weight"
+    ></mk-slider>
+    <mk-slider
+      label="Hover Weight 1"
+      min="100"
+      max="900"
+      step="50"
+      value="900"
+      data-target="motion-weight-wave"
+      data-index="0"
+      data-attr="hover-weight"
+    ></mk-slider>
+    <mk-slider
+      label="Influence Radius 1"
+      min="1"
+      max="10"
+      step="1"
+      value="3"
+      data-target="motion-weight-wave"
+      data-index="0"
+      data-attr="influence-radius"
+    ></mk-slider>
+    <mk-text-input
+      label="Text 2"
+      value="Move your cursor here"
+      data-target="motion-weight-wave"
+      data-index="1"
+      data-attr="text"
+    ></mk-text-input>
+    <mk-slider
+      label="Base Weight 2"
+      min="100"
+      max="900"
+      step="50"
+      value="300"
+      data-target="motion-weight-wave"
+      data-index="1"
+      data-attr="base-weight"
+    ></mk-slider>
+    <mk-slider
+      label="Hover Weight 2"
+      min="100"
+      max="900"
+      step="50"
+      value="800"
+      data-target="motion-weight-wave"
+      data-index="1"
+      data-attr="hover-weight"
+    ></mk-slider>
+    <mk-slider
+      label="Influence Radius 2"
+      min="1"
+      max="10"
+      step="1"
+      value="4"
+      data-target="motion-weight-wave"
+      data-index="1"
+      data-attr="influence-radius"
+    ></mk-slider>
+    <mk-slider
+      label="Falloff Power 2"
+      min="0.5"
+      max="5"
+      step="0.1"
+      value="2"
+      data-target="motion-weight-wave"
+      data-index="1"
+      data-attr="falloff-power"
+    ></mk-slider>
+  </div>
 </ComponentCard>

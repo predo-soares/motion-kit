@@ -4,19 +4,38 @@ import ComponentCard from "@/components/ui/component-card.astro";
 
 <ComponentCard description="Framework-agnostic Custom Element with GSAP-powered spring physics.">
   <div class="flex items-center justify-center gap-8 py-8">
-    <motion-magnetic duration="1">
+    <motion-magnetic id="magnetic-demo-1" duration="1">
       <button
         class="px-6 py-3 rounded-full bg-slate-900 text-white text-sm font-medium cursor-pointer select-none"
       >
         Hover me
       </button>
     </motion-magnetic>
-    <motion-magnetic duration="1">
+    <motion-magnetic id="magnetic-demo-2" duration="1">
       <div
         class="w-16 h-16 rounded-2xl bg-orange-500 flex items-center justify-center text-white text-2xl cursor-pointer select-none"
       >
         ✦
       </div>
     </motion-magnetic>
+  </div>
+
+  <div slot="controls" class="mk-controls">
+    <mk-slider
+      label="Duration"
+      min="0.1"
+      max="3"
+      step="0.1"
+      value="1"
+      data-target="#magnetic-demo-1, #magnetic-demo-2"
+      data-attr="duration"></mk-slider>
+    <mk-select label="Ease" data-target="#magnetic-demo-1, #magnetic-demo-2" data-attr="ease">
+      <option value="power1.out">power1.out</option>
+      <option value="power2.out">power2.out</option>
+      <option value="power3.out">power3.out</option>
+      <option value="elastic.out(1, 0.3)" selected>elastic.out(1, 0.3)</option>
+      <option value="back.out(1.7)">back.out(1.7)</option>
+      <option value="bounce.out">bounce.out</option>
+    </mk-select>
   </div>
 </ComponentCard>
