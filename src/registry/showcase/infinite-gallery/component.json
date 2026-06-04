@@ -3,7 +3,7 @@
   "name": "infinite-gallery",
   "type": "registry:component",
   "title": "Infinite Gallery",
-  "description": "A 3D gallery that endlessly scrolls through textured planes with cloth-like distortion and scroll-driven transitions. Lit Custom Element.",
+  "description": "A 3D gallery that endlessly scrolls through textured planes with cloth-like distortion and scroll-driven transitions.",
   "dependencies": ["lit", "ogl"],
   "files": [
     {

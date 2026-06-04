@@ -3,7 +3,7 @@
   "name": "plasma-grid",
   "type": "registry:component",
   "title": "Plasma Grid",
-  "description": "Animated plasma grid effect rendered in WebGL. Creates a checkerboard grid pattern with flowing plasma noise gradients. Colors are customizable via props. Lit Custom Element.",
+  "description": "Animated plasma grid effect rendered in WebGL. Creates a checkerboard grid pattern with flowing plasma noise gradients. Colors are customizable via props.",
   "dependencies": ["lit", "ogl"],
   "files": [
     {

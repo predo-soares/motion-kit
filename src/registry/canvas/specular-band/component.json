@@ -3,7 +3,7 @@
   "name": "specular-band",
   "type": "registry:component",
   "title": "Specular Band",
-  "description": "Animated specular band effect with lens distortion and hue-shifted color palettes. Creates flowing, organic light bands with adaptive blending for different background brightness levels. Lit Custom Element.",
+  "description": "Animated specular band effect with lens distortion and hue-shifted color palettes. Creates flowing, organic light bands with adaptive blending for different background brightness levels.",
   "dependencies": ["lit", "ogl"],
   "files": [
     {

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "velocity-card",
+  "type": "registry:component",
+  "title": "Velocity Card",
+  "description": "A wrapper that reacts to cursor velocity with rotation and stretch, making interactions feel physical.",
+  "dependencies": ["gsap"],
+  "files": [
+    {
+      "path": "src/registry/interaction/velocity-card/velocity-card-element.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/velocity-card-element.ts"
+    }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/velocity-card-element.ts\";\n---\n\n<motion-velocity-card rotation-factor=\"3\" stretch-factor=\"0.04\" decay=\"250\">\n  <div class=\"card\">Move your cursor fast</div>\n</motion-velocity-card>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/velocity-card-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-velocity-card rotation-factor=\"3\" stretch-factor=\"0.04\" decay=\"250\">\n      <div className=\"card\">Move your cursor fast</div>\n    </motion-velocity-card>\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/velocity-card-element.ts\";\n</script>\n\n<template>\n  <motion-velocity-card rotation-factor=\"3\" stretch-factor=\"0.04\" decay=\"250\">\n    <div class=\"card\">Move your cursor fast</div>\n  </motion-velocity-card>\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/velocity-card-element.ts\";\n</script>\n\n<motion-velocity-card rotation-factor=\"3\" stretch-factor=\"0.04\" decay=\"250\">\n  <div class=\"card\">Move your cursor fast</div>\n</motion-velocity-card>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/velocity-card-element.js\"></script>\n\n<motion-velocity-card rotation-factor=\"3\" stretch-factor=\"0.04\" decay=\"250\">\n  <div class=\"card\">Move your cursor fast</div>\n</motion-velocity-card>"
+    }
+  ],
+  "props": [
+    {
+      "name": "duration",
+      "type": "number",
+      "default": "0.25",
+      "description": "quickTo tween duration in seconds for velocity tracking."
+    },
+    {
+      "name": "rotation-factor",
+      "type": "number",
+      "default": "3",
+      "description": "Degrees of rotation per px/ms of horizontal cursor velocity."
+    },
+    {
+      "name": "stretch-factor",
+      "type": "number",
+      "default": "0.04",
+      "description": "scaleX multiplier per px/ms of cursor speed."
+    },
+    {
+      "name": "decay",
+      "type": "number",
+      "default": "250",
+      "description": "Snap-back transition duration in milliseconds."
+    }
+  ]
+}

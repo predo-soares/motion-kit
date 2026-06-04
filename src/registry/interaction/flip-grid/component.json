@@ -61,7 +61,7 @@
       "name": "ease",
       "type": "string",
       "default": "\"power2.inOut\"",
-      "description": "GSAP easing function for animations."
+      "description": "easing function for animations."
     },
     {
       "name": "stagger",

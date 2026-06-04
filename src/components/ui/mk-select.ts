@@ -50,6 +50,7 @@ export class MkSelect extends LitElement {
 
   @property() label = "";
   @property() value = "";
+  @property() options = "";
 
   @state() private _options: { value: string; label: string }[] = [];
 
@@ -59,16 +60,39 @@ export class MkSelect extends LitElement {
   }
 
   private _readOptions() {
-    const opts = Array.from(
+    // First, try to read from child <option> elements
+    const childOpts = Array.from(
       this.querySelectorAll("option"),
     ) as HTMLOptionElement[];
-    this._options = opts.map((o) => ({
-      value: o.value,
-      label: o.textContent ?? o.value,
-    }));
-    const selected = opts.find((o) => o.selected || o.hasAttribute("selected"));
-    if (selected) this.value = selected.value;
-    else if (opts.length) this.value = opts[0]!.value;
+
+    if (childOpts.length > 0) {
+      this._options = childOpts.map((o) => ({
+        value: o.value,
+        label: o.textContent ?? o.value,
+      }));
+      const selected = childOpts.find((o) => o.selected || o.hasAttribute("selected"));
+      if (selected) this.value = selected.value;
+      else if (childOpts.length) this.value = childOpts[0]!.value;
+    } else if (this.options) {
+      // Parse from options attribute (JSON array)
+      try {
+        const parsed = JSON.parse(this.options);
+        if (Array.isArray(parsed)) {
+          this._options = parsed.map((opt) => {
+            if (typeof opt === "string") {
+              return { value: opt, label: opt };
+            }
+            return { value: String(opt.value ?? ""), label: String(opt.label ?? opt.value ?? "") };
+          });
+          if (this._options.length && !this.value) {
+            this.value = this._options[0]!.value;
+          }
+        }
+      } catch (e) {
+        console.error("Failed to parse options attribute:", e);
+        this._options = [];
+      }
+    }
   }
 
   private _onChange(e: Event) {

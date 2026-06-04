@@ -22,7 +22,7 @@ const next = index < componentCatalog.length - 1 ? componentCatalog[index + 1] :
       aria-label="Component navigation"
     >
       <a
-        href={prev ? `/components/${prev.slug}` : undefined}
+        href={prev ? `/docs/components/${prev.slug}` : undefined}
         aria-label={prev ? `Previous: ${prev.title}` : "No previous component"}
         title={prev ? prev.title : "No previous component"}
         aria-disabled={!prev}
@@ -46,7 +46,7 @@ const next = index < componentCatalog.length - 1 ? componentCatalog[index + 1] :
         </span>
       </a>
       <a
-        href={next ? `/components/${next.slug}` : undefined}
+        href={next ? `/docs/components/${next.slug}` : undefined}
         aria-label={next ? `Next: ${next.title}` : "No next component"}
         title={next ? next.title : "No next component"}
         aria-disabled={!next}
@@ -73,7 +73,7 @@ const next = index < componentCatalog.length - 1 ? componentCatalog[index + 1] :
   ) : (
     <nav class="flex items-center gap-1" aria-label="Component navigation">
       <a
-        href={prev ? `/components/${prev.slug}` : undefined}
+        href={prev ? `/docs/components/${prev.slug}` : undefined}
         aria-label={prev ? `Previous: ${prev.title}` : "No previous component"}
         title={prev ? prev.title : "No previous component"}
         aria-disabled={!prev}
@@ -92,7 +92,7 @@ const next = index < componentCatalog.length - 1 ? componentCatalog[index + 1] :
         />
       </a>
       <a
-        href={next ? `/components/${next.slug}` : undefined}
+        href={next ? `/docs/components/${next.slug}` : undefined}
         aria-label={next ? `Next: ${next.title}` : "No next component"}
         title={next ? next.title : "No next component"}
         aria-disabled={!next}

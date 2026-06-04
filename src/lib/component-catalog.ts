@@ -66,6 +66,7 @@ const seeds: ComponentSeed[] = [
   { slug: "image-trail", group: "Interaction" },
   { slug: "magnetic", group: "Interaction" },
   { slug: "marquee", group: "Interaction" },
+  { slug: "velocity-card", group: "Interaction" },
   { slug: "split-hover", group: "Text" },
   { slug: "split-reveal", group: "Text" },
   { slug: "stacking-words", group: "Text" },

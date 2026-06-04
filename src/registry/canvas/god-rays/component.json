@@ -3,7 +3,7 @@
   "name": "god-rays",
   "type": "registry:component",
   "title": "God Rays",
-  "description": "High-performance procedural god rays effect with customizable colors, pulsating intensity, and distortion. Lit Custom Element.",
+  "description": "High-performance procedural god rays effect with customizable colors, pulsating intensity, and distortion.",
   "dependencies": ["lit", "ogl"],
   "files": [
     {

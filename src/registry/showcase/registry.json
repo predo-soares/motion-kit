@@ -1,0 +1,431 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "items": [
+    {
+      "name": "infinite-gallery",
+      "type": "registry:component",
+      "title": "Infinite Gallery",
+      "description": "A 3D gallery that endlessly scrolls through textured planes with cloth-like distortion and scroll-driven transitions.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/infinite-gallery-element.ts",
+          "path": "infinite-gallery/infinite-gallery-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/infinite-gallery-element.ts\";\n---\n\n<motion-infinite-gallery\n  images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n  speed=\"1\"\n  visible-count=\"8\"\n  class=\"h-[600px] w-full\"\n></motion-infinite-gallery>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/infinite-gallery-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-infinite-gallery\n      images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n      speed=\"1\"\n      visible-count=\"8\"\n      class=\"h-[600px] w-full\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"`@/components/motion-kit/infinite-gallery-element.ts`\";\n</script>\n\n<template>\n  <motion-infinite-gallery\n    :images='JSON.stringify([{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}])'\n    speed=\"1\"\n    visible-count=\"8\"\n    class=\"h-[600px] w-full\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/infinite-gallery-element.ts\";\n</script>\n\n<motion-infinite-gallery\n  images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n  speed=\"1\"\n  visible-count=\"8\"\n  class=\"h-[600px] w-full\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/infinite-gallery-element.js\"></script>\n\n<motion-infinite-gallery\n  images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n  speed=\"1\"\n  visible-count=\"8\"\n  class=\"h-[600px] w-full\"\n></motion-infinite-gallery>"
+        }
+      ],
+      "props": [
+        {
+          "name": "images",
+          "type": "string",
+          "default": "[]",
+          "description": "JSON-serialized array of image URLs or objects with src and optional alt properties."
+        },
+        {
+          "name": "speed",
+          "type": "number",
+          "default": "1",
+          "description": "Scroll speed multiplier."
+        },
+        {
+          "name": "visible-count",
+          "type": "number",
+          "default": "8",
+          "description": "Number of image planes visible at once."
+        },
+        {
+          "name": "fade-settings",
+          "type": "object",
+          "default": "{fadeIn:{start:0.01,end:0.25},fadeOut:{start:0.43,end:0.46}}",
+          "description": "Fade transition zones (normalized 0-1)."
+        },
+        {
+          "name": "blur-settings",
+          "type": "object",
+          "default": "{blurIn:{start:0,end:0.2},blurOut:{start:0.43,end:0.46},maxBlur:8}",
+          "description": "Blur transition zones and maximum blur amount."
+        }
+      ]
+    },
+    {
+      "name": "infinite-physics-gallery",
+      "type": "registry:component",
+      "title": "Infinite Physics Gallery",
+      "description": "Infinite 2-D draggable grid with physics-based momentum, edge scrolling, and support for mixed image/video cells. Framework-agnostic Custom Element.",
+      "dependencies": [
+        "lit",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/infinite-physics-gallery-element.ts",
+          "path": "infinite-physics-gallery/infinite-physics-gallery-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/infinite-physics-gallery-element.ts\";\n---\n\n<motion-infinite-physics-gallery\n  items='[{\"type\":\"image\",\"src\":\"/1.jpg\"},{\"type\":\"image\",\"src\":\"/2.jpg\"}]'\n  cell-width=\"320\"\n  cell-height=\"400\"\n  class=\"h-[480px] w-full rounded-2xl overflow-hidden\"\n></motion-infinite-physics-gallery>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/infinite-physics-gallery-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-infinite-physics-gallery\n      items='[{\"type\":\"image\",\"src\":\"/1.jpg\"},{\"type\":\"image\",\"src\":\"/2.jpg\"}]'\n      cell-width=\"320\"\n      cell-height=\"400\"\n      class=\"h-[480px] w-full rounded-2xl overflow-hidden\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/infinite-physics-gallery-element.ts\";\n</script>\n\n<template>\n  <motion-infinite-physics-gallery\n    :items='JSON.stringify([{\"type\":\"image\",\"src\":\"/1.jpg\"},{\"type\":\"image\",\"src\":\"/2.jpg\"}])'\n    cell-width=\"320\"\n    cell-height=\"400\"\n    class=\"h-[480px] w-full rounded-2xl overflow-hidden\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/infinite-physics-gallery-element.ts\";\n</script>\n\n<motion-infinite-physics-gallery\n  items='[{\"type\":\"image\",\"src\":\"/1.jpg\"},{\"type\":\"image\",\"src\":\"/2.jpg\"}]'\n  cell-width=\"320\"\n  cell-height=\"400\"\n  class=\"h-[480px] w-full rounded-2xl overflow-hidden\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/infinite-physics-gallery-element.js\"></script>\n\n<motion-infinite-physics-gallery\n  items='[{\"type\":\"image\",\"src\":\"/1.jpg\"},{\"type\":\"image\",\"src\":\"/2.jpg\"}]'\n  cell-width=\"320\"\n  cell-height=\"400\"\n  class=\"h-[480px] w-full rounded-2xl overflow-hidden\"\n></motion-infinite-physics-gallery>"
+        }
+      ],
+      "props": [
+        {
+          "name": "items",
+          "type": "string",
+          "default": "\"[]\"",
+          "description": "JSON array of media items: [{type:\"image|video\",src:\"...\",alt:\"...\"}]."
+        },
+        {
+          "name": "cell-width",
+          "type": "number",
+          "default": "320",
+          "description": "Cell width in pixels."
+        },
+        {
+          "name": "cell-height",
+          "type": "number",
+          "default": "400",
+          "description": "Cell height in pixels."
+        },
+        {
+          "name": "gap",
+          "type": "number",
+          "default": "24",
+          "description": "Gap between cells in pixels."
+        },
+        {
+          "name": "friction",
+          "type": "number",
+          "default": "0.95",
+          "description": "Base inertia friction (0–1)."
+        },
+        {
+          "name": "wheel-speed",
+          "type": "number",
+          "default": "2",
+          "description": "Wheel speed multiplier."
+        },
+        {
+          "name": "edge-threshold",
+          "type": "number",
+          "default": "100",
+          "description": "Edge auto-scroll threshold in pixels."
+        },
+        {
+          "name": "edge-scroll-speed",
+          "type": "number",
+          "default": "2",
+          "description": "Edge auto-scroll speed."
+        }
+      ]
+    },
+    {
+      "name": "logo-carousel",
+      "type": "registry:component",
+      "title": "Logo Carousel",
+      "description": "Grid of logos that cycles through items with a blurred vertical swap animation. Framework-agnostic Custom Element.",
+      "dependencies": [
+        "lit",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/logo-carousel-element.ts",
+          "path": "logo-carousel/logo-carousel-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/logo-carousel-element.ts\";\n---\n\n<motion-logo-carousel\n  logos='[{\"src\":\"/logos/a.svg\",\"alt\":\"A\"},{\"src\":\"/logos/b.svg\",\"alt\":\"B\"}]'\n  columns=\"3\"\n  cycle-interval=\"2000\"\n></motion-logo-carousel>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/logo-carousel-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-logo-carousel\n      logos='[{\"src\":\"/logos/a.svg\",\"alt\":\"A\"},{\"src\":\"/logos/b.svg\",\"alt\":\"B\"}]'\n      columns=\"3\"\n      cycle-interval=\"2000\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/logo-carousel-element.ts\";\n</script>\n\n<template>\n  <motion-logo-carousel\n    :logos='JSON.stringify([{\"src\":\"/logos/a.svg\",\"alt\":\"A\"},{\"src\":\"/logos/b.svg\",\"alt\":\"B\"}])'\n    columns=\"3\"\n    cycle-interval=\"2000\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/logo-carousel-element.ts\";\n</script>\n\n<motion-logo-carousel\n  logos='[{\"src\":\"/logos/a.svg\",\"alt\":\"A\"},{\"src\":\"/logos/b.svg\",\"alt\":\"B\"}]'\n  columns=\"3\"\n  cycle-interval=\"2000\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/logo-carousel-element.js\"></script>\n\n<motion-logo-carousel\n  logos='[{\"src\":\"/logos/a.svg\",\"alt\":\"A\"},{\"src\":\"/logos/b.svg\",\"alt\":\"B\"}]'\n  columns=\"3\"\n  cycle-interval=\"2000\"\n></motion-logo-carousel>"
+        }
+      ],
+      "props": [
+        {
+          "name": "logos",
+          "type": "string",
+          "default": "\"[]\"",
+          "description": "JSON array of logo objects with src, alt, and name properties."
+        },
+        {
+          "name": "columns",
+          "type": "number",
+          "default": "2",
+          "description": "Number of columns to distribute logos into."
+        },
+        {
+          "name": "cycle-interval",
+          "type": "number",
+          "default": "2000",
+          "description": "Milliseconds between logo cycles."
+        }
+      ]
+    },
+    {
+      "name": "radial-gallery",
+      "type": "registry:component",
+      "title": "Radial Gallery",
+      "description": "Circular rotating image gallery. Items are evenly spaced around a ring that spins continuously. Framework-agnostic Custom Element.",
+      "dependencies": [
+        "lit",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/radial-gallery-element.ts",
+          "path": "radial-gallery/radial-gallery-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/radial-gallery-element.ts\";\n---\n\n<motion-radial-gallery\n  items='[{\"src\":\"/img/1.jpg\"},{\"src\":\"/img/2.jpg\"}]'\n  radius=\"480\"\n  duration=\"24\"\n  element-size=\"160\"\n  class=\"h-[360px] w-full overflow-hidden\"\n></motion-radial-gallery>"
+        },
+        {
+          "label": "React",
+          "code": "import \"`@/components/motion-kit/radial-gallery-element.ts`\";\n\nexport default function Page() {\n  return (\n    <motion-radial-gallery\n      items='[{\"src\":\"/img/1.jpg\"},{\"src\":\"/img/2.jpg\"}]'\n      radius=\"480\"\n      duration=\"24\"\n      element-size=\"160\"\n      className=\"h-[360px] w-full overflow-hidden\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/radial-gallery-element.ts\";\n</script>\n\n<template>\n  <motion-radial-gallery\n    :items='JSON.stringify([{\"src\":\"/img/1.jpg\"},{\"src\":\"/img/2.jpg\"}])'\n    radius=\"480\"\n    duration=\"24\"\n    element-size=\"160\"\n    class=\"h-[360px] w-full overflow-hidden\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/radial-gallery-element.ts\";\n</script>\n\n<motion-radial-gallery\n  items='[{\"src\":\"/img/1.jpg\"},{\"src\":\"/img/2.jpg\"}]'\n  radius=\"480\"\n  duration=\"24\"\n  element-size=\"160\"\n  class=\"h-[360px] w-full overflow-hidden\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/radial-gallery-element.js\"></script>\n\n<motion-radial-gallery\n  items='[{\"src\":\"/img/1.jpg\"},{\"src\":\"/img/2.jpg\"}]'\n  radius=\"480\"\n  duration=\"24\"\n  element-size=\"160\"\n  class=\"h-[360px] w-full overflow-hidden\"\n></motion-radial-gallery>"
+        }
+      ],
+      "props": [
+        {
+          "name": "items",
+          "type": "string",
+          "default": "\"[]\"",
+          "description": "JSON array of image objects with src and alt properties."
+        },
+        {
+          "name": "radius",
+          "type": "number",
+          "default": "600",
+          "description": "Radius of the circle in pixels."
+        },
+        {
+          "name": "duration",
+          "type": "number",
+          "default": "20",
+          "description": "Duration of one full rotation in seconds."
+        },
+        {
+          "name": "reversed",
+          "type": "boolean",
+          "default": "false",
+          "description": "Rotate counter-clockwise."
+        },
+        {
+          "name": "offset",
+          "type": "number",
+          "default": "0",
+          "description": "Extra pixels to offset the ring center below the visible area."
+        },
+        {
+          "name": "gap",
+          "type": "number",
+          "default": "0",
+          "description": "Gap between items in pixels."
+        },
+        {
+          "name": "element-size",
+          "type": "number",
+          "default": "100",
+          "description": "Estimated item width in pixels for circumference calculations."
+        }
+      ]
+    },
+    {
+      "name": "slideshow",
+      "type": "registry:component",
+      "title": "Slideshow",
+      "description": "Full-bleed image slideshow with parallax slide transitions and thumbnail navigation. Framework-agnostic Custom Element.",
+      "dependencies": [
+        "lit",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/slideshow-element.ts",
+          "path": "slideshow/slideshow-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/slideshow-element.ts\";\n---\n\n<motion-slideshow\n  images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n  class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n></motion-slideshow>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/slideshow-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-slideshow\n      images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n      class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/slideshow-element.ts\";\n</script>\n\n<template>\n  <motion-slideshow\n    :images='JSON.stringify([{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}])'\n    class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/slideshow-element.ts\";\n</script>\n\n<motion-slideshow\n  images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n  class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/slideshow-element.js\"></script>\n\n<motion-slideshow\n  images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n  class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n></motion-slideshow>"
+        }
+      ],
+      "props": [
+        {
+          "name": "images",
+          "type": "string",
+          "default": "\"[]\"",
+          "description": "JSON array of image objects with src and alt properties."
+        }
+      ]
+    },
+    {
+      "name": "video-player",
+      "type": "registry:component",
+      "title": "Video Player",
+      "description": "Custom video player with play/pause, a hover-expanding scrubber, mute, and Flip fullscreen expand animation.",
+      "dependencies": [
+        "lit",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/video-player-element.ts",
+          "path": "video-player/video-player-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/video-player-element.ts\";\n---\n\n<motion-video-player\n  src=\"https://example.com/video.mp4\"\n  poster=\"https://example.com/poster.jpg\"\n  class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n></motion-video-player>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/video-player-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-video-player\n      src=\"https://example.com/video.mp4\"\n      poster=\"https://example.com/poster.jpg\"\n      class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/video-player-element.ts\";\n</script>\n\n<template>\n  <motion-video-player\n    src=\"https://example.com/video.mp4\"\n    poster=\"https://example.com/poster.jpg\"\n    class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/video-player-element.ts\";\n</script>\n\n<motion-video-player\n  src=\"https://example.com/video.mp4\"\n  poster=\"https://example.com/poster.jpg\"\n  class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/video-player-element.js\"></script>\n\n<motion-video-player\n  src=\"https://example.com/video.mp4\"\n  poster=\"https://example.com/poster.jpg\"\n  class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n></motion-video-player>"
+        }
+      ],
+      "props": [
+        {
+          "name": "src",
+          "type": "string",
+          "default": "\"\"",
+          "description": "URL of the video file to play."
+        },
+        {
+          "name": "poster",
+          "type": "string",
+          "default": "\"\"",
+          "description": "URL of the poster image to display before playback."
+        },
+        {
+          "name": "autoplay",
+          "type": "boolean",
+          "default": "false",
+          "description": "Whether to start playing automatically."
+        },
+        {
+          "name": "muted",
+          "type": "boolean",
+          "default": "true",
+          "description": "Whether the video starts muted."
+        },
+        {
+          "name": "loop",
+          "type": "boolean",
+          "default": "false",
+          "description": "Whether to loop the video when it ends."
+        },
+        {
+          "name": "hide-controls",
+          "type": "boolean",
+          "default": "false",
+          "description": "Whether to hide all controls (play/pause, scrubber, etc.)."
+        }
+      ]
+    }
+  ]
+}

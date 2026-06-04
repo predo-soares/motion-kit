@@ -53,8 +53,8 @@ import "@/components/motion-kit/magnetic-element.ts"
 
 ## Notes
 
-- A block is included in the registry when it defines `src/registry/new-york/blocks/<name>/component.json`.
-- Run `pnpm registry:compose` to rebuild `registry.json` and `public/r/registry.json` from those manifests.
+- A component is included in the registry when it defines `src/registry/<group>/<name>/component.json`.
+- Update `registry.json`, the grouped `src/registry/<group>/registry.json` include files, and `public/r/registry.json` directly when you change the registry structure.
 - The registry files served from `public/r` are still static JSON.
 - The distributed items are Custom Elements and helper files, not React components.
 - `pnpm registry:build` is reserved for later validation against the `shadcn` builder.

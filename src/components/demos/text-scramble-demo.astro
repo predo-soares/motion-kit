@@ -11,4 +11,45 @@ import ComponentCard from "@/components/ui/component-card.astro";
       cycles="8"
     ></motion-text-scramble>
   </div>
+  <div slot="controls" class="mk-controls">
+    <mk-text-input
+      label="Text"
+      value="HOVER THIS"
+      data-target="motion-text-scramble"
+      data-attr="text"
+    ></mk-text-input>
+    <mk-slider
+      label="Scramble Duration"
+      min="0.1"
+      max="2"
+      step="0.1"
+      value="0.6"
+      data-target="motion-text-scramble"
+      data-attr="scramble-duration"
+    ></mk-slider>
+    <mk-slider
+      label="Stagger"
+      min="0"
+      max="0.2"
+      step="0.01"
+      value="0.03"
+      data-target="motion-text-scramble"
+      data-attr="stagger"
+    ></mk-slider>
+    <mk-slider
+      label="Cycles"
+      min="1"
+      max="30"
+      step="1"
+      value="8"
+      data-target="motion-text-scramble"
+      data-attr="cycles"
+    ></mk-slider>
+    <mk-text-input
+      label="Characters"
+      value="!@#$%^&*01"
+      data-target="motion-text-scramble"
+      data-attr="characters"
+    ></mk-text-input>
+  </div>
 </ComponentCard>

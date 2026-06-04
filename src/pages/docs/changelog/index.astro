@@ -2,7 +2,7 @@
 import { render } from "astro:content";
 
 import ComponentBrowserShell from "@/components/docs/component-browser-shell.astro";
-import DocsTableOfContents from "@/components/docs/docs-table-of-contents.astro";
+import ComponentToc from "@/components/docs/component-toc.astro";
 import SiteLayout from "@/layouts/site-layout.astro";
 import {
   formatChangelogDate,
@@ -36,20 +36,20 @@ const tocItems = [
   title="Motion Kit Changelog"
   description="Latest updates and announcements around the Motion Kit Astro registry."
 >
-  <ComponentBrowserShell currentHref="/changelog">
+  <ComponentBrowserShell currentHref="/docs/changelog">
     <article class="flex w-full max-w-[600px] min-w-0 flex-col gap-10 pb-16">
       <header class="flex flex-col gap-3">
         <div class="flex flex-col gap-2">
-          <p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">
-            Docs
-          </p>
-          <h1 class="text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl">
+          <p class="text-xs font-semibold text-slate-400">Docs</p>
+          <h1
+            class="text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl"
+          >
             Changelog
           </h1>
         </div>
         <p class="max-w-3xl text-sm text-balance text-slate-600">
-          Latest updates and announcements around the Astro registry, docs shell, and component
-          release work.
+          Latest updates and announcements around the Astro registry, docs
+          shell, and component release work.
         </p>
       </header>
 
@@ -76,7 +76,9 @@ const tocItems = [
                         {entry.data.title}
                       </a>
                     </h2>
-                    <p class="text-sm leading-6 text-slate-600">{entry.data.description}</p>
+                    <p class="text-sm leading-6 text-slate-600">
+                      {entry.data.description}
+                    </p>
                   </div>
                 </div>
 
@@ -93,19 +95,21 @@ const tocItems = [
         olderEntries.length > 0 ? (
           <section id="more-updates" class="scroll-mt-24 flex flex-col gap-6">
             <div class="flex flex-col gap-1">
-              <h2 class="text-2xl font-semibold tracking-tight text-slate-950">More Updates</h2>
+              <h2 class="text-2xl font-semibold tracking-tight text-slate-950">
+                More Updates
+              </h2>
             </div>
 
             <div class="grid auto-rows-fr gap-3 sm:grid-cols-2">
               {olderEntries.map((entry) => (
                 <a
                   href={getChangelogUrl(entry)}
-                  class="flex min-h-28 flex-col justify-center rounded-[1.35rem] bg-slate-950 px-5 py-4 text-slate-100 transition-colors hover:bg-slate-900"
+                  class="flex min-h-28 flex-col justify-center rounded-[1.35rem] border border-slate-200 bg-slate-50 px-5 py-4 transition-colors hover:bg-slate-100"
                 >
-                  <span class="text-sm text-slate-500">
+                  <span class="text-xs text-slate-400">
                     {formatChangelogMonth(entry.data.date)}
                   </span>
-                  <span class="mt-2 text-[1.05rem] font-medium leading-6 tracking-tight text-slate-300">
+                  <span class="text-sm font-medium tracking-tight text-slate-800">
                     {entry.data.title}
                   </span>
                 </a>
@@ -118,7 +122,7 @@ const tocItems = [
 
     <Fragment slot="aside">
       <div class="flex flex-col gap-6">
-        <DocsTableOfContents items={tocItems} />
+        <ComponentToc items={tocItems} />
       </div>
     </Fragment>
   </ComponentBrowserShell>

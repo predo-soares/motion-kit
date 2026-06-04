@@ -1,0 +1,89 @@
+---
+import ComponentBrowserShell from "@/components/docs/component-browser-shell.astro";
+import ComponentPreviewScripts from "@/components/docs/component-preview-scripts.astro";
+import FrameworkHostReact from "@/components/tests/framework-host-react.tsx";
+import FrameworkHostSvelte from "@/components/tests/framework-host-svelte.svelte";
+import FrameworkHostVue from "@/components/tests/framework-host-vue.vue";
+import FrameworkMatrixCell from "@/components/tests/framework-matrix-cell.astro";
+import SiteLayout from "@/layouts/site-layout.astro";
+import {
+  componentCatalog,
+  type ComponentCatalogEntry,
+} from "@/lib/component-catalog";
+import {
+  getComponentTestSpec,
+  renderSpecToHtml,
+  type ComponentTestPageSpec,
+} from "@/lib/component-test-spec";
+
+export function getStaticPaths() {
+  return componentCatalog
+    .map((component) => {
+      const testSpec = getComponentTestSpec(component);
+      if (!testSpec) return null;
+
+      return {
+        params: { slug: component.slug },
+        props: { component, testSpec },
+      };
+    })
+    .filter(Boolean);
+}
+
+interface Props {
+  component: ComponentCatalogEntry;
+  testSpec: ComponentTestPageSpec;
+}
+
+const { component, testSpec } = Astro.props;
+const previewMarkup = renderSpecToHtml(testSpec.renderSpec);
+---
+
+<SiteLayout
+  title={`${component.title} Test Matrix — Motion Kit`}
+  description={`Generated framework test page for ${component.title}.`}
+>
+  <ComponentBrowserShell currentSlug={component.slug}>
+    <article class="flex w-full min-w-0 max-w-6xl flex-col gap-10 pb-16">
+      <header class="flex flex-col gap-4">
+        <div class="flex flex-col gap-2">
+          <p class="text-xs font-semibold text-slate-400">
+            {component.group}
+          </p>
+          <div class="flex flex-wrap items-center gap-3">
+            <h1
+              class="text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl"
+            >
+              {component.title} Test Matrix
+            </h1>
+            <a
+              href={`/docs/components/${component.slug}`}
+              class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-600 transition-colors hover:border-slate-300 hover:text-slate-950"
+            >
+              Back to component
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <section class="grid md:grid-cols-2">
+        <FrameworkMatrixCell framework="Astro">
+          <Fragment set:html={previewMarkup} />
+        </FrameworkMatrixCell>
+
+        <FrameworkMatrixCell framework="React">
+          <FrameworkHostReact client:load spec={testSpec.renderSpec} />
+        </FrameworkMatrixCell>
+
+        <FrameworkMatrixCell framework="Vue">
+          <FrameworkHostVue client:load spec={testSpec.renderSpec} />
+        </FrameworkMatrixCell>
+
+        <FrameworkMatrixCell framework="Svelte">
+          <FrameworkHostSvelte client:load spec={testSpec.renderSpec} />
+        </FrameworkMatrixCell>
+      </section>
+    </article>
+  </ComponentBrowserShell>
+  <ComponentPreviewScripts />
+</SiteLayout>

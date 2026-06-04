@@ -3,7 +3,7 @@
   "name": "neural-noise",
   "type": "registry:component",
   "title": "Neural Noise",
-  "description": "Animated CPPN-based neural noise rendered in WebGL. Produces continuously evolving organic color patterns driven by a compositional pattern-producing network. Lit Custom Element.",
+  "description": "Animated CPPN-based neural noise rendered in WebGL. Produces continuously evolving organic color patterns driven by a compositional pattern-producing network.",
   "dependencies": ["lit", "ogl"],
   "files": [
     {

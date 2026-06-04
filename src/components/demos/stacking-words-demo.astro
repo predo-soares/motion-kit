@@ -31,4 +31,40 @@ import ComponentCard from "@/components/ui/component-card.astro";
       <p class="text-slate-400 text-sm tracking-wide">Hell yeah!</p>
     </div>
   </div>
+  <div slot="controls" class="mk-controls">
+    <mk-text-input
+      label="Text 1"
+      value="Motion Kit gives you beautiful animated components for any framework."
+      data-target="motion-stacking-words"
+      data-index="0"
+      data-attr="text"
+    ></mk-text-input>
+    <mk-slider
+      label="Stagger 1"
+      min="0"
+      max="1"
+      step="0.01"
+      value="0.21"
+      data-target="motion-stacking-words"
+      data-index="0"
+      data-attr="stagger"
+    ></mk-slider>
+    <mk-text-input
+      label="Text 2"
+      value="Install via shadcn. No framework lock-in."
+      data-target="motion-stacking-words"
+      data-index="1"
+      data-attr="text"
+    ></mk-text-input>
+    <mk-slider
+      label="Stagger 2"
+      min="0"
+      max="1"
+      step="0.01"
+      value="0.21"
+      data-target="motion-stacking-words"
+      data-index="1"
+      data-attr="stagger"
+    ></mk-slider>
+  </div>
 </ComponentCard>

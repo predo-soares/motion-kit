@@ -1,0 +1,1784 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "items": [
+    {
+      "name": "ascii-renderer",
+      "type": "registry:component",
+      "title": "ASCII Renderer",
+      "description": "OGL WebGL image rendered as animated ASCII dot-grid characters with scanline displacement.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/ascii-renderer-element.ts",
+          "path": "ascii-renderer/ascii-renderer-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/ascii-renderer-element.ts\";\n---\n\n<motion-ascii-renderer\n  image=\"/images/your-image.jpg\"\n  density={25.0}\n  strength={3.0}\n  color=\"#00ff00\"\n  background-color=\"#17181A\"\n  class=\"w-full h-[400px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/ascii-renderer-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-ascii-renderer\n      image=\"/images/your-image.jpg\"\n      density={25.0}\n      strength={3.0}\n      color=\"#00ff00\"\n      background-color=\"#17181A\"\n      class=\"w-full h-[400px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/ascii-renderer-element.ts\";\n</script>\n\n<template>\n  <motion-ascii-renderer\n    image=\"/images/your-image.jpg\"\n    :density=\"25.0\"\n    :strength=\"3.0\"\n    color=\"#00ff00\"\n    background-color=\"#17181A\"\n    class=\"w-full h-[400px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/ascii-renderer-element.ts\";\n</script>\n\n<motion-ascii-renderer\n  image=\"/images/your-image.jpg\"\n  density={25.0}\n  strength={3.0}\n  color=\"#00ff00\"\n  background-color=\"#17181A\"\n  class=\"w-full h-[400px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/ascii-renderer-element.js\"></script>\n\n<motion-ascii-renderer\n  image=\"/images/your-image.jpg\"\n  density=\"25.0\"\n  strength=\"3.0\"\n  color=\"#00ff00\"\n  background-color=\"#17181A\"\n  class=\"w-full h-[400px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "image",
+          "type": "string",
+          "default": "\"\"",
+          "description": "URL of the image to render as ASCII."
+        },
+        {
+          "name": "density",
+          "type": "number",
+          "default": "25.0",
+          "description": "Density of the ASCII character grid (higher = more characters)."
+        },
+        {
+          "name": "strength",
+          "type": "number",
+          "default": "3.0",
+          "description": "Intensity of the ASCII character brightness based on image luminance."
+        },
+        {
+          "name": "color",
+          "type": "string",
+          "default": "\"#00ff00\"",
+          "description": "Color of the ASCII characters (any CSS color value)."
+        },
+        {
+          "name": "background-color",
+          "type": "string",
+          "default": "\"#17181A\"",
+          "description": "Background color behind the ASCII characters (any CSS color value)."
+        }
+      ]
+    },
+    {
+      "name": "card-3d",
+      "type": "registry:component",
+      "title": "Card 3D",
+      "description": "OGL-powered 3D card with rounded corners and mouse-tracking parallax rotation.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/card-3d-element.ts",
+          "path": "card-3d/card-3d-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/card-3d-element.ts\";\n---\n\n<motion-card-3d\n  image=\"/path/to/image.jpg\"\n  width=\"3.2\"\n  height=\"2\"\n  depth=\"0.08\"\n  radius=\"0.15\"\n  class=\"w-full h-[400px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/card-3d-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-card-3d\n      image=\"/path/to/image.jpg\"\n      width={3.2}\n      height={2}\n      depth={0.08}\n      radius={0.15}\n      className=\"w-full h-[400px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/card-3d-element.ts\";\n</script>\n\n<template>\n  <motion-card-3d\n    image=\"/path/to/image.jpg\"\n    :width=\"3.2\"\n    :height=\"2\"\n    :depth=\"0.08\"\n    :radius=\"0.15\"\n    class=\"w-full h-[400px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/card-3d-element.ts\";\n</script>\n\n<motion-card-3d\n  image=\"/path/to/image.jpg\"\n  width={3.2}\n  height={2}\n  depth={0.08}\n  radius={0.15}\n  class=\"w-full h-[400px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/card-3d-element.js\"></script>\n\n<motion-card-3d\n  image=\"/path/to/image.jpg\"\n  width=\"3.2\"\n  height=\"2\"\n  depth=\"0.08\"\n  radius=\"0.15\"\n  class=\"w-full h-[400px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "image",
+          "type": "string",
+          "default": "\"\"",
+          "description": "URL of the image to display on the 3D card."
+        },
+        {
+          "name": "width",
+          "type": "number",
+          "default": "3.2",
+          "description": "Width of the card in 3D space units."
+        },
+        {
+          "name": "height",
+          "type": "number",
+          "default": "2",
+          "description": "Height of the card in 3D space units."
+        },
+        {
+          "name": "depth",
+          "type": "number",
+          "default": "0.08",
+          "description": "Thickness/depth of the 3D card geometry."
+        },
+        {
+          "name": "radius",
+          "type": "number",
+          "default": "0.15",
+          "description": "Corner radius for rounded corners (in 3D space units)."
+        }
+      ]
+    },
+    {
+      "name": "dithered-image",
+      "type": "registry:component",
+      "title": "Dithered Image",
+      "description": "OGL WebGL dithered image renderer with Bayer, halftone and void-and-cluster threshold maps.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/dithered-image-element.ts",
+          "path": "dithered-image/dithered-image-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/dithered-image-element.ts\";\n---\n\n<motion-dithered-image\n  image=\"/path/to/image.jpg\"\n  dither-map=\"bayer4x4\"\n  pixel-size=\"1\"\n  color=\"#ff6900\"\n  background-color=\"#17181A\"\n  threshold=\"0.0\"\n  class=\"w-full h-[400px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/dithered-image-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-dithered-image\n      image=\"/path/to/image.jpg\"\n      ditherMap=\"bayer4x4\"\n      pixelSize={1}\n      color=\"#ff6900\"\n      backgroundColor=\"#17181A\"\n      threshold={0.0}\n      className=\"w-full h-[400px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/dithered-image-element.ts\";\n</script>\n\n<template>\n  <motion-dithered-image\n    image=\"/path/to/image.jpg\"\n    dither-map=\"bayer4x4\"\n    :pixel-size=\"1\"\n    color=\"#ff6900\"\n    background-color=\"#17181A\"\n    :threshold=\"0.0\"\n    class=\"w-full h-[400px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/dithered-image-element.ts\";\n</script>\n\n<motion-dithered-image\n  image=\"/path/to/image.jpg\"\n  ditherMap=\"bayer4x4\"\n  pixelSize={1}\n  color=\"#ff6900\"\n  backgroundColor=\"#17181A\"\n  threshold={0.0}\n  class=\"w-full h-[400px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/dithered-image-element.js\"></script>\n\n<motion-dithered-image\n  image=\"/path/to/image.jpg\"\n  dither-map=\"bayer4x4\"\n  pixel-size=\"1\"\n  color=\"#ff6900\"\n  background-color=\"#17181A\"\n  threshold=\"0.0\"\n  class=\"w-full h-[400px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "image",
+          "type": "string",
+          "default": "\"\"",
+          "description": "URL of the image to dither."
+        },
+        {
+          "name": "dither-map",
+          "type": "bayer4x4 | bayer8x8 | halftone | voidAndCluster",
+          "default": "\"bayer4x4\"",
+          "description": "Type of dithering threshold map to use."
+        },
+        {
+          "name": "pixel-size",
+          "type": "number",
+          "default": "1",
+          "description": "Size of dithering pixels in screen pixels."
+        },
+        {
+          "name": "color",
+          "type": "string",
+          "default": "\"#ff6900\"",
+          "description": "Foreground color for the dithered pixels."
+        },
+        {
+          "name": "background-color",
+          "type": "string",
+          "default": "\"#17181A\"",
+          "description": "Background color for the dithered image."
+        },
+        {
+          "name": "threshold",
+          "type": "number",
+          "default": "0.0",
+          "description": "Brightness threshold offset (-1 to 1)."
+        }
+      ]
+    },
+    {
+      "name": "fake-3d-image",
+      "type": "registry:component",
+      "title": "Fake 3D Image",
+      "description": "OGL depth-map parallax effect — move the cursor to shift the image by a grayscale depth map.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/fake-3d-image-element.ts",
+          "path": "fake-3d-image/fake-3d-image-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/fake-3d-image-element.ts\";\n---\n\n<motion-fake-3d-image\n  color-src=\"/path/to/image.jpg\"\n  depth-src=\"/path/to/depth-map.jpg\"\n  x-threshold=\"8\"\n  y-threshold=\"8\"\n  sensitivity=\"0.25\"\n  class=\"w-full h-[400px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/fake-3d-image-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-fake-3d-image\n      colorSrc=\"/path/to/image.jpg\"\n      depthSrc=\"/path/to/depth-map.jpg\"\n      xThreshold={8}\n      yThreshold={8}\n      sensitivity={0.25}\n      className=\"w-full h-[400px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/fake-3d-image-element.ts\";\n</script>\n\n<template>\n  <motion-fake-3d-image\n    color-src=\"/path/to/image.jpg\"\n    depth-src=\"/path/to/depth-map.jpg\"\n    :x-threshold=\"8\"\n    :y-threshold=\"8\"\n    :sensitivity=\"0.25\"\n    class=\"w-full h-[400px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/fake-3d-image-element.ts\";\n</script>\n\n<motion-fake-3d-image\n  colorSrc=\"/path/to/image.jpg\"\n  depthSrc=\"/path/to/depth-map.jpg\"\n  xThreshold={8}\n  yThreshold={8}\n  sensitivity={0.25}\n  class=\"w-full h-[400px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/fake-3d-image-element.js\"></script>\n\n<motion-fake-3d-image\n  color-src=\"/path/to/image.jpg\"\n  depth-src=\"/path/to/depth-map.jpg\"\n  x-threshold=\"8\"\n  y-threshold=\"8\"\n  sensitivity=\"0.25\"\n  class=\"w-full h-[400px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "color-src",
+          "type": "string",
+          "default": "\"\"",
+          "description": "URL of the color image to display."
+        },
+        {
+          "name": "depth-src",
+          "type": "string",
+          "default": "\"\"",
+          "description": "URL of the grayscale depth map (white = near, black = far)."
+        },
+        {
+          "name": "x-threshold",
+          "type": "number",
+          "default": "8",
+          "description": "Parallax strength threshold on X axis."
+        },
+        {
+          "name": "y-threshold",
+          "type": "number",
+          "default": "8",
+          "description": "Parallax strength threshold on Y axis."
+        },
+        {
+          "name": "sensitivity",
+          "type": "number",
+          "default": "0.25",
+          "description": "Mouse movement sensitivity (0 to 1)."
+        }
+      ]
+    },
+    {
+      "name": "fluid-image-reveal",
+      "type": "registry:component",
+      "title": "Fluid Image Reveal",
+      "description": "OGL fluid simulation used as a mask to reveal a second image beneath as you move the cursor.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/fluid-image-reveal-element.ts",
+          "path": "fluid-image-reveal/fluid-image-reveal-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/fluid-image-reveal-element.ts\";\n---\n\n<motion-fluid-image-reveal\n  base-image=\"/images/before.jpg\"\n  reveal-image=\"/images/after.jpg\"\n  dissipation={0.96}\n  pointer-size={0.005}\n  blend-softness={0.22}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/fluid-image-reveal-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-fluid-image-reveal\n      base-image=\"/images/before.jpg\"\n      reveal-image=\"/images/after.jpg\"\n      dissipation={0.96}\n      pointer-size={0.005}\n      blend-softness={0.22}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/fluid-image-reveal-element.ts\";\n</script>\n\n<template>\n  <motion-fluid-image-reveal\n    base-image=\"/images/before.jpg\"\n    reveal-image=\"/images/after.jpg\"\n    :dissipation=\"0.96\"\n    :pointer-size=\"0.005\"\n    :blend-softness=\"0.22\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/fluid-image-reveal-element.ts\";\n</script>\n\n<motion-fluid-image-reveal\n  base-image=\"/images/before.jpg\"\n  reveal-image=\"/images/after.jpg\"\n  dissipation={0.96}\n  pointer-size={0.005}\n  blend-softness={0.22}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/fluid-image-reveal-element.js\"></script>\n\n<motion-fluid-image-reveal\n  base-image=\"/images/before.jpg\"\n  reveal-image=\"/images/after.jpg\"\n  dissipation=\"0.96\"\n  pointer-size=\"0.005\"\n  blend-softness=\"0.22\"\n  class=\"w-full h-[500px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "base-image",
+          "type": "string",
+          "default": "\"\"",
+          "description": "URL of the base image that is initially visible."
+        },
+        {
+          "name": "reveal-image",
+          "type": "string",
+          "default": "\"\"",
+          "description": "URL of the image to reveal through the fluid mask."
+        },
+        {
+          "name": "dissipation",
+          "type": "number",
+          "default": "0.96",
+          "description": "How quickly the fluid density dissipates over time (lower = faster fade)."
+        },
+        {
+          "name": "pointer-size",
+          "type": "number",
+          "default": "0.005",
+          "description": "Size of the cursor's influence on the fluid simulation."
+        },
+        {
+          "name": "velocity-dissipation",
+          "type": "number",
+          "default": "0.96",
+          "description": "How quickly fluid velocity dissipates (affects swirl duration)."
+        },
+        {
+          "name": "pressure-iterations",
+          "type": "number",
+          "default": "10",
+          "description": "Number of pressure solver iterations (higher = more accurate but slower)."
+        },
+        {
+          "name": "blend-softness",
+          "type": "number",
+          "default": "0.22",
+          "description": "Softness of the edge between the two images in the blend zone."
+        }
+      ]
+    },
+    {
+      "name": "fluid-simulation",
+      "type": "registry:component",
+      "title": "Fluid Simulation",
+      "description": "OGL GPU fluid simulation — move the cursor to paint fluid. Animates autonomously while idle.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/fluid-simulation-element.ts",
+          "path": "fluid-simulation/fluid-simulation-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/fluid-simulation-element.ts\";\n---\n\n<motion-fluid-simulation\n  color=\"#ff6900\"\n  background-color=\"#17181A\"\n  dissipation={0.96}\n  pointer-size={0.005}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/fluid-simulation-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-fluid-simulation\n      color=\"#ff6900\"\n      background-color=\"#17181A\"\n      dissipation={0.96}\n      pointer-size={0.005}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/fluid-simulation-element.ts\";\n</script>\n\n<template>\n  <motion-fluid-simulation\n    color=\"#ff6900\"\n    background-color=\"#17181A\"\n    :dissipation=\"0.96\"\n    :pointer-size=\"0.005\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/fluid-simulation-element.ts\";\n</script>\n\n<motion-fluid-simulation\n  color=\"#ff6900\"\n  background-color=\"#17181A\"\n  dissipation={0.96}\n  pointer-size={0.005}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/fluid-simulation-element.js\"></script>\n\n<motion-fluid-simulation\n  color=\"#ff6900\"\n  background-color=\"#17181A\"\n  dissipation=\"0.96\"\n  pointer-size=\"0.005\"\n  class=\"w-full h-[500px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "dissipation",
+          "type": "number",
+          "default": "0.96",
+          "description": "How quickly the fluid density dissipates over time (lower = faster fade)."
+        },
+        {
+          "name": "pointer-size",
+          "type": "number",
+          "default": "0.005",
+          "description": "Size of the cursor's influence on the fluid simulation."
+        },
+        {
+          "name": "color",
+          "type": "string",
+          "default": "\"#ff6900\"",
+          "description": "Color of the fluid being painted (any CSS color value)."
+        },
+        {
+          "name": "background-color",
+          "type": "string",
+          "default": "\"#17181A\"",
+          "description": "Background color of the canvas (any CSS color value)."
+        },
+        {
+          "name": "velocity-dissipation",
+          "type": "number",
+          "default": "0.96",
+          "description": "How quickly fluid velocity dissipates (affects swirl duration)."
+        },
+        {
+          "name": "pressure-iterations",
+          "type": "number",
+          "default": "10",
+          "description": "Number of pressure solver iterations (higher = more accurate but slower)."
+        }
+      ]
+    },
+    {
+      "name": "glass-logo",
+      "type": "registry:component",
+      "title": "Glass Logo",
+      "description": "OGL WebGL2 glass lens over an animated procedural swirl — silhouette driven by an SVG SDF.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/glass-logo-element.ts",
+          "path": "glass-logo/glass-logo-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/glass-logo-element.ts\";\n\nconst svgLogo = `<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"50\" cy=\"50\" r=\"40\" fill=\"white\"/></svg>`;\n---\n\n<motion-glass-logo\n  svg-source={svgLogo}\n  speed={1}\n  scale={1}\n  rotation={0}\n  refraction={1}\n  chromatic-aberration={1}\n  blur={1}\n  swirl-color-a=\"#222326\"\n  swirl-color-b=\"#ff6900\"\n  class=\"w-full h-[400px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/glass-logo-element.ts\";\n\nconst svgLogo = `<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"50\" cy=\"50\" r=\"40\" fill=\"white\"/></svg>`;\n\nexport default function Page() {\n  return (\n    <motion-glass-logo\n      svg-source={svgLogo}\n      speed={1}\n      scale={1}\n      rotation={0}\n      refraction={1}\n      chromatic-aberration={1}\n      blur={1}\n      swirl-color-a=\"#222326\"\n      swirl-color-b=\"#ff6900\"\n      className=\"w-full h-[400px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/glass-logo-element.ts\";\n\nconst svgLogo = `<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"50\" cy=\"50\" r=\"40\" fill=\"white\"/></svg>`;\n</script>\n\n<template>\n  <motion-glass-logo\n    :svg-source=\"svgLogo\"\n    :speed=\"1\"\n    :scale=\"1\"\n    :rotation=\"0\"\n    :refraction=\"1\"\n    :chromatic-aberration=\"1\"\n    :blur=\"1\"\n    swirl-color-a=\"#222326\"\n    swirl-color-b=\"#ff6900\"\n    class=\"w-full h-[400px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/glass-logo-element.ts\";\n\n  const svgLogo = `<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"50\" cy=\"50\" r=\"40\" fill=\"white\"/></svg>`;\n</script>\n\n<motion-glass-logo\n  svg-source={svgLogo}\n  speed={1}\n  scale={1}\n  rotation={0}\n  refraction={1}\n  chromatic-aberration={1}\n  blur={1}\n  swirl-color-a=\"#222326\"\n  swirl-color-b=\"#ff6900\"\n  class=\"w-full h-[400px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/glass-logo-element.js\"></script>\n\n<motion-glass-logo\n  svg-source=\"<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='40' fill='white'/></svg>\"\n  speed=\"1\"\n  scale=\"1\"\n  rotation=\"0\"\n  refraction=\"1\"\n  chromatic-aberration=\"1\"\n  blur=\"1\"\n  swirl-color-a=\"#222326\"\n  swirl-color-b=\"#ff6900\"\n  class=\"w-full h-[400px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "svg-source",
+          "type": "string",
+          "default": "\"<svg>...</svg>\"",
+          "description": "SVG markup to render as a glass lens (defaults to a logo shape)."
+        },
+        {
+          "name": "speed",
+          "type": "number",
+          "default": "1",
+          "description": "Animation speed of the swirl background."
+        },
+        {
+          "name": "scale",
+          "type": "number",
+          "default": "1",
+          "description": "Scale of the logo within the canvas."
+        },
+        {
+          "name": "offset-x",
+          "type": "number",
+          "default": "0",
+          "description": "Horizontal offset of the logo center."
+        },
+        {
+          "name": "offset-y",
+          "type": "number",
+          "default": "0",
+          "description": "Vertical offset of the logo center."
+        },
+        {
+          "name": "rotation",
+          "type": "number",
+          "default": "0",
+          "description": "Rotation angle of the logo in degrees."
+        },
+        {
+          "name": "refraction",
+          "type": "number",
+          "default": "1",
+          "description": "Strength of the glass lens refraction effect."
+        },
+        {
+          "name": "chromatic-aberration",
+          "type": "number",
+          "default": "1",
+          "description": "Intensity of RGB color splitting at edges."
+        },
+        {
+          "name": "blur",
+          "type": "number",
+          "default": "1",
+          "description": "Blur amount of the refracted background."
+        },
+        {
+          "name": "swirl-color-a",
+          "type": "string",
+          "default": "\"#222326\"",
+          "description": "First color for the animated swirl gradient."
+        },
+        {
+          "name": "swirl-color-b",
+          "type": "string",
+          "default": "\"#ff6900\"",
+          "description": "Second color for the animated swirl gradient."
+        }
+      ]
+    },
+    {
+      "name": "glass-pane",
+      "type": "registry:component",
+      "title": "Glass Pane",
+      "description": "OGL animated glass panel strips with refraction, chromatic aberration and wave distortion over an image.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/glass-pane-element.ts",
+          "path": "glass-pane/glass-pane-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/glass-pane-element.ts\";\n---\n\n<motion-glass-pane\n  image=\"/images/your-image.jpg\"\n  rotation={0}\n  refraction={1}\n  chromatic-aberration={1}\n  panel-width={0.82}\n  wave-frequency={0.0}\n  wave-amplitude={0.0}\n  speed={0.65}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/glass-pane-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-glass-pane\n      image=\"/images/your-image.jpg\"\n      rotation={0}\n      refraction={1}\n      chromatic-aberration={1}\n      panel-width={0.82}\n      wave-frequency={0.0}\n      wave-amplitude={0.0}\n      speed={0.65}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/glass-pane-element.ts\";\n</script>\n\n<template>\n  <motion-glass-pane\n    image=\"/images/your-image.jpg\"\n    :rotation=\"0\"\n    :refraction=\"1\"\n    :chromatic-aberration=\"1\"\n    :panel-width=\"0.82\"\n    :wave-frequency=\"0.0\"\n    :wave-amplitude=\"0.0\"\n    :speed=\"0.65\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/glass-pane-element.ts\";\n</script>\n\n<motion-glass-pane\n  image=\"/images/your-image.jpg\"\n  rotation={0}\n  refraction={1}\n  chromatic-aberration={1}\n  panel-width={0.82}\n  wave-frequency={0.0}\n  wave-amplitude={0.0}\n  speed={0.65}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/glass-pane-element.js\"></script>\n\n<motion-glass-pane\n  image=\"/images/your-image.jpg\"\n  rotation=\"0\"\n  refraction=\"1\"\n  chromatic-aberration=\"1\"\n  panel-width=\"0.82\"\n  wave-frequency=\"0.0\"\n  wave-amplitude=\"0.0\"\n  speed=\"0.65\"\n  class=\"w-full h-[500px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "image",
+          "type": "string",
+          "default": "\"\"",
+          "description": "URL of the background image to display through the glass pane."
+        },
+        {
+          "name": "rotation",
+          "type": "number",
+          "default": "0",
+          "description": "Rotation angle of the glass strips in degrees."
+        },
+        {
+          "name": "refraction",
+          "type": "number",
+          "default": "1",
+          "description": "Strength of the glass refraction distortion."
+        },
+        {
+          "name": "chromatic-aberration",
+          "type": "number",
+          "default": "1",
+          "description": "Intensity of RGB color splitting at edges."
+        },
+        {
+          "name": "panel-width",
+          "type": "number",
+          "default": "0.82",
+          "description": "Width of each glass strip as a fraction of the canvas."
+        },
+        {
+          "name": "wave-frequency",
+          "type": "number",
+          "default": "0.0",
+          "description": "Frequency of the wave distortion across the strips."
+        },
+        {
+          "name": "wave-amplitude",
+          "type": "number",
+          "default": "0.0",
+          "description": "Amplitude of the wave distortion effect."
+        },
+        {
+          "name": "speed",
+          "type": "number",
+          "default": "0.65",
+          "description": "Animation speed of the wave distortion."
+        }
+      ]
+    },
+    {
+      "name": "glass-slideshow",
+      "type": "registry:component",
+      "title": "Glass Slideshow",
+      "description": "An OGL-powered slideshow with liquid glass image transitions, chromatic fringing, and optional autoplay.",
+      "dependencies": [
+        "lit",
+        "gsap",
+        "ogl"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/glass-slideshow-element.ts",
+          "path": "glass-slideshow/glass-slideshow-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/glass-slideshow-element.ts\";\n\nconst slides = [\n  { src: \"/images/slide1.jpg\", alt: \"Slide 1\" },\n  { src: \"/images/slide2.jpg\", alt: \"Slide 2\" },\n  { src: \"/images/slide3.jpg\", alt: \"Slide 3\" }\n];\n---\n\n<motion-glass-slideshow\n  images={JSON.stringify(slides)}\n  index={0}\n  transition-duration={2000}\n  intensity={1}\n  distortion={1}\n  chromatic-aberration={1}\n  refraction={1}\n  autoplay={true}\n  autoplay-interval={5000}\n  class=\"w-full h-[600px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/glass-slideshow-element.ts\";\n\nconst slides = [\n  { src: \"/images/slide1.jpg\", alt: \"Slide 1\" },\n  { src: \"/images/slide2.jpg\", alt: \"Slide 2\" },\n  { src: \"/images/slide3.jpg\", alt: \"Slide 3\" }\n];\n\nexport default function Page() {\n  return (\n    <motion-glass-slideshow\n      images={JSON.stringify(slides)}\n      index={0}\n      transition-duration={2000}\n      intensity={1}\n      distortion={1}\n      chromatic-aberration={1}\n      refraction={1}\n      autoplay={true}\n      autoplay-interval={5000}\n      className=\"w-full h-[600px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/glass-slideshow-element.ts\";\n\nconst slides = [\n  { src: \"/images/slide1.jpg\", alt: \"Slide 1\" },\n  { src: \"/images/slide2.jpg\", alt: \"Slide 2\" },\n  { src: \"/images/slide3.jpg\", alt: \"Slide 3\" }\n];\n</script>\n\n<template>\n  <motion-glass-slideshow\n    :images=\"JSON.stringify(slides)\"\n    :index=\"0\"\n    :transition-duration=\"2000\"\n    :intensity=\"1\"\n    :distortion=\"1\"\n    :chromatic-aberration=\"1\"\n    :refraction=\"1\"\n    :autoplay=\"true\"\n    :autoplay-interval=\"5000\"\n    class=\"w-full h-[600px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/glass-slideshow-element.ts\";\n\n  const slides = [\n    { src: \"/images/slide1.jpg\", alt: \"Slide 1\" },\n    { src: \"/images/slide2.jpg\", alt: \"Slide 2\" },\n    { src: \"/images/slide3.jpg\", alt: \"Slide 3\" }\n  ];\n</script>\n\n<motion-glass-slideshow\n  images={JSON.stringify(slides)}\n  index={0}\n  transition-duration={2000}\n  intensity={1}\n  distortion={1}\n  chromatic-aberration={1}\n  refraction={1}\n  autoplay={true}\n  autoplay-interval={5000}\n  class=\"w-full h-[600px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/glass-slideshow-element.js\"></script>\n\n<motion-glass-slideshow\n  images='[{\"src\":\"/images/slide1.jpg\",\"alt\":\"Slide 1\"},{\"src\":\"/images/slide2.jpg\",\"alt\":\"Slide 2\"},{\"src\":\"/images/slide3.jpg\",\"alt\":\"Slide 3\"}]'\n  index=\"0\"\n  transition-duration=\"2000\"\n  intensity=\"1\"\n  distortion=\"1\"\n  chromatic-aberration=\"1\"\n  refraction=\"1\"\n  autoplay=\"true\"\n  autoplay-interval=\"5000\"\n  class=\"w-full h-[600px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "images",
+          "type": "string (JSON)",
+          "default": "\"[]\"",
+          "description": "JSON array of slide objects with src (URL) and optional alt text."
+        },
+        {
+          "name": "index",
+          "type": "number",
+          "default": "0",
+          "description": "Current slide index (updates on transition when autoplay is false)."
+        },
+        {
+          "name": "transition-duration",
+          "type": "number",
+          "default": "2000",
+          "description": "Duration of the glass transition effect in milliseconds."
+        },
+        {
+          "name": "intensity",
+          "type": "number",
+          "default": "1",
+          "description": "Overall intensity of the glass distortion and refraction effects."
+        },
+        {
+          "name": "distortion",
+          "type": "number",
+          "default": "1",
+          "description": "Strength of the liquid distortion during transitions."
+        },
+        {
+          "name": "chromatic-aberration",
+          "type": "number",
+          "default": "1",
+          "description": "Intensity of RGB color splitting at refracted edges."
+        },
+        {
+          "name": "refraction",
+          "type": "number",
+          "default": "1",
+          "description": "Strength of the glass lens refraction effect."
+        },
+        {
+          "name": "autoplay",
+          "type": "boolean",
+          "default": "true",
+          "description": "Whether to automatically advance slides."
+        },
+        {
+          "name": "autoplay-interval",
+          "type": "number",
+          "default": "5000",
+          "description": "Time between automatic slide advances in milliseconds."
+        }
+      ]
+    },
+    {
+      "name": "glitter-cloth",
+      "type": "registry:component",
+      "title": "Glitter Cloth",
+      "description": "An OGL shader surface with animated silk folds, glitter sparkle, and vignette depth shading.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/glitter-cloth-element.ts",
+          "path": "glitter-cloth/glitter-cloth-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/glitter-cloth-element.ts\";\n---\n\n<motion-glitter-cloth\n  color=\"#ff6900\"\n  speed={1}\n  brightness={1}\n  blend-strength={0.02}\n  noise-scale={4}\n  vignette-strength={15}\n  vignette-power={0.25}\n  vignette-opacity={1}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/glitter-cloth-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-glitter-cloth\n      color=\"#ff6900\"\n      speed={1}\n      brightness={1}\n      blend-strength={0.02}\n      noise-scale={4}\n      vignette-strength={15}\n      vignette-power={0.25}\n      vignette-opacity={1}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/glitter-cloth-element.ts\";\n</script>\n\n<template>\n  <motion-glitter-cloth\n    color=\"#ff6900\"\n    :speed=\"1\"\n    :brightness=\"1\"\n    :blend-strength=\"0.02\"\n    :noise-scale=\"4\"\n    :vignette-strength=\"15\"\n    :vignette-power=\"0.25\"\n    :vignette-opacity=\"1\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/glitter-cloth-element.ts\";\n</script>\n\n<motion-glitter-cloth\n  color=\"#ff6900\"\n  speed={1}\n  brightness={1}\n  blend-strength={0.02}\n  noise-scale={4}\n  vignette-strength={15}\n  vignette-power={0.25}\n  vignette-opacity={1}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/glitter-cloth-element.js\"></script>\n\n<motion-glitter-cloth\n  color=\"#ff6900\"\n  speed=\"1\"\n  brightness=\"1\"\n  blend-strength=\"0.02\"\n  noise-scale=\"4\"\n  vignette-strength=\"15\"\n  vignette-power=\"0.25\"\n  vignette-opacity=\"1\"\n  class=\"w-full h-[500px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "color",
+          "type": "string",
+          "default": "\"#ff6900\"",
+          "description": "Primary color of the glitter cloth (accent and shadow colors are auto-derived)."
+        },
+        {
+          "name": "speed",
+          "type": "number",
+          "default": "1",
+          "description": "Animation speed of the cloth folds and sparkle."
+        },
+        {
+          "name": "brightness",
+          "type": "number",
+          "default": "1",
+          "description": "Overall brightness multiplier of the fabric."
+        },
+        {
+          "name": "blend-strength",
+          "type": "number",
+          "default": "0.02",
+          "description": "How strongly the noise blends with the base color (vividLight mode)."
+        },
+        {
+          "name": "noise-scale",
+          "type": "number",
+          "default": "4",
+          "description": "Scale of the noise texture (lower = larger grain)."
+        },
+        {
+          "name": "vignette-strength",
+          "type": "number",
+          "default": "15",
+          "description": "Intensity of the vignette darkening at edges."
+        },
+        {
+          "name": "vignette-power",
+          "type": "number",
+          "default": "0.25",
+          "description": "Power curve of the vignette falloff."
+        },
+        {
+          "name": "vignette-opacity",
+          "type": "number",
+          "default": "1",
+          "description": "Opacity of the vignette effect (0 = disabled)."
+        }
+      ]
+    },
+    {
+      "name": "globe",
+      "type": "registry:component",
+      "title": "Globe",
+      "description": "A Fresnel-lit globe with rim glow, haloed atmosphere, land mesh detail, and marker layers for data storytelling.",
+      "dependencies": [
+        "lit",
+        "ogl",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/globe-element.ts",
+          "path": "globe/globe-element.ts"
+        },
+        {
+          "type": "registry:file",
+          "target": "public/motion-kit/globe/land-texture.png",
+          "path": "globe/land-texture.png"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/globe-element.ts\";\n\nconst markers = [\n  { location: [40.7128, -74.006], label: \"New York\" },\n  { location: [51.5074, -0.1278], label: \"London\" },\n  { location: [35.6762, 139.6503], label: \"Tokyo\" }\n];\n\nconst fresnelConfig = {\n  color: \"#0F3161\",\n  rimColor: \"#6FD3FF\",\n  rimPower: 12,\n  rimIntensity: 0.95\n};\n\nconst atmosphereConfig = {\n  color: \"#5AC8FA\",\n  scale: 1.22,\n  power: 19.5,\n  coefficient: 1.05,\n  intensity: 0.72\n};\n---\n\n<motion-globe\n  radius={2.15}\n  scale={1}\n  markers={markers}\n  fresnel-config={JSON.stringify(fresnelConfig)}\n  atmosphere-config={JSON.stringify(atmosphereConfig)}\n  point-count={21500}\n  point-size={0.06}\n  auto-rotate={true}\n  class=\"w-full h-[600px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/globe-element.ts\";\n\nconst markers = [\n  { location: [40.7128, -74.006], label: \"New York\" },\n  { location: [51.5074, -0.1278], label: \"London\" },\n  { location: [35.6762, 139.6503], label: \"Tokyo\" }\n];\n\nconst fresnelConfig = {\n  color: \"#0F3161\",\n  rimColor: \"#6FD3FF\",\n  rimPower: 12,\n  rimIntensity: 0.95\n};\n\nconst atmosphereConfig = {\n  color: \"#5AC8FA\",\n  scale: 1.22,\n  power: 19.5,\n  coefficient: 1.05,\n  intensity: 0.72\n};\n\nexport default function Page() {\n  return (\n    <motion-globe\n      radius={2.15}\n      scale={1}\n      markers={markers}\n      fresnel-config={JSON.stringify(fresnelConfig)}\n      atmosphere-config={JSON.stringify(atmosphereConfig)}\n      point-count={21500}\n      point-size={0.06}\n      auto-rotate={true}\n      className=\"w-full h-[600px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/globe-element.ts\";\n\nconst markers = [\n  { location: [40.7128, -74.006], label: \"New York\" },\n  { location: [51.5074, -0.1278], label: \"London\" },\n  { location: [35.6762, 139.6503], label: \"Tokyo\" }\n];\n\nconst fresnelConfig = {\n  color: \"#0F3161\",\n  rimColor: \"#6FD3FF\",\n  rimPower: 12,\n  rimIntensity: 0.95\n};\n\nconst atmosphereConfig = {\n  color: \"#5AC8FA\",\n  scale: 1.22,\n  power: 19.5,\n  coefficient: 1.05,\n  intensity: 0.72\n};\n</script>\n\n<template>\n  <motion-globe\n    :radius=\"2.15\"\n    :scale=\"1\"\n    :markers=\"markers\"\n    :fresnel-config=\"JSON.stringify(fresnelConfig)\"\n    :atmosphere-config=\"JSON.stringify(atmosphereConfig)\"\n    :point-count=\"21500\"\n    :point-size=\"0.06\"\n    :auto-rotate=\"true\"\n    class=\"w-full h-[600px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/globe-element.ts\";\n\n  const markers = [\n    { location: [40.7128, -74.006], label: \"New York\" },\n    { location: [51.5074, -0.1278], label: \"London\" },\n    { location: [35.6762, 139.6503], label: \"Tokyo\" }\n  ];\n\n  const fresnelConfig = {\n    color: \"#0F3161\",\n    rimColor: \"#6FD3FF\",\n    rimPower: 12,\n    rimIntensity: 0.95\n  };\n\n  const atmosphereConfig = {\n    color: \"#5AC8FA\",\n    scale: 1.22,\n    power: 19.5,\n    coefficient: 1.05,\n    intensity: 0.72\n  };\n</script>\n\n<motion-globe\n  radius={2.15}\n  scale={1}\n  markers={markers}\n  fresnel-config={JSON.stringify(fresnelConfig)}\n  atmosphere-config={JSON.stringify(atmosphereConfig)}\n  point-count={21500}\n  point-size={0.06}\n  auto-rotate={true}\n  class=\"w-full h-[600px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/globe-element.js\"></script>\n\n<motion-globe\n  radius=\"2.15\"\n  scale=\"1\"\n  markers='[{\"location\":[40.7128,-74.006],\"label\":\"New York\"},{\"location\":[51.5074,-0.1278],\"label\":\"London\"},{\"location\":[35.6762,139.6503],\"label\":\"Tokyo\"}]'\n  fresnel-config='{\"color\":\"#0F3161\",\"rimColor\":\"#6FD3FF\",\"rimPower\":12,\"rimIntensity\":0.95}'\n  atmosphere-config='{\"color\":\"#5AC8FA\",\"scale\":1.22,\"power\":19.5,\"coefficient\":1.05,\"intensity\":0.72}'\n  point-count=\"21500\"\n  point-size=\"0.06\"\n  auto-rotate=\"true\"\n  class=\"w-full h-[600px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "radius",
+          "type": "number",
+          "default": "2.15",
+          "description": "Base radius of the globe sphere."
+        },
+        {
+          "name": "scale",
+          "type": "number",
+          "default": "1",
+          "description": "Display scale of the globe."
+        },
+        {
+          "name": "offset-x",
+          "type": "number",
+          "default": "0",
+          "description": "Horizontal offset of the globe center."
+        },
+        {
+          "name": "offset-y",
+          "type": "number",
+          "default": "0",
+          "description": "Vertical offset of the globe center."
+        },
+        {
+          "name": "rotation",
+          "type": "number",
+          "default": "0",
+          "description": "Initial rotation angle in degrees."
+        },
+        {
+          "name": "fresnel-config",
+          "type": "object (JSON)",
+          "default": "{}",
+          "description": "JSON object with color, rimColor, rimPower, and rimIntensity for the fresnel rim lighting."
+        },
+        {
+          "name": "atmosphere-config",
+          "type": "object (JSON)",
+          "default": "{}",
+          "description": "JSON object with color, scale, power, coefficient, and intensity for the atmospheric glow."
+        },
+        {
+          "name": "point-count",
+          "type": "number",
+          "default": "21500",
+          "description": "Number of dots representing the land surface."
+        },
+        {
+          "name": "point-size",
+          "type": "number",
+          "default": "0.06",
+          "description": "Size of individual land surface dots."
+        },
+        {
+          "name": "land-point-color",
+          "type": "string",
+          "default": "\"#f77114\"",
+          "description": "Color of the dots representing land masses."
+        },
+        {
+          "name": "auto-rotate",
+          "type": "boolean",
+          "default": "true",
+          "description": "Whether the globe automatically rotates."
+        },
+        {
+          "name": "locked-polar-angle",
+          "type": "boolean",
+          "default": "true",
+          "description": "Whether to lock the polar angle (prevents flipping upside down)."
+        },
+        {
+          "name": "markers",
+          "type": "array",
+          "default": "[]",
+          "description": "Array of marker objects with location [lat, lon], optional size, color, and label."
+        },
+        {
+          "name": "focus-on",
+          "type": "array",
+          "default": "null",
+          "description": "Location [lat, lon] to smoothly rotate the globe toward."
+        }
+      ]
+    },
+    {
+      "name": "god-rays",
+      "type": "registry:component",
+      "title": "God Rays",
+      "description": "High-performance procedural god rays effect with customizable colors, pulsating intensity, and distortion.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/god-rays-element.ts",
+          "path": "god-rays/god-rays-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/god-rays-element.ts\";\n---\n\n<motion-god-rays\n  color=\"#FFFFFF\"\n  background-color=\"#17181A\"\n  anchor-x={0.5}\n  anchor-y={1.2}\n  direction-x={0}\n  direction-y={-1}\n  speed={1}\n  light-spread={1}\n  ray-length={1}\n  pulsating={false}\n  fade-distance={1}\n  saturation={1}\n  noise-amount={0}\n  distortion={0}\n  intensity={1}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/god-rays-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-god-rays\n      color=\"#FFFFFF\"\n      background-color=\"#17181A\"\n      anchor-x={0.5}\n      anchor-y={1.2}\n      direction-x={0}\n      direction-y={-1}\n      speed={1}\n      light-spread={1}\n      ray-length={1}\n      pulsating={false}\n      fade-distance={1}\n      saturation={1}\n      noise-amount={0}\n      distortion={0}\n      intensity={1}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/god-rays-element.ts\";\n</script>\n\n<template>\n  <motion-god-rays\n    color=\"#FFFFFF\"\n    background-color=\"#17181A\"\n    :anchor-x=\"0.5\"\n    :anchor-y=\"1.2\"\n    :direction-x=\"0\"\n    :direction-y=\"-1\"\n    :speed=\"1\"\n    :light-spread=\"1\"\n    :ray-length=\"1\"\n    :pulsating=\"false\"\n    :fade-distance=\"1\"\n    :saturation=\"1\"\n    :noise-amount=\"0\"\n    :distortion=\"0\"\n    :intensity=\"1\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/god-rays-element.ts\";\n</script>\n\n<motion-god-rays\n  color=\"#FFFFFF\"\n  background-color=\"#17181A\"\n  anchor-x={0.5}\n  anchor-y={1.2}\n  direction-x={0}\n  direction-y={-1}\n  speed={1}\n  light-spread={1}\n  ray-length={1}\n  pulsating={false}\n  fade-distance={1}\n  saturation={1}\n  noise-amount={0}\n  distortion={0}\n  intensity={1}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/god-rays-element.js\"></script>\n\n<motion-god-rays\n  color=\"#FFFFFF\"\n  background-color=\"#17181A\"\n  anchor-x=\"0.5\"\n  anchor-y=\"1.2\"\n  direction-x=\"0\"\n  direction-y=\"-1\"\n  speed=\"1\"\n  light-spread=\"1\"\n  ray-length=\"1\"\n  pulsating=\"false\"\n  fade-distance=\"1\"\n  saturation=\"1\"\n  noise-amount=\"0\"\n  distortion=\"0\"\n  intensity=\"1\"\n  class=\"w-full h-[500px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "color",
+          "type": "string",
+          "default": "\"#FFFFFF\"",
+          "description": "Color of the god rays light source."
+        },
+        {
+          "name": "background-color",
+          "type": "string",
+          "default": "\"#17181A\"",
+          "description": "Background color of the canvas."
+        },
+        {
+          "name": "anchor-x",
+          "type": "number",
+          "default": "0.5",
+          "description": "X position of the light source (0-1 range)."
+        },
+        {
+          "name": "anchor-y",
+          "type": "number",
+          "default": "1.2",
+          "description": "Y position of the light source (can be outside 0-1 range)."
+        },
+        {
+          "name": "direction-x",
+          "type": "number",
+          "default": "0",
+          "description": "X component of the ray direction vector."
+        },
+        {
+          "name": "direction-y",
+          "type": "number",
+          "default": "-1",
+          "description": "Y component of the ray direction vector (downward)."
+        },
+        {
+          "name": "speed",
+          "type": "number",
+          "default": "1",
+          "description": "Animation speed of the ray shimmer."
+        },
+        {
+          "name": "light-spread",
+          "type": "number",
+          "default": "1",
+          "description": "How much the light spreads from the source."
+        },
+        {
+          "name": "ray-length",
+          "type": "number",
+          "default": "1",
+          "description": "Maximum length of the rays."
+        },
+        {
+          "name": "pulsating",
+          "type": "boolean",
+          "default": "false",
+          "description": "Whether the rays pulsate over time."
+        },
+        {
+          "name": "fade-distance",
+          "type": "number",
+          "default": "1",
+          "description": "Distance at which rays fade out."
+        },
+        {
+          "name": "saturation",
+          "type": "number",
+          "default": "1",
+          "description": "Color saturation of the rays (1 = full, 0 = grayscale)."
+        },
+        {
+          "name": "noise-amount",
+          "type": "number",
+          "default": "0",
+          "description": "Amount of noise variation in the rays."
+        },
+        {
+          "name": "distortion",
+          "type": "number",
+          "default": "0",
+          "description": "Strength of the sine-wave distortion."
+        },
+        {
+          "name": "intensity",
+          "type": "number",
+          "default": "1",
+          "description": "Overall brightness and intensity of the rays."
+        }
+      ]
+    },
+    {
+      "name": "halo",
+      "type": "registry:component",
+      "title": "Halo",
+      "description": "Atmospheric scattering based halo effect with dynamic camera rotation and sun light simulation.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/halo-element.ts",
+          "path": "halo/halo-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/halo-element.ts\";\n---\n\n<motion-halo\n  scale={1}\n  offset-x={0}\n  offset-y={0}\n  rotation={0}\n  rotation-speed={0.5}\n  background-color=\"#17181A\"\n  camera-distance={3}\n  sun-x={0}\n  sun-y={0}\n  sun-z={1}\n  intensity={1}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/halo-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-halo\n      scale={1}\n      offset-x={0}\n      offset-y={0}\n      rotation={0}\n      rotation-speed={0.5}\n      background-color=\"#17181A\"\n      camera-distance={3}\n      sun-x={0}\n      sun-y={0}\n      sun-z={1}\n      intensity={1}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/halo-element.ts\";\n</script>\n\n<template>\n  <motion-halo\n    :scale=\"1\"\n    :offset-x=\"0\"\n    :offset-y=\"0\"\n    :rotation=\"0\"\n    :rotation-speed=\"0.5\"\n    background-color=\"#17181A\"\n    :camera-distance=\"3\"\n    :sun-x=\"0\"\n    :sun-y=\"0\"\n    :sun-z=\"1\"\n    :intensity=\"1\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/halo-element.ts\";\n</script>\n\n<motion-halo\n  scale={1}\n  offset-x={0}\n  offset-y={0}\n  rotation={0}\n  rotation-speed={0.5}\n  background-color=\"#17181A\"\n  camera-distance={3}\n  sun-x={0}\n  sun-y={0}\n  sun-z={1}\n  intensity={1}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/halo-element.js\"></script>\n\n<motion-halo\n  scale=\"1\"\n  offset-x=\"0\"\n  offset-y=\"0\"\n  rotation=\"0\"\n  rotation-speed=\"0.5\"\n  background-color=\"#17181A\"\n  camera-distance=\"3\"\n  sun-x=\"0\"\n  sun-y=\"0\"\n  sun-z=\"1\"\n  intensity=\"1\"\n  class=\"w-full h-[500px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "scale",
+          "type": "number",
+          "default": "1",
+          "description": "Scale of the halo sphere."
+        },
+        {
+          "name": "offset-x",
+          "type": "number",
+          "default": "0",
+          "description": "Horizontal offset of the halo center."
+        },
+        {
+          "name": "offset-y",
+          "type": "number",
+          "default": "0",
+          "description": "Vertical offset of the halo center."
+        },
+        {
+          "name": "rotation",
+          "type": "number",
+          "default": "0",
+          "description": "Initial rotation angle in degrees."
+        },
+        {
+          "name": "rotation-speed",
+          "type": "number",
+          "default": "0.5",
+          "description": "Auto-rotation speed of the camera around the halo."
+        },
+        {
+          "name": "background-color",
+          "type": "string",
+          "default": "\"#17181A\"",
+          "description": "Background color behind the halo."
+        },
+        {
+          "name": "camera-distance",
+          "type": "number",
+          "default": "3",
+          "description": "Distance of the camera from the halo center."
+        },
+        {
+          "name": "sun-x",
+          "type": "number",
+          "default": "0",
+          "description": "X component of the sun light direction vector."
+        },
+        {
+          "name": "sun-y",
+          "type": "number",
+          "default": "0",
+          "description": "Y component of the sun light direction vector."
+        },
+        {
+          "name": "sun-z",
+          "type": "number",
+          "default": "1",
+          "description": "Z component of the sun light direction vector (toward viewer)."
+        },
+        {
+          "name": "intensity",
+          "type": "number",
+          "default": "1",
+          "description": "Brightness and intensity of the atmospheric scattering."
+        }
+      ]
+    },
+    {
+      "name": "interactive-grid",
+      "type": "registry:component",
+      "title": "Interactive Grid",
+      "description": "Physics-based grid simulation that distorts an image in response to cursor movement. Each grid cell tracks mouse velocity and decays back to rest over time.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/interactive-grid-element.ts",
+          "path": "interactive-grid/interactive-grid-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/interactive-grid-element.ts\";\n---\n\n<motion-interactive-grid\n  src=\"/path/to/image.jpg\"\n  grid={15}\n  mouse-size={0.15}\n  strength={0.35}\n  relaxation={0.9}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/interactive-grid-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-interactive-grid\n      src=\"/path/to/image.jpg\"\n      grid={15}\n      mouse-size={0.15}\n      strength={0.35}\n      relaxation={0.9}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/interactive-grid-element.ts\";\n</script>\n\n<template>\n  <motion-interactive-grid\n    src=\"/path/to/image.jpg\"\n    :grid=\"15\"\n    :mouse-size=\"0.15\"\n    :strength=\"0.35\"\n    :relaxation=\"0.9\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/interactive-grid-element.ts\";\n</script>\n\n<motion-interactive-grid\n  src=\"/path/to/image.jpg\"\n  grid={15}\n  mouse-size={0.15}\n  strength={0.35}\n  relaxation={0.9}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/interactive-grid-element.js\"></script>\n\n<motion-interactive-grid\n  src=\"/path/to/image.jpg\"\n  grid=\"15\"\n  mouse-size=\"0.15\"\n  strength=\"0.35\"\n  relaxation=\"0.9\"\n  class=\"w-full h-[500px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "src",
+          "type": "string",
+          "default": "",
+          "description": "The image source URL to apply the distortion effect to."
+        },
+        {
+          "name": "grid",
+          "type": "number",
+          "default": "15",
+          "description": "Grid resolution — number of cells per row/column. Higher values create finer distortion detail."
+        },
+        {
+          "name": "mouse-size",
+          "type": "number",
+          "default": "0.15",
+          "description": "Radius of mouse influence as a fraction of the grid size (0–1)."
+        },
+        {
+          "name": "strength",
+          "type": "number",
+          "default": "0.35",
+          "description": "Strength of the distortion effect. Higher values produce more dramatic warping."
+        },
+        {
+          "name": "relaxation",
+          "type": "number",
+          "default": "0.9",
+          "description": "How quickly cells return to rest after the cursor leaves (0–1). Values closer to 1 decay more slowly."
+        }
+      ]
+    },
+    {
+      "name": "lava-lamp",
+      "type": "registry:component",
+      "title": "Lava Lamp",
+      "description": "Raymarched metaball blobs rendered with a smooth-min SDF and Fresnel edge lighting. Creates a fluid, organic lava lamp animation.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/lava-lamp-element.ts",
+          "path": "lava-lamp/lava-lamp-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/lava-lamp-element.ts\";\n---\n\n<motion-lava-lamp\n  color=\"#17181A\"\n  fresnel-color=\"#ff6900\"\n  speed=\"1.0\"\n  fresnel-power=\"3.0\"\n  radius=\"1\"\n  smoothness=\"0.1\"\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/lava-lamp-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-lava-lamp\n      color=\"#17181A\"\n      fresnel-color=\"#ff6900\"\n      speed={1.0}\n      fresnel-power={3.0}\n      radius={1}\n      smoothness={0.1}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/lava-lamp-element.ts\";\n</script>\n\n<template>\n  <motion-lava-lamp\n    color=\"#17181A\"\n    fresnel-color=\"#ff6900\"\n    :speed=\"1.0\"\n    :fresnel-power=\"3.0\"\n    :radius=\"1\"\n    :smoothness=\"0.1\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/lava-lamp-element.ts\";\n</script>\n\n<motion-lava-lamp\n  color=\"#17181A\"\n  fresnel-color=\"#ff6900\"\n  speed={1.0}\n  fresnel-power={3.0}\n  radius={1}\n  smoothness={0.1}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/lava-lamp-element.js\"></script>\n\n<motion-lava-lamp\n  color=\"#17181A\"\n  fresnel-color=\"#ff6900\"\n  speed=\"1.0\"\n  fresnel-power=\"3.0\"\n  radius=\"1\"\n  smoothness=\"0.1\"\n  class=\"w-full h-[500px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "color",
+          "type": "string",
+          "default": "#17181A",
+          "description": "Base body color of the lava blobs."
+        },
+        {
+          "name": "fresnel-color",
+          "type": "string",
+          "default": "#ff6900",
+          "description": "Color applied at blob edges via the Fresnel effect."
+        },
+        {
+          "name": "speed",
+          "type": "number",
+          "default": "1.0",
+          "description": "Animation speed multiplier."
+        },
+        {
+          "name": "fresnel-power",
+          "type": "number",
+          "default": "3.0",
+          "description": "Controls the sharpness of the Fresnel edge glow."
+        },
+        {
+          "name": "radius",
+          "type": "number",
+          "default": "1",
+          "description": "Base radius of the blobs."
+        },
+        {
+          "name": "smoothness",
+          "type": "number",
+          "default": "0.1",
+          "description": "Smoothness of the blob blending (metaball merge factor)."
+        },
+        {
+          "name": "scale",
+          "type": "number",
+          "default": "1",
+          "description": "Scale multiplier for the lava field."
+        },
+        {
+          "name": "rotation",
+          "type": "number",
+          "default": "0",
+          "description": "Lava field rotation in degrees."
+        },
+        {
+          "name": "offset-x",
+          "type": "number",
+          "default": "0",
+          "description": "Horizontal offset in normalized viewport units."
+        },
+        {
+          "name": "offset-y",
+          "type": "number",
+          "default": "0",
+          "description": "Vertical offset in normalized viewport units."
+        }
+      ]
+    },
+    {
+      "name": "neural-noise",
+      "type": "registry:component",
+      "title": "Neural Noise",
+      "description": "Animated CPPN-based neural noise rendered in WebGL. Produces continuously evolving organic color patterns driven by a compositional pattern-producing network.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/neural-noise-element.ts",
+          "path": "neural-noise/neural-noise-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/neural-noise-element.ts\";\n---\n\n<motion-neural-noise\n  speed={1}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/neural-noise-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-neural-noise\n      speed={1}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/neural-noise-element.ts\";\n</script>\n\n<template>\n  <motion-neural-noise\n    :speed=\"1\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/neural-noise-element.ts\";\n</script>\n\n<motion-neural-noise\n  speed={1}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/neural-noise-element.js\"></script>\n\n<motion-neural-noise\n  speed=\"1\"\n  class=\"w-full h-[500px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "speed",
+          "type": "number",
+          "default": "1",
+          "description": "Animation speed multiplier. Higher values make the pattern evolve faster."
+        }
+      ]
+    },
+    {
+      "name": "pixelated-image",
+      "type": "registry:component",
+      "title": "Pixelated Image",
+      "description": "OGL image revealer that starts as coarse blocks and sharpens to full resolution over time.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/pixelated-image-element.ts",
+          "path": "pixelated-image/pixelated-image-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/pixelated-image-element.ts\";\n---\n\n<motion-pixelated-image\n  image=\"https://picsum.photos/seed/pixelated/800/600\"\n  initial-grid-size=\"6\"\n  step-duration=\"0.15\"\n></motion-pixelated-image>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/pixelated-image-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-pixelated-image\n      image=\"https://picsum.photos/seed/pixelated/800/600\"\n      initial-grid-size=\"6\"\n      step-duration=\"0.15\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/pixelated-image-element.ts\";\n</script>\n\n<template>\n  <motion-pixelated-image\n    image=\"https://picsum.photos/seed/pixelated/800/600\"\n    initial-grid-size=\"6\"\n    step-duration=\"0.15\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/pixelated-image-element.ts\";\n</script>\n\n<motion-pixelated-image\n  image=\"https://picsum.photos/seed/pixelated/800/600\"\n  initial-grid-size=\"6\"\n  step-duration=\"0.15\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/pixelated-image-element.js\"></script>\n\n<motion-pixelated-image\n  image=\"https://picsum.photos/seed/pixelated/800/600\"\n  initial-grid-size=\"6\"\n  step-duration=\"0.15\"\n></motion-pixelated-image>"
+        }
+      ],
+      "props": [
+        {
+          "name": "image",
+          "type": "string",
+          "default": "\"\"",
+          "description": "Image source URL used for the depixelation reveal."
+        },
+        {
+          "name": "initial-grid-size",
+          "type": "number",
+          "default": "6",
+          "description": "Starting vertical grid size before each depixelation step doubles it."
+        },
+        {
+          "name": "step-duration",
+          "type": "number",
+          "default": "0.15",
+          "description": "Seconds each depixelation step lasts before the grid doubles again."
+        }
+      ]
+    },
+    {
+      "name": "plasma-grid",
+      "type": "registry:component",
+      "title": "Plasma Grid",
+      "description": "Animated plasma grid effect rendered in WebGL. Creates a checkerboard grid pattern with flowing plasma noise gradients. Colors are customizable via props.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/plasma-grid-element.ts",
+          "path": "plasma-grid/plasma-grid-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/plasma-grid-element.ts\";\n---\n\n<motion-plasma-grid\n  color=\"#17181A\"\n  highlight-color=\"#FF6900\"\n  speed={0.5}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/plasma-grid-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-plasma-grid\n      color=\"#17181A\"\n      highlight-color=\"#FF6900\"\n      speed={0.5}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/plasma-grid-element.ts\";\n</script>\n\n<template>\n  <motion-plasma-grid\n    color=\"#17181A\"\n    highlight-color=\"#FF6900\"\n    :speed=\"0.5\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/plasma-grid-element.ts\";\n</script>\n\n<motion-plasma-grid\n  color=\"#17181A\"\n  highlight-color=\"#FF6900\"\n  speed={0.5}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/plasma-grid-element.js\"></script>\n\n<motion-plasma-grid\n  color=\"#17181A\"\n  highlight-color=\"#FF6900\"\n  speed=\"0.5\"\n  class=\"w-full h-[500px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "color",
+          "type": "string",
+          "default": "#17181A",
+          "description": "The base background color of the effect."
+        },
+        {
+          "name": "highlight-color",
+          "type": "string",
+          "default": "#FF6900",
+          "description": "The color used for the plasma noise gradients."
+        },
+        {
+          "name": "speed",
+          "type": "number",
+          "default": "0.5",
+          "description": "Animation speed multiplier. Higher values make the plasma flow faster."
+        }
+      ]
+    },
+    {
+      "name": "rubiks-cube",
+      "type": "registry:component",
+      "title": "Rubik's Cube",
+      "description": "A 3D Rubik's Cube that continuously rotates and scrambles itself with smooth face animations. Features a Fresnel rim glow shader and interactive orbit controls.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/rubiks-cube-element.ts",
+          "path": "rubiks-cube/rubiks-cube-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/rubiks-cube-element.ts\";\n---\n\n<motion-rubiks-cube\n  color=\"#17181A\"\n  rim-color=\"#FF6900\"\n  rim-power=\"6\"\n  rim-intensity=\"1.5\"\n  duration=\"1.5\"\n  gap=\"0.015\"\n  radius=\"0.125\"\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/rubiks-cube-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-rubiks-cube\n      color=\"#17181A\"\n      rim-color=\"#FF6900\"\n      rim-power={6}\n      rim-intensity={1.5}\n      duration={1.5}\n      gap={0.015}\n      radius={0.125}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/rubiks-cube-element.ts\";\n</script>\n\n<template>\n  <motion-rubiks-cube\n    color=\"#17181A\"\n    rim-color=\"#FF6900\"\n    :rim-power=\"6\"\n    :rim-intensity=\"1.5\"\n    :duration=\"1.5\"\n    :gap=\"0.015\"\n    :radius=\"0.125\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/rubiks-cube-element.ts\";\n</script>\n\n<motion-rubiks-cube\n  color=\"#17181A\"\n  rim-color=\"#FF6900\"\n  rim-power={6}\n  rim-intensity={1.5}\n  duration={1.5}\n  gap={0.015}\n  radius={0.125}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/rubiks-cube-element.js\"></script>\n\n<motion-rubiks-cube\n  color=\"#17181A\"\n  rim-color=\"#FF6900\"\n  rim-power=\"6\"\n  rim-intensity=\"1.5\"\n  duration=\"1.5\"\n  gap=\"0.015\"\n  radius=\"0.125\"\n  class=\"w-full h-[500px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "color",
+          "type": "string",
+          "default": "#17181A",
+          "description": "Base body color of each cubelet."
+        },
+        {
+          "name": "rim-color",
+          "type": "string",
+          "default": "#FF6900",
+          "description": "Accent color applied by the Fresnel rim shader."
+        },
+        {
+          "name": "rim-power",
+          "type": "number",
+          "default": "6",
+          "description": "Controls how tight the Fresnel rim hug is. Higher values yield a thinner outline."
+        },
+        {
+          "name": "rim-intensity",
+          "type": "number",
+          "default": "1.5",
+          "description": "Intensity multiplier for the Fresnel rim color."
+        },
+        {
+          "name": "duration",
+          "type": "number",
+          "default": "1.5",
+          "description": "Seconds it takes to complete a face rotation."
+        },
+        {
+          "name": "gap",
+          "type": "number",
+          "default": "0.015",
+          "description": "Gap between cubelets to accentuate separation."
+        },
+        {
+          "name": "radius",
+          "type": "number",
+          "default": "0.125",
+          "description": "Corner radius for softened cube edges."
+        },
+        {
+          "name": "scale",
+          "type": "number",
+          "default": "1",
+          "description": "Scale multiplier for the cube."
+        },
+        {
+          "name": "rotation",
+          "type": "number",
+          "default": "0",
+          "description": "Cube rotation in degrees (Z-axis)."
+        },
+        {
+          "name": "offset-x",
+          "type": "number",
+          "default": "0",
+          "description": "Horizontal cube offset in normalized viewport units."
+        },
+        {
+          "name": "offset-y",
+          "type": "number",
+          "default": "0",
+          "description": "Vertical cube offset in normalized viewport units."
+        }
+      ]
+    },
+    {
+      "name": "specular-band",
+      "type": "registry:component",
+      "title": "Specular Band",
+      "description": "Animated specular band effect with lens distortion and hue-shifted color palettes. Creates flowing, organic light bands with adaptive blending for different background brightness levels.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/specular-band-element.ts",
+          "path": "specular-band/specular-band-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/specular-band-element.ts\";\n---\n\n<motion-specular-band\n  color=\"#FF6900\"\n  background-color=\"#17181A\"\n  speed={1.0}\n  distortion={0.2}\n  hue-shift={30}\n  intensity={1.0}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/specular-band-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-specular-band\n      color=\"#FF6900\"\n      background-color=\"#17181A\"\n      speed={1.0}\n      distortion={0.2}\n      hue-shift={30}\n      intensity={1.0}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/specular-band-element.ts\";\n</script>\n\n<template>\n  <motion-specular-band\n    color=\"#FF6900\"\n    background-color=\"#17181A\"\n    :speed=\"1.0\"\n    :distortion=\"0.2\"\n    :hue-shift=\"30\"\n    :intensity=\"1.0\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/specular-band-element.ts\";\n</script>\n\n<motion-specular-band\n  color=\"#FF6900\"\n  background-color=\"#17181A\"\n  speed={1.0}\n  distortion={0.2}\n  hueShift={30}\n  intensity={1.0}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/specular-band-element.js\"></script>\n\n<motion-specular-band\n  color=\"#FF6900\"\n  background-color=\"#17181A\"\n  speed=\"1.0\"\n  distortion=\"0.2\"\n  hue-shift=\"30\"\n  intensity=\"1.0\"\n  class=\"w-full h-[500px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "color",
+          "type": "string",
+          "default": "#FF6900",
+          "description": "Base color of the specular bands."
+        },
+        {
+          "name": "background-color",
+          "type": "string",
+          "default": "#17181A",
+          "description": "Color of the background."
+        },
+        {
+          "name": "speed",
+          "type": "number",
+          "default": "1.0",
+          "description": "Animation speed multiplier."
+        },
+        {
+          "name": "distortion",
+          "type": "number",
+          "default": "0.2",
+          "description": "Lens distortion intensity."
+        },
+        {
+          "name": "hue-shift",
+          "type": "number",
+          "default": "30.0",
+          "description": "Amount of hue shift for secondary bands (in degrees)."
+        },
+        {
+          "name": "intensity",
+          "type": "number",
+          "default": "1.0",
+          "description": "Global intensity/brightness of the effect."
+        }
+      ]
+    },
+    {
+      "name": "water-ripple",
+      "type": "registry:component",
+      "title": "Water Ripple",
+      "description": "Interactive water ripple effect on images. Creates realistic ripple distortions that follow pointer movement with expanding wave animations.",
+      "dependencies": [
+        "lit",
+        "ogl"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/water-ripple-element.ts",
+          "path": "water-ripple/water-ripple-element.ts"
+        },
+        {
+          "type": "registry:file",
+          "target": "public/motion-kit/water-ripple/brush.png",
+          "path": "water-ripple/brush.png"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/water-ripple-element.ts\";\n---\n\n<motion-water-ripple\n  src=\"/path/to/image.jpg\"\n  brush-size={100}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/water-ripple-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-water-ripple\n      src=\"/path/to/image.jpg\"\n      brush-size={100}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/water-ripple-element.ts\";\n</script>\n\n<template>\n  <motion-water-ripple\n    src=\"/path/to/image.jpg\"\n    :brush-size=\"100\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/water-ripple-element.ts\";\n</script>\n\n<motion-water-ripple\n  src=\"/path/to/image.jpg\"\n  brush-size={100}\n  class=\"w-full h-[500px]\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/water-ripple-element.js\"></script>\n\n<motion-water-ripple\n  src=\"/path/to/image.jpg\"\n  brush-size=\"100\"\n  class=\"w-full h-[500px]\"\n/>"
+        }
+      ],
+      "props": [
+        {
+          "name": "src",
+          "type": "string",
+          "default": "",
+          "description": "The image source URL to apply the water ripple effect to."
+        },
+        {
+          "name": "brush-size",
+          "type": "number",
+          "default": "100",
+          "description": "Size of the ripple brush in pixels. Larger values create bigger ripples."
+        }
+      ]
+    }
+  ]
+}

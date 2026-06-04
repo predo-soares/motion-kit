@@ -10,16 +10,16 @@ pnpm build        # production build → dist/
 pnpm preview      # preview built output
 ```
 
-> **Note:** The dev server is always running at http://localhost:4321 — never start it or ask to restart it. `pnpm registry:build` is reserved for the user to run manually. `registry.json` and `public/r/registry.json` are generated outputs — never edit them directly; run `pnpm registry:compose` instead.
+> **Note:** The dev server is always running at http://localhost:4321 — never start it or ask to restart it. `pnpm registry:build` is reserved for the user to run manually.
 
 ## What this project is
 
 `motion-kit-astro` is a **shadcn-compatible component registry** that hosts animated web components for installation via `pnpm dlx shadcn@latest add`. The Astro site (`src/pages/index.astro`) is a live preview/demo gallery; the actual distributable artifacts are:
 
-- **Registry source:** `src/registry/new-york/blocks/<name>/` — one directory per component
+- **Registry source:** `src/registry/<group>/<name>/` — one directory per component
 - **Static JSON served to consumers:** `public/r/<name>.json` + `public/r/registry.json`
-- **Component manifest:** `src/registry/new-york/blocks/<name>/component.json` — opt-in source of truth for a published item
-- **Composed registry manifest:** `registry.json` at the root — generated index of published items
+- **Component manifest:** `src/registry/<group>/<name>/component.json` — opt-in source of truth for a published item
+- **Composed source registries:** `registry.json` at the root plus `src/registry/<group>/registry.json` — include-based manifests
 
 When a consumer runs `shadcn add`, they receive the files listed under `"files"` in the composed `registry.json`, installed at the `"target"` paths in their project.
 
@@ -36,7 +36,7 @@ Every component exposes a `replay()` method for the preview UI's replay button.
 
 ### Registry → consumer flow
 
-Any block folder that defines `component.json` is included in the published registry. `pnpm registry:compose` reads those manifests and rewrites both `registry.json` and `public/r/registry.json`. `public/r/*.json` item payloads are still the pre-built static files that shadcn fetches.
+Any component folder that defines `component.json` can be referenced from the include-based source registries. `public/r/*.json` item payloads are still the static files that shadcn fetches.
 
 ### Preview site (`src/pages/index.astro`)
 
@@ -58,9 +58,9 @@ Tailwind v4 via `@tailwindcss/vite`. Configured in `src/styles/global.css` with 
 
 ## Adding a new component
 
-1. Create `src/registry/new-york/blocks/<name>/<name>-element.ts` (Lit or vanilla Custom Element)
-2. Add `src/registry/new-york/blocks/<name>/component.json` with the registry item metadata
-3. Run `pnpm registry:compose`
-4. Copy or generate the corresponding `public/r/<name>.json` file (same schema as an individual registry item)
+1. Create `src/registry/<group>/<name>/<name>-element.ts` (Lit or vanilla Custom Element)
+2. Add `src/registry/<group>/<name>/component.json` with the registry item metadata
+3. Add the item to the appropriate `src/registry/<group>/registry.json` include file
+4. Update the corresponding `public/r/<name>.json` file (same schema as an individual registry item)
 5. Import and demo the element in `src/pages/index.astro` inside a `<ComponentCard>`
 6. All components must implement `replay()` for the preview UI

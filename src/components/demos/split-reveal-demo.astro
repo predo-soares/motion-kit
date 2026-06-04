@@ -25,4 +25,81 @@ import ComponentCard from "@/components/ui/component-card.astro";
       ></motion-split-reveal>
     </div>
   </div>
+  <div slot="controls" class="mk-controls">
+    <mk-text-input
+      label="Text 1"
+      value="Lines reveal upward from a mask."
+      data-target="motion-split-reveal"
+      data-index="0"
+      data-attr="text"
+    ></mk-text-input>
+    <mk-select
+      label="Mode 1"
+      value="lines"
+      data-target="motion-split-reveal"
+      data-index="0"
+      data-attr="mode"
+      options='["lines","words","chars"]'
+    ></mk-select>
+    <mk-slider
+      label="Delay 1"
+      min="0"
+      max="2"
+      step="0.1"
+      value="0.1"
+      data-target="motion-split-reveal"
+      data-index="0"
+      data-attr="delay"
+    ></mk-slider>
+    <mk-text-input
+      label="Text 2"
+      value="Words arrive one by one in sequence."
+      data-target="motion-split-reveal"
+      data-index="1"
+      data-attr="text"
+    ></mk-text-input>
+    <mk-select
+      label="Mode 2"
+      value="words"
+      data-target="motion-split-reveal"
+      data-index="1"
+      data-attr="mode"
+      options='["lines","words","chars"]'
+    ></mk-select>
+    <mk-slider
+      label="Delay 2"
+      min="0"
+      max="2"
+      step="0.1"
+      value="0.4"
+      data-target="motion-split-reveal"
+      data-index="1"
+      data-attr="delay"
+    ></mk-slider>
+    <mk-text-input
+      label="Text 3"
+      value="CHARS"
+      data-target="motion-split-reveal"
+      data-index="2"
+      data-attr="text"
+    ></mk-text-input>
+    <mk-select
+      label="Mode 3"
+      value="chars"
+      data-target="motion-split-reveal"
+      data-index="2"
+      data-attr="mode"
+      options='["lines","words","chars"]'
+    ></mk-select>
+    <mk-slider
+      label="Delay 3"
+      min="0"
+      max="2"
+      step="0.1"
+      value="0.8"
+      data-target="motion-split-reveal"
+      data-index="2"
+      data-attr="delay"
+    ></mk-slider>
+  </div>
 </ComponentCard>
