@@ -4,6 +4,7 @@
   import "@/registry/interaction/card-stack/card-stack-element.ts";
   import "@/registry/interaction/card-stack/card-stack-item-element.ts";
   import "@/registry/interaction/magnetic/magnetic-element.ts";
+  import "@/registry/interaction/velocity-card/velocity-card-element.ts";
   import "@/registry/text/text-loop/text-loop-element.ts";
   import "@/registry/text/text-scramble/text-scramble-element.ts";
   import "@/registry/text/text-repel/text-repel-element.ts";
@@ -47,6 +48,7 @@
   import "@/components/ui/mk-slider.ts";
   import "@/components/ui/mk-color.ts";
   import "@/components/ui/mk-select.ts";
+  import "@/components/ui/mk-text-input.ts";
 
   gsap.registerPlugin(Flip);
 
@@ -126,7 +128,26 @@
         "option[selected]",
       ) as HTMLOptionElement | null;
       const firstOption = control.querySelector("option");
-      return selectedOption?.value ?? firstOption?.value ?? null;
+      if (selectedOption?.value) return selectedOption.value;
+      if (firstOption?.value) return firstOption.value;
+
+      // Try parsing from options attribute
+      const optionsAttr = control.getAttribute("options");
+      if (optionsAttr) {
+        try {
+          const parsed = JSON.parse(optionsAttr);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            return typeof parsed[0] === "string" ? parsed[0] : parsed[0]?.value ?? null;
+          }
+        } catch (e) {
+          // Invalid JSON, ignore
+        }
+      }
+      return null;
+    }
+
+    if (control.tagName === "MK-TEXT-INPUT") {
+      return control.getAttribute("value") ?? "";
     }
 
     return (control as HTMLInputElement).defaultValue ?? null;
@@ -180,7 +201,6 @@
           previewContent.style.height = "";
           previewContent.style.flexShrink = "";
         }
-        originalParent.insertBefore(card, placeholder);
         placeholder.remove();
         backdrop.remove();
         document.body.classList.remove("mk-card-fullscreen-open");
