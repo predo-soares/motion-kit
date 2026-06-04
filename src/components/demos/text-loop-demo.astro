@@ -13,4 +13,21 @@ import ComponentCard from "@/components/ui/component-card.astro";
       ></motion-text-loop>
     </p>
   </div>
+  <div slot="controls" class="mk-controls">
+    <mk-text-input
+      label="Texts (JSON array)"
+      value='["Design","Develop","Deploy","Delight"]'
+      data-target="motion-text-loop"
+      data-attr="texts"
+    ></mk-text-input>
+    <mk-slider
+      label="Interval (ms)"
+      min="500"
+      max="5000"
+      step="100"
+      value="2000"
+      data-target="motion-text-loop"
+      data-attr="interval"
+    ></mk-slider>
+  </div>
 </ComponentCard>

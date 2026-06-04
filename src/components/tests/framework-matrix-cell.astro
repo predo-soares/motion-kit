@@ -1,0 +1,24 @@
+---
+interface Props {
+  framework: string;
+}
+
+const { framework } = Astro.props;
+
+const previewBackgroundClass =
+  "bg-slate-50 [background-image:radial-gradient(circle,rgba(203,213,225,0.9)_1px,transparent_1.2px)] [background-size:32px_32px]";
+---
+
+<article
+  class={`flex min-h-[260px] flex-col border border-slate-200 bg-white/90 p-5 ${previewBackgroundClass}`}
+>
+  <p
+    class="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-400"
+  >
+    {framework}
+  </p>
+
+  <div class="flex min-h-[180px] flex-1 items-center justify-center px-3 py-6">
+    <slot />
+  </div>
+</article>

@@ -3,7 +3,7 @@
   "name": "video-player",
   "type": "registry:component",
   "title": "Video Player",
-  "description": "Custom video player with play/pause, a hover-expanding scrubber, mute, and GSAP Flip fullscreen expand animation.",
+  "description": "Custom video player with play/pause, a hover-expanding scrubber, mute, and Flip fullscreen expand animation.",
   "dependencies": ["lit", "gsap"],
   "files": [
     {

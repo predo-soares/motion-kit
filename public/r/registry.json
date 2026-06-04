@@ -5,7 +5,6 @@
   "items": [
     {
       "name": "ascii-renderer",
-      "type": "registry:component",
       "title": "ASCII Renderer",
       "description": "OGL WebGL image rendered as animated ASCII dot-grid characters with scanline displacement.",
       "dependencies": [
@@ -14,69 +13,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/ascii-renderer/ascii-renderer-element.ts",
+          "path": "src/registry/canvas/ascii-renderer/ascii-renderer-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/ascii-renderer-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/ascii-renderer-element.ts\";\n---\n\n<motion-ascii-renderer\n  image=\"/images/your-image.jpg\"\n  density={25.0}\n  strength={3.0}\n  color=\"#00ff00\"\n  background-color=\"#17181A\"\n  class=\"w-full h-[400px]\"\n/>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/ascii-renderer-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-ascii-renderer\n      image=\"/images/your-image.jpg\"\n      density={25.0}\n      strength={3.0}\n      color=\"#00ff00\"\n      background-color=\"#17181A\"\n      class=\"w-full h-[400px]\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/ascii-renderer-element.ts\";\n</script>\n\n<template>\n  <motion-ascii-renderer\n    image=\"/images/your-image.jpg\"\n    :density=\"25.0\"\n    :strength=\"3.0\"\n    color=\"#00ff00\"\n    background-color=\"#17181A\"\n    class=\"w-full h-[400px]\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/ascii-renderer-element.ts\";\n</script>\n\n<motion-ascii-renderer\n  image=\"/images/your-image.jpg\"\n  density={25.0}\n  strength={3.0}\n  color=\"#00ff00\"\n  background-color=\"#17181A\"\n  class=\"w-full h-[400px]\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/ascii-renderer-element.js\"></script>\n\n<motion-ascii-renderer\n  image=\"/images/your-image.jpg\"\n  density=\"25.0\"\n  strength=\"3.0\"\n  color=\"#00ff00\"\n  background-color=\"#17181A\"\n  class=\"w-full h-[400px]\"\n/>"
-        }
-      ],
-      "props": [
-        {
-          "name": "image",
-          "type": "string",
-          "default": "\"\"",
-          "description": "URL of the image to render as ASCII."
-        },
-        {
-          "name": "density",
-          "type": "number",
-          "default": "25.0",
-          "description": "Density of the ASCII character grid (higher = more characters)."
-        },
-        {
-          "name": "strength",
-          "type": "number",
-          "default": "3.0",
-          "description": "Intensity of the ASCII character brightness based on image luminance."
-        },
-        {
-          "name": "color",
-          "type": "string",
-          "default": "\"#00ff00\"",
-          "description": "Color of the ASCII characters (any CSS color value)."
-        },
-        {
-          "name": "background-color",
-          "type": "string",
-          "default": "\"#17181A\"",
-          "description": "Background color behind the ASCII characters (any CSS color value)."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "card-3d",
-      "type": "registry:component",
       "title": "Card 3D",
       "description": "OGL-powered 3D card with rounded corners and mouse-tracking parallax rotation.",
       "dependencies": [
@@ -85,69 +30,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/card-3d/card-3d-element.ts",
+          "path": "src/registry/canvas/card-3d/card-3d-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/card-3d-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/card-3d-element.ts\";\n---\n\n<motion-card-3d\n  image=\"/path/to/image.jpg\"\n  width=\"3.2\"\n  height=\"2\"\n  depth=\"0.08\"\n  radius=\"0.15\"\n  class=\"w-full h-[400px]\"\n/>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/card-3d-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-card-3d\n      image=\"/path/to/image.jpg\"\n      width={3.2}\n      height={2}\n      depth={0.08}\n      radius={0.15}\n      className=\"w-full h-[400px]\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/card-3d-element.ts\";\n</script>\n\n<template>\n  <motion-card-3d\n    image=\"/path/to/image.jpg\"\n    :width=\"3.2\"\n    :height=\"2\"\n    :depth=\"0.08\"\n    :radius=\"0.15\"\n    class=\"w-full h-[400px]\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/card-3d-element.ts\";\n</script>\n\n<motion-card-3d\n  image=\"/path/to/image.jpg\"\n  width={3.2}\n  height={2}\n  depth={0.08}\n  radius={0.15}\n  class=\"w-full h-[400px]\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/card-3d-element.js\"></script>\n\n<motion-card-3d\n  image=\"/path/to/image.jpg\"\n  width=\"3.2\"\n  height=\"2\"\n  depth=\"0.08\"\n  radius=\"0.15\"\n  class=\"w-full h-[400px]\"\n/>"
-        }
-      ],
-      "props": [
-        {
-          "name": "image",
-          "type": "string",
-          "default": "\"\"",
-          "description": "URL of the image to display on the 3D card."
-        },
-        {
-          "name": "width",
-          "type": "number",
-          "default": "3.2",
-          "description": "Width of the card in 3D space units."
-        },
-        {
-          "name": "height",
-          "type": "number",
-          "default": "2",
-          "description": "Height of the card in 3D space units."
-        },
-        {
-          "name": "depth",
-          "type": "number",
-          "default": "0.08",
-          "description": "Thickness/depth of the 3D card geometry."
-        },
-        {
-          "name": "radius",
-          "type": "number",
-          "default": "0.15",
-          "description": "Corner radius for rounded corners (in 3D space units)."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "dithered-image",
-      "type": "registry:component",
       "title": "Dithered Image",
       "description": "OGL WebGL dithered image renderer with Bayer, halftone and void-and-cluster threshold maps.",
       "dependencies": [
@@ -156,75 +47,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/dithered-image/dithered-image-element.ts",
+          "path": "src/registry/canvas/dithered-image/dithered-image-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/dithered-image-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/dithered-image-element.ts\";\n---\n\n<motion-dithered-image\n  image=\"/path/to/image.jpg\"\n  dither-map=\"bayer4x4\"\n  pixel-size=\"1\"\n  color=\"#ff6900\"\n  background-color=\"#17181A\"\n  threshold=\"0.0\"\n  class=\"w-full h-[400px]\"\n/>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/dithered-image-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-dithered-image\n      image=\"/path/to/image.jpg\"\n      ditherMap=\"bayer4x4\"\n      pixelSize={1}\n      color=\"#ff6900\"\n      backgroundColor=\"#17181A\"\n      threshold={0.0}\n      className=\"w-full h-[400px]\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/dithered-image-element.ts\";\n</script>\n\n<template>\n  <motion-dithered-image\n    image=\"/path/to/image.jpg\"\n    dither-map=\"bayer4x4\"\n    :pixel-size=\"1\"\n    color=\"#ff6900\"\n    background-color=\"#17181A\"\n    :threshold=\"0.0\"\n    class=\"w-full h-[400px]\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/dithered-image-element.ts\";\n</script>\n\n<motion-dithered-image\n  image=\"/path/to/image.jpg\"\n  ditherMap=\"bayer4x4\"\n  pixelSize={1}\n  color=\"#ff6900\"\n  backgroundColor=\"#17181A\"\n  threshold={0.0}\n  class=\"w-full h-[400px]\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/dithered-image-element.js\"></script>\n\n<motion-dithered-image\n  image=\"/path/to/image.jpg\"\n  dither-map=\"bayer4x4\"\n  pixel-size=\"1\"\n  color=\"#ff6900\"\n  background-color=\"#17181A\"\n  threshold=\"0.0\"\n  class=\"w-full h-[400px]\"\n/>"
-        }
-      ],
-      "props": [
-        {
-          "name": "image",
-          "type": "string",
-          "default": "\"\"",
-          "description": "URL of the image to dither."
-        },
-        {
-          "name": "dither-map",
-          "type": "bayer4x4 | bayer8x8 | halftone | voidAndCluster",
-          "default": "\"bayer4x4\"",
-          "description": "Type of dithering threshold map to use."
-        },
-        {
-          "name": "pixel-size",
-          "type": "number",
-          "default": "1",
-          "description": "Size of dithering pixels in screen pixels."
-        },
-        {
-          "name": "color",
-          "type": "string",
-          "default": "\"#ff6900\"",
-          "description": "Foreground color for the dithered pixels."
-        },
-        {
-          "name": "background-color",
-          "type": "string",
-          "default": "\"#17181A\"",
-          "description": "Background color for the dithered image."
-        },
-        {
-          "name": "threshold",
-          "type": "number",
-          "default": "0.0",
-          "description": "Brightness threshold offset (-1 to 1)."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "fake-3d-image",
-      "type": "registry:component",
       "title": "Fake 3D Image",
       "description": "OGL depth-map parallax effect — move the cursor to shift the image by a grayscale depth map.",
       "dependencies": [
@@ -233,69 +64,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/fake-3d-image/fake-3d-image-element.ts",
+          "path": "src/registry/canvas/fake-3d-image/fake-3d-image-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/fake-3d-image-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/fake-3d-image-element.ts\";\n---\n\n<motion-fake-3d-image\n  color-src=\"/path/to/image.jpg\"\n  depth-src=\"/path/to/depth-map.jpg\"\n  x-threshold=\"8\"\n  y-threshold=\"8\"\n  sensitivity=\"0.25\"\n  class=\"w-full h-[400px]\"\n/>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/fake-3d-image-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-fake-3d-image\n      colorSrc=\"/path/to/image.jpg\"\n      depthSrc=\"/path/to/depth-map.jpg\"\n      xThreshold={8}\n      yThreshold={8}\n      sensitivity={0.25}\n      className=\"w-full h-[400px]\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/fake-3d-image-element.ts\";\n</script>\n\n<template>\n  <motion-fake-3d-image\n    color-src=\"/path/to/image.jpg\"\n    depth-src=\"/path/to/depth-map.jpg\"\n    :x-threshold=\"8\"\n    :y-threshold=\"8\"\n    :sensitivity=\"0.25\"\n    class=\"w-full h-[400px]\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/fake-3d-image-element.ts\";\n</script>\n\n<motion-fake-3d-image\n  colorSrc=\"/path/to/image.jpg\"\n  depthSrc=\"/path/to/depth-map.jpg\"\n  xThreshold={8}\n  yThreshold={8}\n  sensitivity={0.25}\n  class=\"w-full h-[400px]\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/fake-3d-image-element.js\"></script>\n\n<motion-fake-3d-image\n  color-src=\"/path/to/image.jpg\"\n  depth-src=\"/path/to/depth-map.jpg\"\n  x-threshold=\"8\"\n  y-threshold=\"8\"\n  sensitivity=\"0.25\"\n  class=\"w-full h-[400px]\"\n/>"
-        }
-      ],
-      "props": [
-        {
-          "name": "color-src",
-          "type": "string",
-          "default": "\"\"",
-          "description": "URL of the color image to display."
-        },
-        {
-          "name": "depth-src",
-          "type": "string",
-          "default": "\"\"",
-          "description": "URL of the grayscale depth map (white = near, black = far)."
-        },
-        {
-          "name": "x-threshold",
-          "type": "number",
-          "default": "8",
-          "description": "Parallax strength threshold on X axis."
-        },
-        {
-          "name": "y-threshold",
-          "type": "number",
-          "default": "8",
-          "description": "Parallax strength threshold on Y axis."
-        },
-        {
-          "name": "sensitivity",
-          "type": "number",
-          "default": "0.25",
-          "description": "Mouse movement sensitivity (0 to 1)."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "fluid-image-reveal",
-      "type": "registry:component",
       "title": "Fluid Image Reveal",
       "description": "OGL fluid simulation used as a mask to reveal a second image beneath as you move the cursor.",
       "dependencies": [
@@ -304,81 +81,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/fluid-image-reveal/fluid-image-reveal-element.ts",
+          "path": "src/registry/canvas/fluid-image-reveal/fluid-image-reveal-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/fluid-image-reveal-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/fluid-image-reveal-element.ts\";\n---\n\n<motion-fluid-image-reveal\n  base-image=\"/images/before.jpg\"\n  reveal-image=\"/images/after.jpg\"\n  dissipation={0.96}\n  pointer-size={0.005}\n  blend-softness={0.22}\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/fluid-image-reveal-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-fluid-image-reveal\n      base-image=\"/images/before.jpg\"\n      reveal-image=\"/images/after.jpg\"\n      dissipation={0.96}\n      pointer-size={0.005}\n      blend-softness={0.22}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/fluid-image-reveal-element.ts\";\n</script>\n\n<template>\n  <motion-fluid-image-reveal\n    base-image=\"/images/before.jpg\"\n    reveal-image=\"/images/after.jpg\"\n    :dissipation=\"0.96\"\n    :pointer-size=\"0.005\"\n    :blend-softness=\"0.22\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/fluid-image-reveal-element.ts\";\n</script>\n\n<motion-fluid-image-reveal\n  base-image=\"/images/before.jpg\"\n  reveal-image=\"/images/after.jpg\"\n  dissipation={0.96}\n  pointer-size={0.005}\n  blend-softness={0.22}\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/fluid-image-reveal-element.js\"></script>\n\n<motion-fluid-image-reveal\n  base-image=\"/images/before.jpg\"\n  reveal-image=\"/images/after.jpg\"\n  dissipation=\"0.96\"\n  pointer-size=\"0.005\"\n  blend-softness=\"0.22\"\n  class=\"w-full h-[500px]\"\n/>"
-        }
-      ],
-      "props": [
-        {
-          "name": "base-image",
-          "type": "string",
-          "default": "\"\"",
-          "description": "URL of the base image that is initially visible."
-        },
-        {
-          "name": "reveal-image",
-          "type": "string",
-          "default": "\"\"",
-          "description": "URL of the image to reveal through the fluid mask."
-        },
-        {
-          "name": "dissipation",
-          "type": "number",
-          "default": "0.96",
-          "description": "How quickly the fluid density dissipates over time (lower = faster fade)."
-        },
-        {
-          "name": "pointer-size",
-          "type": "number",
-          "default": "0.005",
-          "description": "Size of the cursor's influence on the fluid simulation."
-        },
-        {
-          "name": "velocity-dissipation",
-          "type": "number",
-          "default": "0.96",
-          "description": "How quickly fluid velocity dissipates (affects swirl duration)."
-        },
-        {
-          "name": "pressure-iterations",
-          "type": "number",
-          "default": "10",
-          "description": "Number of pressure solver iterations (higher = more accurate but slower)."
-        },
-        {
-          "name": "blend-softness",
-          "type": "number",
-          "default": "0.22",
-          "description": "Softness of the edge between the two images in the blend zone."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "fluid-simulation",
-      "type": "registry:component",
       "title": "Fluid Simulation",
       "description": "OGL GPU fluid simulation — move the cursor to paint fluid. Animates autonomously while idle.",
       "dependencies": [
@@ -387,75 +98,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/fluid-simulation/fluid-simulation-element.ts",
+          "path": "src/registry/canvas/fluid-simulation/fluid-simulation-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/fluid-simulation-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/fluid-simulation-element.ts\";\n---\n\n<motion-fluid-simulation\n  color=\"#ff6900\"\n  background-color=\"#17181A\"\n  dissipation={0.96}\n  pointer-size={0.005}\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/fluid-simulation-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-fluid-simulation\n      color=\"#ff6900\"\n      background-color=\"#17181A\"\n      dissipation={0.96}\n      pointer-size={0.005}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/fluid-simulation-element.ts\";\n</script>\n\n<template>\n  <motion-fluid-simulation\n    color=\"#ff6900\"\n    background-color=\"#17181A\"\n    :dissipation=\"0.96\"\n    :pointer-size=\"0.005\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/fluid-simulation-element.ts\";\n</script>\n\n<motion-fluid-simulation\n  color=\"#ff6900\"\n  background-color=\"#17181A\"\n  dissipation={0.96}\n  pointer-size={0.005}\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/fluid-simulation-element.js\"></script>\n\n<motion-fluid-simulation\n  color=\"#ff6900\"\n  background-color=\"#17181A\"\n  dissipation=\"0.96\"\n  pointer-size=\"0.005\"\n  class=\"w-full h-[500px]\"\n/>"
-        }
-      ],
-      "props": [
-        {
-          "name": "dissipation",
-          "type": "number",
-          "default": "0.96",
-          "description": "How quickly the fluid density dissipates over time (lower = faster fade)."
-        },
-        {
-          "name": "pointer-size",
-          "type": "number",
-          "default": "0.005",
-          "description": "Size of the cursor's influence on the fluid simulation."
-        },
-        {
-          "name": "color",
-          "type": "string",
-          "default": "\"#ff6900\"",
-          "description": "Color of the fluid being painted (any CSS color value)."
-        },
-        {
-          "name": "background-color",
-          "type": "string",
-          "default": "\"#17181A\"",
-          "description": "Background color of the canvas (any CSS color value)."
-        },
-        {
-          "name": "velocity-dissipation",
-          "type": "number",
-          "default": "0.96",
-          "description": "How quickly fluid velocity dissipates (affects swirl duration)."
-        },
-        {
-          "name": "pressure-iterations",
-          "type": "number",
-          "default": "10",
-          "description": "Number of pressure solver iterations (higher = more accurate but slower)."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "glass-logo",
-      "type": "registry:component",
       "title": "Glass Logo",
       "description": "OGL WebGL2 glass lens over an animated procedural swirl — silhouette driven by an SVG SDF.",
       "dependencies": [
@@ -464,105 +115,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/glass-logo/glass-logo-element.ts",
+          "path": "src/registry/canvas/glass-logo/glass-logo-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/glass-logo-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/glass-logo-element.ts\";\n\nconst svgLogo = `<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"50\" cy=\"50\" r=\"40\" fill=\"white\"/></svg>`;\n---\n\n<motion-glass-logo\n  svg-source={svgLogo}\n  speed={1}\n  scale={1}\n  rotation={0}\n  refraction={1}\n  chromatic-aberration={1}\n  blur={1}\n  swirl-color-a=\"#222326\"\n  swirl-color-b=\"#ff6900\"\n  class=\"w-full h-[400px]\"\n/>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/glass-logo-element.ts\";\n\nconst svgLogo = `<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"50\" cy=\"50\" r=\"40\" fill=\"white\"/></svg>`;\n\nexport default function Page() {\n  return (\n    <motion-glass-logo\n      svg-source={svgLogo}\n      speed={1}\n      scale={1}\n      rotation={0}\n      refraction={1}\n      chromatic-aberration={1}\n      blur={1}\n      swirl-color-a=\"#222326\"\n      swirl-color-b=\"#ff6900\"\n      className=\"w-full h-[400px]\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/glass-logo-element.ts\";\n\nconst svgLogo = `<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"50\" cy=\"50\" r=\"40\" fill=\"white\"/></svg>`;\n</script>\n\n<template>\n  <motion-glass-logo\n    :svg-source=\"svgLogo\"\n    :speed=\"1\"\n    :scale=\"1\"\n    :rotation=\"0\"\n    :refraction=\"1\"\n    :chromatic-aberration=\"1\"\n    :blur=\"1\"\n    swirl-color-a=\"#222326\"\n    swirl-color-b=\"#ff6900\"\n    class=\"w-full h-[400px]\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/glass-logo-element.ts\";\n\n  const svgLogo = `<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"50\" cy=\"50\" r=\"40\" fill=\"white\"/></svg>`;\n</script>\n\n<motion-glass-logo\n  svg-source={svgLogo}\n  speed={1}\n  scale={1}\n  rotation={0}\n  refraction={1}\n  chromatic-aberration={1}\n  blur={1}\n  swirl-color-a=\"#222326\"\n  swirl-color-b=\"#ff6900\"\n  class=\"w-full h-[400px]\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/glass-logo-element.js\"></script>\n\n<motion-glass-logo\n  svg-source=\"<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='40' fill='white'/></svg>\"\n  speed=\"1\"\n  scale=\"1\"\n  rotation=\"0\"\n  refraction=\"1\"\n  chromatic-aberration=\"1\"\n  blur=\"1\"\n  swirl-color-a=\"#222326\"\n  swirl-color-b=\"#ff6900\"\n  class=\"w-full h-[400px]\"\n/>"
-        }
-      ],
-      "props": [
-        {
-          "name": "svg-source",
-          "type": "string",
-          "default": "\"<svg>...</svg>\"",
-          "description": "SVG markup to render as a glass lens (defaults to a logo shape)."
-        },
-        {
-          "name": "speed",
-          "type": "number",
-          "default": "1",
-          "description": "Animation speed of the swirl background."
-        },
-        {
-          "name": "scale",
-          "type": "number",
-          "default": "1",
-          "description": "Scale of the logo within the canvas."
-        },
-        {
-          "name": "offset-x",
-          "type": "number",
-          "default": "0",
-          "description": "Horizontal offset of the logo center."
-        },
-        {
-          "name": "offset-y",
-          "type": "number",
-          "default": "0",
-          "description": "Vertical offset of the logo center."
-        },
-        {
-          "name": "rotation",
-          "type": "number",
-          "default": "0",
-          "description": "Rotation angle of the logo in degrees."
-        },
-        {
-          "name": "refraction",
-          "type": "number",
-          "default": "1",
-          "description": "Strength of the glass lens refraction effect."
-        },
-        {
-          "name": "chromatic-aberration",
-          "type": "number",
-          "default": "1",
-          "description": "Intensity of RGB color splitting at edges."
-        },
-        {
-          "name": "blur",
-          "type": "number",
-          "default": "1",
-          "description": "Blur amount of the refracted background."
-        },
-        {
-          "name": "swirl-color-a",
-          "type": "string",
-          "default": "\"#222326\"",
-          "description": "First color for the animated swirl gradient."
-        },
-        {
-          "name": "swirl-color-b",
-          "type": "string",
-          "default": "\"#ff6900\"",
-          "description": "Second color for the animated swirl gradient."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "glass-pane",
-      "type": "registry:component",
       "title": "Glass Pane",
       "description": "OGL animated glass panel strips with refraction, chromatic aberration and wave distortion over an image.",
       "dependencies": [
@@ -571,87 +132,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/glass-pane/glass-pane-element.ts",
+          "path": "src/registry/canvas/glass-pane/glass-pane-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/glass-pane-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/glass-pane-element.ts\";\n---\n\n<motion-glass-pane\n  image=\"/images/your-image.jpg\"\n  rotation={0}\n  refraction={1}\n  chromatic-aberration={1}\n  panel-width={0.82}\n  wave-frequency={0.0}\n  wave-amplitude={0.0}\n  speed={0.65}\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/glass-pane-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-glass-pane\n      image=\"/images/your-image.jpg\"\n      rotation={0}\n      refraction={1}\n      chromatic-aberration={1}\n      panel-width={0.82}\n      wave-frequency={0.0}\n      wave-amplitude={0.0}\n      speed={0.65}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/glass-pane-element.ts\";\n</script>\n\n<template>\n  <motion-glass-pane\n    image=\"/images/your-image.jpg\"\n    :rotation=\"0\"\n    :refraction=\"1\"\n    :chromatic-aberration=\"1\"\n    :panel-width=\"0.82\"\n    :wave-frequency=\"0.0\"\n    :wave-amplitude=\"0.0\"\n    :speed=\"0.65\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/glass-pane-element.ts\";\n</script>\n\n<motion-glass-pane\n  image=\"/images/your-image.jpg\"\n  rotation={0}\n  refraction={1}\n  chromatic-aberration={1}\n  panel-width={0.82}\n  wave-frequency={0.0}\n  wave-amplitude={0.0}\n  speed={0.65}\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/glass-pane-element.js\"></script>\n\n<motion-glass-pane\n  image=\"/images/your-image.jpg\"\n  rotation=\"0\"\n  refraction=\"1\"\n  chromatic-aberration=\"1\"\n  panel-width=\"0.82\"\n  wave-frequency=\"0.0\"\n  wave-amplitude=\"0.0\"\n  speed=\"0.65\"\n  class=\"w-full h-[500px]\"\n/>"
-        }
-      ],
-      "props": [
-        {
-          "name": "image",
-          "type": "string",
-          "default": "\"\"",
-          "description": "URL of the background image to display through the glass pane."
-        },
-        {
-          "name": "rotation",
-          "type": "number",
-          "default": "0",
-          "description": "Rotation angle of the glass strips in degrees."
-        },
-        {
-          "name": "refraction",
-          "type": "number",
-          "default": "1",
-          "description": "Strength of the glass refraction distortion."
-        },
-        {
-          "name": "chromatic-aberration",
-          "type": "number",
-          "default": "1",
-          "description": "Intensity of RGB color splitting at edges."
-        },
-        {
-          "name": "panel-width",
-          "type": "number",
-          "default": "0.82",
-          "description": "Width of each glass strip as a fraction of the canvas."
-        },
-        {
-          "name": "wave-frequency",
-          "type": "number",
-          "default": "0.0",
-          "description": "Frequency of the wave distortion across the strips."
-        },
-        {
-          "name": "wave-amplitude",
-          "type": "number",
-          "default": "0.0",
-          "description": "Amplitude of the wave distortion effect."
-        },
-        {
-          "name": "speed",
-          "type": "number",
-          "default": "0.65",
-          "description": "Animation speed of the wave distortion."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "glass-slideshow",
-      "type": "registry:component",
       "title": "Glass Slideshow",
       "description": "An OGL-powered slideshow with liquid glass image transitions, chromatic fringing, and optional autoplay. Lit Custom Element.",
       "dependencies": [
@@ -661,93 +150,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/glass-slideshow/glass-slideshow-element.ts",
+          "path": "src/registry/canvas/glass-slideshow/glass-slideshow-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/glass-slideshow-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/glass-slideshow-element.ts\";\n\nconst slides = [\n  { src: \"/images/slide1.jpg\", alt: \"Slide 1\" },\n  { src: \"/images/slide2.jpg\", alt: \"Slide 2\" },\n  { src: \"/images/slide3.jpg\", alt: \"Slide 3\" }\n];\n---\n\n<motion-glass-slideshow\n  images={JSON.stringify(slides)}\n  index={0}\n  transition-duration={2000}\n  intensity={1}\n  distortion={1}\n  chromatic-aberration={1}\n  refraction={1}\n  autoplay={true}\n  autoplay-interval={5000}\n  class=\"w-full h-[600px]\"\n/>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/glass-slideshow-element.ts\";\n\nconst slides = [\n  { src: \"/images/slide1.jpg\", alt: \"Slide 1\" },\n  { src: \"/images/slide2.jpg\", alt: \"Slide 2\" },\n  { src: \"/images/slide3.jpg\", alt: \"Slide 3\" }\n];\n\nexport default function Page() {\n  return (\n    <motion-glass-slideshow\n      images={JSON.stringify(slides)}\n      index={0}\n      transition-duration={2000}\n      intensity={1}\n      distortion={1}\n      chromatic-aberration={1}\n      refraction={1}\n      autoplay={true}\n      autoplay-interval={5000}\n      className=\"w-full h-[600px]\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/glass-slideshow-element.ts\";\n\nconst slides = [\n  { src: \"/images/slide1.jpg\", alt: \"Slide 1\" },\n  { src: \"/images/slide2.jpg\", alt: \"Slide 2\" },\n  { src: \"/images/slide3.jpg\", alt: \"Slide 3\" }\n];\n</script>\n\n<template>\n  <motion-glass-slideshow\n    :images=\"JSON.stringify(slides)\"\n    :index=\"0\"\n    :transition-duration=\"2000\"\n    :intensity=\"1\"\n    :distortion=\"1\"\n    :chromatic-aberration=\"1\"\n    :refraction=\"1\"\n    :autoplay=\"true\"\n    :autoplay-interval=\"5000\"\n    class=\"w-full h-[600px]\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/glass-slideshow-element.ts\";\n\n  const slides = [\n    { src: \"/images/slide1.jpg\", alt: \"Slide 1\" },\n    { src: \"/images/slide2.jpg\", alt: \"Slide 2\" },\n    { src: \"/images/slide3.jpg\", alt: \"Slide 3\" }\n  ];\n</script>\n\n<motion-glass-slideshow\n  images={JSON.stringify(slides)}\n  index={0}\n  transition-duration={2000}\n  intensity={1}\n  distortion={1}\n  chromatic-aberration={1}\n  refraction={1}\n  autoplay={true}\n  autoplay-interval={5000}\n  class=\"w-full h-[600px]\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/glass-slideshow-element.js\"></script>\n\n<motion-glass-slideshow\n  images='[{\"src\":\"/images/slide1.jpg\",\"alt\":\"Slide 1\"},{\"src\":\"/images/slide2.jpg\",\"alt\":\"Slide 2\"},{\"src\":\"/images/slide3.jpg\",\"alt\":\"Slide 3\"}]'\n  index=\"0\"\n  transition-duration=\"2000\"\n  intensity=\"1\"\n  distortion=\"1\"\n  chromatic-aberration=\"1\"\n  refraction=\"1\"\n  autoplay=\"true\"\n  autoplay-interval=\"5000\"\n  class=\"w-full h-[600px]\"\n/>"
-        }
-      ],
-      "props": [
-        {
-          "name": "images",
-          "type": "string (JSON)",
-          "default": "\"[]\"",
-          "description": "JSON array of slide objects with src (URL) and optional alt text."
-        },
-        {
-          "name": "index",
-          "type": "number",
-          "default": "0",
-          "description": "Current slide index (updates on transition when autoplay is false)."
-        },
-        {
-          "name": "transition-duration",
-          "type": "number",
-          "default": "2000",
-          "description": "Duration of the glass transition effect in milliseconds."
-        },
-        {
-          "name": "intensity",
-          "type": "number",
-          "default": "1",
-          "description": "Overall intensity of the glass distortion and refraction effects."
-        },
-        {
-          "name": "distortion",
-          "type": "number",
-          "default": "1",
-          "description": "Strength of the liquid distortion during transitions."
-        },
-        {
-          "name": "chromatic-aberration",
-          "type": "number",
-          "default": "1",
-          "description": "Intensity of RGB color splitting at refracted edges."
-        },
-        {
-          "name": "refraction",
-          "type": "number",
-          "default": "1",
-          "description": "Strength of the glass lens refraction effect."
-        },
-        {
-          "name": "autoplay",
-          "type": "boolean",
-          "default": "true",
-          "description": "Whether to automatically advance slides."
-        },
-        {
-          "name": "autoplay-interval",
-          "type": "number",
-          "default": "5000",
-          "description": "Time between automatic slide advances in milliseconds."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "glitter-cloth",
-      "type": "registry:component",
       "title": "Glitter Cloth",
       "description": "An OGL shader surface with animated silk folds, glitter sparkle, and vignette depth shading. Lit Custom Element.",
       "dependencies": [
@@ -756,87 +167,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/glitter-cloth/glitter-cloth-element.ts",
+          "path": "src/registry/canvas/glitter-cloth/glitter-cloth-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/glitter-cloth-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/glitter-cloth-element.ts\";\n---\n\n<motion-glitter-cloth\n  color=\"#ff6900\"\n  speed={1}\n  brightness={1}\n  blend-strength={0.02}\n  noise-scale={4}\n  vignette-strength={15}\n  vignette-power={0.25}\n  vignette-opacity={1}\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/glitter-cloth-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-glitter-cloth\n      color=\"#ff6900\"\n      speed={1}\n      brightness={1}\n      blend-strength={0.02}\n      noise-scale={4}\n      vignette-strength={15}\n      vignette-power={0.25}\n      vignette-opacity={1}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/glitter-cloth-element.ts\";\n</script>\n\n<template>\n  <motion-glitter-cloth\n    color=\"#ff6900\"\n    :speed=\"1\"\n    :brightness=\"1\"\n    :blend-strength=\"0.02\"\n    :noise-scale=\"4\"\n    :vignette-strength=\"15\"\n    :vignette-power=\"0.25\"\n    :vignette-opacity=\"1\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/glitter-cloth-element.ts\";\n</script>\n\n<motion-glitter-cloth\n  color=\"#ff6900\"\n  speed={1}\n  brightness={1}\n  blend-strength={0.02}\n  noise-scale={4}\n  vignette-strength={15}\n  vignette-power={0.25}\n  vignette-opacity={1}\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/glitter-cloth-element.js\"></script>\n\n<motion-glitter-cloth\n  color=\"#ff6900\"\n  speed=\"1\"\n  brightness=\"1\"\n  blend-strength=\"0.02\"\n  noise-scale=\"4\"\n  vignette-strength=\"15\"\n  vignette-power=\"0.25\"\n  vignette-opacity=\"1\"\n  class=\"w-full h-[500px]\"\n/>"
-        }
-      ],
-      "props": [
-        {
-          "name": "color",
-          "type": "string",
-          "default": "\"#ff6900\"",
-          "description": "Primary color of the glitter cloth (accent and shadow colors are auto-derived)."
-        },
-        {
-          "name": "speed",
-          "type": "number",
-          "default": "1",
-          "description": "Animation speed of the cloth folds and sparkle."
-        },
-        {
-          "name": "brightness",
-          "type": "number",
-          "default": "1",
-          "description": "Overall brightness multiplier of the fabric."
-        },
-        {
-          "name": "blend-strength",
-          "type": "number",
-          "default": "0.02",
-          "description": "How strongly the noise blends with the base color (vividLight mode)."
-        },
-        {
-          "name": "noise-scale",
-          "type": "number",
-          "default": "4",
-          "description": "Scale of the noise texture (lower = larger grain)."
-        },
-        {
-          "name": "vignette-strength",
-          "type": "number",
-          "default": "15",
-          "description": "Intensity of the vignette darkening at edges."
-        },
-        {
-          "name": "vignette-power",
-          "type": "number",
-          "default": "0.25",
-          "description": "Power curve of the vignette falloff."
-        },
-        {
-          "name": "vignette-opacity",
-          "type": "number",
-          "default": "1",
-          "description": "Opacity of the vignette effect (0 = disabled)."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "globe",
-      "type": "registry:component",
       "title": "Globe",
       "description": "A Fresnel-lit globe with rim glow, haloed atmosphere, land mesh detail, and marker layers for data storytelling. Lit Custom Element.",
       "dependencies": [
@@ -846,128 +185,20 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/globe/globe-element.ts",
+          "path": "src/registry/canvas/globe/globe-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/globe-element.ts"
         },
         {
-          "path": "src/registry/new-york/blocks/globe/land-texture.png",
+          "path": "src/registry/canvas/globe/land-texture.png",
           "type": "registry:file",
           "target": "public/motion-kit/globe/land-texture.png"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/globe-element.ts\";\n\nconst markers = [\n  { location: [40.7128, -74.006], label: \"New York\" },\n  { location: [51.5074, -0.1278], label: \"London\" },\n  { location: [35.6762, 139.6503], label: \"Tokyo\" }\n];\n\nconst fresnelConfig = {\n  color: \"#0F3161\",\n  rimColor: \"#6FD3FF\",\n  rimPower: 12,\n  rimIntensity: 0.95\n};\n\nconst atmosphereConfig = {\n  color: \"#5AC8FA\",\n  scale: 1.22,\n  power: 19.5,\n  coefficient: 1.05,\n  intensity: 0.72\n};\n---\n\n<motion-globe\n  radius={2.15}\n  scale={1}\n  markers={markers}\n  fresnel-config={JSON.stringify(fresnelConfig)}\n  atmosphere-config={JSON.stringify(atmosphereConfig)}\n  point-count={21500}\n  point-size={0.06}\n  auto-rotate={true}\n  class=\"w-full h-[600px]\"\n/>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/globe-element.ts\";\n\nconst markers = [\n  { location: [40.7128, -74.006], label: \"New York\" },\n  { location: [51.5074, -0.1278], label: \"London\" },\n  { location: [35.6762, 139.6503], label: \"Tokyo\" }\n];\n\nconst fresnelConfig = {\n  color: \"#0F3161\",\n  rimColor: \"#6FD3FF\",\n  rimPower: 12,\n  rimIntensity: 0.95\n};\n\nconst atmosphereConfig = {\n  color: \"#5AC8FA\",\n  scale: 1.22,\n  power: 19.5,\n  coefficient: 1.05,\n  intensity: 0.72\n};\n\nexport default function Page() {\n  return (\n    <motion-globe\n      radius={2.15}\n      scale={1}\n      markers={markers}\n      fresnel-config={JSON.stringify(fresnelConfig)}\n      atmosphere-config={JSON.stringify(atmosphereConfig)}\n      point-count={21500}\n      point-size={0.06}\n      auto-rotate={true}\n      className=\"w-full h-[600px]\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/globe-element.ts\";\n\nconst markers = [\n  { location: [40.7128, -74.006], label: \"New York\" },\n  { location: [51.5074, -0.1278], label: \"London\" },\n  { location: [35.6762, 139.6503], label: \"Tokyo\" }\n];\n\nconst fresnelConfig = {\n  color: \"#0F3161\",\n  rimColor: \"#6FD3FF\",\n  rimPower: 12,\n  rimIntensity: 0.95\n};\n\nconst atmosphereConfig = {\n  color: \"#5AC8FA\",\n  scale: 1.22,\n  power: 19.5,\n  coefficient: 1.05,\n  intensity: 0.72\n};\n</script>\n\n<template>\n  <motion-globe\n    :radius=\"2.15\"\n    :scale=\"1\"\n    :markers=\"markers\"\n    :fresnel-config=\"JSON.stringify(fresnelConfig)\"\n    :atmosphere-config=\"JSON.stringify(atmosphereConfig)\"\n    :point-count=\"21500\"\n    :point-size=\"0.06\"\n    :auto-rotate=\"true\"\n    class=\"w-full h-[600px]\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/globe-element.ts\";\n\n  const markers = [\n    { location: [40.7128, -74.006], label: \"New York\" },\n    { location: [51.5074, -0.1278], label: \"London\" },\n    { location: [35.6762, 139.6503], label: \"Tokyo\" }\n  ];\n\n  const fresnelConfig = {\n    color: \"#0F3161\",\n    rimColor: \"#6FD3FF\",\n    rimPower: 12,\n    rimIntensity: 0.95\n  };\n\n  const atmosphereConfig = {\n    color: \"#5AC8FA\",\n    scale: 1.22,\n    power: 19.5,\n    coefficient: 1.05,\n    intensity: 0.72\n  };\n</script>\n\n<motion-globe\n  radius={2.15}\n  scale={1}\n  markers={markers}\n  fresnel-config={JSON.stringify(fresnelConfig)}\n  atmosphere-config={JSON.stringify(atmosphereConfig)}\n  point-count={21500}\n  point-size={0.06}\n  auto-rotate={true}\n  class=\"w-full h-[600px]\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/globe-element.js\"></script>\n\n<motion-globe\n  radius=\"2.15\"\n  scale=\"1\"\n  markers='[{\"location\":[40.7128,-74.006],\"label\":\"New York\"},{\"location\":[51.5074,-0.1278],\"label\":\"London\"},{\"location\":[35.6762,139.6503],\"label\":\"Tokyo\"}]'\n  fresnel-config='{\"color\":\"#0F3161\",\"rimColor\":\"#6FD3FF\",\"rimPower\":12,\"rimIntensity\":0.95}'\n  atmosphere-config='{\"color\":\"#5AC8FA\",\"scale\":1.22,\"power\":19.5,\"coefficient\":1.05,\"intensity\":0.72}'\n  point-count=\"21500\"\n  point-size=\"0.06\"\n  auto-rotate=\"true\"\n  class=\"w-full h-[600px]\"\n/>"
-        }
-      ],
-      "props": [
-        {
-          "name": "radius",
-          "type": "number",
-          "default": "2.15",
-          "description": "Base radius of the globe sphere."
-        },
-        {
-          "name": "scale",
-          "type": "number",
-          "default": "1",
-          "description": "Display scale of the globe."
-        },
-        {
-          "name": "offset-x",
-          "type": "number",
-          "default": "0",
-          "description": "Horizontal offset of the globe center."
-        },
-        {
-          "name": "offset-y",
-          "type": "number",
-          "default": "0",
-          "description": "Vertical offset of the globe center."
-        },
-        {
-          "name": "rotation",
-          "type": "number",
-          "default": "0",
-          "description": "Initial rotation angle in degrees."
-        },
-        {
-          "name": "fresnel-config",
-          "type": "object (JSON)",
-          "default": "{}",
-          "description": "JSON object with color, rimColor, rimPower, and rimIntensity for the fresnel rim lighting."
-        },
-        {
-          "name": "atmosphere-config",
-          "type": "object (JSON)",
-          "default": "{}",
-          "description": "JSON object with color, scale, power, coefficient, and intensity for the atmospheric glow."
-        },
-        {
-          "name": "point-count",
-          "type": "number",
-          "default": "21500",
-          "description": "Number of dots representing the land surface."
-        },
-        {
-          "name": "point-size",
-          "type": "number",
-          "default": "0.06",
-          "description": "Size of individual land surface dots."
-        },
-        {
-          "name": "land-point-color",
-          "type": "string",
-          "default": "\"#f77114\"",
-          "description": "Color of the dots representing land masses."
-        },
-        {
-          "name": "auto-rotate",
-          "type": "boolean",
-          "default": "true",
-          "description": "Whether the globe automatically rotates."
-        },
-        {
-          "name": "locked-polar-angle",
-          "type": "boolean",
-          "default": "true",
-          "description": "Whether to lock the polar angle (prevents flipping upside down)."
-        },
-        {
-          "name": "markers",
-          "type": "array",
-          "default": "[]",
-          "description": "Array of marker objects with location [lat, lon], optional size, color, and label."
-        },
-        {
-          "name": "focus-on",
-          "type": "array",
-          "default": "null",
-          "description": "Location [lat, lon] to smoothly rotate the globe toward."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "god-rays",
-      "type": "registry:component",
       "title": "God Rays",
       "description": "High-performance procedural god rays effect with customizable colors, pulsating intensity, and distortion. Lit Custom Element.",
       "dependencies": [
@@ -976,129 +207,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/god-rays/god-rays-element.ts",
+          "path": "src/registry/canvas/god-rays/god-rays-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/god-rays-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/god-rays-element.ts\";\n---\n\n<motion-god-rays\n  color=\"#FFFFFF\"\n  background-color=\"#17181A\"\n  anchor-x={0.5}\n  anchor-y={1.2}\n  direction-x={0}\n  direction-y={-1}\n  speed={1}\n  light-spread={1}\n  ray-length={1}\n  pulsating={false}\n  fade-distance={1}\n  saturation={1}\n  noise-amount={0}\n  distortion={0}\n  intensity={1}\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/god-rays-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-god-rays\n      color=\"#FFFFFF\"\n      background-color=\"#17181A\"\n      anchor-x={0.5}\n      anchor-y={1.2}\n      direction-x={0}\n      direction-y={-1}\n      speed={1}\n      light-spread={1}\n      ray-length={1}\n      pulsating={false}\n      fade-distance={1}\n      saturation={1}\n      noise-amount={0}\n      distortion={0}\n      intensity={1}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/god-rays-element.ts\";\n</script>\n\n<template>\n  <motion-god-rays\n    color=\"#FFFFFF\"\n    background-color=\"#17181A\"\n    :anchor-x=\"0.5\"\n    :anchor-y=\"1.2\"\n    :direction-x=\"0\"\n    :direction-y=\"-1\"\n    :speed=\"1\"\n    :light-spread=\"1\"\n    :ray-length=\"1\"\n    :pulsating=\"false\"\n    :fade-distance=\"1\"\n    :saturation=\"1\"\n    :noise-amount=\"0\"\n    :distortion=\"0\"\n    :intensity=\"1\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/god-rays-element.ts\";\n</script>\n\n<motion-god-rays\n  color=\"#FFFFFF\"\n  background-color=\"#17181A\"\n  anchor-x={0.5}\n  anchor-y={1.2}\n  direction-x={0}\n  direction-y={-1}\n  speed={1}\n  light-spread={1}\n  ray-length={1}\n  pulsating={false}\n  fade-distance={1}\n  saturation={1}\n  noise-amount={0}\n  distortion={0}\n  intensity={1}\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/god-rays-element.js\"></script>\n\n<motion-god-rays\n  color=\"#FFFFFF\"\n  background-color=\"#17181A\"\n  anchor-x=\"0.5\"\n  anchor-y=\"1.2\"\n  direction-x=\"0\"\n  direction-y=\"-1\"\n  speed=\"1\"\n  light-spread=\"1\"\n  ray-length=\"1\"\n  pulsating=\"false\"\n  fade-distance=\"1\"\n  saturation=\"1\"\n  noise-amount=\"0\"\n  distortion=\"0\"\n  intensity=\"1\"\n  class=\"w-full h-[500px]\"\n/>"
-        }
-      ],
-      "props": [
-        {
-          "name": "color",
-          "type": "string",
-          "default": "\"#FFFFFF\"",
-          "description": "Color of the god rays light source."
-        },
-        {
-          "name": "background-color",
-          "type": "string",
-          "default": "\"#17181A\"",
-          "description": "Background color of the canvas."
-        },
-        {
-          "name": "anchor-x",
-          "type": "number",
-          "default": "0.5",
-          "description": "X position of the light source (0-1 range)."
-        },
-        {
-          "name": "anchor-y",
-          "type": "number",
-          "default": "1.2",
-          "description": "Y position of the light source (can be outside 0-1 range)."
-        },
-        {
-          "name": "direction-x",
-          "type": "number",
-          "default": "0",
-          "description": "X component of the ray direction vector."
-        },
-        {
-          "name": "direction-y",
-          "type": "number",
-          "default": "-1",
-          "description": "Y component of the ray direction vector (downward)."
-        },
-        {
-          "name": "speed",
-          "type": "number",
-          "default": "1",
-          "description": "Animation speed of the ray shimmer."
-        },
-        {
-          "name": "light-spread",
-          "type": "number",
-          "default": "1",
-          "description": "How much the light spreads from the source."
-        },
-        {
-          "name": "ray-length",
-          "type": "number",
-          "default": "1",
-          "description": "Maximum length of the rays."
-        },
-        {
-          "name": "pulsating",
-          "type": "boolean",
-          "default": "false",
-          "description": "Whether the rays pulsate over time."
-        },
-        {
-          "name": "fade-distance",
-          "type": "number",
-          "default": "1",
-          "description": "Distance at which rays fade out."
-        },
-        {
-          "name": "saturation",
-          "type": "number",
-          "default": "1",
-          "description": "Color saturation of the rays (1 = full, 0 = grayscale)."
-        },
-        {
-          "name": "noise-amount",
-          "type": "number",
-          "default": "0",
-          "description": "Amount of noise variation in the rays."
-        },
-        {
-          "name": "distortion",
-          "type": "number",
-          "default": "0",
-          "description": "Strength of the sine-wave distortion."
-        },
-        {
-          "name": "intensity",
-          "type": "number",
-          "default": "1",
-          "description": "Overall brightness and intensity of the rays."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "halo",
-      "type": "registry:component",
       "title": "Halo",
       "description": "Atmospheric scattering based halo effect with dynamic camera rotation and sun light simulation. Lit Custom Element.",
       "dependencies": [
@@ -1107,105 +224,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/halo/halo-element.ts",
+          "path": "src/registry/canvas/halo/halo-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/halo-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/halo-element.ts\";\n---\n\n<motion-halo\n  scale={1}\n  offset-x={0}\n  offset-y={0}\n  rotation={0}\n  rotation-speed={0.5}\n  background-color=\"#17181A\"\n  camera-distance={3}\n  sun-x={0}\n  sun-y={0}\n  sun-z={1}\n  intensity={1}\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/halo-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-halo\n      scale={1}\n      offset-x={0}\n      offset-y={0}\n      rotation={0}\n      rotation-speed={0.5}\n      background-color=\"#17181A\"\n      camera-distance={3}\n      sun-x={0}\n      sun-y={0}\n      sun-z={1}\n      intensity={1}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/halo-element.ts\";\n</script>\n\n<template>\n  <motion-halo\n    :scale=\"1\"\n    :offset-x=\"0\"\n    :offset-y=\"0\"\n    :rotation=\"0\"\n    :rotation-speed=\"0.5\"\n    background-color=\"#17181A\"\n    :camera-distance=\"3\"\n    :sun-x=\"0\"\n    :sun-y=\"0\"\n    :sun-z=\"1\"\n    :intensity=\"1\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/halo-element.ts\";\n</script>\n\n<motion-halo\n  scale={1}\n  offset-x={0}\n  offset-y={0}\n  rotation={0}\n  rotation-speed={0.5}\n  background-color=\"#17181A\"\n  camera-distance={3}\n  sun-x={0}\n  sun-y={0}\n  sun-z={1}\n  intensity={1}\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/halo-element.js\"></script>\n\n<motion-halo\n  scale=\"1\"\n  offset-x=\"0\"\n  offset-y=\"0\"\n  rotation=\"0\"\n  rotation-speed=\"0.5\"\n  background-color=\"#17181A\"\n  camera-distance=\"3\"\n  sun-x=\"0\"\n  sun-y=\"0\"\n  sun-z=\"1\"\n  intensity=\"1\"\n  class=\"w-full h-[500px]\"\n/>"
-        }
-      ],
-      "props": [
-        {
-          "name": "scale",
-          "type": "number",
-          "default": "1",
-          "description": "Scale of the halo sphere."
-        },
-        {
-          "name": "offset-x",
-          "type": "number",
-          "default": "0",
-          "description": "Horizontal offset of the halo center."
-        },
-        {
-          "name": "offset-y",
-          "type": "number",
-          "default": "0",
-          "description": "Vertical offset of the halo center."
-        },
-        {
-          "name": "rotation",
-          "type": "number",
-          "default": "0",
-          "description": "Initial rotation angle in degrees."
-        },
-        {
-          "name": "rotation-speed",
-          "type": "number",
-          "default": "0.5",
-          "description": "Auto-rotation speed of the camera around the halo."
-        },
-        {
-          "name": "background-color",
-          "type": "string",
-          "default": "\"#17181A\"",
-          "description": "Background color behind the halo."
-        },
-        {
-          "name": "camera-distance",
-          "type": "number",
-          "default": "3",
-          "description": "Distance of the camera from the halo center."
-        },
-        {
-          "name": "sun-x",
-          "type": "number",
-          "default": "0",
-          "description": "X component of the sun light direction vector."
-        },
-        {
-          "name": "sun-y",
-          "type": "number",
-          "default": "0",
-          "description": "Y component of the sun light direction vector."
-        },
-        {
-          "name": "sun-z",
-          "type": "number",
-          "default": "1",
-          "description": "Z component of the sun light direction vector (toward viewer)."
-        },
-        {
-          "name": "intensity",
-          "type": "number",
-          "default": "1",
-          "description": "Brightness and intensity of the atmospheric scattering."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "interactive-grid",
-      "type": "registry:component",
       "title": "Interactive Grid",
       "description": "Physics-based grid simulation that distorts an image in response to cursor movement. Each grid cell tracks mouse velocity and decays back to rest over time. Lit Custom Element.",
       "dependencies": [
@@ -1219,64 +246,10 @@
           "target": "src/components/motion-kit/interactive-grid-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/interactive-grid-element.ts\";\n---\n\n<motion-interactive-grid\n  src=\"/path/to/image.jpg\"\n  grid={15}\n  mouse-size={0.15}\n  strength={0.35}\n  relaxation={0.9}\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/interactive-grid-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-interactive-grid\n      src=\"/path/to/image.jpg\"\n      grid={15}\n      mouse-size={0.15}\n      strength={0.35}\n      relaxation={0.9}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/interactive-grid-element.ts\";\n</script>\n\n<template>\n  <motion-interactive-grid\n    src=\"/path/to/image.jpg\"\n    :grid=\"15\"\n    :mouse-size=\"0.15\"\n    :strength=\"0.35\"\n    :relaxation=\"0.9\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/interactive-grid-element.ts\";\n</script>\n\n<motion-interactive-grid\n  src=\"/path/to/image.jpg\"\n  grid={15}\n  mouse-size={0.15}\n  strength={0.35}\n  relaxation={0.9}\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/interactive-grid-element.js\"></script>\n\n<motion-interactive-grid\n  src=\"/path/to/image.jpg\"\n  grid=\"15\"\n  mouse-size=\"0.15\"\n  strength=\"0.35\"\n  relaxation=\"0.9\"\n  class=\"w-full h-[500px]\"\n/>"
-        }
-      ],
-      "props": [
-        {
-          "name": "src",
-          "type": "string",
-          "default": "",
-          "description": "The image source URL to apply the distortion effect to."
-        },
-        {
-          "name": "grid",
-          "type": "number",
-          "default": "15",
-          "description": "Grid resolution — number of cells per row/column. Higher values create finer distortion detail."
-        },
-        {
-          "name": "mouse-size",
-          "type": "number",
-          "default": "0.15",
-          "description": "Radius of mouse influence as a fraction of the grid size (0–1)."
-        },
-        {
-          "name": "strength",
-          "type": "number",
-          "default": "0.35",
-          "description": "Strength of the distortion effect. Higher values produce more dramatic warping."
-        },
-        {
-          "name": "relaxation",
-          "type": "number",
-          "default": "0.9",
-          "description": "How quickly cells return to rest after the cursor leaves (0–1). Values closer to 1 decay more slowly."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "lava-lamp",
-      "type": "registry:component",
       "title": "Lava Lamp",
       "description": "Raymarched metaball blobs rendered with a smooth-min SDF and Fresnel edge lighting. Creates a fluid, organic lava lamp animation. Lit Custom Element.",
       "dependencies": [
@@ -1290,94 +263,10 @@
           "target": "src/components/motion-kit/lava-lamp-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/lava-lamp-element.ts\";\n---\n\n<motion-lava-lamp\n  color=\"#17181A\"\n  fresnel-color=\"#ff6900\"\n  speed=\"1.0\"\n  fresnel-power=\"3.0\"\n  radius=\"1\"\n  smoothness=\"0.1\"\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/lava-lamp-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-lava-lamp\n      color=\"#17181A\"\n      fresnel-color=\"#ff6900\"\n      speed={1.0}\n      fresnel-power={3.0}\n      radius={1}\n      smoothness={0.1}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/lava-lamp-element.ts\";\n</script>\n\n<template>\n  <motion-lava-lamp\n    color=\"#17181A\"\n    fresnel-color=\"#ff6900\"\n    :speed=\"1.0\"\n    :fresnel-power=\"3.0\"\n    :radius=\"1\"\n    :smoothness=\"0.1\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/lava-lamp-element.ts\";\n</script>\n\n<motion-lava-lamp\n  color=\"#17181A\"\n  fresnel-color=\"#ff6900\"\n  speed={1.0}\n  fresnel-power={3.0}\n  radius={1}\n  smoothness={0.1}\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/lava-lamp-element.js\"></script>\n\n<motion-lava-lamp\n  color=\"#17181A\"\n  fresnel-color=\"#ff6900\"\n  speed=\"1.0\"\n  fresnel-power=\"3.0\"\n  radius=\"1\"\n  smoothness=\"0.1\"\n  class=\"w-full h-[500px]\"\n/>"
-        }
-      ],
-      "props": [
-        {
-          "name": "color",
-          "type": "string",
-          "default": "#17181A",
-          "description": "Base body color of the lava blobs."
-        },
-        {
-          "name": "fresnel-color",
-          "type": "string",
-          "default": "#ff6900",
-          "description": "Color applied at blob edges via the Fresnel effect."
-        },
-        {
-          "name": "speed",
-          "type": "number",
-          "default": "1.0",
-          "description": "Animation speed multiplier."
-        },
-        {
-          "name": "fresnel-power",
-          "type": "number",
-          "default": "3.0",
-          "description": "Controls the sharpness of the Fresnel edge glow."
-        },
-        {
-          "name": "radius",
-          "type": "number",
-          "default": "1",
-          "description": "Base radius of the blobs."
-        },
-        {
-          "name": "smoothness",
-          "type": "number",
-          "default": "0.1",
-          "description": "Smoothness of the blob blending (metaball merge factor)."
-        },
-        {
-          "name": "scale",
-          "type": "number",
-          "default": "1",
-          "description": "Scale multiplier for the lava field."
-        },
-        {
-          "name": "rotation",
-          "type": "number",
-          "default": "0",
-          "description": "Lava field rotation in degrees."
-        },
-        {
-          "name": "offset-x",
-          "type": "number",
-          "default": "0",
-          "description": "Horizontal offset in normalized viewport units."
-        },
-        {
-          "name": "offset-y",
-          "type": "number",
-          "default": "0",
-          "description": "Vertical offset in normalized viewport units."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "neural-noise",
-      "type": "registry:component",
       "title": "Neural Noise",
       "description": "Animated CPPN-based neural noise rendered in WebGL. Produces continuously evolving organic color patterns driven by a compositional pattern-producing network. Lit Custom Element.",
       "dependencies": [
@@ -1391,40 +280,10 @@
           "target": "src/components/motion-kit/neural-noise-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/neural-noise-element.ts\";\n---\n\n<motion-neural-noise\n  speed={1}\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/neural-noise-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-neural-noise\n      speed={1}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/neural-noise-element.ts\";\n</script>\n\n<template>\n  <motion-neural-noise\n    :speed=\"1\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/neural-noise-element.ts\";\n</script>\n\n<motion-neural-noise\n  speed={1}\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/neural-noise-element.js\"></script>\n\n<motion-neural-noise\n  speed=\"1\"\n  class=\"w-full h-[500px]\"\n/>"
-        }
-      ],
-      "props": [
-        {
-          "name": "speed",
-          "type": "number",
-          "default": "1",
-          "description": "Animation speed multiplier. Higher values make the pattern evolve faster."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "pixelated-image",
-      "type": "registry:component",
       "title": "Pixelated Image",
       "description": "OGL image revealer that starts as coarse blocks and sharpens to full resolution over time.",
       "dependencies": [
@@ -1433,57 +292,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/pixelated-image/pixelated-image-element.ts",
+          "path": "src/registry/canvas/pixelated-image/pixelated-image-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/pixelated-image-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/pixelated-image-element.ts\";\n---\n\n<motion-pixelated-image\n  image=\"https://picsum.photos/seed/pixelated/800/600\"\n  initial-grid-size=\"6\"\n  step-duration=\"0.15\"\n></motion-pixelated-image>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/pixelated-image-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-pixelated-image\n      image=\"https://picsum.photos/seed/pixelated/800/600\"\n      initial-grid-size=\"6\"\n      step-duration=\"0.15\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/pixelated-image-element.ts\";\n</script>\n\n<template>\n  <motion-pixelated-image\n    image=\"https://picsum.photos/seed/pixelated/800/600\"\n    initial-grid-size=\"6\"\n    step-duration=\"0.15\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/pixelated-image-element.ts\";\n</script>\n\n<motion-pixelated-image\n  image=\"https://picsum.photos/seed/pixelated/800/600\"\n  initial-grid-size=\"6\"\n  step-duration=\"0.15\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/pixelated-image-element.js\"></script>\n\n<motion-pixelated-image\n  image=\"https://picsum.photos/seed/pixelated/800/600\"\n  initial-grid-size=\"6\"\n  step-duration=\"0.15\"\n></motion-pixelated-image>"
-        }
-      ],
-      "props": [
-        {
-          "name": "image",
-          "type": "string",
-          "default": "\"\"",
-          "description": "Image source URL used for the depixelation reveal."
-        },
-        {
-          "name": "initial-grid-size",
-          "type": "number",
-          "default": "6",
-          "description": "Starting vertical grid size before each depixelation step doubles it."
-        },
-        {
-          "name": "step-duration",
-          "type": "number",
-          "default": "0.15",
-          "description": "Seconds each depixelation step lasts before the grid doubles again."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "plasma-grid",
-      "type": "registry:component",
       "title": "Plasma Grid",
       "description": "Animated plasma grid effect rendered in WebGL. Creates a checkerboard grid pattern with flowing plasma noise gradients. Colors are customizable via props. Lit Custom Element.",
       "dependencies": [
@@ -1497,52 +314,10 @@
           "target": "src/components/motion-kit/plasma-grid-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/plasma-grid-element.ts\";\n---\n\n<motion-plasma-grid\n  color=\"#17181A\"\n  highlight-color=\"#FF6900\"\n  speed={0.5}\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/plasma-grid-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-plasma-grid\n      color=\"#17181A\"\n      highlight-color=\"#FF6900\"\n      speed={0.5}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/plasma-grid-element.ts\";\n</script>\n\n<template>\n  <motion-plasma-grid\n    color=\"#17181A\"\n    highlight-color=\"#FF6900\"\n    :speed=\"0.5\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/plasma-grid-element.ts\";\n</script>\n\n<motion-plasma-grid\n  color=\"#17181A\"\n  highlight-color=\"#FF6900\"\n  speed={0.5}\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/plasma-grid-element.js\"></script>\n\n<motion-plasma-grid\n  color=\"#17181A\"\n  highlight-color=\"#FF6900\"\n  speed=\"0.5\"\n  class=\"w-full h-[500px]\"\n/>"
-        }
-      ],
-      "props": [
-        {
-          "name": "color",
-          "type": "string",
-          "default": "#17181A",
-          "description": "The base background color of the effect."
-        },
-        {
-          "name": "highlight-color",
-          "type": "string",
-          "default": "#FF6900",
-          "description": "The color used for the plasma noise gradients."
-        },
-        {
-          "name": "speed",
-          "type": "number",
-          "default": "0.5",
-          "description": "Animation speed multiplier. Higher values make the plasma flow faster."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "rubiks-cube",
-      "type": "registry:component",
       "title": "Rubik's Cube",
       "description": "A 3D Rubik's Cube that continuously rotates and scrambles itself with smooth face animations. Features a Fresnel rim glow shader and interactive orbit controls. Lit Custom Element.",
       "dependencies": [
@@ -1556,100 +331,10 @@
           "target": "src/components/motion-kit/rubiks-cube-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/rubiks-cube-element.ts\";\n---\n\n<motion-rubiks-cube\n  color=\"#17181A\"\n  rim-color=\"#FF6900\"\n  rim-power=\"6\"\n  rim-intensity=\"1.5\"\n  duration=\"1.5\"\n  gap=\"0.015\"\n  radius=\"0.125\"\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/rubiks-cube-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-rubiks-cube\n      color=\"#17181A\"\n      rim-color=\"#FF6900\"\n      rim-power={6}\n      rim-intensity={1.5}\n      duration={1.5}\n      gap={0.015}\n      radius={0.125}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/rubiks-cube-element.ts\";\n</script>\n\n<template>\n  <motion-rubiks-cube\n    color=\"#17181A\"\n    rim-color=\"#FF6900\"\n    :rim-power=\"6\"\n    :rim-intensity=\"1.5\"\n    :duration=\"1.5\"\n    :gap=\"0.015\"\n    :radius=\"0.125\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/rubiks-cube-element.ts\";\n</script>\n\n<motion-rubiks-cube\n  color=\"#17181A\"\n  rim-color=\"#FF6900\"\n  rim-power={6}\n  rim-intensity={1.5}\n  duration={1.5}\n  gap={0.015}\n  radius={0.125}\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/rubiks-cube-element.js\"></script>\n\n<motion-rubiks-cube\n  color=\"#17181A\"\n  rim-color=\"#FF6900\"\n  rim-power=\"6\"\n  rim-intensity=\"1.5\"\n  duration=\"1.5\"\n  gap=\"0.015\"\n  radius=\"0.125\"\n  class=\"w-full h-[500px]\"\n/>"
-        }
-      ],
-      "props": [
-        {
-          "name": "color",
-          "type": "string",
-          "default": "#17181A",
-          "description": "Base body color of each cubelet."
-        },
-        {
-          "name": "rim-color",
-          "type": "string",
-          "default": "#FF6900",
-          "description": "Accent color applied by the Fresnel rim shader."
-        },
-        {
-          "name": "rim-power",
-          "type": "number",
-          "default": "6",
-          "description": "Controls how tight the Fresnel rim hug is. Higher values yield a thinner outline."
-        },
-        {
-          "name": "rim-intensity",
-          "type": "number",
-          "default": "1.5",
-          "description": "Intensity multiplier for the Fresnel rim color."
-        },
-        {
-          "name": "duration",
-          "type": "number",
-          "default": "1.5",
-          "description": "Seconds it takes to complete a face rotation."
-        },
-        {
-          "name": "gap",
-          "type": "number",
-          "default": "0.015",
-          "description": "Gap between cubelets to accentuate separation."
-        },
-        {
-          "name": "radius",
-          "type": "number",
-          "default": "0.125",
-          "description": "Corner radius for softened cube edges."
-        },
-        {
-          "name": "scale",
-          "type": "number",
-          "default": "1",
-          "description": "Scale multiplier for the cube."
-        },
-        {
-          "name": "rotation",
-          "type": "number",
-          "default": "0",
-          "description": "Cube rotation in degrees (Z-axis)."
-        },
-        {
-          "name": "offset-x",
-          "type": "number",
-          "default": "0",
-          "description": "Horizontal cube offset in normalized viewport units."
-        },
-        {
-          "name": "offset-y",
-          "type": "number",
-          "default": "0",
-          "description": "Vertical cube offset in normalized viewport units."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "specular-band",
-      "type": "registry:component",
       "title": "Specular Band",
       "description": "Animated specular band effect with lens distortion and hue-shifted color palettes. Creates flowing, organic light bands with adaptive blending for different background brightness levels. Lit Custom Element.",
       "dependencies": [
@@ -1663,70 +348,10 @@
           "target": "src/components/motion-kit/specular-band-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/specular-band-element.ts\";\n---\n\n<motion-specular-band\n  color=\"#FF6900\"\n  background-color=\"#17181A\"\n  speed={1.0}\n  distortion={0.2}\n  hue-shift={30}\n  intensity={1.0}\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/specular-band-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-specular-band\n      color=\"#FF6900\"\n      background-color=\"#17181A\"\n      speed={1.0}\n      distortion={0.2}\n      hue-shift={30}\n      intensity={1.0}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/specular-band-element.ts\";\n</script>\n\n<template>\n  <motion-specular-band\n    color=\"#FF6900\"\n    background-color=\"#17181A\"\n    :speed=\"1.0\"\n    :distortion=\"0.2\"\n    :hue-shift=\"30\"\n    :intensity=\"1.0\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/specular-band-element.ts\";\n</script>\n\n<motion-specular-band\n  color=\"#FF6900\"\n  background-color=\"#17181A\"\n  speed={1.0}\n  distortion={0.2}\n  hueShift={30}\n  intensity={1.0}\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/specular-band-element.js\"></script>\n\n<motion-specular-band\n  color=\"#FF6900\"\n  background-color=\"#17181A\"\n  speed=\"1.0\"\n  distortion=\"0.2\"\n  hue-shift=\"30\"\n  intensity=\"1.0\"\n  class=\"w-full h-[500px]\"\n/>"
-        }
-      ],
-      "props": [
-        {
-          "name": "color",
-          "type": "string",
-          "default": "#FF6900",
-          "description": "Base color of the specular bands."
-        },
-        {
-          "name": "background-color",
-          "type": "string",
-          "default": "#17181A",
-          "description": "Color of the background."
-        },
-        {
-          "name": "speed",
-          "type": "number",
-          "default": "1.0",
-          "description": "Animation speed multiplier."
-        },
-        {
-          "name": "distortion",
-          "type": "number",
-          "default": "0.2",
-          "description": "Lens distortion intensity."
-        },
-        {
-          "name": "hue-shift",
-          "type": "number",
-          "default": "30.0",
-          "description": "Amount of hue shift for secondary bands (in degrees)."
-        },
-        {
-          "name": "intensity",
-          "type": "number",
-          "default": "1.0",
-          "description": "Global intensity/brightness of the effect."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "water-ripple",
-      "type": "registry:component",
       "title": "Water Ripple",
       "description": "Interactive water ripple effect on images. Creates realistic ripple distortions that follow pointer movement with expanding wave animations. Lit Custom Element.",
       "dependencies": [
@@ -1740,51 +365,15 @@
           "target": "src/components/motion-kit/water-ripple-element.ts"
         },
         {
-          "path": "public/motion-kit/water-ripple/brush.png",
+          "path": "src/registry/canvas/water-ripple/brush.png",
           "type": "registry:file",
           "target": "public/motion-kit/water-ripple/brush.png"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/water-ripple-element.ts\";\n---\n\n<motion-water-ripple\n  src=\"/path/to/image.jpg\"\n  brush-size={100}\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/water-ripple-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-water-ripple\n      src=\"/path/to/image.jpg\"\n      brush-size={100}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/water-ripple-element.ts\";\n</script>\n\n<template>\n  <motion-water-ripple\n    src=\"/path/to/image.jpg\"\n    :brush-size=\"100\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/water-ripple-element.ts\";\n</script>\n\n<motion-water-ripple\n  src=\"/path/to/image.jpg\"\n  brush-size={100}\n  class=\"w-full h-[500px]\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/water-ripple-element.js\"></script>\n\n<motion-water-ripple\n  src=\"/path/to/image.jpg\"\n  brush-size=\"100\"\n  class=\"w-full h-[500px]\"\n/>"
-        }
-      ],
-      "props": [
-        {
-          "name": "src",
-          "type": "string",
-          "default": "",
-          "description": "The image source URL to apply the water ripple effect to."
-        },
-        {
-          "name": "brush-size",
-          "type": "number",
-          "default": "100",
-          "description": "Size of the ripple brush in pixels. Larger values create bigger ripples."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "card-stack",
-      "type": "registry:component",
       "title": "Card Stack",
       "description": "Scroll-driven sticky card stack with GSAP ScrollTrigger. Nest <motion-card-stack-item> elements inside.",
       "dependencies": [
@@ -1793,74 +382,20 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/card-stack/card-stack-element.ts",
+          "path": "src/registry/interaction/card-stack/card-stack-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/card-stack-element.ts"
         },
         {
-          "path": "src/registry/new-york/blocks/card-stack/card-stack-item-element.ts",
+          "path": "src/registry/interaction/card-stack/card-stack-item-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/card-stack-item-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/card-stack-element.ts\";\nimport \"@/components/motion-kit/card-stack-item-element.ts\";\n---\n\n<motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 1</h2>\n    <p>Content for the first card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n    <h2>Card 2</h2>\n    <p>Content for the second card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 3</h2>\n    <p>Content for the third card</p>\n  </motion-card-stack-item>\n</motion-card-stack>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/card-stack-element.ts\";\nimport \"@/components/motion-kit/card-stack-item-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n      <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n        <h2>Card 1</h2>\n        <p>Content for the first card</p>\n      </motion-card-stack-item>\n      <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n        <h2>Card 2</h2>\n        <p>Content for the second card</p>\n      </motion-card-stack-item>\n      <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n        <h2>Card 3</h2>\n        <p>Content for the third card</p>\n      </motion-card-stack-item>\n    </motion-card-stack>\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/card-stack-element.ts\";\nimport \"@/components/motion-kit/card-stack-item-element.ts\";\n</script>\n\n<template>\n  <motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n    <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n      <h2>Card 1</h2>\n      <p>Content for the first card</p>\n    </motion-card-stack-item>\n    <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n      <h2>Card 2</h2>\n      <p>Content for the second card</p>\n    </motion-card-stack-item>\n    <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n      <h2>Card 3</h2>\n      <p>Content for the third card</p>\n    </motion-card-stack-item>\n  </motion-card-stack>\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/card-stack-element.ts\";\n  import \"@/components/motion-kit/card-stack-item-element.ts\";\n</script>\n\n<motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 1</h2>\n    <p>Content for the first card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n    <h2>Card 2</h2>\n    <p>Content for the second card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 3</h2>\n    <p>Content for the third card</p>\n  </motion-card-stack-item>\n</motion-card-stack>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/card-stack-element.js\"></script>\n<script type=\"module\" src=\"/components/motion-kit/card-stack-item-element.js\"></script>\n\n<motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 1</h2>\n    <p>Content for the first card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n    <h2>Card 2</h2>\n    <p>Content for the second card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 3</h2>\n    <p>Content for the third card</p>\n  </motion-card-stack-item>\n</motion-card-stack>"
-        }
-      ],
-      "props": [
-        {
-          "name": "scale-factor",
-          "type": "number",
-          "default": "0.05",
-          "description": "How much each card scales down per card (0.05 = 5% smaller each step)."
-        },
-        {
-          "name": "gap",
-          "type": "number",
-          "default": "0",
-          "description": "Vertical gap between stacked cards in pixels."
-        },
-        {
-          "name": "offset",
-          "type": "number",
-          "default": "10",
-          "description": "Vertical offset between card positions in pixels."
-        },
-        {
-          "name": "top-offset",
-          "type": "number",
-          "default": "0",
-          "description": "Initial top offset for the first card in pixels."
-        },
-        {
-          "name": "scroll-element",
-          "type": "string",
-          "default": "\"\"",
-          "description": "CSS selector for the scrollable container (defaults to window scroll)."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "flip-card-stack",
-      "type": "registry:component",
       "title": "Flip Card Stack",
       "description": "A draggable card stack where the top card snaps to the back after a threshold drag. Framework-agnostic Custom Element.",
       "dependencies": [
@@ -1868,69 +403,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/flip-card-stack/flip-card-stack-element.ts",
+          "path": "src/registry/interaction/flip-card-stack/flip-card-stack-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/flip-card-stack-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/flip-card-stack-element.ts\";\n---\n\n<motion-flip-card-stack\n  stack-offset=\"8\"\n  stack-rotation=\"-10\"\n  drag-threshold=\"80\"\n  duration=\"0.3\"\n  ease=\"power2.out\"\n  class=\"inline-grid relative w-[320px] h-[480px]\"\n>\n  <div class=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n    <h2>Card 1</h2>\n  </div>\n  <div class=\"flip-grid-item w-full h-full bg-slate-50 rounded-2xl p-6\">\n    <h2>Card 2</h2>\n  </div>\n  <div class=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n    <h2>Card 3</h2>\n  </div>\n</motion-flip-card-stack>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/flip-card-stack-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-flip-card-stack\n      stackOffset={8}\n      stackRotation={-10}\n      dragThreshold={80}\n      duration={0.3}\n      ease=\"power2.out\"\n      className=\"inline-grid relative w-[320px] h-[480px]\"\n    >\n      <div className=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n        <h2>Card 1</h2>\n      </div>\n      <div className=\"flip-grid-item w-full h-full bg-slate-50 rounded-2xl p-6\">\n        <h2>Card 2</h2>\n      </div>\n      <div className=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n        <h2>Card 3</h2>\n      </div>\n    </motion-flip-card-stack>\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/flip-card-stack-element.ts\";\n</script>\n\n<template>\n  <motion-flip-card-stack\n    :stack-offset=\"8\"\n    :stack-rotation=\"-10\"\n    :drag-threshold=\"80\"\n    :duration=\"0.3\"\n    ease=\"power2.out\"\n    class=\"inline-grid relative w-[320px] h-[480px]\"\n  >\n    <div class=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n      <h2>Card 1</h2>\n    </div>\n    <div class=\"flip-grid-item w-full h-full bg-slate-50 rounded-2xl p-6\">\n      <h2>Card 2</h2>\n    </div>\n    <div class=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n      <h2>Card 3</h2>\n    </div>\n  </motion-flip-card-stack>\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/flip-card-stack-element.ts\";\n</script>\n\n<motion-flip-card-stack\n  stackOffset={8}\n  stackRotation={-10}\n  dragThreshold={80}\n  duration={0.3}\n  ease=\"power2.out\"\n  class=\"inline-grid relative w-[320px] h-[480px]\"\n>\n  <div class=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n    <h2>Card 1</h2>\n  </div>\n  <div class=\"flip-grid-item w-full h-full bg-slate-50 rounded-2xl p-6\">\n    <h2>Card 2</h2>\n  </div>\n  <div class=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n    <h2>Card 3</h2>\n  </div>\n</motion-flip-card-stack>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/flip-card-stack-element.js\"></script>\n\n<motion-flip-card-stack\n  stack-offset=\"8\"\n  stack-rotation=\"-10\"\n  drag-threshold=\"80\"\n  duration=\"0.3\"\n  ease=\"power2.out\"\n  class=\"inline-grid relative w-[320px] h-[480px]\"\n>\n  <div class=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n    <h2>Card 1</h2>\n  </div>\n  <div class=\"flip-grid-item w-full h-full bg-slate-50 rounded-2xl p-6\">\n    <h2>Card 2</h2>\n  </div>\n  <div class=\"flip-grid-item w-full h-full bg-white rounded-2xl p-6\">\n    <h2>Card 3</h2>\n  </div>\n</motion-flip-card-stack>"
-        }
-      ],
-      "props": [
-        {
-          "name": "stack-offset",
-          "type": "number",
-          "default": "8",
-          "description": "Vertical offset (in pixels) between stacked cards."
-        },
-        {
-          "name": "stack-rotation",
-          "type": "number",
-          "default": "-10",
-          "description": "Rotation angle (in degrees) for each card in the stack."
-        },
-        {
-          "name": "drag-threshold",
-          "type": "number",
-          "default": "80",
-          "description": "Distance (in pixels) the card must be dragged before it snaps to the back."
-        },
-        {
-          "name": "duration",
-          "type": "number",
-          "default": "0.3",
-          "description": "Animation duration in seconds."
-        },
-        {
-          "name": "ease",
-          "type": "string",
-          "default": "\"power2.out\"",
-          "description": "GSAP easing function for card animations."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "flip-grid",
-      "type": "registry:component",
       "title": "Flip Grid",
       "description": "A FLIP-powered grid that animates reordering and layout changes. Framework-agnostic Custom Elements.",
       "dependencies": [
@@ -1938,74 +419,20 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/flip-grid/flip-grid-element.ts",
+          "path": "src/registry/interaction/flip-grid/flip-grid-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/flip-grid-element.ts"
         },
         {
-          "path": "src/registry/new-york/blocks/flip-grid/flip-grid-item-element.ts",
+          "path": "src/registry/interaction/flip-grid/flip-grid-item-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/flip-grid-item-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/flip-grid-element.ts\";\nimport \"@/components/motion-kit/flip-grid-item-element.ts\";\n---\n\n<motion-flip-grid\n  columns=\"3\"\n  duration=\"0.5\"\n  ease=\"power2.inOut\"\n  stagger=\"0\"\n  gap=\"1rem\"\n  class=\"w-full\"\n>\n  <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 1</div>\n  <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 2</div>\n  <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 3</div>\n  <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 4</div>\n</motion-flip-grid>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/flip-grid-element.ts\";\nimport \"@/components/motion-kit/flip-grid-item-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-flip-grid\n      columns={3}\n      duration={0.5}\n      ease=\"power2.inOut\"\n      stagger={0}\n      gap=\"1rem\"\n      className=\"w-full\"\n    >\n      <div className=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 1</div>\n      <div className=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 2</div>\n      <div className=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 3</div>\n      <div className=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 4</div>\n    </motion-flip-grid>\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/flip-grid-element.ts\";\nimport \"@/components/motion-kit/flip-grid-item-element.ts\";\n</script>\n\n<template>\n  <motion-flip-grid\n    :columns=\"3\"\n    :duration=\"0.5\"\n    ease=\"power2.inOut\"\n    :stagger=\"0\"\n    gap=\"1rem\"\n    class=\"w-full\"\n  >\n    <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 1</div>\n    <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 2</div>\n    <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 3</div>\n    <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 4</div>\n  </motion-flip-grid>\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/flip-grid-element.ts\";\n  import \"@/components/motion-kit/flip-grid-item-element.ts\";\n</script>\n\n<motion-flip-grid\n  columns={3}\n  duration={0.5}\n  ease=\"power2.inOut\"\n  stagger={0}\n  gap=\"1rem\"\n  class=\"w-full\"\n>\n  <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 1</div>\n  <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 2</div>\n  <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 3</div>\n  <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 4</div>\n</motion-flip-grid>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/flip-grid-element.js\"></script>\n<script type=\"module\" src=\"/components/motion-kit/flip-grid-item-element.js\"></script>\n\n<motion-flip-grid\n  columns=\"3\"\n  duration=\"0.5\"\n  ease=\"power2.inOut\"\n  stagger=\"0\"\n  gap=\"1rem\"\n  class=\"w-full\"\n>\n  <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 1</div>\n  <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 2</div>\n  <div class=\"flip-grid-item h-32 bg-white rounded-lg p-4\">Item 3</div>\n  <div class=\"flip-grid-item h-32 bg-slate-50 rounded-lg p-4\">Item 4</div>\n</motion-flip-grid>"
-        }
-      ],
-      "props": [
-        {
-          "name": "columns",
-          "type": "number",
-          "default": "0",
-          "description": "Number of columns in the grid (0 for auto-layout)."
-        },
-        {
-          "name": "duration",
-          "type": "number",
-          "default": "0.5",
-          "description": "Animation duration in seconds."
-        },
-        {
-          "name": "ease",
-          "type": "string",
-          "default": "\"power2.inOut\"",
-          "description": "GSAP easing function for animations."
-        },
-        {
-          "name": "stagger",
-          "type": "number",
-          "default": "0",
-          "description": "Stagger delay in seconds between item animations."
-        },
-        {
-          "name": "gap",
-          "type": "string",
-          "default": "\"\"",
-          "description": "CSS gap value between grid items."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "floating-menu",
-      "type": "registry:component",
       "title": "Floating Menu",
       "description": "A floating GSAP-powered navigation menu with staggered link reveals and animated toggle lines. Lit Custom Element.",
       "dependencies": [
@@ -2014,63 +441,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/floating-menu/floating-menu-element.ts",
+          "path": "src/registry/interaction/floating-menu/floating-menu-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/floating-menu-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/floating-menu-element.ts\";\n\nconst menuGroups = [\n  {\n    title: \"Explore\",\n    links: [\n      { label: \"Home\", href: \"/\" },\n      { label: \"About\", href: \"/about\" },\n      { label: \"Contact\", href: \"/contact\" }\n    ]\n  },\n  {\n    title: \"Resources\",\n    variant: \"muted\",\n    links: [\n      { label: \"Blog\", href: \"/blog\" },\n      { label: \"Docs\", href: \"/docs\" }\n    ]\n  }\n];\n\nconst logoHtml = `<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg>`;\n---\n\n<motion-floating-menu\n  menu-groups={JSON.stringify(menuGroups)}\n  logo-html={logoHtml}\n  primary-button={JSON.stringify({ label: \"Get Started\", href: \"/start\" })}\n  secondary-button={JSON.stringify({ label: \"Login\", href: \"/login\" })}\n  class=\"w-full\"\n/>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/floating-menu-element.ts\";\n\nconst menuGroups = [\n  {\n    title: \"Explore\",\n    links: [\n      { label: \"Home\", href: \"/\" },\n      { label: \"About\", href: \"/about\" },\n      { label: \"Contact\", href: \"/contact\" }\n    ]\n  },\n  {\n    title: \"Resources\",\n    variant: \"muted\",\n    links: [\n      { label: \"Blog\", href: \"/blog\" },\n      { label: \"Docs\", href: \"/docs\" }\n    ]\n  }\n];\n\nconst logoHtml = `<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg>`;\n\nexport default function Page() {\n  return (\n    <motion-floating-menu\n      menu-groups={JSON.stringify(menuGroups)}\n      logo-html={logoHtml}\n      primary-button={JSON.stringify({ label: \"Get Started\", href: \"/start\" })}\n      secondary-button={JSON.stringify({ label: \"Login\", href: \"/login\" })}\n      className=\"w-full\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/floating-menu-element.ts\";\n\nconst menuGroups = [\n  {\n    title: \"Explore\",\n    links: [\n      { label: \"Home\", href: \"/\" },\n      { label: \"About\", href: \"/about\" },\n      { label: \"Contact\", href: \"/contact\" }\n    ]\n  },\n  {\n    title: \"Resources\",\n    variant: \"muted\",\n    links: [\n      { label: \"Blog\", href: \"/blog\" },\n      { label: \"Docs\", href: \"/docs\" }\n    ]\n  }\n];\n\nconst logoHtml = `<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg>`;\n</script>\n\n<template>\n  <motion-floating-menu\n    :menu-groups=\"JSON.stringify(menuGroups)\"\n    :logo-html=\"logoHtml\"\n    :primary-button=\"JSON.stringify({ label: 'Get Started', href: '/start' })\"\n    :secondary-button=\"JSON.stringify({ label: 'Login', href: '/login' })\"\n    class=\"w-full\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/floating-menu-element.ts\";\n\n  const menuGroups = [\n    {\n      title: \"Explore\",\n      links: [\n        { label: \"Home\", href: \"/\" },\n        { label: \"About\", href: \"/about\" },\n        { label: \"Contact\", href: \"/contact\" }\n      ]\n    },\n    {\n      title: \"Resources\",\n      variant: \"muted\",\n      links: [\n        { label: \"Blog\", href: \"/blog\" },\n        { label: \"Docs\", href: \"/docs\" }\n      ]\n    }\n  ];\n\n  const logoHtml = `<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg>`;\n</script>\n\n<motion-floating-menu\n  menu-groups={JSON.stringify(menuGroups)}\n  logo-html={logoHtml}\n  primary-button={JSON.stringify({ label: \"Get Started\", href: \"/start\" })}\n  secondary-button={JSON.stringify({ label: \"Login\", href: \"/login\" })}\n  class=\"w-full\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/floating-menu-element.js\"></script>\n\n<motion-floating-menu\n  menu-groups='[{\"title\":\"Explore\",\"links\":[{\"label\":\"Home\",\"href\":\"/\"},{\"label\":\"About\",\"href\":\"/about\"}]},{\"title\":\"Resources\",\"variant\":\"muted\",\"links\":[{\"label\":\"Blog\",\"href\":\"/blog\"}]}]'\n  logo-html=\"<svg width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><circle cx='12' cy='12' r='10'/></svg>\"\n  primary-button='{\"label\":\"Get Started\",\"href\":\"/start\"}'\n  secondary-button='{\"label\":\"Login\",\"href\":\"/login\"}'\n  class=\"w-full\"\n/>"
-        }
-      ],
-      "props": [
-        {
-          "name": "menu-groups",
-          "type": "string (JSON)",
-          "default": "\"[]\"",
-          "description": "JSON string array of menu groups. Each group has title, optional variant ('default' or 'muted'), and links array with label and href."
-        },
-        {
-          "name": "logo-html",
-          "type": "string",
-          "default": "\"\"",
-          "description": "HTML string for the logo displayed in the header (SVG or image tag)."
-        },
-        {
-          "name": "primary-button",
-          "type": "string (JSON)",
-          "default": "\"\"",
-          "description": "JSON string with label and href for the primary CTA button."
-        },
-        {
-          "name": "secondary-button",
-          "type": "string (JSON)",
-          "default": "\"\"",
-          "description": "JSON string with label and href for the secondary button (hidden on mobile)."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "image-trail",
-      "type": "registry:component",
       "title": "Image Trail",
       "description": "An interactive effect that spawns a trail of images following the cursor with scaling and rotation. Lit Custom Element.",
       "dependencies": [
@@ -2084,46 +463,10 @@
           "target": "src/components/motion-kit/image-trail-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/image-trail-element.ts\";\n\nconst images = [\n  \"/images/trail-1.png\",\n  \"/images/trail-2.png\",\n  \"/images/trail-3.png\"\n];\n\nconst config = {\n  imageLifespan: 600,\n  removalTickMs: 16,\n  mouseThreshold: 40,\n  minMovementForImage: 5,\n  inDuration: 600,\n  outDuration: 800,\n  maxRotationFactor: 3,\n  baseRotation: 30,\n  speedSmoothingFactor: 0.25,\n  minImageSize: 80,\n  maxImageSize: 120,\n  staggerOut: 40\n};\n---\n\n<motion-image-trail\n  images={images}\n  config={config}\n  class=\"w-full h-[600px]\"\n/>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/image-trail-element.ts\";\n\nconst images = [\n  \"/images/trail-1.png\",\n  \"/images/trail-2.png\",\n  \"/images/trail-3.png\"\n];\n\nconst config = {\n  imageLifespan: 600,\n  removalTickMs: 16,\n  mouseThreshold: 40,\n  minMovementForImage: 5,\n  inDuration: 600,\n  outDuration: 800,\n  maxRotationFactor: 3,\n  baseRotation: 30,\n  speedSmoothingFactor: 0.25,\n  minImageSize: 80,\n  maxImageSize: 120,\n  staggerOut: 40\n};\n\nexport default function Page() {\n  return (\n    <motion-image-trail\n      images={images}\n      config={config}\n      className=\"w-full h-[600px]\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/image-trail-element.ts\";\n\nconst images = [\n  \"/images/trail-1.png\",\n  \"/images/trail-2.png\",\n  \"/images/trail-3.png\"\n];\n\nconst config = {\n  imageLifespan: 600,\n  removalTickMs: 16,\n  mouseThreshold: 40,\n  minMovementForImage: 5,\n  inDuration: 600,\n  outDuration: 800,\n  maxRotationFactor: 3,\n  baseRotation: 30,\n  speedSmoothingFactor: 0.25,\n  minImageSize: 80,\n  maxImageSize: 120,\n  staggerOut: 40\n};\n</script>\n\n<template>\n  <motion-image-trail\n    :images=\"images\"\n    :config=\"config\"\n    class=\"w-full h-[600px]\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/image-trail-element.ts\";\n\n  const images = [\n    \"/images/trail-1.png\",\n    \"/images/trail-2.png\",\n    \"/images/trail-3.png\"\n  ];\n\n  const config = {\n    imageLifespan: 600,\n    removalTickMs: 16,\n    mouseThreshold: 40,\n    minMovementForImage: 5,\n    inDuration: 600,\n    outDuration: 800,\n    maxRotationFactor: 3,\n    baseRotation: 30,\n    speedSmoothingFactor: 0.25,\n    minImageSize: 80,\n    maxImageSize: 120,\n    staggerOut: 40\n  };\n</script>\n\n<motion-image-trail\n  images={images}\n  config={config}\n  class=\"w-full h-[600px]\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/image-trail-element.js\"></script>\n\n<motion-image-trail\n  images='[\"/images/trail-1.png\",\"/images/trail-2.png\",\"/images/trail-3.png\"]'\n  config='{\"imageLifespan\":600,\"removalTickMs\":16,\"mouseThreshold\":40,\"minMovementForImage\":5,\"inDuration\":600,\"outDuration\":800,\"maxRotationFactor\":3,\"baseRotation\":30,\"speedSmoothingFactor\":0.25,\"minImageSize\":260,\"maxImageSize\":340,\"staggerOut\":40}'\n  class=\"w-full h-[600px]\"\n/>"
-        }
-      ],
-      "props": [
-        {
-          "name": "images",
-          "type": "array",
-          "default": "[]",
-          "description": "Array of image URLs to cycle through in the trail."
-        },
-        {
-          "name": "config",
-          "type": "object",
-          "default": "{}",
-          "description": "Configuration object with imageLifespan, removalTickMs, mouseThreshold, minMovementForImage, inDuration, outDuration, maxRotationFactor, baseRotation, speedSmoothingFactor, minImageSize, maxImageSize, and staggerOut options."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "magnetic",
-      "type": "registry:component",
       "title": "Magnetic",
       "description": "Framework-agnostic <motion-magnetic> Custom Element with spring physics, powered by Lit and GSAP.",
       "dependencies": [
@@ -2137,46 +480,10 @@
           "target": "src/components/motion-kit/magnetic-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/magnetic-element.ts\";\n---\n\n<motion-magnetic duration=\"1.2\">\n  <button>Hover me</button>\n</motion-magnetic>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/magnetic-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-magnetic duration=\"1.2\">\n      <button>Hover me</button>\n    </motion-magnetic>\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/magnetic-element.ts\";\n</script>\n\n<template>\n  <motion-magnetic duration=\"1.2\">\n    <button>Hover me</button>\n  </motion-magnetic>\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/magnetic-element.ts\";\n</script>\n\n<motion-magnetic duration=\"1.2\">\n  <button>Hover me</button>\n</motion-magnetic>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/magnetic-element.js\"></script>\n\n<motion-magnetic duration=\"1.2\">\n  <button>Hover me</button>\n</motion-magnetic>"
-        }
-      ],
-      "props": [
-        {
-          "name": "duration",
-          "type": "number",
-          "default": "1",
-          "description": "Animation duration in seconds."
-        },
-        {
-          "name": "ease",
-          "type": "string",
-          "default": "\"elastic.out(1, 0.3)\"",
-          "description": "GSAP easing function string."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "marquee",
-      "type": "registry:component",
       "title": "Marquee",
       "description": "Scroll-velocity-boosted infinite marquee. Vanilla Custom Element — no Lit dependency.",
       "dependencies": [
@@ -2184,69 +491,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/marquee/marquee-element.ts",
+          "path": "src/registry/interaction/marquee/marquee-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/marquee-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/marquee-element.ts\";\n---\n\n<motion-marquee gap=\"32\" duration=\"10\">\n  <img src=\"/logo-a.svg\" alt=\"A\" />\n  <img src=\"/logo-b.svg\" alt=\"B\" />\n</motion-marquee>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/marquee-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-marquee gap=\"32\" duration=\"10\">\n      <img src=\"/logo-a.svg\" alt=\"A\" />\n      <img src=\"/logo-b.svg\" alt=\"B\" />\n    </motion-marquee>\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/marquee-element.ts\";\n</script>\n\n<template>\n  <motion-marquee gap=\"32\" duration=\"10\">\n    <img src=\"/logo-a.svg\" alt=\"A\" />\n    <img src=\"/logo-b.svg\" alt=\"B\" />\n  </motion-marquee>\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/marquee-element.ts\";\n</script>\n\n<motion-marquee gap=\"32\" duration=\"10\">\n  <img src=\"/logo-a.svg\" alt=\"A\" />\n  <img src=\"/logo-b.svg\" alt=\"B\" />\n</motion-marquee>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/marquee-element.js\"></script>\n\n<motion-marquee gap=\"32\" duration=\"10\">\n  <img src=\"/logo-a.svg\" alt=\"A\" />\n  <img src=\"/logo-b.svg\" alt=\"B\" />\n</motion-marquee>"
-        }
-      ],
-      "props": [
-        {
-          "name": "gap",
-          "type": "number",
-          "default": "32",
-          "description": "Space between items in pixels."
-        },
-        {
-          "name": "duration",
-          "type": "number",
-          "default": "5",
-          "description": "Seconds for one full loop at rest."
-        },
-        {
-          "name": "velocity",
-          "type": "number",
-          "default": "0.5",
-          "description": "Scroll velocity multiplier for the speed boost effect."
-        },
-        {
-          "name": "repeat",
-          "type": "number",
-          "default": "3",
-          "description": "Number of times to duplicate the slotted content for a seamless loop."
-        },
-        {
-          "name": "reversed",
-          "type": "boolean",
-          "default": "false",
-          "description": "Present to reverse the scroll direction."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "infinite-gallery",
-      "type": "registry:component",
       "title": "Infinite Gallery",
       "description": "A 3D gallery that endlessly scrolls through textured planes with cloth-like distortion and scroll-driven transitions. Lit Custom Element.",
       "dependencies": [
@@ -2255,69 +508,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/infinite-gallery/infinite-gallery-element.ts",
+          "path": "src/registry/showcase/infinite-gallery/infinite-gallery-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/infinite-gallery-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/infinite-gallery-element.ts\";\n---\n\n<motion-infinite-gallery\n  images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n  speed=\"1\"\n  visible-count=\"8\"\n  class=\"h-[600px] w-full\"\n></motion-infinite-gallery>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/infinite-gallery-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-infinite-gallery\n      images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n      speed=\"1\"\n      visible-count=\"8\"\n      class=\"h-[600px] w-full\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"`@/components/motion-kit/infinite-gallery-element.ts`\";\n</script>\n\n<template>\n  <motion-infinite-gallery\n    :images='JSON.stringify([{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}])'\n    speed=\"1\"\n    visible-count=\"8\"\n    class=\"h-[600px] w-full\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/infinite-gallery-element.ts\";\n</script>\n\n<motion-infinite-gallery\n  images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n  speed=\"1\"\n  visible-count=\"8\"\n  class=\"h-[600px] w-full\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/infinite-gallery-element.js\"></script>\n\n<motion-infinite-gallery\n  images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n  speed=\"1\"\n  visible-count=\"8\"\n  class=\"h-[600px] w-full\"\n></motion-infinite-gallery>"
-        }
-      ],
-      "props": [
-        {
-          "name": "images",
-          "type": "string",
-          "default": "[]",
-          "description": "JSON-serialized array of image URLs or objects with src and optional alt properties."
-        },
-        {
-          "name": "speed",
-          "type": "number",
-          "default": "1",
-          "description": "Scroll speed multiplier."
-        },
-        {
-          "name": "visible-count",
-          "type": "number",
-          "default": "8",
-          "description": "Number of image planes visible at once."
-        },
-        {
-          "name": "fade-settings",
-          "type": "object",
-          "default": "{fadeIn:{start:0.01,end:0.25},fadeOut:{start:0.43,end:0.46}}",
-          "description": "Fade transition zones (normalized 0-1)."
-        },
-        {
-          "name": "blur-settings",
-          "type": "object",
-          "default": "{blurIn:{start:0,end:0.2},blurOut:{start:0.43,end:0.46},maxBlur:8}",
-          "description": "Blur transition zones and maximum blur amount."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "infinite-physics-gallery",
-      "type": "registry:component",
       "title": "Infinite Physics Gallery",
       "description": "Infinite 2-D draggable grid with physics-based momentum, edge scrolling, and support for mixed image/video cells. Framework-agnostic Custom Element.",
       "dependencies": [
@@ -2326,87 +525,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/infinite-physics-gallery/infinite-physics-gallery-element.ts",
+          "path": "src/registry/showcase/infinite-physics-gallery/infinite-physics-gallery-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/infinite-physics-gallery-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/infinite-physics-gallery-element.ts\";\n---\n\n<motion-infinite-physics-gallery\n  items='[{\"type\":\"image\",\"src\":\"/1.jpg\"},{\"type\":\"image\",\"src\":\"/2.jpg\"}]'\n  cell-width=\"320\"\n  cell-height=\"400\"\n  class=\"h-[480px] w-full rounded-2xl overflow-hidden\"\n></motion-infinite-physics-gallery>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/infinite-physics-gallery-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-infinite-physics-gallery\n      items='[{\"type\":\"image\",\"src\":\"/1.jpg\"},{\"type\":\"image\",\"src\":\"/2.jpg\"}]'\n      cell-width=\"320\"\n      cell-height=\"400\"\n      class=\"h-[480px] w-full rounded-2xl overflow-hidden\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/infinite-physics-gallery-element.ts\";\n</script>\n\n<template>\n  <motion-infinite-physics-gallery\n    :items='JSON.stringify([{\"type\":\"image\",\"src\":\"/1.jpg\"},{\"type\":\"image\",\"src\":\"/2.jpg\"}])'\n    cell-width=\"320\"\n    cell-height=\"400\"\n    class=\"h-[480px] w-full rounded-2xl overflow-hidden\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/infinite-physics-gallery-element.ts\";\n</script>\n\n<motion-infinite-physics-gallery\n  items='[{\"type\":\"image\",\"src\":\"/1.jpg\"},{\"type\":\"image\",\"src\":\"/2.jpg\"}]'\n  cell-width=\"320\"\n  cell-height=\"400\"\n  class=\"h-[480px] w-full rounded-2xl overflow-hidden\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/infinite-physics-gallery-element.js\"></script>\n\n<motion-infinite-physics-gallery\n  items='[{\"type\":\"image\",\"src\":\"/1.jpg\"},{\"type\":\"image\",\"src\":\"/2.jpg\"}]'\n  cell-width=\"320\"\n  cell-height=\"400\"\n  class=\"h-[480px] w-full rounded-2xl overflow-hidden\"\n></motion-infinite-physics-gallery>"
-        }
-      ],
-      "props": [
-        {
-          "name": "items",
-          "type": "string",
-          "default": "\"[]\"",
-          "description": "JSON array of media items: [{type:\"image|video\",src:\"...\",alt:\"...\"}]."
-        },
-        {
-          "name": "cell-width",
-          "type": "number",
-          "default": "320",
-          "description": "Cell width in pixels."
-        },
-        {
-          "name": "cell-height",
-          "type": "number",
-          "default": "400",
-          "description": "Cell height in pixels."
-        },
-        {
-          "name": "gap",
-          "type": "number",
-          "default": "24",
-          "description": "Gap between cells in pixels."
-        },
-        {
-          "name": "friction",
-          "type": "number",
-          "default": "0.95",
-          "description": "Base inertia friction (0–1)."
-        },
-        {
-          "name": "wheel-speed",
-          "type": "number",
-          "default": "2",
-          "description": "Wheel speed multiplier."
-        },
-        {
-          "name": "edge-threshold",
-          "type": "number",
-          "default": "100",
-          "description": "Edge auto-scroll threshold in pixels."
-        },
-        {
-          "name": "edge-scroll-speed",
-          "type": "number",
-          "default": "2",
-          "description": "Edge auto-scroll speed."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "logo-carousel",
-      "type": "registry:component",
       "title": "Logo Carousel",
       "description": "Grid of logos that cycles through items with a blurred vertical swap animation. Framework-agnostic Custom Element.",
       "dependencies": [
@@ -2415,57 +542,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/logo-carousel/logo-carousel-element.ts",
+          "path": "src/registry/showcase/logo-carousel/logo-carousel-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/logo-carousel-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/logo-carousel-element.ts\";\n---\n\n<motion-logo-carousel\n  logos='[{\"src\":\"/logos/a.svg\",\"alt\":\"A\"},{\"src\":\"/logos/b.svg\",\"alt\":\"B\"}]'\n  columns=\"3\"\n  cycle-interval=\"2000\"\n></motion-logo-carousel>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/logo-carousel-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-logo-carousel\n      logos='[{\"src\":\"/logos/a.svg\",\"alt\":\"A\"},{\"src\":\"/logos/b.svg\",\"alt\":\"B\"}]'\n      columns=\"3\"\n      cycle-interval=\"2000\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/logo-carousel-element.ts\";\n</script>\n\n<template>\n  <motion-logo-carousel\n    :logos='JSON.stringify([{\"src\":\"/logos/a.svg\",\"alt\":\"A\"},{\"src\":\"/logos/b.svg\",\"alt\":\"B\"}])'\n    columns=\"3\"\n    cycle-interval=\"2000\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/logo-carousel-element.ts\";\n</script>\n\n<motion-logo-carousel\n  logos='[{\"src\":\"/logos/a.svg\",\"alt\":\"A\"},{\"src\":\"/logos/b.svg\",\"alt\":\"B\"}]'\n  columns=\"3\"\n  cycle-interval=\"2000\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/logo-carousel-element.js\"></script>\n\n<motion-logo-carousel\n  logos='[{\"src\":\"/logos/a.svg\",\"alt\":\"A\"},{\"src\":\"/logos/b.svg\",\"alt\":\"B\"}]'\n  columns=\"3\"\n  cycle-interval=\"2000\"\n></motion-logo-carousel>"
-        }
-      ],
-      "props": [
-        {
-          "name": "logos",
-          "type": "string",
-          "default": "\"[]\"",
-          "description": "JSON array of logo objects with src, alt, and name properties."
-        },
-        {
-          "name": "columns",
-          "type": "number",
-          "default": "2",
-          "description": "Number of columns to distribute logos into."
-        },
-        {
-          "name": "cycle-interval",
-          "type": "number",
-          "default": "2000",
-          "description": "Milliseconds between logo cycles."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "radial-gallery",
-      "type": "registry:component",
       "title": "Radial Gallery",
       "description": "Circular rotating image gallery. Items are evenly spaced around a ring that spins continuously. Framework-agnostic Custom Element.",
       "dependencies": [
@@ -2474,81 +559,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/radial-gallery/radial-gallery-element.ts",
+          "path": "src/registry/showcase/radial-gallery/radial-gallery-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/radial-gallery-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/radial-gallery-element.ts\";\n---\n\n<motion-radial-gallery\n  items='[{\"src\":\"/img/1.jpg\"},{\"src\":\"/img/2.jpg\"}]'\n  radius=\"480\"\n  duration=\"24\"\n  element-size=\"160\"\n  class=\"h-[360px] w-full overflow-hidden\"\n></motion-radial-gallery>"
-        },
-        {
-          "label": "React",
-          "code": "import \"`@/components/motion-kit/radial-gallery-element.ts`\";\n\nexport default function Page() {\n  return (\n    <motion-radial-gallery\n      items='[{\"src\":\"/img/1.jpg\"},{\"src\":\"/img/2.jpg\"}]'\n      radius=\"480\"\n      duration=\"24\"\n      element-size=\"160\"\n      className=\"h-[360px] w-full overflow-hidden\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/radial-gallery-element.ts\";\n</script>\n\n<template>\n  <motion-radial-gallery\n    :items='JSON.stringify([{\"src\":\"/img/1.jpg\"},{\"src\":\"/img/2.jpg\"}])'\n    radius=\"480\"\n    duration=\"24\"\n    element-size=\"160\"\n    class=\"h-[360px] w-full overflow-hidden\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/radial-gallery-element.ts\";\n</script>\n\n<motion-radial-gallery\n  items='[{\"src\":\"/img/1.jpg\"},{\"src\":\"/img/2.jpg\"}]'\n  radius=\"480\"\n  duration=\"24\"\n  element-size=\"160\"\n  class=\"h-[360px] w-full overflow-hidden\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/radial-gallery-element.js\"></script>\n\n<motion-radial-gallery\n  items='[{\"src\":\"/img/1.jpg\"},{\"src\":\"/img/2.jpg\"}]'\n  radius=\"480\"\n  duration=\"24\"\n  element-size=\"160\"\n  class=\"h-[360px] w-full overflow-hidden\"\n></motion-radial-gallery>"
-        }
-      ],
-      "props": [
-        {
-          "name": "items",
-          "type": "string",
-          "default": "\"[]\"",
-          "description": "JSON array of image objects with src and alt properties."
-        },
-        {
-          "name": "radius",
-          "type": "number",
-          "default": "600",
-          "description": "Radius of the circle in pixels."
-        },
-        {
-          "name": "duration",
-          "type": "number",
-          "default": "20",
-          "description": "Duration of one full rotation in seconds."
-        },
-        {
-          "name": "reversed",
-          "type": "boolean",
-          "default": "false",
-          "description": "Rotate counter-clockwise."
-        },
-        {
-          "name": "offset",
-          "type": "number",
-          "default": "0",
-          "description": "Extra pixels to offset the ring center below the visible area."
-        },
-        {
-          "name": "gap",
-          "type": "number",
-          "default": "0",
-          "description": "Gap between items in pixels."
-        },
-        {
-          "name": "element-size",
-          "type": "number",
-          "default": "100",
-          "description": "Estimated item width in pixels for circumference calculations."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "slideshow",
-      "type": "registry:component",
       "title": "Slideshow",
       "description": "Full-bleed image slideshow with parallax slide transitions and thumbnail navigation. Framework-agnostic Custom Element.",
       "dependencies": [
@@ -2557,45 +576,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/slideshow/slideshow-element.ts",
+          "path": "src/registry/showcase/slideshow/slideshow-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/slideshow-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/slideshow-element.ts\";\n---\n\n<motion-slideshow\n  images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n  class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n></motion-slideshow>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/slideshow-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-slideshow\n      images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n      class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/slideshow-element.ts\";\n</script>\n\n<template>\n  <motion-slideshow\n    :images='JSON.stringify([{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}])'\n    class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/slideshow-element.ts\";\n</script>\n\n<motion-slideshow\n  images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n  class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/slideshow-element.js\"></script>\n\n<motion-slideshow\n  images='[{\"src\":\"/1.jpg\",\"alt\":\"One\"},{\"src\":\"/2.jpg\",\"alt\":\"Two\"}]'\n  class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n></motion-slideshow>"
-        }
-      ],
-      "props": [
-        {
-          "name": "images",
-          "type": "string",
-          "default": "\"[]\"",
-          "description": "JSON array of image objects with src and alt properties."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "video-player",
-      "type": "registry:component",
       "title": "Video Player",
       "description": "Custom video player with play/pause, a hover-expanding scrubber, mute, and GSAP Flip fullscreen expand animation.",
       "dependencies": [
@@ -2604,75 +593,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/video-player/video-player-element.ts",
+          "path": "src/registry/showcase/video-player/video-player-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/video-player-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/video-player-element.ts\";\n---\n\n<motion-video-player\n  src=\"https://example.com/video.mp4\"\n  poster=\"https://example.com/poster.jpg\"\n  class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n></motion-video-player>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/video-player-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-video-player\n      src=\"https://example.com/video.mp4\"\n      poster=\"https://example.com/poster.jpg\"\n      class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/video-player-element.ts\";\n</script>\n\n<template>\n  <motion-video-player\n    src=\"https://example.com/video.mp4\"\n    poster=\"https://example.com/poster.jpg\"\n    class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/video-player-element.ts\";\n</script>\n\n<motion-video-player\n  src=\"https://example.com/video.mp4\"\n  poster=\"https://example.com/poster.jpg\"\n  class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/video-player-element.js\"></script>\n\n<motion-video-player\n  src=\"https://example.com/video.mp4\"\n  poster=\"https://example.com/poster.jpg\"\n  class=\"aspect-video w-full max-w-2xl rounded-xl overflow-hidden\"\n></motion-video-player>"
-        }
-      ],
-      "props": [
-        {
-          "name": "src",
-          "type": "string",
-          "default": "\"\"",
-          "description": "URL of the video file to play."
-        },
-        {
-          "name": "poster",
-          "type": "string",
-          "default": "\"\"",
-          "description": "URL of the poster image to display before playback."
-        },
-        {
-          "name": "autoplay",
-          "type": "boolean",
-          "default": "false",
-          "description": "Whether to start playing automatically."
-        },
-        {
-          "name": "muted",
-          "type": "boolean",
-          "default": "true",
-          "description": "Whether the video starts muted."
-        },
-        {
-          "name": "loop",
-          "type": "boolean",
-          "default": "false",
-          "description": "Whether to loop the video when it ends."
-        },
-        {
-          "name": "hide-controls",
-          "type": "boolean",
-          "default": "false",
-          "description": "Whether to hide all controls (play/pause, scrubber, etc.)."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "split-hover",
-      "type": "registry:component",
       "title": "Split Hover",
       "description": "Splits text into characters and animates stacked layers on hover for a seamless swap. Framework-agnostic Custom Element.",
       "dependencies": [
@@ -2681,45 +610,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/split-hover/split-hover-element.ts",
+          "path": "src/registry/text/split-hover/split-hover-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/split-hover-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/split-hover-element.ts\";\n---\n\n<motion-split-hover text=\"Hover me\"></motion-split-hover>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/split-hover-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-split-hover text=\"Hover me\" />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/split-hover-element.ts\";\n</script>\n\n<template>\n  <motion-split-hover text=\"Hover me\" />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/split-hover-element.ts\";\n</script>\n\n<motion-split-hover text=\"Hover me\" />"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/split-hover-element.js\"></script>\n\n<motion-split-hover text=\"Hover me\"></motion-split-hover>"
-        }
-      ],
-      "props": [
-        {
-          "name": "text",
-          "type": "string",
-          "default": "\"\"",
-          "description": "The text content to display and animate."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "split-reveal",
-      "type": "registry:component",
       "title": "Split Reveal",
       "description": "Masks text and reveals lines, words, or characters on mount or scroll. Framework-agnostic Custom Element.",
       "dependencies": [
@@ -2728,81 +627,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/split-reveal/split-reveal-element.ts",
+          "path": "src/registry/text/split-reveal/split-reveal-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/split-reveal-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/split-reveal-element.ts\";\n---\n\n<motion-split-reveal text=\"Hello World\" mode=\"lines\"></motion-split-reveal>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/split-reveal-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-split-reveal text=\"Hello World\" mode=\"lines\" />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/split-reveal-element.ts\";\n</script>\n\n<template>\n  <motion-split-reveal text=\"Hello World\" mode=\"lines\" />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/split-reveal-element.ts\";\n</script>\n\n<motion-split-reveal text=\"Hello World\" mode=\"lines\" />"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/split-reveal-element.js\"></script>\n\n<motion-split-reveal text=\"Hello World\" mode=\"lines\"></motion-split-reveal>"
-        }
-      ],
-      "props": [
-        {
-          "name": "text",
-          "type": "string",
-          "default": "\"\"",
-          "description": "The text content to display and animate."
-        },
-        {
-          "name": "mode",
-          "type": "\"lines\" | \"words\" | \"chars\"",
-          "default": "\"lines\"",
-          "description": "How to split the text for reveal animation."
-        },
-        {
-          "name": "delay",
-          "type": "number",
-          "default": "0",
-          "description": "Initial delay in seconds before animation starts (not for scroll-triggered)."
-        },
-        {
-          "name": "trigger-on-scroll",
-          "type": "boolean",
-          "default": "false",
-          "description": "Whether to trigger reveal when element scrolls into view."
-        },
-        {
-          "name": "scroll-element",
-          "type": "string",
-          "default": "\"\"",
-          "description": "CSS selector for scrollable container (defaults to window)."
-        },
-        {
-          "name": "duration",
-          "type": "number",
-          "default": "0",
-          "description": "Animation duration in seconds (0 = auto based on mode)."
-        },
-        {
-          "name": "stagger",
-          "type": "number",
-          "default": "0",
-          "description": "Stagger delay between split items in seconds (0 = auto based on mode)."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "stacking-words",
-      "type": "registry:component",
       "title": "Stacking Words",
       "description": "Splits text into lines and slides each line's words in from the right on scroll. Framework-agnostic Custom Element.",
       "dependencies": [
@@ -2811,81 +644,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/stacking-words/stacking-words-element.ts",
+          "path": "src/registry/text/stacking-words/stacking-words-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/stacking-words-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/stacking-words-element.ts\";\n---\n\n<motion-stacking-words\n  text=\"Every word arrives on its own.\"\n  start=\"top 90%\"\n  end=\"top 30%\"\n></motion-stacking-words>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/stacking-words-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-stacking-words\n      text=\"Every word arrives on its own.\"\n      start=\"top 90%\"\n      end=\"top 30%\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/stacking-words-element.ts\";\n</script>\n\n<template>\n  <motion-stacking-words\n    text=\"Every word arrives on its own.\"\n    start=\"top 90%\"\n    end=\"top 30%\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/stacking-words-element.ts\";\n</script>\n\n<motion-stacking-words\n  text=\"Every word arrives on its own.\"\n  start=\"top 90%\"\n  end=\"top 30%\"\n/>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/stacking-words-element.js\"></script>\n\n<motion-stacking-words\n  text=\"Every word arrives on its own.\"\n  start=\"top 90%\"\n  end=\"top 30%\"\n></motion-stacking-words>"
-        }
-      ],
-      "props": [
-        {
-          "name": "text",
-          "type": "string",
-          "default": "\"\"",
-          "description": "The text content to display and animate."
-        },
-        {
-          "name": "start",
-          "type": "string",
-          "default": "\"top 90%\"",
-          "description": "ScrollTrigger start position (when animation begins)."
-        },
-        {
-          "name": "end",
-          "type": "string",
-          "default": "\"top 30%\"",
-          "description": "ScrollTrigger end position (when animation completes)."
-        },
-        {
-          "name": "scrub",
-          "type": "number",
-          "default": "1.234",
-          "description": "Scrub duration in seconds for smooth scroll linking."
-        },
-        {
-          "name": "stagger",
-          "type": "number",
-          "default": "0.21",
-          "description": "Delay between each word's animation in seconds."
-        },
-        {
-          "name": "ease",
-          "type": "string",
-          "default": "\"power3.out\"",
-          "description": "GSAP easing function for the animation."
-        },
-        {
-          "name": "scroll-element",
-          "type": "string",
-          "default": "\"\"",
-          "description": "CSS selector for scrollable container (defaults to window)."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "text-loop",
-      "type": "registry:component",
       "title": "Text Loop",
       "description": "Cycles through an array of text strings with a blurred vertical slide transition. Framework-agnostic Custom Element.",
       "dependencies": [
@@ -2894,51 +661,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/text-loop/text-loop-element.ts",
+          "path": "src/registry/text/text-loop/text-loop-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/text-loop-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/text-loop-element.ts\";\n---\n\n<motion-text-loop\n  texts='[\"Design\",\"Develop\",\"Deploy\"]'\n  interval=\"2000\"\n></motion-text-loop>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/text-loop-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-text-loop\n      texts='[\"Design\",\"Develop\",\"Deploy\"]'\n      interval=\"2000\"\n    />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/text-loop-element.ts\";\n</script>\n\n<template>\n  <motion-text-loop\n    :texts='JSON.stringify([\"Design\", \"Develop\", \"Deploy\"])'\n    interval=\"2000\"\n  />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/text-loop-element.ts\";\n</script>\n\n<motion-text-loop\n  texts='[\"Design\",\"Develop\",\"Deploy\"]'\n  interval=\"2000\"\n></motion-text-loop>"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/text-loop-element.js\"></script>\n\n<motion-text-loop\n  texts='[\"Design\",\"Develop\",\"Deploy\"]'\n  interval=\"2000\"\n></motion-text-loop>"
-        }
-      ],
-      "props": [
-        {
-          "name": "texts",
-          "type": "string[]",
-          "default": "[]",
-          "description": "Array of strings to cycle through. Pass as a JSON array string."
-        },
-        {
-          "name": "interval",
-          "type": "number",
-          "default": "2000",
-          "description": "Milliseconds between transitions."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "text-repel",
-      "type": "registry:component",
       "title": "Text Repel",
       "description": "Splits text into words or characters that repel from the pointer. Framework-agnostic Custom Element.",
       "dependencies": [
@@ -2947,87 +678,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/text-repel/text-repel-element.ts",
+          "path": "src/registry/text/text-repel/text-repel-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/text-repel-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/text-repel-element.ts\";\n---\n\n<motion-text-repel text=\"Hover over me\" mode=\"words\"></motion-text-repel>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/text-repel-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-text-repel text=\"Hover over me\" mode=\"words\" />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/text-repel-element.ts\";\n</script>\n\n<template>\n  <motion-text-repel text=\"Hover over me\" mode=\"words\" />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/text-repel-element.ts\";\n</script>\n\n<motion-text-repel text=\"Hover over me\" mode=\"words\" />"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/text-repel-element.js\"></script>\n\n<motion-text-repel text=\"Hover over me\" mode=\"words\"></motion-text-repel>"
-        }
-      ],
-      "props": [
-        {
-          "name": "text",
-          "type": "string",
-          "default": "\"\"",
-          "description": "The text content to display and animate."
-        },
-        {
-          "name": "mode",
-          "type": "\"words\" | \"chars\"",
-          "default": "\"words\"",
-          "description": "Whether to split by words or characters."
-        },
-        {
-          "name": "strength",
-          "type": "number",
-          "default": "18",
-          "description": "Maximum distance in pixels to repel text elements."
-        },
-        {
-          "name": "radius",
-          "type": "number",
-          "default": "160",
-          "description": "Radius around the cursor where repel effect is active."
-        },
-        {
-          "name": "falloff-power",
-          "type": "number",
-          "default": "1.5",
-          "description": "Power curve for falloff (higher = sharper falloff)."
-        },
-        {
-          "name": "duration",
-          "type": "number",
-          "default": "0.45",
-          "description": "Animation duration in seconds."
-        },
-        {
-          "name": "ease",
-          "type": "string",
-          "default": "\"power3.out\"",
-          "description": "GSAP easing function for the animation."
-        },
-        {
-          "name": "hover-target",
-          "type": "string",
-          "default": "\"\"",
-          "description": "CSS selector for an external hover target. Defaults to this element."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "text-scramble",
-      "type": "registry:component",
       "title": "Text Scramble",
       "description": "Scrambles characters on hover before settling back to the original text. Framework-agnostic Custom Element.",
       "dependencies": [
@@ -3036,75 +695,15 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/text-scramble/text-scramble-element.ts",
+          "path": "src/registry/text/text-scramble/text-scramble-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/text-scramble-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/text-scramble-element.ts\";\n---\n\n<motion-text-scramble text=\"Hello World\"></motion-text-scramble>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/text-scramble-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-text-scramble text=\"Hello World\" />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/text-scramble-element.ts\";\n</script>\n\n<template>\n  <motion-text-scramble text=\"Hello World\" />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/text-scramble-element.ts\";\n</script>\n\n<motion-text-scramble text=\"Hello World\" />"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/text-scramble-element.js\"></script>\n\n<motion-text-scramble text=\"Hello World\"></motion-text-scramble>"
-        }
-      ],
-      "props": [
-        {
-          "name": "text",
-          "type": "string",
-          "default": "\"\"",
-          "description": "The text content to display and scramble."
-        },
-        {
-          "name": "hover-target",
-          "type": "string",
-          "default": "\"\"",
-          "description": "CSS selector for an external element that triggers the effect. Defaults to this element."
-        },
-        {
-          "name": "scramble-duration",
-          "type": "number",
-          "default": "0.6",
-          "description": "Duration of the scramble animation in seconds."
-        },
-        {
-          "name": "stagger",
-          "type": "number",
-          "default": "0.03",
-          "description": "Delay between each character's animation in seconds."
-        },
-        {
-          "name": "cycles",
-          "type": "number",
-          "default": "12",
-          "description": "Number of random character cycles before settling."
-        },
-        {
-          "name": "characters",
-          "type": "string",
-          "default": "\"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*\"",
-          "description": "Character pool to use for scrambling effect."
-        }
-      ]
+      "type": "registry:component"
     },
     {
       "name": "weight-wave",
-      "type": "registry:component",
       "title": "Weight Wave",
       "description": "Hover-reactive text effect that smoothly increases font weight with a falloff across neighboring characters. Requires a variable font.",
       "dependencies": [
@@ -3113,77 +712,12 @@
       ],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/weight-wave/weight-wave-element.ts",
+          "path": "src/registry/text/weight-wave/weight-wave-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/weight-wave-element.ts"
         }
       ],
-      "usage": [
-        {
-          "label": "Astro",
-          "code": "---\nimport \"@/components/motion-kit/weight-wave-element.ts\";\n---\n\n<motion-weight-wave text=\"Hover me\"></motion-weight-wave>"
-        },
-        {
-          "label": "React",
-          "code": "import \"@/components/motion-kit/weight-wave-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-weight-wave text=\"Hover me\" />\n  );\n}"
-        },
-        {
-          "label": "Vue",
-          "code": "<script setup>\nimport \"@/components/motion-kit/weight-wave-element.ts\";\n</script>\n\n<template>\n  <motion-weight-wave text=\"Hover me\" />\n</template>"
-        },
-        {
-          "label": "Svelte",
-          "code": "<script>\n  import \"@/components/motion-kit/weight-wave-element.ts\";\n</script>\n\n<motion-weight-wave text=\"Hover me\" />"
-        },
-        {
-          "label": "HTML",
-          "code": "<script type=\"module\" src=\"/components/motion-kit/weight-wave-element.js\"></script>\n\n<motion-weight-wave text=\"Hover me\"></motion-weight-wave>"
-        }
-      ],
-      "props": [
-        {
-          "name": "text",
-          "type": "string",
-          "default": "\"\"",
-          "description": "The text content to display and animate."
-        },
-        {
-          "name": "base-weight",
-          "type": "number",
-          "default": "350",
-          "description": "Base font weight when not hovering."
-        },
-        {
-          "name": "hover-weight",
-          "type": "number",
-          "default": "750",
-          "description": "Font weight at cursor position."
-        },
-        {
-          "name": "influence-radius",
-          "type": "number",
-          "default": "3",
-          "description": "Number of neighboring characters affected by the wave."
-        },
-        {
-          "name": "falloff-power",
-          "type": "number",
-          "default": "1.5",
-          "description": "Power curve for weight falloff (higher = sharper falloff)."
-        },
-        {
-          "name": "duration",
-          "type": "number",
-          "default": "1.0",
-          "description": "Animation duration in seconds."
-        },
-        {
-          "name": "ease",
-          "type": "string",
-          "default": "\"power3.out\"",
-          "description": "GSAP easing function for the animation."
-        }
-      ]
+      "type": "registry:component"
     }
   ]
 }

@@ -3,7 +3,7 @@
   "name": "marquee",
   "type": "registry:component",
   "title": "Marquee",
-  "description": "Scroll-velocity-boosted infinite marquee. Vanilla Custom Element — no Lit dependency.",
+  "description": "Scroll-velocity-boosted infinite marquee. Vanilla Custom Element.",
   "dependencies": ["gsap"],
   "files": [
     {

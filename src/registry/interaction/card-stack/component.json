@@ -3,7 +3,7 @@
   "name": "card-stack",
   "type": "registry:component",
   "title": "Card Stack",
-  "description": "Scroll-driven sticky card stack with GSAP ScrollTrigger. Nest <motion-card-stack-item> elements inside.",
+  "description": "Scroll-driven sticky card stack with ScrollTrigger. Nest <motion-card-stack-item> elements inside.",
   "dependencies": ["lit", "gsap"],
   "files": [
     {

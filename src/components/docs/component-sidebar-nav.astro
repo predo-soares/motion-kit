@@ -9,8 +9,9 @@ interface Props {
 const { currentSlug, currentHref } = Astro.props;
 
 const docsLinks = [
-  { href: "/components", label: "Components" },
-  { href: "/changelog", label: "Changelog" },
+  { href: "/docs/introduction", label: "Introduction" },
+  { href: "/docs/components", label: "Components" },
+  { href: "/docs/changelog", label: "Changelog" },
 ];
 ---
 
@@ -33,7 +34,7 @@ const docsLinks = [
             >
               <span
                 class:list={[
-                  "inline-flex rounded-3xl px-3 py-1.5 text-[13px] font-medium tracking-tight transition-colors duration-150",
+                  "inline-flex rounded-3xl px-2 py-1 text-xs font-medium tracking-tight transition-colors duration-150",
                   isActive
                     ? "bg-slate-900 text-white"
                     : "text-slate-600 group-hover:bg-slate-100 group-hover:text-slate-900",
@@ -63,7 +64,7 @@ const docsLinks = [
             return (
               <li>
                 <a
-                  href={`/components/${component.slug}`}
+                  href={`/docs/components/${component.slug}`}
                   class:list={[
                     "group inline-flex rounded-3xl  p-0.5  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 focus-visible:ring-offset-2 focus-visible:ring-offset-white",
                   ]}

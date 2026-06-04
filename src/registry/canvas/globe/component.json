@@ -3,7 +3,7 @@
   "name": "globe",
   "type": "registry:component",
   "title": "Globe",
-  "description": "A Fresnel-lit globe with rim glow, haloed atmosphere, land mesh detail, and marker layers for data storytelling. Lit Custom Element.",
+  "description": "A Fresnel-lit globe with rim glow, haloed atmosphere, land mesh detail, and marker layers for data storytelling.",
   "dependencies": ["lit", "ogl", "gsap"],
   "files": [
     {

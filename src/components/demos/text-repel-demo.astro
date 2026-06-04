@@ -19,4 +19,76 @@ import ComponentCard from "@/components/ui/component-card.astro";
       class="text-4xl font-black tracking-widest text-violet-600 select-none"
     ></motion-text-repel>
   </div>
+  <div slot="controls" class="mk-controls">
+    <mk-text-input
+      label="Text 1"
+      value="Move your cursor here"
+      data-target="motion-text-repel"
+      data-index="0"
+      data-attr="text"
+    ></mk-text-input>
+    <mk-select
+      label="Mode 1"
+      value="words"
+      data-target="motion-text-repel"
+      data-index="0"
+      data-attr="mode"
+      options='["words","chars"]'
+    ></mk-select>
+    <mk-slider
+      label="Strength 1"
+      min="0"
+      max="100"
+      step="1"
+      value="24"
+      data-target="motion-text-repel"
+      data-index="0"
+      data-attr="strength"
+    ></mk-slider>
+    <mk-slider
+      label="Radius 1"
+      min="50"
+      max="400"
+      step="10"
+      value="180"
+      data-target="motion-text-repel"
+      data-index="0"
+      data-attr="radius"
+    ></mk-slider>
+    <mk-text-input
+      label="Text 2"
+      value="CHARACTERS"
+      data-target="motion-text-repel"
+      data-index="1"
+      data-attr="text"
+    ></mk-text-input>
+    <mk-select
+      label="Mode 2"
+      value="chars"
+      data-target="motion-text-repel"
+      data-index="1"
+      data-attr="mode"
+      options='["words","chars"]'
+    ></mk-select>
+    <mk-slider
+      label="Strength 2"
+      min="0"
+      max="100"
+      step="1"
+      value="32"
+      data-target="motion-text-repel"
+      data-index="1"
+      data-attr="strength"
+    ></mk-slider>
+    <mk-slider
+      label="Radius 2"
+      min="50"
+      max="400"
+      step="10"
+      value="120"
+      data-target="motion-text-repel"
+      data-index="1"
+      data-attr="radius"
+    ></mk-slider>
+  </div>
 </ComponentCard>

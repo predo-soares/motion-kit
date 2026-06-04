@@ -20,6 +20,9 @@ export class MotionFake3DImage extends LitElement {
   private _uniforms?: { uThreshold: { value: Vec2 } }
   private _setColor?: (src: string) => void
   private _setDepth?: (src: string) => void
+  private _canvas?: HTMLCanvasElement
+  private _onMove?: (e: PointerEvent) => void
+  private _onLeave?: () => void
 
   override firstUpdated() {
     this._init(this.shadowRoot!.querySelector("canvas")!)
@@ -29,6 +32,7 @@ export class MotionFake3DImage extends LitElement {
     super.disconnectedCallback()
     this._cancelled = true
     cancelAnimationFrame(this._raf)
+    this._removePointerListeners()
   }
 
   override updated(changed: Map<string, unknown>) {
@@ -47,6 +51,7 @@ export class MotionFake3DImage extends LitElement {
   }
 
   private _init(canvas: HTMLCanvasElement) {
+    this._removePointerListeners()
     this._cancelled = false
     const renderer = new Renderer({ canvas, alpha: true, dpr: window.devicePixelRatio })
     const gl = renderer.gl
@@ -133,14 +138,15 @@ export class MotionFake3DImage extends LitElement {
     mesh.setParent(scene)
 
     const target = new Vec2(0, 0), smooth = new Vec2(0, 0)
-    const onMove = (e: PointerEvent) => {
+    this._canvas = canvas
+    this._onMove = (e: PointerEvent) => {
       const r = canvas.getBoundingClientRect()
       target.x = ((e.clientX - r.left) / r.width) * 2 - 1
       target.y = -(((e.clientY - r.top) / r.height) * 2 - 1)
     }
-    const onLeave = () => { target.x = 0; target.y = 0 }
-    canvas.addEventListener("pointermove", onMove)
-    canvas.addEventListener("pointerleave", onLeave)
+    this._onLeave = () => { target.x = 0; target.y = 0 }
+    canvas.addEventListener("pointermove", this._onMove)
+    canvas.addEventListener("pointerleave", this._onLeave)
 
     let prev = 0
     const tick = (now: number) => {
@@ -165,5 +171,17 @@ export class MotionFake3DImage extends LitElement {
 
   override render() {
     return html`<canvas></canvas>`
+  }
+
+  private _removePointerListeners() {
+    if (this._canvas && this._onMove) {
+      this._canvas.removeEventListener("pointermove", this._onMove)
+    }
+    if (this._canvas && this._onLeave) {
+      this._canvas.removeEventListener("pointerleave", this._onLeave)
+    }
+    this._canvas = undefined
+    this._onMove = undefined
+    this._onLeave = undefined
   }
 }

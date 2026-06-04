@@ -1,0 +1,157 @@
+---
+import ComponentBrowserShell from "@/components/docs/component-browser-shell.astro";
+import ComponentToc from "@/components/docs/component-toc.astro";
+import SiteLayout from "@/layouts/site-layout.astro";
+
+const tocItems = [
+  { href: "#what-is-motion-kit", label: "What is Motion Kit" },
+  { href: "#not-a-component-library", label: "Not a Component Library" },
+  { href: "#web-components", label: "Web Components" },
+  { href: "#registry-distribution", label: "Registry & Distribution" },
+  { href: "#open-code", label: "Open Code" },
+];
+---
+
+<SiteLayout
+  title="Introduction — Motion Kit"
+  description="Motion Kit is a shadcn-compatible registry of animated web components powered by GSAP."
+>
+  <ComponentBrowserShell currentHref="/docs/introduction">
+    <article class="flex w-full max-w-[600px] min-w-0 flex-col gap-10 pb-16">
+      <header class="flex flex-col gap-3">
+        <div class="flex flex-col gap-2">
+          <p class="text-xs font-semibold text-slate-400">Docs</p>
+          <h1
+            class="text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl"
+          >
+            Introduction
+          </h1>
+        </div>
+        <p class="text-sm leading-6 text-balance text-slate-600">
+          Motion Kit is a shadcn-compatible registry of animated web components
+          powered by GSAP. Install any component directly into your project with
+          a single command. No runtime dependency, no version lock — just your
+          code.
+        </p>
+      </header>
+
+      <section id="what-is-motion-kit" class="flex flex-col gap-4 scroll-mt-24">
+        <h2 class="text-xl font-semibold tracking-tight text-slate-950">
+          What is Motion Kit
+        </h2>
+        <div class="flex flex-col gap-3 text-sm leading-7 text-slate-600">
+          <p>
+            Motion Kit is a collection of production-ready animated components
+            built as Custom Elements and distributed through the shadcn
+            registry. Each component ships as source code dropped directly into
+            your project — no package manager dependency, no abstraction layer
+            between you and the animation.
+          </p>
+          <p>
+            It is built around a small set of ideas: open code you own and
+            control, a consistent Web Component interface that works across
+            frameworks, and a distribution model that keeps installation as
+            simple as one command.
+          </p>
+        </div>
+      </section>
+
+      <section
+        id="not-a-component-library"
+        class="flex flex-col gap-4 scroll-mt-24"
+      >
+        <h2 class="text-xl font-semibold tracking-tight text-slate-950">
+          Not a Component Library
+        </h2>
+        <div class="flex flex-col gap-3 text-sm leading-7 text-slate-600">
+          <p>
+            This is not a library you install from npm and import. It is a
+            registry you pull from. When you add a Motion Kit component, the
+            source files are copied into your project and become part of your
+            codebase. You own them.
+          </p>
+          <p>
+            Traditional animation libraries ask you to accept their runtime,
+            wrap their components, and fight their APIs whenever your design
+            deviates from their defaults. Motion Kit sidesteps that entirely —
+            if you want to change an easing curve or adjust a timing value, you
+            open the file and change it.
+          </p>
+        </div>
+      </section>
+
+      <section id="web-components" class="flex flex-col gap-4 scroll-mt-24">
+        <h2 class="text-xl font-semibold tracking-tight text-slate-950">
+          Web Components
+        </h2>
+        <div class="flex flex-col gap-3 text-sm leading-7 text-slate-600">
+          <p>
+            Every component is a Custom Element — framework-agnostic by design.
+            Built with Lit or vanilla <code
+              class="rounded bg-slate-100 px-1.5 py-0.5 text-[0.9em] text-slate-800"
+              >HTMLElement</code
+            >, they work in Astro, Next.js, SvelteKit, or plain HTML without
+            modification.
+          </p>
+          <p>
+            Each component shares a consistent interface: shadow DOM for style
+            isolation, GSAP for animation, and a <code
+              class="rounded bg-slate-100 px-1.5 py-0.5 text-[0.9em] text-slate-800"
+              >replay()</code
+            > method that re-triggers the animation on demand. There is nothing to
+            learn beyond the HTML attribute API each component publishes — and those
+            are all documented in the API Reference on each component page.
+          </p>
+        </div>
+      </section>
+
+      <section
+        id="registry-distribution"
+        class="flex flex-col gap-4 scroll-mt-24"
+      >
+        <h2 class="text-xl font-semibold tracking-tight text-slate-950">
+          Registry & Distribution
+        </h2>
+        <div class="flex flex-col gap-3 text-sm leading-7 text-slate-600">
+          <p>
+            Motion Kit uses the shadcn registry schema: a flat-file structure
+            that defines each component, its dependencies, and installation
+            targets. The shadcn CLI reads that schema and places source files
+            exactly where they belong in your project.
+          </p>
+          <p>Install any component with a single command:</p>
+          <pre
+            class="rounded-xl bg-slate-200 px-4 py-3 text-xs text-slate-900 overflow-x-auto"><code>pnpm dlx shadcn@latest add https://motion-kit-astro.vercel.app/r/&lt;name&gt;.json</code></pre>
+          <p>
+            Each component's page has the exact command ready to copy. Re-run it
+            at any time to pull in an updated version.
+          </p>
+        </div>
+      </section>
+
+      <section id="open-code" class="flex flex-col gap-4 scroll-mt-24">
+        <h2 class="text-xl font-semibold tracking-tight text-slate-950">
+          Open Code
+        </h2>
+        <div class="flex flex-col gap-3 text-sm leading-7 text-slate-600">
+          <p>
+            You receive the full component source — TypeScript, GSAP setup,
+            shadow DOM styles and all. There is no compiled black box to debug.
+            Every animation curve, every timing value, every DOM decision is
+            yours to read and change.
+          </p>
+          <p>
+            This also makes Motion Kit components straightforward for LLMs to
+            work with. The source is small, self-contained, and follows a
+            consistent pattern — making it easy to ask an AI to extend, restyle,
+            or compose components without fighting an opaque API.
+          </p>
+        </div>
+      </section>
+    </article>
+
+    <Fragment slot="aside">
+      <ComponentToc items={tocItems} />
+    </Fragment>
+  </ComponentBrowserShell>
+</SiteLayout>

@@ -3,7 +3,7 @@
   "name": "halo",
   "type": "registry:component",
   "title": "Halo",
-  "description": "Atmospheric scattering based halo effect with dynamic camera rotation and sun light simulation. Lit Custom Element.",
+  "description": "Atmospheric scattering based halo effect with dynamic camera rotation and sun light simulation.",
   "dependencies": ["lit", "ogl"],
   "files": [
     {

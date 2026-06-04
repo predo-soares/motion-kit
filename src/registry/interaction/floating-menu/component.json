@@ -3,7 +3,7 @@
   "name": "floating-menu",
   "type": "registry:component",
   "title": "Floating Menu",
-  "description": "A floating GSAP-powered navigation menu with staggered link reveals and animated toggle lines. Lit Custom Element.",
+  "description": "A floating navigation menu with staggered link reveals and animated toggle lines.",
   "dependencies": ["lit", "gsap"],
   "files": [
     {

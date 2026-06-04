@@ -1,0 +1,520 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "items": [
+    {
+      "name": "split-hover",
+      "type": "registry:component",
+      "title": "Split Hover",
+      "description": "Splits text into characters and animates stacked layers on hover for a seamless swap. Framework-agnostic Custom Element.",
+      "dependencies": [
+        "lit",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/split-hover-element.ts",
+          "path": "split-hover/split-hover-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/split-hover-element.ts\";\n---\n\n<motion-split-hover text=\"Hover me\"></motion-split-hover>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/split-hover-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-split-hover text=\"Hover me\" />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/split-hover-element.ts\";\n</script>\n\n<template>\n  <motion-split-hover text=\"Hover me\" />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/split-hover-element.ts\";\n</script>\n\n<motion-split-hover text=\"Hover me\" />"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/split-hover-element.js\"></script>\n\n<motion-split-hover text=\"Hover me\"></motion-split-hover>"
+        }
+      ],
+      "props": [
+        {
+          "name": "text",
+          "type": "string",
+          "default": "\"\"",
+          "description": "The text content to display and animate."
+        }
+      ]
+    },
+    {
+      "name": "split-reveal",
+      "type": "registry:component",
+      "title": "Split Reveal",
+      "description": "Masks text and reveals lines, words, or characters on mount or scroll. Framework-agnostic Custom Element.",
+      "dependencies": [
+        "lit",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/split-reveal-element.ts",
+          "path": "split-reveal/split-reveal-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/split-reveal-element.ts\";\n---\n\n<motion-split-reveal text=\"Hello World\" mode=\"lines\"></motion-split-reveal>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/split-reveal-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-split-reveal text=\"Hello World\" mode=\"lines\" />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/split-reveal-element.ts\";\n</script>\n\n<template>\n  <motion-split-reveal text=\"Hello World\" mode=\"lines\" />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/split-reveal-element.ts\";\n</script>\n\n<motion-split-reveal text=\"Hello World\" mode=\"lines\" />"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/split-reveal-element.js\"></script>\n\n<motion-split-reveal text=\"Hello World\" mode=\"lines\"></motion-split-reveal>"
+        }
+      ],
+      "props": [
+        {
+          "name": "text",
+          "type": "string",
+          "default": "\"\"",
+          "description": "The text content to display and animate."
+        },
+        {
+          "name": "mode",
+          "type": "\"lines\" | \"words\" | \"chars\"",
+          "default": "\"lines\"",
+          "description": "How to split the text for reveal animation."
+        },
+        {
+          "name": "delay",
+          "type": "number",
+          "default": "0",
+          "description": "Initial delay in seconds before animation starts (not for scroll-triggered)."
+        },
+        {
+          "name": "trigger-on-scroll",
+          "type": "boolean",
+          "default": "false",
+          "description": "Whether to trigger reveal when element scrolls into view."
+        },
+        {
+          "name": "scroll-element",
+          "type": "string",
+          "default": "\"\"",
+          "description": "CSS selector for scrollable container (defaults to window)."
+        },
+        {
+          "name": "duration",
+          "type": "number",
+          "default": "0",
+          "description": "Animation duration in seconds (0 = auto based on mode)."
+        },
+        {
+          "name": "stagger",
+          "type": "number",
+          "default": "0",
+          "description": "Stagger delay between split items in seconds (0 = auto based on mode)."
+        }
+      ]
+    },
+    {
+      "name": "stacking-words",
+      "type": "registry:component",
+      "title": "Stacking Words",
+      "description": "Splits text into lines and slides each line's words in from the right on scroll. Framework-agnostic Custom Element.",
+      "dependencies": [
+        "lit",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/stacking-words-element.ts",
+          "path": "stacking-words/stacking-words-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/stacking-words-element.ts\";\n---\n\n<motion-stacking-words\n  text=\"Every word arrives on its own.\"\n  start=\"top 90%\"\n  end=\"top 30%\"\n></motion-stacking-words>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/stacking-words-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-stacking-words\n      text=\"Every word arrives on its own.\"\n      start=\"top 90%\"\n      end=\"top 30%\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/stacking-words-element.ts\";\n</script>\n\n<template>\n  <motion-stacking-words\n    text=\"Every word arrives on its own.\"\n    start=\"top 90%\"\n    end=\"top 30%\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/stacking-words-element.ts\";\n</script>\n\n<motion-stacking-words\n  text=\"Every word arrives on its own.\"\n  start=\"top 90%\"\n  end=\"top 30%\"\n/>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/stacking-words-element.js\"></script>\n\n<motion-stacking-words\n  text=\"Every word arrives on its own.\"\n  start=\"top 90%\"\n  end=\"top 30%\"\n></motion-stacking-words>"
+        }
+      ],
+      "props": [
+        {
+          "name": "text",
+          "type": "string",
+          "default": "\"\"",
+          "description": "The text content to display and animate."
+        },
+        {
+          "name": "start",
+          "type": "string",
+          "default": "\"top 90%\"",
+          "description": "ScrollTrigger start position (when animation begins)."
+        },
+        {
+          "name": "end",
+          "type": "string",
+          "default": "\"top 30%\"",
+          "description": "ScrollTrigger end position (when animation completes)."
+        },
+        {
+          "name": "scrub",
+          "type": "number",
+          "default": "1.234",
+          "description": "Scrub duration in seconds for smooth scroll linking."
+        },
+        {
+          "name": "stagger",
+          "type": "number",
+          "default": "0.21",
+          "description": "Delay between each word's animation in seconds."
+        },
+        {
+          "name": "ease",
+          "type": "string",
+          "default": "\"power3.out\"",
+          "description": "easing function for the animation."
+        },
+        {
+          "name": "scroll-element",
+          "type": "string",
+          "default": "\"\"",
+          "description": "CSS selector for scrollable container (defaults to window)."
+        }
+      ]
+    },
+    {
+      "name": "text-loop",
+      "type": "registry:component",
+      "title": "Text Loop",
+      "description": "Cycles through an array of text strings with a blurred vertical slide transition. Framework-agnostic Custom Element.",
+      "dependencies": [
+        "lit",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/text-loop-element.ts",
+          "path": "text-loop/text-loop-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/text-loop-element.ts\";\n---\n\n<motion-text-loop\n  texts='[\"Design\",\"Develop\",\"Deploy\"]'\n  interval=\"2000\"\n></motion-text-loop>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/text-loop-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-text-loop\n      texts='[\"Design\",\"Develop\",\"Deploy\"]'\n      interval=\"2000\"\n    />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/text-loop-element.ts\";\n</script>\n\n<template>\n  <motion-text-loop\n    :texts='JSON.stringify([\"Design\", \"Develop\", \"Deploy\"])'\n    interval=\"2000\"\n  />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/text-loop-element.ts\";\n</script>\n\n<motion-text-loop\n  texts='[\"Design\",\"Develop\",\"Deploy\"]'\n  interval=\"2000\"\n></motion-text-loop>"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/text-loop-element.js\"></script>\n\n<motion-text-loop\n  texts='[\"Design\",\"Develop\",\"Deploy\"]'\n  interval=\"2000\"\n></motion-text-loop>"
+        }
+      ],
+      "props": [
+        {
+          "name": "texts",
+          "type": "string[]",
+          "default": "[]",
+          "description": "Array of strings to cycle through. Pass as a JSON array string."
+        },
+        {
+          "name": "interval",
+          "type": "number",
+          "default": "2000",
+          "description": "Milliseconds between transitions."
+        }
+      ]
+    },
+    {
+      "name": "text-repel",
+      "type": "registry:component",
+      "title": "Text Repel",
+      "description": "Splits text into words or characters that repel from the pointer. Framework-agnostic Custom Element.",
+      "dependencies": [
+        "lit",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/text-repel-element.ts",
+          "path": "text-repel/text-repel-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/text-repel-element.ts\";\n---\n\n<motion-text-repel text=\"Hover over me\" mode=\"words\"></motion-text-repel>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/text-repel-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-text-repel text=\"Hover over me\" mode=\"words\" />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/text-repel-element.ts\";\n</script>\n\n<template>\n  <motion-text-repel text=\"Hover over me\" mode=\"words\" />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/text-repel-element.ts\";\n</script>\n\n<motion-text-repel text=\"Hover over me\" mode=\"words\" />"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/text-repel-element.js\"></script>\n\n<motion-text-repel text=\"Hover over me\" mode=\"words\"></motion-text-repel>"
+        }
+      ],
+      "props": [
+        {
+          "name": "text",
+          "type": "string",
+          "default": "\"\"",
+          "description": "The text content to display and animate."
+        },
+        {
+          "name": "mode",
+          "type": "\"words\" | \"chars\"",
+          "default": "\"words\"",
+          "description": "Whether to split by words or characters."
+        },
+        {
+          "name": "strength",
+          "type": "number",
+          "default": "18",
+          "description": "Maximum distance in pixels to repel text elements."
+        },
+        {
+          "name": "radius",
+          "type": "number",
+          "default": "160",
+          "description": "Radius around the cursor where repel effect is active."
+        },
+        {
+          "name": "falloff-power",
+          "type": "number",
+          "default": "1.5",
+          "description": "Power curve for falloff (higher = sharper falloff)."
+        },
+        {
+          "name": "duration",
+          "type": "number",
+          "default": "0.45",
+          "description": "Animation duration in seconds."
+        },
+        {
+          "name": "ease",
+          "type": "string",
+          "default": "\"power3.out\"",
+          "description": "easing function for the animation."
+        },
+        {
+          "name": "hover-target",
+          "type": "string",
+          "default": "\"\"",
+          "description": "CSS selector for an external hover target. Defaults to this element."
+        }
+      ]
+    },
+    {
+      "name": "text-scramble",
+      "type": "registry:component",
+      "title": "Text Scramble",
+      "description": "Scrambles characters on hover before settling back to the original text. Framework-agnostic Custom Element.",
+      "dependencies": [
+        "lit",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/text-scramble-element.ts",
+          "path": "text-scramble/text-scramble-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/text-scramble-element.ts\";\n---\n\n<motion-text-scramble text=\"Hello World\"></motion-text-scramble>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/text-scramble-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-text-scramble text=\"Hello World\" />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/text-scramble-element.ts\";\n</script>\n\n<template>\n  <motion-text-scramble text=\"Hello World\" />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/text-scramble-element.ts\";\n</script>\n\n<motion-text-scramble text=\"Hello World\" />"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/text-scramble-element.js\"></script>\n\n<motion-text-scramble text=\"Hello World\"></motion-text-scramble>"
+        }
+      ],
+      "props": [
+        {
+          "name": "text",
+          "type": "string",
+          "default": "\"\"",
+          "description": "The text content to display and scramble."
+        },
+        {
+          "name": "hover-target",
+          "type": "string",
+          "default": "\"\"",
+          "description": "CSS selector for an external element that triggers the effect. Defaults to this element."
+        },
+        {
+          "name": "scramble-duration",
+          "type": "number",
+          "default": "0.6",
+          "description": "Duration of the scramble animation in seconds."
+        },
+        {
+          "name": "stagger",
+          "type": "number",
+          "default": "0.03",
+          "description": "Delay between each character's animation in seconds."
+        },
+        {
+          "name": "cycles",
+          "type": "number",
+          "default": "12",
+          "description": "Number of random character cycles before settling."
+        },
+        {
+          "name": "characters",
+          "type": "string",
+          "default": "\"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*\"",
+          "description": "Character pool to use for scrambling effect."
+        }
+      ]
+    },
+    {
+      "name": "weight-wave",
+      "type": "registry:component",
+      "title": "Weight Wave",
+      "description": "Hover-reactive text effect that smoothly increases font weight with a falloff across neighboring characters. Requires a variable font.",
+      "dependencies": [
+        "lit",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "target": "src/components/motion-kit/weight-wave-element.ts",
+          "path": "weight-wave/weight-wave-element.ts"
+        }
+      ],
+      "usage": [
+        {
+          "label": "Astro",
+          "code": "---\nimport \"@/components/motion-kit/weight-wave-element.ts\";\n---\n\n<motion-weight-wave text=\"Hover me\"></motion-weight-wave>"
+        },
+        {
+          "label": "React",
+          "code": "import \"@/components/motion-kit/weight-wave-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-weight-wave text=\"Hover me\" />\n  );\n}"
+        },
+        {
+          "label": "Vue",
+          "code": "<script setup>\nimport \"@/components/motion-kit/weight-wave-element.ts\";\n</script>\n\n<template>\n  <motion-weight-wave text=\"Hover me\" />\n</template>"
+        },
+        {
+          "label": "Svelte",
+          "code": "<script>\n  import \"@/components/motion-kit/weight-wave-element.ts\";\n</script>\n\n<motion-weight-wave text=\"Hover me\" />"
+        },
+        {
+          "label": "HTML",
+          "code": "<script type=\"module\" src=\"/components/motion-kit/weight-wave-element.js\"></script>\n\n<motion-weight-wave text=\"Hover me\"></motion-weight-wave>"
+        }
+      ],
+      "props": [
+        {
+          "name": "text",
+          "type": "string",
+          "default": "\"\"",
+          "description": "The text content to display and animate."
+        },
+        {
+          "name": "base-weight",
+          "type": "number",
+          "default": "350",
+          "description": "Base font weight when not hovering."
+        },
+        {
+          "name": "hover-weight",
+          "type": "number",
+          "default": "750",
+          "description": "Font weight at cursor position."
+        },
+        {
+          "name": "influence-radius",
+          "type": "number",
+          "default": "3",
+          "description": "Number of neighboring characters affected by the wave."
+        },
+        {
+          "name": "falloff-power",
+          "type": "number",
+          "default": "1.5",
+          "description": "Power curve for weight falloff (higher = sharper falloff)."
+        },
+        {
+          "name": "duration",
+          "type": "number",
+          "default": "1.0",
+          "description": "Animation duration in seconds."
+        },
+        {
+          "name": "ease",
+          "type": "string",
+          "default": "\"power3.out\"",
+          "description": "easing function for the animation."
+        }
+      ]
+    }
+  ]
+}

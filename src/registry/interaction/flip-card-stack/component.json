@@ -7,7 +7,7 @@
   "dependencies": ["gsap"],
   "files": [
     {
-      "path": "src/registry/new-york/blocks/flip-card-stack/flip-card-stack-element.ts",
+      "path": "src/registry/interaction/flip-card-stack/flip-card-stack-element.ts",
       "type": "registry:component",
       "target": "src/components/motion-kit/flip-card-stack-element.ts"
     }
@@ -63,7 +63,7 @@
       "name": "ease",
       "type": "string",
       "default": "\"power2.out\"",
-      "description": "GSAP easing function for card animations."
+      "description": "easing function for card animations."
     }
   ]
 }

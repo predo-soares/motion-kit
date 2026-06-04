@@ -13,4 +13,20 @@ import ComponentCard from "@/components/ui/component-card.astro";
       class="text-4xl font-bold text-violet-600 cursor-default select-none"
     ></motion-split-hover>
   </div>
+  <div slot="controls" class="mk-controls">
+    <mk-text-input
+      label="Text 1"
+      value="Hover me"
+      data-target="motion-split-hover"
+      data-index="0"
+      data-attr="text"
+    ></mk-text-input>
+    <mk-text-input
+      label="Text 2"
+      value="Motion Kit"
+      data-target="motion-split-hover"
+      data-index="1"
+      data-attr="text"
+    ></mk-text-input>
+  </div>
 </ComponentCard>
