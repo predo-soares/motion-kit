@@ -1,39 +1,42 @@
 ---
 import type { ComponentCatalogEntry } from "@/lib/component-catalog";
 
-interface Props {
-  component: ComponentCatalogEntry;
-}
+type Item = { href: string; label: string };
 
-const { component } = Astro.props;
+type Props =
+  | { component: ComponentCatalogEntry; items?: never }
+  | { items: Item[]; component?: never };
 
-type TocItem = { id: string; label: string };
+const { component, items: propItems } = Astro.props;
 
-const items: TocItem[] = [
-  { id: "preview", label: "Preview" },
-  { id: "installation", label: "Installation" },
-  ...(component.usage?.length ? [{ id: "usage", label: "Usage" }] : []),
-  ...(component.props?.length ? [{ id: "api-reference", label: "API Reference" }] : []),
+const items: Item[] = propItems ?? [
+  { href: "#preview", label: "Preview" },
+  { href: "#installation", label: "Installation" },
+  ...(component!.usage?.length ? [{ href: "#usage", label: "Usage" }] : []),
+  ...(component!.props?.length
+    ? [{ href: "#api-reference", label: "API Reference" }]
+    : []),
 ];
 ---
 
 <nav aria-label="On this page" class="flex flex-col gap-2">
-  <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
-    On this page
-  </p>
+  <p class="text-xs text-slate-500 tracking-wider mb-1">On this page</p>
   <ul class="flex flex-col gap-0.5">
     {
-      items.map(({ id, label }) => (
-        <li>
-          <a
-            href={`#${id}`}
-            data-toc-link={id}
-            class="block rounded-md px-2 py-1 text-sm text-slate-500 transition-colors hover:text-slate-900 data-[active]:text-slate-900 data-[active]:font-medium"
-          >
-            {label}
-          </a>
-        </li>
-      ))
+      items.map(({ href, label }) => {
+        const id = href.startsWith("#") ? href.slice(1) : href;
+        return (
+          <li>
+            <a
+              href={href}
+              data-toc-link={id}
+              class="block rounded-md py-1 text-xs text-slate-500 transition-colors hover:text-slate-900 data-[active]:text-slate-900 data-[active]:font-medium"
+            >
+              {label}
+            </a>
+          </li>
+        );
+      })
     }
   </ul>
 </nav>
