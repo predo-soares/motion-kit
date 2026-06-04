@@ -1,0 +1,50 @@
+---
+import ComponentCard from "@/components/ui/component-card.astro";
+---
+
+<ComponentCard description="Move your cursor across the card to feel the velocity.">
+  <div class="flex items-center justify-center py-12">
+    <motion-velocity-card id="velocity-card-main" rotation-factor="3" stretch-factor="0.04">
+      <div
+        class="w-56 rounded-2xl bg-white shadow-[0_8px_40px_-12px_rgba(15,23,42,0.18)] border border-slate-100 p-6 select-none cursor-default"
+      >
+        <div class="w-10 h-10 rounded-xl bg-slate-900 mb-4 flex items-center justify-center text-white text-lg">
+          ✦
+        </div>
+        <p class="text-sm font-semibold text-slate-900 leading-snug">
+          Velocity aware
+        </p>
+        <p class="mt-1 text-xs text-slate-400 leading-relaxed">
+          Reacts to how fast you move, not just where you are.
+        </p>
+      </div>
+    </motion-velocity-card>
+  </div>
+
+  <div slot="controls" class="mk-controls">
+    <mk-slider
+      label="Rotation Factor"
+      min="0"
+      max="10"
+      step="0.5"
+      value="3"
+      data-target="#velocity-card-main"
+      data-attr="rotation-factor"></mk-slider>
+    <mk-slider
+      label="Stretch Factor"
+      min="0.01"
+      max="0.1"
+      step="0.005"
+      value="0.04"
+      data-target="#velocity-card-main"
+      data-attr="stretch-factor"></mk-slider>
+    <mk-slider
+      label="Duration"
+      min="0.1"
+      max="1"
+      step="0.05"
+      value="0.25"
+      data-target="#velocity-card-main"
+      data-attr="duration"></mk-slider>
+  </div>
+</ComponentCard>
