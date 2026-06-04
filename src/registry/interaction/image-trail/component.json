@@ -3,7 +3,7 @@
   "name": "image-trail",
   "type": "registry:component",
   "title": "Image Trail",
-  "description": "An interactive effect that spawns a trail of images following the cursor with scaling and rotation. Lit Custom Element.",
+  "description": "An interactive effect that spawns a trail of images following the cursor with scaling and rotation.",
   "dependencies": ["lit", "gsap"],
   "files": [
     {

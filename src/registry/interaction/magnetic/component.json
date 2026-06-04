@@ -3,7 +3,7 @@
   "name": "magnetic",
   "type": "registry:component",
   "title": "Magnetic",
-  "description": "Framework-agnostic <motion-magnetic> Custom Element with spring physics, powered by Lit and GSAP.",
+  "description": "Framework-agnostic <motion-magnetic> Custom Element with spring physics.",
   "dependencies": ["lit", "gsap"],
   "files": [
     {
@@ -45,7 +45,7 @@
       "name": "ease",
       "type": "string",
       "default": "\"elastic.out(1, 0.3)\"",
-      "description": "GSAP easing function string."
+      "description": "easing function string."
     }
   ]
 }

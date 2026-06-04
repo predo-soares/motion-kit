@@ -63,7 +63,7 @@
       "name": "ease",
       "type": "string",
       "default": "\"power2.out\"",
-      "description": "GSAP easing function for card animations."
+      "description": "easing function for card animations."
     }
   ]
 }

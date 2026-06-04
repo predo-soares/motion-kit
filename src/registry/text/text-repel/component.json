@@ -75,7 +75,7 @@
       "name": "ease",
       "type": "string",
       "default": "\"power3.out\"",
-      "description": "GSAP easing function for the animation."
+      "description": "easing function for the animation."
     },
     {
       "name": "hover-target",

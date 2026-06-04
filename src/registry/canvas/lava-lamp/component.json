@@ -3,7 +3,7 @@
   "name": "lava-lamp",
   "type": "registry:component",
   "title": "Lava Lamp",
-  "description": "Raymarched metaball blobs rendered with a smooth-min SDF and Fresnel edge lighting. Creates a fluid, organic lava lamp animation. Lit Custom Element.",
+  "description": "Raymarched metaball blobs rendered with a smooth-min SDF and Fresnel edge lighting. Creates a fluid, organic lava lamp animation.",
   "dependencies": ["lit", "ogl"],
   "files": [
     {
