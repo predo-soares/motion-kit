@@ -30,13 +30,13 @@ const latestChangelogEntry = await getLatestChangelogEntry();
       </p>
       <div class="flex flex-wrap items-center gap-3">
         <a
-          href={`/components/${firstComponent.slug}`}
+          href={`/docs/components/${firstComponent.slug}`}
           class="inline-flex items-center justify-center rounded-full bg-slate-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-slate-800"
         >
           Open Component Browser
         </a>
         <a
-          href="/changelog"
+          href="/docs/changelog"
           class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-slate-50 px-5 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:border-slate-300 hover:bg-white hover:text-slate-900"
         >
           View Changelog
@@ -66,7 +66,7 @@ const latestChangelogEntry = await getLatestChangelogEntry();
               </p>
             </div>
             <a
-              href="/changelog"
+              href="/docs/changelog"
               class="inline-flex items-center justify-center rounded-full bg-slate-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-slate-800"
             >
               Open Full Timeline
@@ -94,7 +94,7 @@ const latestChangelogEntry = await getLatestChangelogEntry();
               {group.items.map((component) => (
                 <li>
                   <a
-                    href={`/components/${component.slug}`}
+                    href={`/docs/components/${component.slug}`}
                     class="block rounded-2xl border border-transparent px-4 py-3 transition-colors hover:border-slate-200 hover:bg-white"
                   >
                     <span class="block text-base font-medium tracking-tight text-slate-900">

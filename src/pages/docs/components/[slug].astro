@@ -11,6 +11,7 @@ import {
   componentCatalog,
   type ComponentCatalogEntry,
 } from "@/lib/component-catalog";
+import { getComponentTestSpec } from "@/lib/component-test-spec";
 
 export function getStaticPaths() {
   return componentCatalog.map((component) => ({
@@ -26,11 +27,11 @@ interface Props {
 const { component } = Astro.props;
 
 const demoModules = import.meta.glob<{ default: any }>(
-  "../../components/demos/*-demo.astro",
+  "../../../components/demos/*-demo.astro",
   { eager: true },
 );
 const demoModule =
-  demoModules[`../../components/demos/${component.slug}-demo.astro`];
+  demoModules[`../../../components/demos/${component.slug}-demo.astro`];
 
 if (!demoModule) {
   throw new Error(`Missing demo partial for "${component.slug}".`);
@@ -39,6 +40,7 @@ if (!demoModule) {
 const DemoComponent = demoModule.default;
 
 const installCommand = `shadcn@latest add https://motion-kit-astro.vercel.app/r/${component.slug}.json`;
+const hasTestPage = Boolean(getComponentTestSpec(component));
 ---
 
 <SiteLayout
@@ -60,7 +62,19 @@ const installCommand = `shadcn@latest add https://motion-kit-astro.vercel.app/r/
             >
               {component.title}
             </h1>
-            <ComponentNav currentSlug={component.slug} />
+            <div class="flex items-center gap-3">
+              {
+                hasTestPage ? (
+                  <a
+                    href={`/docs/components/${component.slug}/test`}
+                    class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-600 transition-colors hover:border-slate-300 hover:text-slate-950"
+                  >
+                    Test
+                  </a>
+                ) : null
+              }
+              <ComponentNav currentSlug={component.slug} />
+            </div>
           </div>
         </div>
         <p class="max-w-3xl text-slate-600 text-sm text-balance">
@@ -88,7 +102,10 @@ const installCommand = `shadcn@latest add https://motion-kit-astro.vercel.app/r/
         <DemoComponent />
       </section>
 
-      <section id="installation" class="flex flex-col gap-3 w-full max-w-[600px]">
+      <section
+        id="installation"
+        class="flex flex-col gap-3 w-full max-w-[600px]"
+      >
         <h2 class="text-xl font-semibold tracking-tight text-slate-950">
           Installation
         </h2>
@@ -108,7 +125,10 @@ const installCommand = `shadcn@latest add https://motion-kit-astro.vercel.app/r/
 
       {
         component.props?.length ? (
-          <section id="api-reference" class="flex flex-col gap-3 w-full max-w-[600px]">
+          <section
+            id="api-reference"
+            class="flex flex-col gap-3 w-full max-w-[600px]"
+          >
             <h2 class="text-xl font-semibold tracking-tight text-slate-950">
               API Reference
             </h2>
