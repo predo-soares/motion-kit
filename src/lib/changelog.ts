@@ -27,7 +27,7 @@ export async function getLatestChangelogEntry() {
 }
 
 export function getChangelogUrl(entry: Pick<ChangelogEntry, "id">) {
-  return `/changelog/${entry.id}`;
+  return `/docs/changelog/${entry.id}`;
 }
 
 export function formatChangelogDate(date: Date) {
