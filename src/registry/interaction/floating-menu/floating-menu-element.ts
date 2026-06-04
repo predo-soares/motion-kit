@@ -254,6 +254,10 @@ export class MotionFloatingMenu extends LitElement {
       border-bottom: 1px solid var(--border);
     }
 
+    .group.muted {
+      opacity: 0.92;
+    }
+
     .group:first-child {
       padding-top: 0;
     }
@@ -285,6 +289,17 @@ export class MotionFloatingMenu extends LitElement {
       color: var(--ink-muted);
     }
 
+    .group.muted .groupNumber {
+      color: var(--ink-muted);
+      opacity: 0.78;
+    }
+
+    .group.muted .groupTitle {
+      color: var(--ink-soft);
+      opacity: 0.72;
+      font-weight: 600;
+    }
+
     /* ── Links ── */
     .linkList {
       display: flex;
@@ -309,9 +324,18 @@ export class MotionFloatingMenu extends LitElement {
         transform 0.2s;
     }
 
+    .group.muted .link {
+      color: var(--ink-muted);
+      font-weight: 450;
+    }
+
     .link:hover {
       color: var(--ink);
       transform: translateX(3px);
+    }
+
+    .group.muted .link:hover {
+      color: var(--ink-soft);
     }
 
     .linkTextOuter {
@@ -719,7 +743,10 @@ export class MotionFloatingMenu extends LitElement {
           <div data-slot="grid" class="grid">
             ${groups.map(
               (group, i) => html`
-                <div data-slot="group" class="group">
+                <div
+                  data-slot="group"
+                  class=${`group${group.variant === "muted" ? " muted" : ""}`}
+                >
                   <div class="groupHeader">
                     <span class="groupNumber"
                       >${String(i + 1).padStart(2, "0")}</span
