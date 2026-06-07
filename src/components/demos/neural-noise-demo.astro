@@ -6,6 +6,8 @@ import ComponentCard from "@/components/ui/component-card.astro";
   <div class="relative aspect-video w-full overflow-hidden rounded-[2rem]">
     <motion-neural-noise
       speed="1"
+      color="#17181A"
+      highlight-color="#6c87bc"
       class="absolute inset-0"
     ></motion-neural-noise>
   </div>
@@ -19,5 +21,17 @@ import ComponentCard from "@/components/ui/component-card.astro";
       data-target="motion-neural-noise"
       data-attr="speed"
     ></mk-slider>
+    <mk-color
+      label="Color"
+      value="#17181A"
+      data-target="motion-neural-noise"
+      data-attr="color"
+    ></mk-color>
+    <mk-color
+      label="Highlight"
+      value="#6c87bc"
+      data-target="motion-neural-noise"
+      data-attr="highlight-color"
+    ></mk-color>
   </div>
 </ComponentCard>

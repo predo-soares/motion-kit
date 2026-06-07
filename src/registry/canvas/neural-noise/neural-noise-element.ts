@@ -1,6 +1,7 @@
 import { LitElement, html, css } from "lit"
 import { customElement, property } from "lit/decorators.js"
-import { Camera, Mesh, Program, Renderer, Transform, Triangle, Vec2 } from "ogl"
+import { Camera, Mesh, Program, Renderer, Transform, Triangle, Vec2, Vec3 } from "ogl"
+import { toLinearRgb, type ColorRepresentation } from "@/lib/helpers/color"
 
 const VERTEX = `
   attribute vec2 uv;
@@ -18,6 +19,8 @@ const FRAGMENT = `
   #endif
   uniform float uTime;
   uniform vec2 uResolution;
+  uniform vec3 uColor;
+  uniform vec3 uHighlightColor;
   varying vec2 vUv;
 
   vec4 buf[8];
@@ -56,13 +59,22 @@ const FRAGMENT = `
     return vec4(buf[0].xyz, 1.0);
   }
 
+  vec3 linearToSrgb(vec3 c) {
+    vec3 s = max(c, vec3(0.0));
+    vec3 lo = s * 12.92;
+    vec3 hi = 1.055 * pow(s, vec3(1.0 / 2.4)) - 0.055;
+    return mix(lo, hi, step(vec3(0.0031308), s));
+  }
+
   void main() {
     vec2 uv = vUv * 2.0 - 1.0;
     uv.y *= -1.0;
 
     vec4 color = cppn_fn(uv, 0.1 * sin(0.3 * uTime), 0.1 * sin(0.69 * uTime), 0.1 * sin(0.44 * uTime));
+    float lum = dot(color.rgb, vec3(0.299, 0.587, 0.114));
+    vec3 tinted = mix(uColor, uHighlightColor, lum);
 
-    gl_FragColor = vec4(color.rgb, 1.0);
+    gl_FragColor = vec4(linearToSrgb(tinted), 1.0);
   }
 `
 
@@ -74,10 +86,16 @@ export class MotionNeuralNoise extends LitElement {
   `
 
   @property({ type: Number }) speed = 1.0
+  @property() color: ColorRepresentation = "#17181A"
+  @property({ attribute: "highlight-color" }) highlightColor: ColorRepresentation = "#6c87bc"
 
   private _raf = 0
   private _cancelled = false
   private _uTime?: { value: number }
+  private _uniforms?: {
+    uColor: { value: Vec3 }
+    uHighlightColor: { value: Vec3 }
+  }
 
   override firstUpdated() {
     this._init(this.shadowRoot!.querySelector("canvas")!)
@@ -90,8 +108,14 @@ export class MotionNeuralNoise extends LitElement {
   }
 
   override updated(changed: Map<string, unknown>) {
-    if (changed.has("speed") && this._uTime) {
-      // speed is read per-frame, no uniform to push
+    if (!this._uniforms) return
+    if (changed.has("color")) {
+      const [r, g, b] = toLinearRgb(this.color, [23 / 255, 24 / 255, 26 / 255])
+      this._uniforms.uColor.value.set(r, g, b)
+    }
+    if (changed.has("highlightColor")) {
+      const [r, g, b] = toLinearRgb(this.highlightColor, [108 / 255, 135 / 255, 188 / 255])
+      this._uniforms.uHighlightColor.value.set(r, g, b)
     }
   }
 
@@ -99,6 +123,7 @@ export class MotionNeuralNoise extends LitElement {
     this._cancelled = true
     cancelAnimationFrame(this._raf)
     this._uTime = undefined
+    this._uniforms = undefined
     this._init(this.shadowRoot!.querySelector("canvas")!)
   }
 
@@ -116,11 +141,17 @@ export class MotionNeuralNoise extends LitElement {
     const scene = new Transform()
     const geometry = new Triangle(gl)
 
+    const [cr, cg, cb] = toLinearRgb(this.color, [23 / 255, 24 / 255, 26 / 255])
+    const [hr, hg, hb] = toLinearRgb(this.highlightColor, [108 / 255, 135 / 255, 188 / 255])
+
     const uniforms = {
       uTime: { value: 0 },
       uResolution: { value: new Vec2(1, 1) },
+      uColor: { value: new Vec3(cr, cg, cb) },
+      uHighlightColor: { value: new Vec3(hr, hg, hb) },
     }
     this._uTime = uniforms.uTime
+    this._uniforms = uniforms
 
     const program = new Program(gl, {
       vertex: VERTEX,

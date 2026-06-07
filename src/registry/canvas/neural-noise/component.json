@@ -40,6 +40,18 @@
       "type": "number",
       "default": "1",
       "description": "Animation speed multiplier. Higher values make the pattern evolve faster."
+    },
+    {
+      "name": "color",
+      "type": "string",
+      "default": "#17181A",
+      "description": "Base color the pattern is tinted toward in its darker regions."
+    },
+    {
+      "name": "highlight-color",
+      "type": "string",
+      "default": "#6c87bc",
+      "description": "Highlight color the pattern is tinted toward in its brighter regions."
     }
   ]
 }
