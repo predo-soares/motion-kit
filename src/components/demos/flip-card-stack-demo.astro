@@ -4,32 +4,32 @@ import ComponentCard from "@/components/ui/component-card.astro";
 
 <ComponentCard description="Drag the top card past the threshold and it snaps to the back of the stack with GSAP-driven transforms.">
   <div class="flex items-center justify-center py-10">
-    <motion-flip-card-stack id="flip-card-stack-main" class="h-[320px] w-[280px]" stack-offset="14">
+    <motion-flip-card-stack id="flip-card-stack-main" class="h-[240px] w-[200px]" stack-offset="14">
       <article
-        class="flex h-[320px] w-[280px] flex-col justify-between rounded-[2rem] border border-slate-200 bg-white p-6 shadow-[0_18px_60px_rgba(15,23,42,0.12)]"
+        class="flex h-[240px] w-[200px] flex-col justify-between rounded-[2rem] border border-slate-200 bg-white p-5 shadow-[0_18px_60px_rgba(15,23,42,0.12)]"
       >
         <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">01</p>
         <div class="space-y-2">
-          <h3 class="text-2xl font-semibold tracking-tight text-slate-950">Velocity</h3>
-          <p class="text-sm leading-6 text-slate-600">Gesture-friendly stack with a tactile top-card swap.</p>
+          <h3 class="text-xl font-semibold tracking-tight text-slate-950">Velocity</h3>
+          <p class="text-xs leading-5 text-slate-600">Gesture-friendly stack with a tactile top-card swap.</p>
         </div>
       </article>
       <article
-        class="flex h-[320px] w-[280px] flex-col justify-between rounded-[2rem] border border-slate-200 bg-slate-50 p-6 shadow-[0_18px_60px_rgba(15,23,42,0.12)]"
+        class="flex h-[240px] w-[200px] flex-col justify-between rounded-[2rem] border border-slate-200 bg-slate-50 p-5 shadow-[0_18px_60px_rgba(15,23,42,0.12)]"
       >
         <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">02</p>
         <div class="space-y-2">
-          <h3 class="text-2xl font-semibold tracking-tight text-slate-950">Depth</h3>
-          <p class="text-sm leading-6 text-slate-600">The stack keeps scale and rotation offsets while you drag.</p>
+          <h3 class="text-xl font-semibold tracking-tight text-slate-950">Depth</h3>
+          <p class="text-xs leading-5 text-slate-600">The stack keeps scale and rotation offsets while you drag.</p>
         </div>
       </article>
       <article
-        class="flex h-[320px] w-[280px] flex-col justify-between rounded-[2rem] border border-slate-200 bg-orange-500 p-6 text-white shadow-[0_18px_60px_rgba(15,23,42,0.16)]"
+        class="flex h-[240px] w-[200px] flex-col justify-between rounded-[2rem] border border-slate-200 bg-orange-500 p-5 text-white shadow-[0_18px_60px_rgba(15,23,42,0.16)]"
       >
         <p class="text-xs font-semibold uppercase tracking-[0.18em] text-orange-100">03</p>
         <div class="space-y-2">
-          <h3 class="text-2xl font-semibold tracking-tight">Motion</h3>
-          <p class="text-sm leading-6 text-orange-50">Drag me and toss me to the back of the queue.</p>
+          <h3 class="text-xl font-semibold tracking-tight">Motion</h3>
+          <p class="text-xs leading-5 text-orange-50">Drag me and toss me to the back of the queue.</p>
         </div>
       </article>
     </motion-flip-card-stack>
