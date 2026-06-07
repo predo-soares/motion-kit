@@ -28,11 +28,22 @@ const {
   showReplay = true,
   plain = false,
 } = Astro.props;
+
 const hasControls = Astro.slots.has("controls");
 const showTitlePill = Boolean(showTitle && title);
 const previewBackgroundClass = plain
   ? ""
   : "bg-slate-50 [background-image:radial-gradient(circle,rgba(203,213,225,0.9)_1px,transparent_1.2px)] [background-size:32px_32px]";
+
+const blurLayers = scrollable ? "3" : "5";
+const blurIntensity = scrollable ? "0.23" : "0.20";
+const fadeColor = scrollable
+  ? "rgba(248, 250, 252, 0.9)"
+  : "rgba(256, 256, 256, 0.7)";
+const blurHeightClass = scrollable ? "h-[72%]" : "h-[100%]";
+const descClass = scrollable
+  ? "pb-4 pt-12 text-center text-slate-500"
+  : "pb-3 pt-5 text-balance text-center text-slate-900";
 ---
 
 <figure
@@ -92,86 +103,67 @@ const previewBackgroundClass = plain
   </div>
 
   <!-- Preview -->
-  {
-    scrollable ? (
-      <div
-        data-preview
-        class={`relative flex-1 z-0 flex items-center justify-center aspect-video min-h-[420px] ${previewBackgroundClass}`}
-      >
+  <div
+    data-preview
+    class={`relative flex-1 z-0 flex items-center justify-center aspect-video  ${previewBackgroundClass}`}
+  >
+    {
+      scrollable ? (
         <div id={id} class="h-[420px] overflow-y-auto w-fit">
           <div data-preview-content class="min-h-full">
             <slot />
           </div>
         </div>
-
-        {description ? (
-          <figcaption class="pointer-events-none absolute inset-x-0 bottom-0 z-10 overflow-hidden">
-            <motion-progressive-blur
-              aria-hidden="true"
-              direction="bottom"
-              blur-layers="3"
-              blur-intensity="0.23"
-              fade-color="rgba(248, 250, 252, 0.9)"
-              class="absolute inset-x-0 bottom-0 h-[72%] block"
-            />
-
-            <div class="relative z-10 px-6 pb-4 pt-12 text-center text-xs text-slate-500 italic">
-              {description}
-            </div>
-          </figcaption>
-        ) : null}
-      </div>
-    ) : (
-      <div
-        data-preview
-        class={`relative flex-1 min-h-[420px] aspect-video z-0 flex items-center justify-center ${previewBackgroundClass}`}
-      >
+      ) : (
         <div data-preview-content class="w-full">
           <slot />
         </div>
+      )
+    }
 
-        {description ? (
-          <figcaption class="pointer-events-none absolute inset-x-0 bottom-0 z-10 overflow-hidden">
-            <motion-progressive-blur
-              aria-hidden="true"
-              direction="bottom"
-              blur-layers="5"
-              blur-intensity="0.20"
-              fade-color="rgba(256, 256, 256, 0.7)"
-              class="absolute inset-x-0 bottom-0 h-[100%] block"
-            />
-
-            <div class="relative z-10 px-6 pb-3 pt-5 text-balance text-center text-xs text-slate-900 italic">
-              {description}
-            </div>
-          </figcaption>
-        ) : null}
-      </div>
-    )
-  }
+    {
+      description ? (
+        <figcaption class="pointer-events-none absolute inset-x-0 bottom-0 z-10 overflow-hidden">
+          <motion-progressive-blur
+            aria-hidden="true"
+            direction="bottom"
+            blur-layers={blurLayers}
+            blur-intensity={blurIntensity}
+            fade-color={fadeColor}
+            class={`absolute inset-x-0 bottom-0 ${blurHeightClass} block`}
+          />
+          <div class={`relative z-10 px-6 text-xs italic ${descClass}`}>
+            {description}
+          </div>
+        </figcaption>
+      ) : null
+    }
+  </div>
 
   {
     hasControls ? (
-      <div class="relative w-full z-0 bg-white border-t border-slate-100/20">
-        <div class="p-2 pb-3 max-w-[600px] mx-auto">
-          <div class="mb-2 flex items-center justify-between">
-            <div class="text-xs font-medium text-slate-400">Attributes</div>
+      <div data-controls-panel class="relative w-full z-0 bg-white border-t border-slate-100/20">
+        <div data-controls-body class="overflow-hidden">
+          <div class="p-2 pb-3 max-w-[600px] mx-auto">
+            <div class="mb-2 flex items-center justify-between">
+              <div class="text-xs font-medium text-slate-400">Attributes</div>
 
-            <button
-              type="button"
-              data-card-action="reset-props"
-              class="inline-flex h-7 w-7 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-900"
-              aria-label="Reset props"
-            >
-              <span
-                aria-hidden="true"
-                class="[&_svg]:block [&_svg]:h-3 [&_svg]:w-3"
-                set:html={refreshIcon}
-              />
-            </button>
+              <button
+                type="button"
+                data-card-action="reset-props"
+                class="inline-flex h-7 w-7 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-900"
+                aria-label="Reset attributes"
+              >
+                <span
+                  aria-hidden="true"
+                  class="[&_svg]:block [&_svg]:h-3 [&_svg]:w-3"
+                  set:html={refreshIcon}
+                />
+              </button>
+            </div>
+
+            <slot name="controls" />
           </div>
-
-          <slot name="controls" />
         </div>
       </div>
     ) : null

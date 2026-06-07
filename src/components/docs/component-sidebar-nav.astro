@@ -1,5 +1,5 @@
 ---
-import { componentGroups } from "@/lib/component-catalog";
+import { componentGroups } from "@/lib/catalog";
 
 interface Props {
   currentSlug?: string;
@@ -10,6 +10,7 @@ const { currentSlug, currentHref } = Astro.props;
 
 const docsLinks = [
   { href: "/docs/introduction", label: "Introduction" },
+  { href: "/docs/installation", label: "Installation" },
   { href: "/docs/components", label: "Components" },
   { href: "/docs/changelog", label: "Changelog" },
 ];
@@ -28,6 +29,8 @@ const docsLinks = [
           <li>
             <a
               href={link.href}
+              data-audio-hover="hover"
+              data-audio-click="tab-switch"
               class:list={[
                 "group inline-flex rounded-3xl p-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 focus-visible:ring-offset-2 focus-visible:ring-offset-white",
               ]}
@@ -65,6 +68,8 @@ const docsLinks = [
               <li>
                 <a
                   href={`/docs/components/${component.slug}`}
+                  data-audio-hover="hover"
+                  data-audio-click="tab-switch"
                   class:list={[
                     "group inline-flex rounded-3xl  p-0.5  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 focus-visible:ring-offset-2 focus-visible:ring-offset-white",
                   ]}

@@ -1,6 +1,7 @@
 ---
 import ComponentBrowserShell from "@/components/docs/component-browser-shell.astro";
 import ComponentToc from "@/components/docs/component-toc.astro";
+import CodeBlock from "@/components/docs/code-block.astro";
 import SiteLayout from "@/layouts/site-layout.astro";
 
 const tocItems = [
@@ -10,6 +11,9 @@ const tocItems = [
   { href: "#registry-distribution", label: "Registry & Distribution" },
   { href: "#open-code", label: "Open Code" },
 ];
+
+const installCommand =
+  "pnpm dlx shadcn@latest add https://motion-kit-astro.vercel.app/r/<name>.json";
 ---
 
 <SiteLayout
@@ -120,8 +124,7 @@ const tocItems = [
             exactly where they belong in your project.
           </p>
           <p>Install any component with a single command:</p>
-          <pre
-            class="rounded-xl bg-slate-200 px-4 py-3 text-xs text-slate-900 overflow-x-auto"><code>pnpm dlx shadcn@latest add https://motion-kit-astro.vercel.app/r/&lt;name&gt;.json</code></pre>
+          <CodeBlock code={installCommand} />
           <p>
             Each component's page has the exact command ready to copy. Re-run it
             at any time to pull in an updated version.

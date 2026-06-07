@@ -7,7 +7,7 @@
   "dependencies": ["lit", "ogl"],
   "files": [
     {
-      "path": "src/registry/new-york/blocks/fluid-simulation/fluid-simulation-element.ts",
+      "path": "src/registry/canvas/fluid-simulation/fluid-simulation-element.ts",
       "type": "registry:component",
       "target": "src/components/motion-kit/fluid-simulation-element.ts"
     }

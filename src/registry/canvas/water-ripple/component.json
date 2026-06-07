@@ -12,7 +12,7 @@
       "target": "src/components/motion-kit/water-ripple-element.ts"
     },
     {
-      "path": "brush.png",
+      "path": "src/registry/canvas/water-ripple/brush.png",
       "type": "registry:file",
       "target": "public/motion-kit/water-ripple/brush.png"
     }

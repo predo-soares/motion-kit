@@ -49,6 +49,7 @@
   import "@/components/ui/mk-color.ts";
   import "@/components/ui/mk-select.ts";
   import "@/components/ui/mk-text-input.ts";
+  import "@/components/ui/mk-file-input.ts";
 
   gsap.registerPlugin(Flip);
 
@@ -59,6 +60,7 @@
     originalBorderRadius: string;
     originalParent: Node;
     originalNext: Node | null;
+    controlsPanel: HTMLElement | null;
   };
 
   let fullscreenState: FullscreenCardState | null = null;
@@ -66,9 +68,8 @@
 
   document.addEventListener("mouseover", (event) => {
     hoveredCard =
-      (event.target as HTMLElement | null)?.closest(
-        "[data-component-card]",
-      ) ?? null;
+      (event.target as HTMLElement | null)?.closest("[data-component-card]") ??
+      null;
   });
 
   const replayPreview = (card: HTMLElement) => {
@@ -137,7 +138,9 @@
         try {
           const parsed = JSON.parse(optionsAttr);
           if (Array.isArray(parsed) && parsed.length > 0) {
-            return typeof parsed[0] === "string" ? parsed[0] : parsed[0]?.value ?? null;
+            return typeof parsed[0] === "string"
+              ? parsed[0]
+              : (parsed[0]?.value ?? null);
           }
         } catch (e) {
           // Invalid JSON, ignore
@@ -148,6 +151,10 @@
 
     if (control.tagName === "MK-TEXT-INPUT") {
       return control.getAttribute("value") ?? "";
+    }
+
+    if (control.tagName === "MK-FILE-INPUT") {
+      return null;
     }
 
     return (control as HTMLInputElement).defaultValue ?? null;
@@ -163,7 +170,9 @@
       if (defaultValue === null) return;
 
       (control as any).value = defaultValue;
-      control.dispatchEvent(new Event("input", { bubbles: true, composed: true }));
+      control.dispatchEvent(
+        new Event("input", { bubbles: true, composed: true }),
+      );
     });
   };
 
@@ -177,11 +186,38 @@
       backdrop,
       originalBorderRadius,
       originalParent,
+      controlsPanel,
     } = state;
 
     const targetRect = placeholder.getBoundingClientRect();
 
     gsap.to(backdrop, { opacity: 0, duration: 0.3, ease: "power2.out" });
+
+    if (controlsPanel) {
+      gsap.to(controlsPanel, {
+        x: 16,
+        opacity: 0,
+        scale: 0.94,
+        duration: 0.2,
+        ease: "back.in(2)",
+        onComplete: () => {
+          gsap.set(controlsPanel, { clearProps: "all" });
+          delete controlsPanel.dataset.fullscreenPanel;
+          const controlsBody = controlsPanel.querySelector(
+            "[data-controls-body]",
+          ) as HTMLElement | null;
+          if (controlsBody) {
+            gsap.set(controlsBody, { height: 0 });
+            gsap.to(controlsBody, {
+              height: "auto",
+              duration: 0.4,
+              ease: "power3.out",
+              onComplete: () => gsap.set(controlsBody, { clearProps: "height" }),
+            });
+          }
+        },
+      });
+    }
 
     gsap.to(card, {
       top: targetRect.top,
@@ -257,6 +293,10 @@
 
     card.dataset.fullscreenActive = "true";
 
+    const controlsPanel = card.querySelector(
+      "[data-controls-panel]",
+    ) as HTMLElement | null;
+
     fullscreenState = {
       card,
       placeholder,
@@ -264,7 +304,21 @@
       originalBorderRadius,
       originalParent,
       originalNext,
+      controlsPanel,
     };
+
+    if (controlsPanel) {
+      const controlsBody = controlsPanel.querySelector(
+        "[data-controls-body]",
+      ) as HTMLElement | null;
+      if (controlsBody) {
+        gsap.to(controlsBody, {
+          height: 0,
+          duration: 0.35,
+          ease: "power3.in",
+        });
+      }
+    }
 
     gsap.fromTo(
       card,
@@ -283,6 +337,35 @@
         borderRadius: 0,
         duration: 0.65,
         ease: "power3.inOut",
+        onComplete: () => {
+          if (!controlsPanel) return;
+          const controlsBody = controlsPanel.querySelector(
+            "[data-controls-body]",
+          ) as HTMLElement | null;
+          if (controlsBody) gsap.set(controlsBody, { clearProps: "height" });
+          controlsPanel.dataset.fullscreenPanel = "true";
+          gsap.set(controlsPanel, {
+            position: "absolute",
+            top: 48,
+            right: 12,
+            bottom: "auto",
+            left: "auto",
+            width: 284,
+            y: 0,
+            x: 20,
+            opacity: 0,
+            scale: 0.94,
+            transformOrigin: "right top",
+            zIndex: 15,
+          });
+          gsap.to(controlsPanel, {
+            x: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.55,
+            ease: "back.out(2.4)",
+          });
+        },
       },
     );
   };
@@ -329,7 +412,9 @@
       return;
     }
 
-    const copyButton = target.closest("[data-copy-text]") as HTMLButtonElement | null;
+    const copyButton = target.closest(
+      "[data-copy-text]",
+    ) as HTMLButtonElement | null;
     if (copyButton) {
       void copyText(copyButton);
       return;

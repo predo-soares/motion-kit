@@ -26,3 +26,12 @@ pnpm-debug.log*
 # ref codebase
 ref
 .gstack/
+
+# agent
+thoughts
+
+# local automation scripts (contains secrets)
+ralph.sh
+
+# TypeScript incremental build cache
+*.tsbuildinfo

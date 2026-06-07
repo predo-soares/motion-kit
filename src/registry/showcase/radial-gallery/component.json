@@ -7,7 +7,7 @@
   "dependencies": ["lit", "gsap"],
   "files": [
     {
-      "path": "src/registry/new-york/blocks/radial-gallery/radial-gallery-element.ts",
+      "path": "src/registry/showcase/radial-gallery/radial-gallery-element.ts",
       "type": "registry:component",
       "target": "src/components/motion-kit/radial-gallery-element.ts"
     }

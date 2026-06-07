@@ -1,8 +1,9 @@
 {
-  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "$schema": "http://localhost:4321/schema/registry-item.json",
   "name": "card-stack",
+  "type": "registry:component",
   "title": "Card Stack",
-  "description": "Scroll-driven sticky card stack with GSAP ScrollTrigger. Nest <motion-card-stack-item> elements inside.",
+  "description": "Scroll-driven sticky card stack with ScrollTrigger. Nest <motion-card-stack-item> elements inside.",
   "dependencies": [
     "lit",
     "gsap"
@@ -10,16 +11,69 @@
   "files": [
     {
       "path": "src/registry/interaction/card-stack/card-stack-element.ts",
-      "content": "import { LitElement, html, css } from \"lit\"\nimport { customElement, property } from \"lit/decorators.js\"\nimport { gsap } from \"gsap\"\nimport { ScrollTrigger } from \"gsap/ScrollTrigger\"\n\ngsap.registerPlugin(ScrollTrigger)\n\n/**\n * Scroll-driven sticky card stack. Nest <motion-card-stack-item> elements inside.\n * Apply padding directly on this element via class or style.\n *\n * @example\n * <motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n *   <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n *     Card 1\n *   </motion-card-stack-item>\n *   <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n *     Card 2\n *   </motion-card-stack-item>\n * </motion-card-stack>\n */\n@customElement(\"motion-card-stack\")\nexport class MotionCardStack extends LitElement {\n  static override styles = css`\n    :host {\n      display: block;\n      position: relative;\n      width: 100%;\n    }\n  `\n\n  @property({ type: Number, attribute: \"scale-factor\" }) scaleFactor = 0.05\n  @property({ type: Number }) gap = 0\n  @property({ type: Number }) offset = 10\n  @property({ type: Number, attribute: \"top-offset\" }) topOffset = 0\n  @property({ attribute: \"scroll-element\" }) scrollElement = \"\"\n\n  private _ctx?: gsap.Context\n  private _cancelled = false\n\n  override firstUpdated() {\n    void this._init()\n  }\n\n  override disconnectedCallback() {\n    super.disconnectedCallback()\n    this._cleanup()\n  }\n\n  private _resolveScroller(): HTMLElement | Window {\n    if (this.scrollElement) {\n      return document.querySelector<HTMLElement>(this.scrollElement) ?? window\n    }\n    return window\n  }\n\n  private _cleanup() {\n    this._cancelled = true\n    this._ctx?.revert()\n    this._ctx = undefined\n    this.style.paddingBottom = \"\"\n  }\n\n  replay() {\n    const scroller = this._resolveScroller()\n    if (scroller instanceof HTMLElement) {\n      scroller.scrollTop = 0\n    } else {\n      window.scrollTo(0, 0)\n    }\n    void this._init()\n  }\n\n  private async _init() {\n    this._cleanup()\n    this._cancelled = false\n\n    await new Promise<void>((r) => requestAnimationFrame(() => r()))\n    await new Promise<void>((r) => requestAnimationFrame(() => r()))\n    if (this._cancelled) return\n\n    const cards = Array.from(\n      this.querySelectorAll<HTMLElement>(\"motion-card-stack-item\"),\n    )\n    if (!cards.length) return\n\n    const scroller = this._resolveScroller()\n    const { gap, scaleFactor, offset, topOffset } = this\n\n    const scrollerHeight =\n      scroller instanceof HTMLElement ? scroller.clientHeight : window.innerHeight\n\n    const lastCard = cards[cards.length - 1]!\n    const targetPos = topOffset + (cards.length - 1) * offset\n    const totalGap = Math.max(0, cards.length - 1) * gap\n    const extraPadding = Math.max(\n      0,\n      scrollerHeight - lastCard.offsetHeight - targetPos - totalGap,\n    )\n    if (extraPadding > 0) this.style.paddingBottom = `${extraPadding}px`\n\n    this._ctx = gsap.context(() => {\n      cards.forEach((card, index) => {\n        const cardTop = topOffset + index * offset\n\n        gsap.set(card, {\n          transformOrigin: \"top center\",\n          zIndex: index,\n          position: \"sticky\",\n          top: `${cardTop}px`,\n          marginBottom: index < cards.length - 1 ? `${gap}px` : \"0px\",\n        })\n\n        if (index < cards.length - 1) {\n          gsap.timeline({\n            scrollTrigger: {\n              trigger: card,\n              start: `top top+=${cardTop}`,\n              endTrigger: this,\n              end: \"bottom bottom\",\n              scrub: true,\n              scroller,\n              invalidateOnRefresh: true,\n            },\n          }).to(card, {\n            scale: 1 - (cards.length - 1 - index) * scaleFactor,\n            ease: \"none\",\n          })\n        }\n      })\n    }, this)\n  }\n\n  override render() {\n    return html`<slot></slot>`\n  }\n}\n\ndeclare global {\n  interface HTMLElementTagNameMap {\n    \"motion-card-stack\": MotionCardStack\n  }\n}\n",
       "type": "registry:component",
-      "target": "src/components/motion-kit/card-stack-element.ts"
+      "target": "src/components/motion-kit/card-stack-element.ts",
+      "content": "import { LitElement, html, css } from \"lit\"\nimport { customElement, property } from \"lit/decorators.js\"\nimport { gsap } from \"gsap\"\nimport { ScrollTrigger } from \"gsap/ScrollTrigger\"\n\ngsap.registerPlugin(ScrollTrigger)\n\n/**\n * Scroll-driven sticky card stack. Nest <motion-card-stack-item> elements inside.\n * Apply padding directly on this element via class or style.\n *\n * @example\n * <motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n *   <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n *     Card 1\n *   </motion-card-stack-item>\n *   <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n *     Card 2\n *   </motion-card-stack-item>\n * </motion-card-stack>\n */\n@customElement(\"motion-card-stack\")\nexport class MotionCardStack extends LitElement {\n  static override styles = css`\n    :host {\n      display: block;\n      position: relative;\n      width: 100%;\n    }\n  `\n\n  @property({ type: Number, attribute: \"scale-factor\" }) scaleFactor = 0.05\n  @property({ type: Number }) gap = 0\n  @property({ type: Number }) offset = 10\n  @property({ type: Number, attribute: \"top-offset\" }) topOffset = 0\n  @property({ attribute: \"scroll-element\" }) scrollElement = \"\"\n\n  private _ctx?: gsap.Context\n  private _cancelled = false\n\n  override firstUpdated() {\n    void this._init()\n  }\n\n  override disconnectedCallback() {\n    super.disconnectedCallback()\n    this._cleanup()\n  }\n\n  private _resolveScroller(): HTMLElement | Window {\n    if (this.scrollElement) {\n      return document.querySelector<HTMLElement>(this.scrollElement) ?? window\n    }\n    return window\n  }\n\n  private _cleanup() {\n    this._cancelled = true\n    this._ctx?.revert()\n    this._ctx = undefined\n    this.style.paddingBottom = \"\"\n  }\n\n  replay() {\n    const scroller = this._resolveScroller()\n    if (scroller instanceof HTMLElement) {\n      scroller.scrollTop = 0\n    } else {\n      window.scrollTo(0, 0)\n    }\n    void this._init()\n  }\n\n  private async _init() {\n    this._cleanup()\n    this._cancelled = false\n\n    await new Promise<void>((r) => requestAnimationFrame(() => r()))\n    await new Promise<void>((r) => requestAnimationFrame(() => r()))\n    if (this._cancelled) return\n\n    const cards = Array.from(\n      this.querySelectorAll<HTMLElement>(\"motion-card-stack-item\"),\n    )\n    if (!cards.length) return\n\n    const scroller = this._resolveScroller()\n    const { gap, scaleFactor, offset, topOffset } = this\n\n    const scrollerHeight =\n      scroller instanceof HTMLElement ? scroller.clientHeight : window.innerHeight\n\n    const lastCard = cards[cards.length - 1]!\n    const targetPos = topOffset + (cards.length - 1) * offset\n    const totalGap = Math.max(0, cards.length - 1) * gap\n    const extraPadding = Math.max(\n      0,\n      scrollerHeight - lastCard.offsetHeight - targetPos - totalGap,\n    )\n    if (extraPadding > 0) this.style.paddingBottom = `${extraPadding}px`\n\n    this._ctx = gsap.context(() => {\n      cards.forEach((card, index) => {\n        const cardTop = topOffset + index * offset\n\n        gsap.set(card, {\n          transformOrigin: \"top center\",\n          zIndex: index,\n          position: \"sticky\",\n          top: `${cardTop}px`,\n          marginBottom: index < cards.length - 1 ? `${gap}px` : \"0px\",\n        })\n\n        if (index < cards.length - 1) {\n          gsap.timeline({\n            scrollTrigger: {\n              trigger: card,\n              start: `top top+=${cardTop}`,\n              endTrigger: this,\n              end: \"bottom bottom\",\n              scrub: true,\n              scroller,\n              invalidateOnRefresh: true,\n            },\n          }).to(card, {\n            scale: 1 - (cards.length - 1 - index) * scaleFactor,\n            ease: \"none\",\n          })\n        }\n      })\n    }, this)\n  }\n\n  override render() {\n    return html`<slot></slot>`\n  }\n}\n\ndeclare global {\n  interface HTMLElementTagNameMap {\n    \"motion-card-stack\": MotionCardStack\n  }\n}\n"
     },
     {
       "path": "src/registry/interaction/card-stack/card-stack-item-element.ts",
-      "content": "import { LitElement, html, css } from \"lit\"\nimport { customElement } from \"lit/decorators.js\"\n\n/**\n * A single card inside <motion-card-stack>.\n * Apply visual styles (rounded corners, background, padding, etc.) directly\n * as classes or inline styles on this element — they apply to the host.\n *\n * @example\n * <motion-card-stack-item class=\"rounded-2xl bg-white p-8 shadow-sm min-h-[320px]\">\n *   <h2>Card title</h2>\n * </motion-card-stack-item>\n */\n@customElement(\"motion-card-stack-item\")\nexport class MotionCardStackItem extends LitElement {\n  static override styles = css`\n    :host {\n      display: flex;\n      flex-direction: column;\n      will-change: transform;\n    }\n  `\n\n  override render() {\n    return html`<slot></slot>`\n  }\n}\n\ndeclare global {\n  interface HTMLElementTagNameMap {\n    \"motion-card-stack-item\": MotionCardStackItem\n  }\n}\n",
       "type": "registry:component",
-      "target": "src/components/motion-kit/card-stack-item-element.ts"
+      "target": "src/components/motion-kit/card-stack-item-element.ts",
+      "content": "import { LitElement, html, css } from \"lit\"\nimport { customElement } from \"lit/decorators.js\"\n\n/**\n * A single card inside <motion-card-stack>.\n * Apply visual styles (rounded corners, background, padding, etc.) directly\n * as classes or inline styles on this element — they apply to the host.\n *\n * @example\n * <motion-card-stack-item class=\"rounded-2xl bg-white p-8 shadow-sm min-h-[320px]\">\n *   <h2>Card title</h2>\n * </motion-card-stack-item>\n */\n@customElement(\"motion-card-stack-item\")\nexport class MotionCardStackItem extends LitElement {\n  static override styles = css`\n    :host {\n      display: flex;\n      flex-direction: column;\n      will-change: transform;\n    }\n  `\n\n  override render() {\n    return html`<slot></slot>`\n  }\n}\n\ndeclare global {\n  interface HTMLElementTagNameMap {\n    \"motion-card-stack-item\": MotionCardStackItem\n  }\n}\n"
     }
   ],
-  "type": "registry:component"
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/card-stack-element.ts\";\nimport \"@/components/motion-kit/card-stack-item-element.ts\";\n---\n\n<motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 1</h2>\n    <p>Content for the first card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n    <h2>Card 2</h2>\n    <p>Content for the second card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 3</h2>\n    <p>Content for the third card</p>\n  </motion-card-stack-item>\n</motion-card-stack>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/card-stack-element.ts\";\nimport \"@/components/motion-kit/card-stack-item-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n      <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n        <h2>Card 1</h2>\n        <p>Content for the first card</p>\n      </motion-card-stack-item>\n      <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n        <h2>Card 2</h2>\n        <p>Content for the second card</p>\n      </motion-card-stack-item>\n      <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n        <h2>Card 3</h2>\n        <p>Content for the third card</p>\n      </motion-card-stack-item>\n    </motion-card-stack>\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/card-stack-element.ts\";\nimport \"@/components/motion-kit/card-stack-item-element.ts\";\n</script>\n\n<template>\n  <motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n    <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n      <h2>Card 1</h2>\n      <p>Content for the first card</p>\n    </motion-card-stack-item>\n    <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n      <h2>Card 2</h2>\n      <p>Content for the second card</p>\n    </motion-card-stack-item>\n    <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n      <h2>Card 3</h2>\n      <p>Content for the third card</p>\n    </motion-card-stack-item>\n  </motion-card-stack>\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/card-stack-element.ts\";\n  import \"@/components/motion-kit/card-stack-item-element.ts\";\n</script>\n\n<motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 1</h2>\n    <p>Content for the first card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n    <h2>Card 2</h2>\n    <p>Content for the second card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 3</h2>\n    <p>Content for the third card</p>\n  </motion-card-stack-item>\n</motion-card-stack>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/card-stack-element.js\"></script>\n<script type=\"module\" src=\"/components/motion-kit/card-stack-item-element.js\"></script>\n\n<motion-card-stack scroll-element=\"#scroller\" class=\"p-16\">\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 1</h2>\n    <p>Content for the first card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-slate-50 p-8 min-h-[320px]\">\n    <h2>Card 2</h2>\n    <p>Content for the second card</p>\n  </motion-card-stack-item>\n  <motion-card-stack-item class=\"rounded-2xl bg-white p-8 min-h-[320px]\">\n    <h2>Card 3</h2>\n    <p>Content for the third card</p>\n  </motion-card-stack-item>\n</motion-card-stack>"
+    }
+  ],
+  "props": [
+    {
+      "name": "scale-factor",
+      "type": "number",
+      "default": "0.05",
+      "description": "How much each card scales down per card (0.05 = 5% smaller each step)."
+    },
+    {
+      "name": "gap",
+      "type": "number",
+      "default": "0",
+      "description": "Vertical gap between stacked cards in pixels."
+    },
+    {
+      "name": "offset",
+      "type": "number",
+      "default": "10",
+      "description": "Vertical offset between card positions in pixels."
+    },
+    {
+      "name": "top-offset",
+      "type": "number",
+      "default": "0",
+      "description": "Initial top offset for the first card in pixels."
+    },
+    {
+      "name": "scroll-element",
+      "type": "string",
+      "default": "\"\"",
+      "description": "CSS selector for the scrollable container (defaults to window scroll)."
+    }
+  ]
 }

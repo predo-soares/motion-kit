@@ -1,6 +1,7 @@
 {
-  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "$schema": "http://localhost:4321/schema/registry-item.json",
   "name": "weight-wave",
+  "type": "registry:component",
   "title": "Weight Wave",
   "description": "Hover-reactive text effect that smoothly increases font weight with a falloff across neighboring characters. Requires a variable font.",
   "dependencies": [
@@ -10,10 +11,75 @@
   "files": [
     {
       "path": "src/registry/text/weight-wave/weight-wave-element.ts",
-      "content": "import { LitElement, html, css } from \"lit\";\nimport { customElement, property } from \"lit/decorators.js\";\nimport { gsap } from \"gsap\";\nimport { SplitText } from \"gsap/SplitText\";\nimport { registerPluginOnce } from \"@/lib/helpers/gsap\";\n\n/**\n * Hover-reactive text effect that smoothly increases font weight with a\n * falloff across neighboring characters.\n *\n * Requires a variable font that supports the `wght` axis.\n *\n * @example\n * <motion-weight-wave text=\"Hover me\"></motion-weight-wave>\n */\n@customElement(\"motion-weight-wave\")\nexport class MotionWeightWave extends LitElement {\n  static override styles = css`\n    :host {\n      font: inherit;\n      color: inherit;\n      display: inline-block;\n      vertical-align: baseline;\n    }\n  `;\n\n  @property() text = \"\";\n  @property({ type: Number, attribute: \"base-weight\" }) baseWeight = 350;\n  @property({ type: Number, attribute: \"hover-weight\" }) hoverWeight = 750;\n  @property({ type: Number, attribute: \"influence-radius\" }) influenceRadius =\n    3;\n  @property({ type: Number, attribute: \"falloff-power\" }) falloffPower = 1.5;\n  @property({ type: Number }) duration = 1.0;\n  @property() ease = \"power3.out\";\n\n  private _split?: SplitText;\n  private _ctx?: gsap.Context;\n  private _chars: HTMLElement[] = [];\n  private _charPositions: { x: number; width: number }[] = [];\n\n  override connectedCallback() {\n    super.connectedCallback();\n    registerPluginOnce(SplitText);\n    this.addEventListener(\"pointermove\", this._onPointerMove);\n    this.addEventListener(\"pointerleave\", this._onPointerLeave);\n  }\n\n  override disconnectedCallback() {\n    super.disconnectedCallback();\n    this.removeEventListener(\"pointermove\", this._onPointerMove);\n    this.removeEventListener(\"pointerleave\", this._onPointerLeave);\n    this._cleanup();\n  }\n\n  override firstUpdated() {\n    this._init();\n  }\n\n  override updated(changed: Map<string, unknown>) {\n    const reinitKeys = [\n      \"text\",\n      \"baseWeight\",\n      \"hoverWeight\",\n      \"influenceRadius\",\n      \"falloffPower\",\n    ];\n    if (reinitKeys.some((k) => changed.has(k))) this._init();\n  }\n\n  replay() {\n    this._init();\n  }\n\n  private _cleanup() {\n    this._ctx?.revert();\n    this._split?.revert();\n    this._ctx = undefined;\n    this._split = undefined;\n    this._chars = [];\n    this._charPositions = [];\n  }\n\n  private _init() {\n    this._cleanup();\n\n    const content = this.renderRoot.querySelector<HTMLElement>(\".content\");\n    if (!content) return;\n\n    this._ctx = gsap.context(() => {\n      this._split = SplitText.create(content, {\n        type: \"chars\",\n        reduceWhiteSpace: false,\n      });\n\n      this._chars = (this._split.chars ?? []) as HTMLElement[];\n\n      this._chars.forEach((char) => {\n        char.style.fontWeight = String(this.baseWeight);\n        char.style.fontVariationSettings = `\"wght\" ${this.baseWeight}`;\n        char.style.display = \"inline-block\";\n\n        if (!char.textContent?.trim()) {\n          char.style.whiteSpace = \"pre\";\n          char.style.pointerEvents = \"none\";\n          char.style.minWidth = \"0.25em\";\n        }\n      });\n    }, content);\n\n    requestAnimationFrame(() => {\n      this._charPositions = this._chars.map((char) => {\n        const rect = char.getBoundingClientRect();\n        return { x: rect.left + rect.width / 2, width: rect.width };\n      });\n    });\n  }\n\n  private _calculateWeight(distance: number) {\n    if (this.influenceRadius <= 0) return this.baseWeight;\n    if (distance > this.influenceRadius + 1) return this.baseWeight;\n    const normalized = Math.max(0, 1 - distance / (this.influenceRadius + 1));\n    const shaped = Math.pow(normalized, this.falloffPower);\n    return this.baseWeight + (this.hoverWeight - this.baseWeight) * shaped;\n  }\n\n  private _applyWeight(char: HTMLElement, weight: number) {\n    gsap.to(char, {\n      fontWeight: weight,\n      fontVariationSettings: `\"wght\" ${weight}`,\n      duration: this.duration,\n      ease: this.ease,\n      overwrite: \"auto\",\n    });\n  }\n\n  private _onPointerMove = (e: PointerEvent) => {\n    if (!this._chars.length || !this._charPositions.length) return;\n    const mouseX = e.clientX;\n\n    this._chars.forEach((char, i) => {\n      const pos = this._charPositions[i];\n      if (!pos) return;\n      const distance = Math.abs(mouseX - pos.x) / pos.width;\n      this._applyWeight(char, this._calculateWeight(distance));\n    });\n  };\n\n  private _onPointerLeave = () => {\n    this._chars.forEach((char) => this._applyWeight(char, this.baseWeight));\n  };\n\n  override render() {\n    return html`<span class=\"content\">${this.text}</span>`;\n  }\n}\n\ndeclare global {\n  interface HTMLElementTagNameMap {\n    \"motion-weight-wave\": MotionWeightWave;\n  }\n}\n",
       "type": "registry:component",
-      "target": "src/components/motion-kit/weight-wave-element.ts"
+      "target": "src/components/motion-kit/weight-wave-element.ts",
+      "content": "import { LitElement, html, css } from \"lit\";\nimport { customElement, property } from \"lit/decorators.js\";\nimport { gsap } from \"gsap\";\nimport { SplitText } from \"gsap/SplitText\";\nimport { registerPluginOnce } from \"@/lib/helpers/gsap\";\n\n/**\n * Hover-reactive text effect that smoothly increases font weight with a\n * falloff across neighboring characters.\n *\n * Requires a variable font that supports the `wght` axis.\n *\n * @example\n * <motion-weight-wave text=\"Hover me\"></motion-weight-wave>\n */\n@customElement(\"motion-weight-wave\")\nexport class MotionWeightWave extends LitElement {\n  static override styles = css`\n    :host {\n      font: inherit;\n      color: inherit;\n      display: inline-block;\n      vertical-align: baseline;\n    }\n  `;\n\n  @property() text = \"\";\n  @property({ type: Number, attribute: \"base-weight\" }) baseWeight = 350;\n  @property({ type: Number, attribute: \"hover-weight\" }) hoverWeight = 750;\n  @property({ type: Number, attribute: \"influence-radius\" }) influenceRadius =\n    3;\n  @property({ type: Number, attribute: \"falloff-power\" }) falloffPower = 1.5;\n  @property({ type: Number }) duration = 1.0;\n  @property() ease = \"power3.out\";\n\n  private _split?: SplitText;\n  private _ctx?: gsap.Context;\n  private _chars: HTMLElement[] = [];\n  private _charPositions: { x: number; width: number }[] = [];\n\n  override connectedCallback() {\n    super.connectedCallback();\n    registerPluginOnce(SplitText);\n    this.addEventListener(\"pointermove\", this._onPointerMove);\n    this.addEventListener(\"pointerleave\", this._onPointerLeave);\n  }\n\n  override disconnectedCallback() {\n    super.disconnectedCallback();\n    this.removeEventListener(\"pointermove\", this._onPointerMove);\n    this.removeEventListener(\"pointerleave\", this._onPointerLeave);\n    this._cleanup();\n  }\n\n  override firstUpdated() {\n    this._init();\n  }\n\n  override updated(changed: Map<string, unknown>) {\n    const reinitKeys = [\n      \"text\",\n      \"baseWeight\",\n      \"hoverWeight\",\n      \"influenceRadius\",\n      \"falloffPower\",\n    ];\n    if (reinitKeys.some((k) => changed.has(k))) this._init();\n  }\n\n  replay() {\n    this._init();\n  }\n\n  private _cleanup() {\n    this._ctx?.revert();\n    this._split?.revert();\n    this._ctx = undefined;\n    this._split = undefined;\n    this._chars = [];\n    this._charPositions = [];\n  }\n\n  private _init() {\n    this._cleanup();\n\n    const content = this.renderRoot.querySelector<HTMLElement>(\".content\");\n    if (!content) return;\n\n    this._ctx = gsap.context(() => {\n      this._split = SplitText.create(content, {\n        type: \"chars\",\n        reduceWhiteSpace: false,\n      });\n\n      this._chars = (this._split.chars ?? []) as HTMLElement[];\n\n      this._chars.forEach((char) => {\n        char.style.fontWeight = String(this.baseWeight);\n        char.style.fontVariationSettings = `\"wght\" ${this.baseWeight}`;\n        char.style.display = \"inline-block\";\n\n        if (!char.textContent?.trim()) {\n          char.style.whiteSpace = \"pre\";\n          char.style.pointerEvents = \"none\";\n          char.style.minWidth = \"0.25em\";\n        }\n      });\n    }, content);\n\n    requestAnimationFrame(() => {\n      this._charPositions = this._chars.map((char) => {\n        const rect = char.getBoundingClientRect();\n        return { x: rect.left + rect.width / 2, width: rect.width };\n      });\n    });\n  }\n\n  private _calculateWeight(distance: number) {\n    if (this.influenceRadius <= 0) return this.baseWeight;\n    if (distance > this.influenceRadius + 1) return this.baseWeight;\n    const normalized = Math.max(0, 1 - distance / (this.influenceRadius + 1));\n    const shaped = Math.pow(normalized, this.falloffPower);\n    return this.baseWeight + (this.hoverWeight - this.baseWeight) * shaped;\n  }\n\n  private _applyWeight(char: HTMLElement, weight: number) {\n    gsap.to(char, {\n      fontWeight: weight,\n      fontVariationSettings: `\"wght\" ${weight}`,\n      duration: this.duration,\n      ease: this.ease,\n      overwrite: \"auto\",\n    });\n  }\n\n  private _onPointerMove = (e: PointerEvent) => {\n    if (!this._chars.length || !this._charPositions.length) return;\n    const mouseX = e.clientX;\n\n    this._chars.forEach((char, i) => {\n      const pos = this._charPositions[i];\n      if (!pos) return;\n      const distance = Math.abs(mouseX - pos.x) / pos.width;\n      this._applyWeight(char, this._calculateWeight(distance));\n    });\n  };\n\n  private _onPointerLeave = () => {\n    this._chars.forEach((char) => this._applyWeight(char, this.baseWeight));\n  };\n\n  override render() {\n    return html`<span class=\"content\">${this.text}</span>`;\n  }\n}\n\ndeclare global {\n  interface HTMLElementTagNameMap {\n    \"motion-weight-wave\": MotionWeightWave;\n  }\n}\n"
     }
   ],
-  "type": "registry:component"
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/weight-wave-element.ts\";\n---\n\n<motion-weight-wave text=\"Hover me\"></motion-weight-wave>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/weight-wave-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-weight-wave text=\"Hover me\" />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/weight-wave-element.ts\";\n</script>\n\n<template>\n  <motion-weight-wave text=\"Hover me\" />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/weight-wave-element.ts\";\n</script>\n\n<motion-weight-wave text=\"Hover me\" />"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/weight-wave-element.js\"></script>\n\n<motion-weight-wave text=\"Hover me\"></motion-weight-wave>"
+    }
+  ],
+  "props": [
+    {
+      "name": "text",
+      "type": "string",
+      "default": "\"\"",
+      "description": "The text content to display and animate."
+    },
+    {
+      "name": "base-weight",
+      "type": "number",
+      "default": "350",
+      "description": "Base font weight when not hovering."
+    },
+    {
+      "name": "hover-weight",
+      "type": "number",
+      "default": "750",
+      "description": "Font weight at cursor position."
+    },
+    {
+      "name": "influence-radius",
+      "type": "number",
+      "default": "3",
+      "description": "Number of neighboring characters affected by the wave."
+    },
+    {
+      "name": "falloff-power",
+      "type": "number",
+      "default": "1.5",
+      "description": "Power curve for weight falloff (higher = sharper falloff)."
+    },
+    {
+      "name": "duration",
+      "type": "number",
+      "default": "1.0",
+      "description": "Animation duration in seconds."
+    },
+    {
+      "name": "ease",
+      "type": "string",
+      "default": "\"power3.out\"",
+      "description": "easing function for the animation."
+    }
+  ]
 }

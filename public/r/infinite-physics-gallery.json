@@ -1,14 +1,91 @@
 {
+  "$schema": "http://localhost:4321/schema/registry-item.json",
   "name": "infinite-physics-gallery",
   "type": "registry:component",
   "title": "Infinite Physics Gallery",
-  "description": "Infinite physics-based 2D image/video gallery. Drag or scroll to navigate a virtual grid with inertia and edge auto-scroll.",
-  "dependencies": ["lit", "gsap"],
+  "description": "Infinite 2-D draggable grid with physics-based momentum, edge scrolling, and support for mixed image/video cells. Framework-agnostic Custom Element.",
+  "dependencies": [
+    "lit",
+    "gsap"
+  ],
   "files": [
     {
-      "path": "src/registry/new-york/blocks/infinite-physics-gallery/infinite-physics-gallery-element.ts",
+      "path": "src/registry/showcase/infinite-physics-gallery/infinite-physics-gallery-element.ts",
       "type": "registry:component",
-      "target": "src/components/motion-kit/infinite-physics-gallery-element.ts"
+      "target": "src/components/motion-kit/infinite-physics-gallery-element.ts",
+      "content": "import { LitElement, html, css } from \"lit\"\nimport { customElement, property } from \"lit/decorators.js\"\nimport { repeat } from \"lit/directives/repeat.js\"\nimport { gsap } from \"gsap\"\n\ntype MediaItem =\n  | { type: \"image\"; src: string; alt?: string }\n  | { type: \"video\"; src: string }\n\ninterface Cell {\n  id: string\n  item: MediaItem\n  posX: number\n  posY: number\n}\n\nconst MIN_POINTER_DT = 8\nconst WHEEL_DELTA_LIMIT = 220\nconst WHEEL_IMPULSE = 0.04\nconst DRAG_VELOCITY_BLEND = 0.3\nconst EDGE_RESPONSE = 0.22\nconst EDGE_VELOCITY_MULTIPLIER = 2.2\nconst MAX_VELOCITY = 24\n\n/**\n * Infinite physics-based 2-D gallery. Drag or scroll to navigate.\n * Edge proximity auto-scrolls when the cursor lingers near the boundary.\n *\n * Items are passed as a JSON array:\n * `[{\"type\":\"image\",\"src\":\"...\",\"alt\":\"...\"},{\"type\":\"video\",\"src\":\"...\"}]`\n *\n * @example\n * <motion-infinite-physics-gallery\n *   items='[{\"type\":\"image\",\"src\":\"/1.jpg\"},{\"type\":\"image\",\"src\":\"/2.jpg\"}]'\n *   cell-width=\"320\"\n *   cell-height=\"400\"\n *   class=\"h-[480px] w-full rounded-2xl overflow-hidden\"\n * ></motion-infinite-physics-gallery>\n */\n@customElement(\"motion-infinite-physics-gallery\")\nexport class MotionInfinitePhysicsGallery extends LitElement {\n  static override styles = css`\n    :host {\n      display: block;\n      position: relative;\n      overflow: hidden;\n      touch-action: none;\n      user-select: none;\n    }\n    .bg {\n      position: absolute;\n      inset: 0;\n      pointer-events: none;\n    }\n    .cell {\n      position: absolute;\n      top: 0;\n      left: 0;\n      overflow: hidden;\n      will-change: transform;\n      pointer-events: auto;\n    }\n    .cell img,\n    .cell video {\n      position: absolute;\n      inset: 0;\n      width: 100%;\n      height: 100%;\n      object-fit: cover;\n      display: block;\n      pointer-events: none;\n      -webkit-user-drag: none;\n    }\n  `\n\n  /** JSON array of media items: `[{\"type\":\"image\",\"src\":\"...\",\"alt\":\"...\"},...]` */\n  @property({ type: String }) items = \"[]\"\n\n  /** Cell width in pixels. */\n  @property({ type: Number, attribute: \"cell-width\" }) cellWidth = 320\n\n  /** Cell height in pixels. */\n  @property({ type: Number, attribute: \"cell-height\" }) cellHeight = 400\n\n  /** Gap between cells in pixels. */\n  @property({ type: Number }) gap = 24\n\n  /** Base inertia friction (0–1). */\n  @property({ type: Number }) friction = 0.95\n\n  /** Wheel speed multiplier. */\n  @property({ type: Number, attribute: \"wheel-speed\" }) wheelSpeed = 2\n\n  /** Edge auto-scroll threshold in pixels. */\n  @property({ type: Number, attribute: \"edge-threshold\" }) edgeThreshold = 100\n\n  /** Edge auto-scroll speed. */\n  @property({ type: Number, attribute: \"edge-scroll-speed\" }) edgeScrollSpeed = 2\n\n  // ── Physics state ────────────────────────────────────────────────────\n  private _ox = 0\n  private _oy = 0\n  private _vx = 0\n  private _vy = 0\n  private _evx = 0\n  private _evy = 0\n  private _mx = 0\n  private _my = 0\n  private _dragging = false\n  private _pointerId: number | null = null\n  private _lp = { x: 0, y: 0 }\n  private _lpt = 0\n  private _vpW = 0\n  private _vpH = 0\n\n  // ── Display state (triggers Lit renders) ─────────────────────────────\n  private _displayOx = 0\n  private _displayOy = 0\n  private _isDragging = false\n\n  private _resizeObs?: ResizeObserver\n  private _cachedItems: MediaItem[] = []\n\n  override connectedCallback() {\n    super.connectedCallback()\n    this._cachedItems = JSON.parse(this.items)\n  }\n\n  override disconnectedCallback() {\n    super.disconnectedCallback()\n    this._resizeObs?.disconnect()\n    gsap.ticker.remove(this._tick)\n  }\n\n  override firstUpdated() {\n    const host = this as HTMLElement\n    this._vpW = host.clientWidth\n    this._vpH = host.clientHeight\n\n    this._resizeObs = new ResizeObserver(() => {\n      this._vpW = host.clientWidth\n      this._vpH = host.clientHeight\n      this.requestUpdate()\n    })\n    this._resizeObs.observe(host)\n\n    host.addEventListener(\"pointerdown\", this._onPointerDown)\n    host.addEventListener(\"pointermove\", this._onPointerMove)\n    host.addEventListener(\"pointerup\", this._onPointerEnd)\n    host.addEventListener(\"pointercancel\", this._onPointerEnd)\n    host.addEventListener(\"pointerleave\", this._onPointerLeave)\n    host.addEventListener(\"wheel\", this._onWheel, { passive: false })\n\n    gsap.ticker.add(this._tick)\n  }\n\n  override updated(changed: Map<string, unknown>) {\n    if (changed.has(\"items\")) {\n      this._cachedItems = JSON.parse(this.items)\n    }\n  }\n\n  replay() {\n    this._ox = 0\n    this._oy = 0\n    this._vx = 0\n    this._vy = 0\n    this._displayOx = 0\n    this._displayOy = 0\n    this.requestUpdate()\n  }\n\n  // ── Tick ─────────────────────────────────────────────────────────────\n  private _tick = (_time: number, deltaMs: number) => {\n    if (this._dragging) return\n\n    const deltaFrames = Math.max(deltaMs / 16.6667, 0.0001)\n    const fr = Math.pow(this.friction * 0.95, deltaFrames)\n    this._vx *= fr\n    this._vy *= fr\n    if (Math.abs(this._vx) < 0.01) this._vx = 0\n    if (Math.abs(this._vy) < 0.01) this._vy = 0\n\n    const ex = this._edgeInfluence(this._mx, this._vpW, this.edgeThreshold)\n    const ey = this._edgeInfluence(this._my, this._vpH, this.edgeThreshold)\n    const evtX = ex * this.edgeScrollSpeed * EDGE_VELOCITY_MULTIPLIER\n    const evtY = ey * this.edgeScrollSpeed * EDGE_VELOCITY_MULTIPLIER\n    this._evx = this._damp(this._evx, evtX, EDGE_RESPONSE, deltaFrames)\n    this._evy = this._damp(this._evy, evtY, EDGE_RESPONSE, deltaFrames)\n\n    const vx = this._clamp(this._vx + this._evx, -MAX_VELOCITY, MAX_VELOCITY)\n    const vy = this._clamp(this._vy + this._evy, -MAX_VELOCITY, MAX_VELOCITY)\n\n    if (vx !== 0 || vy !== 0) {\n      this._ox += vx * deltaFrames\n      this._oy += vy * deltaFrames\n      this._displayOx = this._ox\n      this._displayOy = this._oy\n      this.requestUpdate()\n    }\n  }\n\n  // ── Pointer handlers ─────────────────────────────────────────────────\n  private _onPointerDown = (e: PointerEvent) => {\n    if (e.button !== 0 && e.pointerType !== \"touch\") return\n    this._dragging = true\n    this._isDragging = true\n    this._pointerId = e.pointerId\n    this._vx = 0\n    this._vy = 0\n    this._evx = 0\n    this._evy = 0\n    this._lp = { x: e.clientX, y: e.clientY }\n    this._lpt = Date.now()\n    this._setMouse(e.clientX, e.clientY)\n    try {\n      (this as HTMLElement).setPointerCapture(e.pointerId)\n    } catch {\n      // capture may fail for some pointer types\n    }\n    this.requestUpdate()\n  }\n\n  private _onPointerMove = (e: PointerEvent) => {\n    this._setMouse(e.clientX, e.clientY)\n    if (!this._dragging || this._pointerId !== e.pointerId) return\n\n    const now = Date.now()\n    const dt = Math.max(now - this._lpt, MIN_POINTER_DT)\n    const dx = e.clientX - this._lp.x\n    const dy = e.clientY - this._lp.y\n\n    this._ox += dx\n    this._oy += dy\n    const pvx = dx * (16 / dt)\n    const pvy = dy * (16 / dt)\n    this._vx =\n      this._vx * DRAG_VELOCITY_BLEND + pvx * (1 - DRAG_VELOCITY_BLEND)\n    this._vy =\n      this._vy * DRAG_VELOCITY_BLEND + pvy * (1 - DRAG_VELOCITY_BLEND)\n    this._vx = this._clamp(this._vx, -MAX_VELOCITY, MAX_VELOCITY)\n    this._vy = this._clamp(this._vy, -MAX_VELOCITY, MAX_VELOCITY)\n    this._lp = { x: e.clientX, y: e.clientY }\n    this._lpt = now\n    this._displayOx = this._ox\n    this._displayOy = this._oy\n    this.requestUpdate()\n  }\n\n  private _onPointerEnd = (e: PointerEvent) => {\n    if (this._pointerId !== e.pointerId) return\n    this._dragging = false\n    this._isDragging = false\n    try {\n      if ((this as HTMLElement).hasPointerCapture(e.pointerId)) {\n        (this as HTMLElement).releasePointerCapture(e.pointerId)\n      }\n    } catch {\n      // ignore\n    }\n    this._pointerId = null\n    this.requestUpdate()\n  }\n\n  private _onPointerLeave = () => {\n    if (!this._dragging) {\n      this._mx = 0\n      this._my = 0\n    }\n  }\n\n  private _onWheel = (e: WheelEvent) => {\n    e.preventDefault()\n    const scale =\n      e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? this._vpH || 800 : 1\n    const dx = this._clamp(e.deltaX * scale, -WHEEL_DELTA_LIMIT, WHEEL_DELTA_LIMIT)\n    const dy = this._clamp(e.deltaY * scale, -WHEEL_DELTA_LIMIT, WHEEL_DELTA_LIMIT)\n    this._vx -= dx * this.wheelSpeed * WHEEL_IMPULSE\n    this._vy -= dy * this.wheelSpeed * WHEEL_IMPULSE\n    this._vx = this._clamp(this._vx, -MAX_VELOCITY, MAX_VELOCITY)\n    this._vy = this._clamp(this._vy, -MAX_VELOCITY, MAX_VELOCITY)\n  }\n\n  // ── Helpers ───────────────────────────────────────────────────────────\n  private _setMouse(cx: number, cy: number) {\n    const rect = (this as HTMLElement).getBoundingClientRect()\n    this._mx = cx - rect.left\n    this._my = cy - rect.top\n  }\n\n  private _clamp(v: number, lo: number, hi: number) {\n    return Math.max(lo, Math.min(hi, v))\n  }\n\n  private _damp(cur: number, tgt: number, s: number, df: number) {\n    return cur + (tgt - cur) * (1 - Math.pow(1 - s, df))\n  }\n\n  private _edgeInfluence(pos: number, size: number, threshold: number) {\n    if (pos <= 0 || size <= 0 || threshold <= 0) return 0\n    if (pos < threshold) return 1 - pos / threshold\n    if (pos > size - threshold) return -1 + (size - pos) / threshold\n    return 0\n  }\n\n  private _mod(v: number, d: number) {\n    return ((v % d) + d) % d\n  }\n\n  // ── Render ────────────────────────────────────────────────────────────\n  private _visibleCells(): Cell[] {\n    const items = this._cachedItems\n    if (!items.length || this._vpW === 0) return []\n\n    const cw = this.cellWidth + this.gap\n    const ch = this.cellHeight + this.gap\n    const ox = this._displayOx\n    const oy = this._displayOy\n\n    const startX = Math.floor(-ox / cw) - 1\n    const endX = Math.ceil((this._vpW - ox) / cw) + 1\n    const startY = Math.floor(-oy / ch) - 1\n    const endY = Math.ceil((this._vpH - oy) / ch) + 1\n\n    const cells: Cell[] = []\n    for (let i = startX; i <= endX; i++) {\n      for (let j = startY; j <= endY; j++) {\n        const idx = this._mod(i + j * 7, items.length)\n        cells.push({\n          id: `${i}-${j}`,\n          item: items[idx],\n          posX: i * cw + ox,\n          posY: j * ch + oy,\n        })\n      }\n    }\n    return cells\n  }\n\n  override render() {\n    const cells = this._visibleCells()\n    const cw = this.cellWidth\n    const ch = this.cellHeight\n    const cursor = this._isDragging ? \"grabbing\" : \"grab\"\n\n    return html`\n      <div class=\"bg\" style=\"cursor:${cursor};pointer-events:none;\"></div>\n      ${repeat(\n        cells,\n        (c) => c.id,\n        (c) => {\n          const item = c.item\n          return html`\n            <div\n              class=\"cell\"\n              style=\"width:${cw}px;height:${ch}px;transform:translate3d(${c.posX}px,${c.posY}px,0);\"\n            >\n              ${item.type === \"image\"\n                ? html`<img src=\"${item.src}\" alt=\"${(item as any).alt ?? \"\"}\" />`\n                : html`<video src=\"${item.src}\" autoplay muted loop playsinline></video>`}\n            </div>\n          `\n        },\n      )}\n    `\n  }\n}\n\ndeclare global {\n  interface HTMLElementTagNameMap {\n    \"motion-infinite-physics-gallery\": MotionInfinitePhysicsGallery\n  }\n}\n"
+    }
+  ],
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/infinite-physics-gallery-element.ts\";\n---\n\n<motion-infinite-physics-gallery\n  items='[{\"type\":\"image\",\"src\":\"/1.jpg\"},{\"type\":\"image\",\"src\":\"/2.jpg\"}]'\n  cell-width=\"320\"\n  cell-height=\"400\"\n  class=\"h-[480px] w-full rounded-2xl overflow-hidden\"\n></motion-infinite-physics-gallery>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/infinite-physics-gallery-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-infinite-physics-gallery\n      items='[{\"type\":\"image\",\"src\":\"/1.jpg\"},{\"type\":\"image\",\"src\":\"/2.jpg\"}]'\n      cell-width=\"320\"\n      cell-height=\"400\"\n      class=\"h-[480px] w-full rounded-2xl overflow-hidden\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/infinite-physics-gallery-element.ts\";\n</script>\n\n<template>\n  <motion-infinite-physics-gallery\n    :items='JSON.stringify([{\"type\":\"image\",\"src\":\"/1.jpg\"},{\"type\":\"image\",\"src\":\"/2.jpg\"}])'\n    cell-width=\"320\"\n    cell-height=\"400\"\n    class=\"h-[480px] w-full rounded-2xl overflow-hidden\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/infinite-physics-gallery-element.ts\";\n</script>\n\n<motion-infinite-physics-gallery\n  items='[{\"type\":\"image\",\"src\":\"/1.jpg\"},{\"type\":\"image\",\"src\":\"/2.jpg\"}]'\n  cell-width=\"320\"\n  cell-height=\"400\"\n  class=\"h-[480px] w-full rounded-2xl overflow-hidden\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/infinite-physics-gallery-element.js\"></script>\n\n<motion-infinite-physics-gallery\n  items='[{\"type\":\"image\",\"src\":\"/1.jpg\"},{\"type\":\"image\",\"src\":\"/2.jpg\"}]'\n  cell-width=\"320\"\n  cell-height=\"400\"\n  class=\"h-[480px] w-full rounded-2xl overflow-hidden\"\n></motion-infinite-physics-gallery>"
+    }
+  ],
+  "props": [
+    {
+      "name": "items",
+      "type": "string",
+      "default": "\"[]\"",
+      "description": "JSON array of media items: [{type:\"image|video\",src:\"...\",alt:\"...\"}]."
+    },
+    {
+      "name": "cell-width",
+      "type": "number",
+      "default": "320",
+      "description": "Cell width in pixels."
+    },
+    {
+      "name": "cell-height",
+      "type": "number",
+      "default": "400",
+      "description": "Cell height in pixels."
+    },
+    {
+      "name": "gap",
+      "type": "number",
+      "default": "24",
+      "description": "Gap between cells in pixels."
+    },
+    {
+      "name": "friction",
+      "type": "number",
+      "default": "0.95",
+      "description": "Base inertia friction (0–1)."
+    },
+    {
+      "name": "wheel-speed",
+      "type": "number",
+      "default": "2",
+      "description": "Wheel speed multiplier."
+    },
+    {
+      "name": "edge-threshold",
+      "type": "number",
+      "default": "100",
+      "description": "Edge auto-scroll threshold in pixels."
+    },
+    {
+      "name": "edge-scroll-speed",
+      "type": "number",
+      "default": "2",
+      "description": "Edge auto-scroll speed."
     }
   ]
 }

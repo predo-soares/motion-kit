@@ -1,0 +1,48 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  description: string;
+  align?: "start" | "center";
+}
+
+const { href, title, description, align = "start" } = Astro.props;
+const isCenter = align === "center";
+---
+
+<a
+  href={href}
+  data-audio-hover="hover"
+  data-audio-click="select"
+  class:list={[
+    "group flex rounded-3xl border border-slate-50 bg-slate-50 p-5 text-sm transition-colors  hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300",
+    isCenter
+      ? "min-h-32 flex-col items-center justify-center gap-2 text-center"
+      : "flex-col items-start gap-1",
+  ]}
+>
+  {
+    Astro.slots.has("icon") ? (
+      <div
+        class={
+          isCenter
+            ? "mb-1 flex size-8 items-center justify-center"
+            : "mb-2 flex size-8 items-center justify-center"
+        }
+      >
+        <slot name="icon" />
+      </div>
+    ) : null
+  }
+  <span class:list={["font-semibold text-slate-900", isCenter && "mt-1"]}>
+    {title}
+  </span>
+  <span
+    class:list={[
+      "text-slate-600",
+      isCenter ? "text-xs leading-5" : "leading-relaxed",
+    ]}
+  >
+    {description}
+  </span>
+</a>

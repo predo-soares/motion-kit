@@ -16,6 +16,12 @@ import ComponentCard from "@/components/ui/component-card.astro";
     ></motion-glass-logo>
   </div>
   <div slot="controls" class="mk-controls">
+    <mk-file-input
+      label="SVG"
+      accept=".svg"
+      data-target="motion-glass-logo"
+      data-attr="svg-source"
+    ></mk-file-input>
     <mk-slider
       label="Speed"
       min="0"

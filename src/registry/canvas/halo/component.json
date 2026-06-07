@@ -7,7 +7,7 @@
   "dependencies": ["lit", "ogl"],
   "files": [
     {
-      "path": "src/registry/new-york/blocks/halo/halo-element.ts",
+      "path": "src/registry/canvas/halo/halo-element.ts",
       "type": "registry:component",
       "target": "src/components/motion-kit/halo-element.ts"
     }

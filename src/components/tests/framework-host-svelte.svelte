@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { mountComponentTestSpec } from "@/lib/component-test-dom";
-  import type { ComponentTestRenderSpec } from "@/lib/component-test-spec";
+  import { mountComponentTestSpec } from "@/lib/testing/dom";
+  import type { ComponentTestRenderSpec } from "@/lib/testing/spec";
 
   export let spec: ComponentTestRenderSpec;
 

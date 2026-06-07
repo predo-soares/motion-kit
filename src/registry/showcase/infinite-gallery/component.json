@@ -7,7 +7,7 @@
   "dependencies": ["lit", "ogl"],
   "files": [
     {
-      "path": "src/registry/new-york/blocks/infinite-gallery/infinite-gallery-element.ts",
+      "path": "src/registry/showcase/infinite-gallery/infinite-gallery-element.ts",
       "type": "registry:component",
       "target": "src/components/motion-kit/infinite-gallery-element.ts"
     }

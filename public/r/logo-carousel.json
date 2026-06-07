@@ -1,6 +1,7 @@
 {
-  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "$schema": "http://localhost:4321/schema/registry-item.json",
   "name": "logo-carousel",
+  "type": "registry:component",
   "title": "Logo Carousel",
   "description": "Grid of logos that cycles through items with a blurred vertical swap animation. Framework-agnostic Custom Element.",
   "dependencies": [
@@ -10,10 +11,51 @@
   "files": [
     {
       "path": "src/registry/showcase/logo-carousel/logo-carousel-element.ts",
-      "content": "import { LitElement, html, css } from \"lit\"\nimport { customElement, property } from \"lit/decorators.js\"\nimport { gsap } from \"gsap\"\n\ninterface LogoItem {\n  src: string\n  alt?: string\n  name?: string\n}\n\n/**\n * Cycling logo carousel distributed across columns. Logos blur and slide\n * between items at a configurable interval, with a staggered offset per column.\n *\n * @example\n * <motion-logo-carousel\n *   logos='[{\"src\":\"/logos/a.svg\",\"alt\":\"A\"},{\"src\":\"/logos/b.svg\",\"alt\":\"B\"}]'\n *   columns=\"3\"\n *   cycle-interval=\"2000\"\n * ></motion-logo-carousel>\n */\n@customElement(\"motion-logo-carousel\")\nexport class MotionLogoCarousel extends LitElement {\n  static override styles = css`\n    :host {\n      display: flex;\n      gap: 1rem;\n    }\n    .col {\n      position: relative;\n      width: 6rem;\n      height: 3.5rem;\n      overflow: hidden;\n    }\n    @media (min-width: 768px) {\n      .col {\n        width: 12rem;\n        height: 6rem;\n      }\n    }\n    .slot {\n      position: absolute;\n      inset: 0;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n    }\n    .slot img {\n      max-height: 70%;\n      max-width: 70%;\n      height: auto;\n      width: auto;\n      object-fit: contain;\n      display: block;\n    }\n  `\n\n  /** JSON array of logo objects: `[{\"src\":\"...\",\"alt\":\"...\",\"name\":\"...\"}]` */\n  @property({ type: String }) logos = \"[]\"\n\n  /** Number of columns to distribute logos into. */\n  @property({ type: Number }) columns = 2\n\n  /** Milliseconds between logo cycles. */\n  @property({ type: Number, attribute: \"cycle-interval\" }) cycleInterval = 2000\n\n  private _colData: { logos: LogoItem[]; idx: number }[] = []\n  private _colEls: HTMLDivElement[] = []\n  private _timers: ReturnType<typeof setTimeout>[] = []\n\n  override render() {\n    return html`\n      ${Array.from({ length: this.columns }, (_, i) => html`\n        <div class=\"col\" data-col=\"${i}\"></div>\n      `)}\n    `\n  }\n\n  override firstUpdated() {\n    this._build()\n  }\n\n  override disconnectedCallback() {\n    super.disconnectedCallback()\n    this._timers.forEach(clearTimeout)\n    this._timers = []\n  }\n\n  replay() {\n    this._timers.forEach(clearTimeout)\n    this._timers = []\n    this._build()\n  }\n\n  private _build() {\n    const all: LogoItem[] = JSON.parse(this.logos)\n    if (!all.length) return\n\n    const shuffled = [...all].sort(() => Math.random() - 0.5)\n    const cols = Math.max(1, this.columns)\n    const distributed: LogoItem[][] = Array.from({ length: cols }, () => [])\n    shuffled.forEach((logo, i) => distributed[i % cols].push(logo))\n    const maxLen = Math.max(...distributed.map((c) => c.length))\n    distributed.forEach((col) => {\n      while (col.length < maxLen) {\n        col.push(shuffled[Math.floor(Math.random() * shuffled.length)])\n      }\n    })\n\n    this._colData = distributed.map((logos) => ({ logos, idx: 0 }))\n    this._colEls = Array.from(\n      this.shadowRoot!.querySelectorAll<HTMLDivElement>(\".col\"),\n    )\n\n    this._colEls.forEach((colEl, i) => {\n      const col = this._colData[i]\n      if (!col?.logos[0]) return\n\n      const slot = document.createElement(\"div\")\n      slot.className = \"slot\"\n      const img = document.createElement(\"img\")\n      img.src = col.logos[0].src\n      img.alt = col.logos[0].alt ?? \"\"\n      img.draggable = false\n      slot.appendChild(img)\n      colEl.innerHTML = \"\"\n      colEl.appendChild(slot)\n\n      this._timers[i] = setTimeout(\n        () => this._cycle(i),\n        this.cycleInterval + i * 200,\n      )\n    })\n  }\n\n  private _cycle(colIdx: number) {\n    const col = this._colData[colIdx]\n    const colEl = this._colEls[colIdx]\n    if (!col || !colEl) return\n\n    const img = colEl.querySelector<HTMLImageElement>(\"img\")\n    if (!img) return\n\n    gsap.to(img, {\n      yPercent: -20,\n      opacity: 0,\n      filter: \"blur(6px)\",\n      duration: 0.3,\n      ease: \"power2.in\",\n      onComplete: () => {\n        col.idx = (col.idx + 1) % col.logos.length\n        const next = col.logos[col.idx]\n        img.src = next.src\n        img.alt = next.alt ?? \"\"\n        gsap.fromTo(\n          img,\n          { yPercent: 10, opacity: 0, filter: \"blur(8px)\" },\n          {\n            yPercent: 0,\n            opacity: 1,\n            filter: \"blur(0px)\",\n            duration: 0.5,\n            delay: 0.35,\n            ease: \"back.out(1.2)\",\n            clearProps: \"yPercent,filter\",\n          },\n        )\n      },\n    })\n\n    this._timers[colIdx] = setTimeout(\n      () => this._cycle(colIdx),\n      this.cycleInterval,\n    )\n  }\n}\n\ndeclare global {\n  interface HTMLElementTagNameMap {\n    \"motion-logo-carousel\": MotionLogoCarousel\n  }\n}\n",
       "type": "registry:component",
-      "target": "src/components/motion-kit/logo-carousel-element.ts"
+      "target": "src/components/motion-kit/logo-carousel-element.ts",
+      "content": "import { LitElement, html, css } from \"lit\"\nimport { customElement, property } from \"lit/decorators.js\"\nimport { gsap } from \"gsap\"\n\ninterface LogoItem {\n  src: string\n  alt?: string\n  name?: string\n}\n\n/**\n * Cycling logo carousel distributed across columns. Logos blur and slide\n * between items at a configurable interval, with a staggered offset per column.\n *\n * @example\n * <motion-logo-carousel\n *   logos='[{\"src\":\"/logos/a.svg\",\"alt\":\"A\"},{\"src\":\"/logos/b.svg\",\"alt\":\"B\"}]'\n *   columns=\"3\"\n *   cycle-interval=\"2000\"\n * ></motion-logo-carousel>\n */\n@customElement(\"motion-logo-carousel\")\nexport class MotionLogoCarousel extends LitElement {\n  static override styles = css`\n    :host {\n      display: flex;\n      gap: 1rem;\n    }\n    .col {\n      position: relative;\n      width: 6rem;\n      height: 3.5rem;\n      overflow: hidden;\n    }\n    @media (min-width: 768px) {\n      .col {\n        width: 12rem;\n        height: 6rem;\n      }\n    }\n    .slot {\n      position: absolute;\n      inset: 0;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n    }\n    .slot img {\n      max-height: 70%;\n      max-width: 70%;\n      height: auto;\n      width: auto;\n      object-fit: contain;\n      display: block;\n    }\n  `\n\n  /** JSON array of logo objects: `[{\"src\":\"...\",\"alt\":\"...\",\"name\":\"...\"}]` */\n  @property({ type: String }) logos = \"[]\"\n\n  /** Number of columns to distribute logos into. */\n  @property({ type: Number }) columns = 2\n\n  /** Milliseconds between logo cycles. */\n  @property({ type: Number, attribute: \"cycle-interval\" }) cycleInterval = 2000\n\n  private _colData: { logos: LogoItem[]; idx: number }[] = []\n  private _colEls: HTMLDivElement[] = []\n  private _timers: ReturnType<typeof setTimeout>[] = []\n\n  override render() {\n    return html`\n      ${Array.from({ length: this.columns }, (_, i) => html`\n        <div class=\"col\" data-col=\"${i}\"></div>\n      `)}\n    `\n  }\n\n  override firstUpdated() {\n    this._build()\n  }\n\n  override disconnectedCallback() {\n    super.disconnectedCallback()\n    this._timers.forEach(clearTimeout)\n    this._timers = []\n  }\n\n  replay() {\n    this._timers.forEach(clearTimeout)\n    this._timers = []\n    this._build()\n  }\n\n  private _build() {\n    const all: LogoItem[] = JSON.parse(this.logos)\n    if (!all.length) return\n\n    const shuffled = [...all].sort(() => Math.random() - 0.5)\n    const cols = Math.max(1, this.columns)\n    const distributed: LogoItem[][] = Array.from({ length: cols }, () => [])\n    shuffled.forEach((logo, i) => distributed[i % cols].push(logo))\n    const maxLen = Math.max(...distributed.map((c) => c.length))\n    distributed.forEach((col) => {\n      while (col.length < maxLen) {\n        col.push(shuffled[Math.floor(Math.random() * shuffled.length)])\n      }\n    })\n\n    this._colData = distributed.map((logos) => ({ logos, idx: 0 }))\n    this._colEls = Array.from(\n      this.shadowRoot!.querySelectorAll<HTMLDivElement>(\".col\"),\n    )\n\n    this._colEls.forEach((colEl, i) => {\n      const col = this._colData[i]\n      if (!col?.logos[0]) return\n\n      const slot = document.createElement(\"div\")\n      slot.className = \"slot\"\n      const img = document.createElement(\"img\")\n      img.src = col.logos[0].src\n      img.alt = col.logos[0].alt ?? \"\"\n      img.draggable = false\n      slot.appendChild(img)\n      colEl.innerHTML = \"\"\n      colEl.appendChild(slot)\n\n      this._timers[i] = setTimeout(\n        () => this._cycle(i),\n        this.cycleInterval + i * 200,\n      )\n    })\n  }\n\n  private _cycle(colIdx: number) {\n    const col = this._colData[colIdx]\n    const colEl = this._colEls[colIdx]\n    if (!col || !colEl) return\n\n    const img = colEl.querySelector<HTMLImageElement>(\"img\")\n    if (!img) return\n\n    gsap.to(img, {\n      yPercent: -20,\n      opacity: 0,\n      filter: \"blur(6px)\",\n      duration: 0.3,\n      ease: \"power2.in\",\n      onComplete: () => {\n        col.idx = (col.idx + 1) % col.logos.length\n        const next = col.logos[col.idx]\n        img.src = next.src\n        img.alt = next.alt ?? \"\"\n        gsap.fromTo(\n          img,\n          { yPercent: 10, opacity: 0, filter: \"blur(8px)\" },\n          {\n            yPercent: 0,\n            opacity: 1,\n            filter: \"blur(0px)\",\n            duration: 0.5,\n            delay: 0.35,\n            ease: \"back.out(1.2)\",\n            clearProps: \"yPercent,filter\",\n          },\n        )\n      },\n    })\n\n    this._timers[colIdx] = setTimeout(\n      () => this._cycle(colIdx),\n      this.cycleInterval,\n    )\n  }\n}\n\ndeclare global {\n  interface HTMLElementTagNameMap {\n    \"motion-logo-carousel\": MotionLogoCarousel\n  }\n}\n"
     }
   ],
-  "type": "registry:component"
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/logo-carousel-element.ts\";\n---\n\n<motion-logo-carousel\n  logos='[{\"src\":\"/logos/a.svg\",\"alt\":\"A\"},{\"src\":\"/logos/b.svg\",\"alt\":\"B\"}]'\n  columns=\"3\"\n  cycle-interval=\"2000\"\n></motion-logo-carousel>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/logo-carousel-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-logo-carousel\n      logos='[{\"src\":\"/logos/a.svg\",\"alt\":\"A\"},{\"src\":\"/logos/b.svg\",\"alt\":\"B\"}]'\n      columns=\"3\"\n      cycle-interval=\"2000\"\n    />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/logo-carousel-element.ts\";\n</script>\n\n<template>\n  <motion-logo-carousel\n    :logos='JSON.stringify([{\"src\":\"/logos/a.svg\",\"alt\":\"A\"},{\"src\":\"/logos/b.svg\",\"alt\":\"B\"}])'\n    columns=\"3\"\n    cycle-interval=\"2000\"\n  />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/logo-carousel-element.ts\";\n</script>\n\n<motion-logo-carousel\n  logos='[{\"src\":\"/logos/a.svg\",\"alt\":\"A\"},{\"src\":\"/logos/b.svg\",\"alt\":\"B\"}]'\n  columns=\"3\"\n  cycle-interval=\"2000\"\n/>"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/logo-carousel-element.js\"></script>\n\n<motion-logo-carousel\n  logos='[{\"src\":\"/logos/a.svg\",\"alt\":\"A\"},{\"src\":\"/logos/b.svg\",\"alt\":\"B\"}]'\n  columns=\"3\"\n  cycle-interval=\"2000\"\n></motion-logo-carousel>"
+    }
+  ],
+  "props": [
+    {
+      "name": "logos",
+      "type": "string",
+      "default": "\"[]\"",
+      "description": "JSON array of logo objects with src, alt, and name properties."
+    },
+    {
+      "name": "columns",
+      "type": "number",
+      "default": "2",
+      "description": "Number of columns to distribute logos into."
+    },
+    {
+      "name": "cycle-interval",
+      "type": "number",
+      "default": "2000",
+      "description": "Milliseconds between logo cycles."
+    }
+  ]
 }

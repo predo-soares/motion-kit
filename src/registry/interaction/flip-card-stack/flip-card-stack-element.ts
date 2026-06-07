@@ -22,6 +22,8 @@ class MotionFlipCardStack extends HTMLElement {
   private _observer?: MutationObserver
   private _handlers = new WeakMap<HTMLElement, PointerHandlers>()
 
+  static observedAttributes = ["stack-offset", "stack-rotation", "drag-threshold", "duration", "ease"]
+
   connectedCallback() {
     this.style.display ||= "inline-grid"
     this.style.position ||= "relative"
@@ -37,6 +39,11 @@ class MotionFlipCardStack extends HTMLElement {
       this._syncCards()
       this._layout(true)
     })
+  }
+
+  attributeChangedCallback(name: string, _oldValue: string | null, _newValue: string | null) {
+    // Re-layout when any observed attribute changes
+    this._layout(false)
   }
 
   disconnectedCallback() {

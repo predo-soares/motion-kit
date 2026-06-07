@@ -7,7 +7,7 @@
   "dependencies": ["lit", "ogl"],
   "files": [
     {
-      "path": "src/registry/new-york/blocks/god-rays/god-rays-element.ts",
+      "path": "src/registry/canvas/god-rays/god-rays-element.ts",
       "type": "registry:component",
       "target": "src/components/motion-kit/god-rays-element.ts"
     }

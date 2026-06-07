@@ -1,115 +1,97 @@
 ---
 import SiteLayout from "@/layouts/site-layout.astro";
-import {
-  componentGroups,
-  firstComponent,
-} from "@/lib/component-catalog";
-import {
-  formatChangelogDate,
-  getLatestChangelogEntry,
-} from "@/lib/changelog";
-
-const latestChangelogEntry = await getLatestChangelogEntry();
 ---
 
 <SiteLayout title="Motion Kit — Astro Registry">
-  <div class="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-10 lg:px-6 lg:py-12">
-    <header class="flex flex-col gap-5">
-      <div class="flex flex-col gap-2">
-        <p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">
-          Motion Kit
-        </p>
-        <h1 class="text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
-          Astro component registry
-        </h1>
-      </div>
-      <p class="max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
-        A custom Astro registry for distributing animated web components via
-        shadcn. Browse the catalog by group, then open each component on its own
-        dedicated page.
+  <div
+    class="relative flex h-dvh flex-col items-center justify-center gap-9 overflow-hidden px-4 text-center"
+  >
+    <!-- Blue radial glow -->
+    <div
+      class="pointer-events-none absolute inset-0"
+      style="background:rgb(191 219 254 / 0.4)"
+    >
+    </div>
+
+    <!-- Edge gradient borders -->
+    <div
+      class="pointer-events-none absolute inset-0"
+      style="background: linear-gradient(to right, rgb(255 255 255 / 0.85) 0%, transparent 6%, transparent 94%, rgb(255 255 255 / 0.85) 100%)"
+    >
+    </div>
+    <div
+      class="pointer-events-none absolute inset-0"
+      style="background: linear-gradient(to bottom, rgb(255 255 255 / 0.85) 0%, transparent 70%, transparent 94%, rgb(255 255 255 / 0.85) 100%)"
+    >
+    </div>
+
+    <!-- Headline -->
+    <div data-animate class="opacity-0 flex flex-col items-center gap-5">
+      <h1
+        class="max-w-2xl text-5xl font-semibold tracking-tight text-slate-950 sm:text-6xl lg:text-[5rem] lg:leading-[1.08]"
+      >
+        Motion that drops<br />into <span class="text-blue-500">anything.</span>
+      </h1>
+      <p
+        class="max-w-md text-base leading-7 text-slate-500 sm:text-lg text-balance"
+      >
+        Animated web components installed in one command. No adapters, no
+        rewrites, no drama.
       </p>
-      <div class="flex flex-wrap items-center gap-3">
+    </div>
+
+    <!-- CTA buttons -->
+    <div
+      data-animate
+      class="opacity-0 flex flex-wrap items-center justify-center gap-3"
+    >
+      <motion-magnetic strength="0.4">
         <a
-          href={`/docs/components/${firstComponent.slug}`}
-          class="inline-flex items-center justify-center rounded-full bg-slate-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-slate-800"
+          href="/docs/components"
+          data-audio-hover="hover"
+          data-audio-click="select"
+          class="inline-flex items-center justify-center rounded-full bg-slate-900 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-slate-700"
         >
-          Open Component Browser
+          Browse Components
         </a>
+      </motion-magnetic>
+      <motion-magnetic strength="0.4">
         <a
-          href="/docs/changelog"
-          class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-slate-50 px-5 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:border-slate-300 hover:bg-white hover:text-slate-900"
+          href="/docs/introduction"
+          data-audio-hover="hover"
+          data-audio-click="select"
+          class="inline-flex items-center justify-center gap-1.5 rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-medium text-slate-700 shadow-sm transition-colors hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
         >
-          View Changelog
+          Getting Started
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M3 8h10M9 4l4 4-4 4"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
         </a>
-        <a
-          href="/r/registry.json"
-          class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:border-slate-300 hover:text-slate-900"
-        >
-          View Registry JSON
-        </a>
-      </div>
-    </header>
-
-    {
-      latestChangelogEntry ? (
-        <section class="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-[0_24px_80px_-48px_rgba(15,23,42,0.35)] sm:p-7">
-          <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-            <div class="max-w-2xl">
-              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
-                Latest Changelog
-              </p>
-              <h2 class="mt-2 text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl">
-                {latestChangelogEntry.data.title}
-              </h2>
-              <p class="mt-3 text-base leading-7 text-slate-600">
-                {latestChangelogEntry.data.description}
-              </p>
-            </div>
-            <a
-              href="/docs/changelog"
-              class="inline-flex items-center justify-center rounded-full bg-slate-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-slate-800"
-            >
-              Open Full Timeline
-            </a>
-          </div>
-
-          <p class="mt-6 text-sm text-slate-500">
-            {formatChangelogDate(latestChangelogEntry.data.date)}
-          </p>
-        </section>
-      ) : null
-    }
-
-    <main class="grid gap-6 lg:grid-cols-2">
-      {
-        componentGroups.map((group) => (
-          <section class="rounded-[2rem] border border-slate-200 bg-slate-50 p-6">
-            <header class="mb-5">
-              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
-                {group.name}
-              </p>
-            </header>
-
-            <ul class="flex flex-col gap-2">
-              {group.items.map((component) => (
-                <li>
-                  <a
-                    href={`/docs/components/${component.slug}`}
-                    class="block rounded-2xl border border-transparent px-4 py-3 transition-colors hover:border-slate-200 hover:bg-white"
-                  >
-                    <span class="block text-base font-medium tracking-tight text-slate-900">
-                      {component.title}
-                    </span>
-                    <span class="mt-1 block text-sm leading-6 text-slate-500">
-                      {component.summary}
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))
-      }
-    </main>
+      </motion-magnetic>
+    </div>
   </div>
 </SiteLayout>
+
+<script>
+  import { gsap } from "gsap";
+  import "@/registry/interaction/magnetic/magnetic-element";
+
+  gsap.to("[data-animate]", {
+    opacity: 1,
+    y: -24,
+    duration: 1.6,
+    ease: "elastic.out(1, 0.5)",
+    stagger: 0.18,
+  });
+</script>

@@ -9,12 +9,12 @@ import SiteLayout from "@/layouts/site-layout.astro";
 import {
   componentCatalog,
   type ComponentCatalogEntry,
-} from "@/lib/component-catalog";
+} from "@/lib/catalog";
 import {
   getComponentTestSpec,
   renderSpecToHtml,
   type ComponentTestPageSpec,
-} from "@/lib/component-test-spec";
+} from "@/lib/testing/spec";
 
 export function getStaticPaths() {
   return componentCatalog
@@ -58,6 +58,8 @@ const previewMarkup = renderSpecToHtml(testSpec.renderSpec);
             </h1>
             <a
               href={`/docs/components/${component.slug}`}
+              data-audio-hover="hover"
+              data-audio-click="tab-switch"
               class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-600 transition-colors hover:border-slate-300 hover:text-slate-950"
             >
               Back to component

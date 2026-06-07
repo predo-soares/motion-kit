@@ -7,12 +7,12 @@
   "dependencies": ["lit", "gsap"],
   "files": [
     {
-      "path": "src/registry/new-york/blocks/card-stack/card-stack-element.ts",
+      "path": "src/registry/interaction/card-stack/card-stack-element.ts",
       "type": "registry:component",
       "target": "src/components/motion-kit/card-stack-element.ts"
     },
     {
-      "path": "src/registry/new-york/blocks/card-stack/card-stack-item-element.ts",
+      "path": "src/registry/interaction/card-stack/card-stack-item-element.ts",
       "type": "registry:component",
       "target": "src/components/motion-kit/card-stack-item-element.ts"
     }

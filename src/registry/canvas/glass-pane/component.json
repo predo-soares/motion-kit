@@ -7,7 +7,7 @@
   "dependencies": ["lit", "ogl"],
   "files": [
     {
-      "path": "src/registry/new-york/blocks/glass-pane/glass-pane-element.ts",
+      "path": "src/registry/canvas/glass-pane/glass-pane-element.ts",
       "type": "registry:component",
       "target": "src/components/motion-kit/glass-pane-element.ts"
     }
