@@ -1,6 +1,7 @@
 {
-  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "$schema": "http://localhost:4321/schema/registry-item.json",
   "name": "text-repel",
+  "type": "registry:component",
   "title": "Text Repel",
   "description": "Splits text into words or characters that repel from the pointer. Framework-agnostic Custom Element.",
   "dependencies": [
@@ -10,10 +11,81 @@
   "files": [
     {
       "path": "src/registry/text/text-repel/text-repel-element.ts",
-      "content": "import { LitElement, html, css } from \"lit\"\nimport { customElement, property } from \"lit/decorators.js\"\nimport { gsap } from \"gsap\"\nimport { SplitText } from \"gsap/SplitText\"\n\ngsap.registerPlugin(SplitText)\n\ntype RepelItem = {\n  node: HTMLElement\n  centerX: number\n  centerY: number\n  xTo: gsap.QuickToFunc\n  yTo: gsap.QuickToFunc\n}\n\n/**\n * Splits text into words or characters and repels them from the pointer.\n *\n * @example\n * <motion-text-repel text=\"Hover over me\" mode=\"words\"></motion-text-repel>\n */\n@customElement(\"motion-text-repel\")\nexport class MotionTextRepel extends LitElement {\n  static override styles = css`\n    :host {\n      font: inherit;\n      color: inherit;\n      display: inline-block;\n    }\n    .content {\n      font: inherit;\n      color: inherit;\n      display: inline-block;\n    }\n  `\n\n  @property() text = \"\"\n  @property() mode: \"words\" | \"chars\" = \"words\"\n  @property({ type: Number }) strength = 18\n  @property({ type: Number }) radius = 160\n  @property({ type: Number, attribute: \"falloff-power\" }) falloffPower = 1.5\n  @property({ type: Number }) duration = 0.45\n  @property() ease = \"power3.out\"\n  /** CSS selector for an external hover target. Defaults to this element. */\n  @property({ attribute: \"hover-target\" }) hoverTarget = \"\"\n\n  private _split?: SplitText\n  private _items: RepelItem[] = []\n  private _ctx?: gsap.Context\n  private _resizeObserver?: ResizeObserver\n  private _target?: HTMLElement\n  private _cancelled = false\n\n  override firstUpdated() {\n    void this._init()\n  }\n\n  override updated(changed: Map<string, unknown>) {\n    if (changed.has(\"text\") || changed.has(\"mode\")) void this._init()\n  }\n\n  override disconnectedCallback() {\n    super.disconnectedCallback()\n    this._cleanup()\n  }\n\n  private _getContent() {\n    return this.renderRoot.querySelector<HTMLElement>(\".content\")\n  }\n\n  private _resolveTarget(): HTMLElement {\n    if (this.hoverTarget) {\n      return document.querySelector<HTMLElement>(this.hoverTarget) ?? this\n    }\n    return this\n  }\n\n  private _cleanup() {\n    this._cancelled = true\n    this._target?.removeEventListener(\"pointermove\", this._onPointerMove)\n    this._target?.removeEventListener(\"pointerenter\", this._measure)\n    this._target?.removeEventListener(\"pointerleave\", this._reset)\n    window.removeEventListener(\"scroll\", this._measure, true)\n    window.removeEventListener(\"resize\", this._measure)\n    this._resizeObserver?.disconnect()\n    this._ctx?.revert()\n    this._split?.revert()\n    this._split = undefined\n    this._items = []\n    this._ctx = undefined\n  }\n\n  replay() {\n    this._reset()\n  }\n\n  private _measure = () => {\n    this._items = this._items.map((item) => {\n      const rect = item.node.getBoundingClientRect()\n      return { ...item, centerX: rect.left + rect.width / 2, centerY: rect.top + rect.height / 2 }\n    })\n  }\n\n  private _reset = () => {\n    this._items.forEach(({ xTo, yTo }) => { xTo(0); yTo(0) })\n  }\n\n  private _onPointerMove = (e: PointerEvent) => {\n    if (!this._items.length) return\n    this._measure()\n    this._items.forEach(({ centerX, centerY, xTo, yTo }) => {\n      const dx = centerX - e.clientX\n      const dy = centerY - e.clientY\n      const dist = Math.hypot(dx, dy)\n\n      if (dist <= 0 || dist > this.radius) { xTo(0); yTo(0); return }\n\n      const influence = Math.pow(Math.max(0, 1 - dist / this.radius), this.falloffPower)\n      const d = this.strength * influence\n      xTo((dx / dist) * d)\n      yTo((dy / dist) * d)\n    })\n  }\n\n  private async _init() {\n    this._cleanup()\n    this._cancelled = false\n\n    const content = this._getContent()\n    if (!content) return\n\n    // Wait for fonts + two rAFs so layout is stable\n    await document.fonts.ready\n    await new Promise<void>((r) => requestAnimationFrame(() => r()))\n    await new Promise<void>((r) => requestAnimationFrame(() => r()))\n    if (this._cancelled) return\n\n    this._ctx = gsap.context(() => {\n      this._split = SplitText.create(content, {\n        type: \"words, chars\",\n        reduceWhiteSpace: false,\n        wordsClass: \"repel-word\",\n        charsClass: \"repel-char\",\n      })\n\n      const targets = (\n        this.mode === \"words\"\n          ? (this._split?.words ?? [])\n          : (this._split?.chars ?? [])\n      ) as HTMLElement[]\n\n      targets.forEach((node) => {\n        node.style.display = \"inline-block\"\n        node.style.willChange = \"transform\"\n        if (!node.textContent?.trim()) {\n          node.style.whiteSpace = \"pre\"\n          node.style.pointerEvents = \"none\"\n        }\n      })\n\n      this._items = targets.map((node) => {\n        const rect = node.getBoundingClientRect()\n        return {\n          node,\n          centerX: rect.left + rect.width / 2,\n          centerY: rect.top + rect.height / 2,\n          xTo: gsap.quickTo(node, \"x\", { duration: this.duration, ease: this.ease }),\n          yTo: gsap.quickTo(node, \"y\", { duration: this.duration, ease: this.ease }),\n        }\n      })\n    }, content)\n\n    this._resizeObserver = new ResizeObserver(this._measure)\n    this._resizeObserver.observe(content)\n\n    this._target = this._resolveTarget()\n    this._target.addEventListener(\"pointermove\", this._onPointerMove)\n    this._target.addEventListener(\"pointerenter\", this._measure)\n    this._target.addEventListener(\"pointerleave\", this._reset)\n    window.addEventListener(\"scroll\", this._measure, true)\n    window.addEventListener(\"resize\", this._measure)\n  }\n\n  override render() {\n    return html`<span class=\"content\">${this.text}</span>`\n  }\n}\n\ndeclare global {\n  interface HTMLElementTagNameMap {\n    \"motion-text-repel\": MotionTextRepel\n  }\n}\n",
       "type": "registry:component",
-      "target": "src/components/motion-kit/text-repel-element.ts"
+      "target": "src/components/motion-kit/text-repel-element.ts",
+      "content": "import { LitElement, html, css } from \"lit\"\nimport { customElement, property } from \"lit/decorators.js\"\nimport { gsap } from \"gsap\"\nimport { SplitText } from \"gsap/SplitText\"\n\ngsap.registerPlugin(SplitText)\n\ntype RepelItem = {\n  node: HTMLElement\n  centerX: number\n  centerY: number\n  xTo: gsap.QuickToFunc\n  yTo: gsap.QuickToFunc\n}\n\n/**\n * Splits text into words or characters and repels them from the pointer.\n *\n * @example\n * <motion-text-repel text=\"Hover over me\" mode=\"words\"></motion-text-repel>\n */\n@customElement(\"motion-text-repel\")\nexport class MotionTextRepel extends LitElement {\n  static override styles = css`\n    :host {\n      font: inherit;\n      color: inherit;\n      display: inline-block;\n    }\n    .content {\n      font: inherit;\n      color: inherit;\n      display: inline-block;\n    }\n  `\n\n  @property() text = \"\"\n  @property() mode: \"words\" | \"chars\" = \"words\"\n  @property({ type: Number }) strength = 18\n  @property({ type: Number }) radius = 160\n  @property({ type: Number, attribute: \"falloff-power\" }) falloffPower = 1.5\n  @property({ type: Number }) duration = 0.45\n  @property() ease = \"power3.out\"\n  /** CSS selector for an external hover target. Defaults to this element. */\n  @property({ attribute: \"hover-target\" }) hoverTarget = \"\"\n\n  private _split?: SplitText\n  private _items: RepelItem[] = []\n  private _ctx?: gsap.Context\n  private _resizeObserver?: ResizeObserver\n  private _target?: HTMLElement\n  private _cancelled = false\n\n  override firstUpdated() {\n    void this._init()\n  }\n\n  override updated(changed: Map<string, unknown>) {\n    if (changed.has(\"text\") || changed.has(\"mode\")) void this._init()\n  }\n\n  override disconnectedCallback() {\n    super.disconnectedCallback()\n    this._cleanup()\n  }\n\n  private _getContent() {\n    return this.renderRoot.querySelector<HTMLElement>(\".content\")\n  }\n\n  private _resolveTarget(): HTMLElement {\n    if (this.hoverTarget) {\n      return document.querySelector<HTMLElement>(this.hoverTarget) ?? this\n    }\n    return this\n  }\n\n  private _cleanup() {\n    this._cancelled = true\n    this._target?.removeEventListener(\"pointermove\", this._onPointerMove)\n    this._target?.removeEventListener(\"pointerenter\", this._measure)\n    this._target?.removeEventListener(\"pointerleave\", this._reset)\n    window.removeEventListener(\"scroll\", this._measure, true)\n    window.removeEventListener(\"resize\", this._measure)\n    this._resizeObserver?.disconnect()\n    this._ctx?.revert()\n    this._split?.revert()\n    this._split = undefined\n    this._items = []\n    this._ctx = undefined\n  }\n\n  replay() {\n    this._reset()\n  }\n\n  private _measure = () => {\n    this._items = this._items.map((item) => {\n      const rect = item.node.getBoundingClientRect()\n      return { ...item, centerX: rect.left + rect.width / 2, centerY: rect.top + rect.height / 2 }\n    })\n  }\n\n  private _reset = () => {\n    this._items.forEach(({ xTo, yTo }) => { xTo(0); yTo(0) })\n  }\n\n  private _onPointerMove = (e: PointerEvent) => {\n    if (!this._items.length) return\n    this._measure()\n    this._items.forEach(({ centerX, centerY, xTo, yTo }) => {\n      const dx = centerX - e.clientX\n      const dy = centerY - e.clientY\n      const dist = Math.hypot(dx, dy)\n\n      if (dist <= 0 || dist > this.radius) { xTo(0); yTo(0); return }\n\n      const influence = Math.pow(Math.max(0, 1 - dist / this.radius), this.falloffPower)\n      const d = this.strength * influence\n      xTo((dx / dist) * d)\n      yTo((dy / dist) * d)\n    })\n  }\n\n  private async _init() {\n    this._cleanup()\n    this._cancelled = false\n\n    const content = this._getContent()\n    if (!content) return\n\n    // Wait for fonts + two rAFs so layout is stable\n    await document.fonts.ready\n    await new Promise<void>((r) => requestAnimationFrame(() => r()))\n    await new Promise<void>((r) => requestAnimationFrame(() => r()))\n    if (this._cancelled) return\n\n    this._ctx = gsap.context(() => {\n      this._split = SplitText.create(content, {\n        type: \"words, chars\",\n        reduceWhiteSpace: false,\n        wordsClass: \"repel-word\",\n        charsClass: \"repel-char\",\n      })\n\n      const targets = (\n        this.mode === \"words\"\n          ? (this._split?.words ?? [])\n          : (this._split?.chars ?? [])\n      ) as HTMLElement[]\n\n      targets.forEach((node) => {\n        node.style.display = \"inline-block\"\n        node.style.willChange = \"transform\"\n        if (!node.textContent?.trim()) {\n          node.style.whiteSpace = \"pre\"\n          node.style.pointerEvents = \"none\"\n        }\n      })\n\n      this._items = targets.map((node) => {\n        const rect = node.getBoundingClientRect()\n        return {\n          node,\n          centerX: rect.left + rect.width / 2,\n          centerY: rect.top + rect.height / 2,\n          xTo: gsap.quickTo(node, \"x\", { duration: this.duration, ease: this.ease }),\n          yTo: gsap.quickTo(node, \"y\", { duration: this.duration, ease: this.ease }),\n        }\n      })\n    }, content)\n\n    this._resizeObserver = new ResizeObserver(this._measure)\n    this._resizeObserver.observe(content)\n\n    this._target = this._resolveTarget()\n    this._target.addEventListener(\"pointermove\", this._onPointerMove)\n    this._target.addEventListener(\"pointerenter\", this._measure)\n    this._target.addEventListener(\"pointerleave\", this._reset)\n    window.addEventListener(\"scroll\", this._measure, true)\n    window.addEventListener(\"resize\", this._measure)\n  }\n\n  override render() {\n    return html`<span class=\"content\">${this.text}</span>`\n  }\n}\n\ndeclare global {\n  interface HTMLElementTagNameMap {\n    \"motion-text-repel\": MotionTextRepel\n  }\n}\n"
     }
   ],
-  "type": "registry:component"
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/text-repel-element.ts\";\n---\n\n<motion-text-repel text=\"Hover over me\" mode=\"words\"></motion-text-repel>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/text-repel-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-text-repel text=\"Hover over me\" mode=\"words\" />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/text-repel-element.ts\";\n</script>\n\n<template>\n  <motion-text-repel text=\"Hover over me\" mode=\"words\" />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/text-repel-element.ts\";\n</script>\n\n<motion-text-repel text=\"Hover over me\" mode=\"words\" />"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/text-repel-element.js\"></script>\n\n<motion-text-repel text=\"Hover over me\" mode=\"words\"></motion-text-repel>"
+    }
+  ],
+  "props": [
+    {
+      "name": "text",
+      "type": "string",
+      "default": "\"\"",
+      "description": "The text content to display and animate."
+    },
+    {
+      "name": "mode",
+      "type": "\"words\" | \"chars\"",
+      "default": "\"words\"",
+      "description": "Whether to split by words or characters."
+    },
+    {
+      "name": "strength",
+      "type": "number",
+      "default": "18",
+      "description": "Maximum distance in pixels to repel text elements."
+    },
+    {
+      "name": "radius",
+      "type": "number",
+      "default": "160",
+      "description": "Radius around the cursor where repel effect is active."
+    },
+    {
+      "name": "falloff-power",
+      "type": "number",
+      "default": "1.5",
+      "description": "Power curve for falloff (higher = sharper falloff)."
+    },
+    {
+      "name": "duration",
+      "type": "number",
+      "default": "0.45",
+      "description": "Animation duration in seconds."
+    },
+    {
+      "name": "ease",
+      "type": "string",
+      "default": "\"power3.out\"",
+      "description": "easing function for the animation."
+    },
+    {
+      "name": "hover-target",
+      "type": "string",
+      "default": "\"\"",
+      "description": "CSS selector for an external hover target. Defaults to this element."
+    }
+  ]
 }

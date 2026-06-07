@@ -1,6 +1,7 @@
 {
-  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "$schema": "http://localhost:4321/schema/registry-item.json",
   "name": "text-scramble",
+  "type": "registry:component",
   "title": "Text Scramble",
   "description": "Scrambles characters on hover before settling back to the original text. Framework-agnostic Custom Element.",
   "dependencies": [
@@ -10,10 +11,69 @@
   "files": [
     {
       "path": "src/registry/text/text-scramble/text-scramble-element.ts",
-      "content": "import { LitElement, html, css } from \"lit\"\nimport { customElement, property } from \"lit/decorators.js\"\nimport { gsap } from \"gsap\"\nimport { SplitText } from \"gsap/SplitText\"\n\ngsap.registerPlugin(SplitText)\n\n/**\n * Scrambles characters on hover before settling back to the original text.\n *\n * @example\n * <motion-text-scramble text=\"Hello World\"></motion-text-scramble>\n *\n * <!-- External trigger (CSS selector resolved from document) -->\n * <button id=\"trigger\">Hover</button>\n * <motion-text-scramble text=\"SCRAMBLE\" hover-target=\"#trigger\"></motion-text-scramble>\n */\n@customElement(\"motion-text-scramble\")\nexport class MotionTextScramble extends LitElement {\n  static override styles = css`\n    :host {\n      font: inherit;\n      color: inherit;\n      display: inline-block;\n    }\n    .content {\n      font: inherit;\n      color: inherit;\n      display: inline-block;\n    }\n  `\n\n  @property() text = \"\"\n  /** CSS selector for an external element that triggers the effect. Defaults to this element. */\n  @property({ attribute: \"hover-target\" }) hoverTarget = \"\"\n  @property({ type: Number, attribute: \"scramble-duration\" }) scrambleDuration = 0.6\n  @property({ type: Number }) stagger = 0.03\n  @property({ type: Number }) cycles = 12\n  @property() characters = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*\"\n\n  private _split?: SplitText\n  private _timeline?: gsap.core.Timeline\n  private _ctx?: gsap.Context\n  private _target?: HTMLElement\n\n  override firstUpdated() {\n    this._setup()\n  }\n\n  override updated(changed: Map<string, unknown>) {\n    if (changed.has(\"text\")) this._setup()\n  }\n\n  override disconnectedCallback() {\n    super.disconnectedCallback()\n    this._cleanup()\n  }\n\n  private _getContent() {\n    return this.renderRoot.querySelector<HTMLElement>(\".content\")\n  }\n\n  private _resolveTarget(): HTMLElement {\n    if (this.hoverTarget) {\n      return document.querySelector<HTMLElement>(this.hoverTarget) ?? this\n    }\n    return this\n  }\n\n  private _cleanup() {\n    this._target?.removeEventListener(\"mouseenter\", this._onEnter)\n    this._target?.removeEventListener(\"mouseleave\", this._onLeave)\n    this._timeline?.kill()\n    this._ctx?.revert()\n    this._split?.revert()\n    this._split = undefined\n    this._timeline = undefined\n    this._ctx = undefined\n  }\n\n  private _getRandomChar() {\n    const pool = this.characters || \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\"\n    return pool[Math.floor(Math.random() * pool.length)] ?? \"\"\n  }\n\n  private _buildTimeline(chars: HTMLElement[]): gsap.core.Timeline | undefined {\n    if (!chars.length) return undefined\n\n    const tl = gsap.timeline({ paused: true })\n    const stepCount = Math.max(1, Math.floor(this.cycles))\n    const stepDuration = Math.max(0.1, this.scrambleDuration) / stepCount\n\n    chars.forEach((node, i) => {\n      const finalChar = node.dataset.originalChar ?? node.textContent ?? \"\"\n      const charTl = gsap.timeline()\n\n      if (!finalChar.trim()) {\n        charTl.call(() => { node.textContent = finalChar })\n      } else {\n        for (let s = 0; s < stepCount; s++) {\n          charTl.call(() => { node.textContent = this._getRandomChar() })\n          charTl.to({}, { duration: stepDuration })\n        }\n        charTl.call(() => { node.textContent = finalChar })\n      }\n\n      tl.add(charTl, i * this.stagger)\n    })\n\n    return tl\n  }\n\n  replay() {\n    this._timeline?.restart()\n  }\n\n  private _onEnter = () => {\n    if (!this._timeline) {\n      const content = this._getContent()\n      if (!content) return\n      const chars = (this._split?.chars ?? []) as HTMLElement[]\n      this._timeline = this._buildTimeline(chars)\n    }\n    this._timeline?.restart()\n  }\n\n  private _onLeave = () => {\n    this._timeline?.progress(1)\n  }\n\n  private _setup() {\n    this._cleanup()\n    const content = this._getContent()\n    if (!content) return\n\n    this._ctx = gsap.context(() => {\n      this._split = SplitText.create(content, {\n        type: \"chars\",\n        reduceWhiteSpace: false,\n        charsClass: \"inline-block\",\n      })\n\n      const chars = (this._split.chars ?? []) as HTMLElement[]\n      chars.forEach((node) => {\n        node.style.display = \"inline-block\"\n        node.dataset.originalChar = node.textContent ?? \"\"\n        if (!node.textContent?.trim()) {\n          node.style.whiteSpace = \"pre\"\n          node.style.pointerEvents = \"none\"\n        }\n      })\n\n      this._timeline = this._buildTimeline(chars)\n    }, content)\n\n    this._target = this._resolveTarget()\n    this._target.addEventListener(\"mouseenter\", this._onEnter)\n    this._target.addEventListener(\"mouseleave\", this._onLeave)\n  }\n\n  override render() {\n    return html`<span class=\"content\">${this.text}</span>`\n  }\n}\n\ndeclare global {\n  interface HTMLElementTagNameMap {\n    \"motion-text-scramble\": MotionTextScramble\n  }\n}\n",
       "type": "registry:component",
-      "target": "src/components/motion-kit/text-scramble-element.ts"
+      "target": "src/components/motion-kit/text-scramble-element.ts",
+      "content": "import { LitElement, html, css } from \"lit\"\nimport { customElement, property } from \"lit/decorators.js\"\nimport { gsap } from \"gsap\"\nimport { SplitText } from \"gsap/SplitText\"\n\ngsap.registerPlugin(SplitText)\n\n/**\n * Scrambles characters on hover before settling back to the original text.\n *\n * @example\n * <motion-text-scramble text=\"Hello World\"></motion-text-scramble>\n *\n * <!-- External trigger (CSS selector resolved from document) -->\n * <button id=\"trigger\">Hover</button>\n * <motion-text-scramble text=\"SCRAMBLE\" hover-target=\"#trigger\"></motion-text-scramble>\n */\n@customElement(\"motion-text-scramble\")\nexport class MotionTextScramble extends LitElement {\n  static override styles = css`\n    :host {\n      font: inherit;\n      color: inherit;\n      display: inline-block;\n    }\n    .content {\n      font: inherit;\n      color: inherit;\n      display: inline-block;\n    }\n  `\n\n  @property() text = \"\"\n  /** CSS selector for an external element that triggers the effect. Defaults to this element. */\n  @property({ attribute: \"hover-target\" }) hoverTarget = \"\"\n  @property({ type: Number, attribute: \"scramble-duration\" }) scrambleDuration = 0.6\n  @property({ type: Number }) stagger = 0.03\n  @property({ type: Number }) cycles = 12\n  @property() characters = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*\"\n\n  private _split?: SplitText\n  private _timeline?: gsap.core.Timeline\n  private _ctx?: gsap.Context\n  private _target?: HTMLElement\n\n  override firstUpdated() {\n    this._setup()\n  }\n\n  override updated(changed: Map<string, unknown>) {\n    if (changed.has(\"text\")) this._setup()\n  }\n\n  override disconnectedCallback() {\n    super.disconnectedCallback()\n    this._cleanup()\n  }\n\n  private _getContent() {\n    return this.renderRoot.querySelector<HTMLElement>(\".content\")\n  }\n\n  private _resolveTarget(): HTMLElement {\n    if (this.hoverTarget) {\n      return document.querySelector<HTMLElement>(this.hoverTarget) ?? this\n    }\n    return this\n  }\n\n  private _cleanup() {\n    this._target?.removeEventListener(\"mouseenter\", this._onEnter)\n    this._target?.removeEventListener(\"mouseleave\", this._onLeave)\n    this._timeline?.kill()\n    this._ctx?.revert()\n    this._split?.revert()\n    this._split = undefined\n    this._timeline = undefined\n    this._ctx = undefined\n  }\n\n  private _getRandomChar() {\n    const pool = this.characters || \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\"\n    return pool[Math.floor(Math.random() * pool.length)] ?? \"\"\n  }\n\n  private _buildTimeline(chars: HTMLElement[]): gsap.core.Timeline | undefined {\n    if (!chars.length) return undefined\n\n    const tl = gsap.timeline({ paused: true })\n    const stepCount = Math.max(1, Math.floor(this.cycles))\n    const stepDuration = Math.max(0.1, this.scrambleDuration) / stepCount\n\n    chars.forEach((node, i) => {\n      const finalChar = node.dataset.originalChar ?? node.textContent ?? \"\"\n      const charTl = gsap.timeline()\n\n      if (!finalChar.trim()) {\n        charTl.call(() => { node.textContent = finalChar })\n      } else {\n        for (let s = 0; s < stepCount; s++) {\n          charTl.call(() => { node.textContent = this._getRandomChar() })\n          charTl.to({}, { duration: stepDuration })\n        }\n        charTl.call(() => { node.textContent = finalChar })\n      }\n\n      tl.add(charTl, i * this.stagger)\n    })\n\n    return tl\n  }\n\n  replay() {\n    this._timeline?.restart()\n  }\n\n  private _onEnter = () => {\n    if (!this._timeline) {\n      const content = this._getContent()\n      if (!content) return\n      const chars = (this._split?.chars ?? []) as HTMLElement[]\n      this._timeline = this._buildTimeline(chars)\n    }\n    this._timeline?.restart()\n  }\n\n  private _onLeave = () => {\n    this._timeline?.progress(1)\n  }\n\n  private _setup() {\n    this._cleanup()\n    const content = this._getContent()\n    if (!content) return\n\n    this._ctx = gsap.context(() => {\n      this._split = SplitText.create(content, {\n        type: \"chars\",\n        reduceWhiteSpace: false,\n        charsClass: \"inline-block\",\n      })\n\n      const chars = (this._split.chars ?? []) as HTMLElement[]\n      chars.forEach((node) => {\n        node.style.display = \"inline-block\"\n        node.dataset.originalChar = node.textContent ?? \"\"\n        if (!node.textContent?.trim()) {\n          node.style.whiteSpace = \"pre\"\n          node.style.pointerEvents = \"none\"\n        }\n      })\n\n      this._timeline = this._buildTimeline(chars)\n    }, content)\n\n    this._target = this._resolveTarget()\n    this._target.addEventListener(\"mouseenter\", this._onEnter)\n    this._target.addEventListener(\"mouseleave\", this._onLeave)\n  }\n\n  override render() {\n    return html`<span class=\"content\">${this.text}</span>`\n  }\n}\n\ndeclare global {\n  interface HTMLElementTagNameMap {\n    \"motion-text-scramble\": MotionTextScramble\n  }\n}\n"
     }
   ],
-  "type": "registry:component"
+  "usage": [
+    {
+      "label": "Astro",
+      "code": "---\nimport \"@/components/motion-kit/text-scramble-element.ts\";\n---\n\n<motion-text-scramble text=\"Hello World\"></motion-text-scramble>"
+    },
+    {
+      "label": "React",
+      "code": "import \"@/components/motion-kit/text-scramble-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-text-scramble text=\"Hello World\" />\n  );\n}"
+    },
+    {
+      "label": "Vue",
+      "code": "<script setup>\nimport \"@/components/motion-kit/text-scramble-element.ts\";\n</script>\n\n<template>\n  <motion-text-scramble text=\"Hello World\" />\n</template>"
+    },
+    {
+      "label": "Svelte",
+      "code": "<script>\n  import \"@/components/motion-kit/text-scramble-element.ts\";\n</script>\n\n<motion-text-scramble text=\"Hello World\" />"
+    },
+    {
+      "label": "HTML",
+      "code": "<script type=\"module\" src=\"/components/motion-kit/text-scramble-element.js\"></script>\n\n<motion-text-scramble text=\"Hello World\"></motion-text-scramble>"
+    }
+  ],
+  "props": [
+    {
+      "name": "text",
+      "type": "string",
+      "default": "\"\"",
+      "description": "The text content to display and scramble."
+    },
+    {
+      "name": "hover-target",
+      "type": "string",
+      "default": "\"\"",
+      "description": "CSS selector for an external element that triggers the effect. Defaults to this element."
+    },
+    {
+      "name": "scramble-duration",
+      "type": "number",
+      "default": "0.6",
+      "description": "Duration of the scramble animation in seconds."
+    },
+    {
+      "name": "stagger",
+      "type": "number",
+      "default": "0.03",
+      "description": "Delay between each character's animation in seconds."
+    },
+    {
+      "name": "cycles",
+      "type": "number",
+      "default": "12",
+      "description": "Number of random character cycles before settling."
+    },
+    {
+      "name": "characters",
+      "type": "string",
+      "default": "\"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*\"",
+      "description": "Character pool to use for scrambling effect."
+    }
+  ]
 }

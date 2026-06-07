@@ -5,6 +5,7 @@
   "items": [
     {
       "name": "ascii-renderer",
+      "type": "registry:component",
       "title": "ASCII Renderer",
       "description": "OGL WebGL image rendered as animated ASCII dot-grid characters with scanline displacement.",
       "dependencies": [
@@ -17,11 +18,11 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/ascii-renderer-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "card-3d",
+      "type": "registry:component",
       "title": "Card 3D",
       "description": "OGL-powered 3D card with rounded corners and mouse-tracking parallax rotation.",
       "dependencies": [
@@ -34,11 +35,11 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/card-3d-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "dithered-image",
+      "type": "registry:component",
       "title": "Dithered Image",
       "description": "OGL WebGL dithered image renderer with Bayer, halftone and void-and-cluster threshold maps.",
       "dependencies": [
@@ -51,11 +52,11 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/dithered-image-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "fake-3d-image",
+      "type": "registry:component",
       "title": "Fake 3D Image",
       "description": "OGL depth-map parallax effect — move the cursor to shift the image by a grayscale depth map.",
       "dependencies": [
@@ -68,11 +69,11 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/fake-3d-image-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "fluid-image-reveal",
+      "type": "registry:component",
       "title": "Fluid Image Reveal",
       "description": "OGL fluid simulation used as a mask to reveal a second image beneath as you move the cursor.",
       "dependencies": [
@@ -85,11 +86,11 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/fluid-image-reveal-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "fluid-simulation",
+      "type": "registry:component",
       "title": "Fluid Simulation",
       "description": "OGL GPU fluid simulation — move the cursor to paint fluid. Animates autonomously while idle.",
       "dependencies": [
@@ -102,11 +103,11 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/fluid-simulation-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "glass-logo",
+      "type": "registry:component",
       "title": "Glass Logo",
       "description": "OGL WebGL2 glass lens over an animated procedural swirl — silhouette driven by an SVG SDF.",
       "dependencies": [
@@ -119,11 +120,11 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/glass-logo-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "glass-pane",
+      "type": "registry:component",
       "title": "Glass Pane",
       "description": "OGL animated glass panel strips with refraction, chromatic aberration and wave distortion over an image.",
       "dependencies": [
@@ -136,13 +137,13 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/glass-pane-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "glass-slideshow",
+      "type": "registry:component",
       "title": "Glass Slideshow",
-      "description": "An OGL-powered slideshow with liquid glass image transitions, chromatic fringing, and optional autoplay. Lit Custom Element.",
+      "description": "An OGL-powered slideshow with liquid glass image transitions, chromatic fringing, and optional autoplay.",
       "dependencies": [
         "lit",
         "gsap",
@@ -154,13 +155,13 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/glass-slideshow-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "glitter-cloth",
+      "type": "registry:component",
       "title": "Glitter Cloth",
-      "description": "An OGL shader surface with animated silk folds, glitter sparkle, and vignette depth shading. Lit Custom Element.",
+      "description": "An OGL shader surface with animated silk folds, glitter sparkle, and vignette depth shading.",
       "dependencies": [
         "lit",
         "ogl"
@@ -171,13 +172,13 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/glitter-cloth-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "globe",
+      "type": "registry:component",
       "title": "Globe",
-      "description": "A Fresnel-lit globe with rim glow, haloed atmosphere, land mesh detail, and marker layers for data storytelling. Lit Custom Element.",
+      "description": "A Fresnel-lit globe with rim glow, haloed atmosphere, land mesh detail, and marker layers for data storytelling.",
       "dependencies": [
         "lit",
         "ogl",
@@ -192,15 +193,17 @@
         {
           "path": "src/registry/canvas/globe/land-texture.png",
           "type": "registry:file",
-          "target": "public/motion-kit/globe/land-texture.png"
+          "target": "public/motion-kit/globe/land-texture.png",
+          "asset": true,
+          "url": "http://localhost:4321/motion-kit/globe/land-texture.png"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "god-rays",
+      "type": "registry:component",
       "title": "God Rays",
-      "description": "High-performance procedural god rays effect with customizable colors, pulsating intensity, and distortion. Lit Custom Element.",
+      "description": "High-performance procedural god rays effect with customizable colors, pulsating intensity, and distortion.",
       "dependencies": [
         "lit",
         "ogl"
@@ -211,13 +214,13 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/god-rays-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "halo",
+      "type": "registry:component",
       "title": "Halo",
-      "description": "Atmospheric scattering based halo effect with dynamic camera rotation and sun light simulation. Lit Custom Element.",
+      "description": "Atmospheric scattering based halo effect with dynamic camera rotation and sun light simulation.",
       "dependencies": [
         "lit",
         "ogl"
@@ -228,13 +231,13 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/halo-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "interactive-grid",
+      "type": "registry:component",
       "title": "Interactive Grid",
-      "description": "Physics-based grid simulation that distorts an image in response to cursor movement. Each grid cell tracks mouse velocity and decays back to rest over time. Lit Custom Element.",
+      "description": "Physics-based grid simulation that distorts an image in response to cursor movement. Each grid cell tracks mouse velocity and decays back to rest over time.",
       "dependencies": [
         "lit",
         "ogl"
@@ -245,13 +248,13 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/interactive-grid-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "lava-lamp",
+      "type": "registry:component",
       "title": "Lava Lamp",
-      "description": "Raymarched metaball blobs rendered with a smooth-min SDF and Fresnel edge lighting. Creates a fluid, organic lava lamp animation. Lit Custom Element.",
+      "description": "Raymarched metaball blobs rendered with a smooth-min SDF and Fresnel edge lighting. Creates a fluid, organic lava lamp animation.",
       "dependencies": [
         "lit",
         "ogl"
@@ -262,13 +265,13 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/lava-lamp-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "neural-noise",
+      "type": "registry:component",
       "title": "Neural Noise",
-      "description": "Animated CPPN-based neural noise rendered in WebGL. Produces continuously evolving organic color patterns driven by a compositional pattern-producing network. Lit Custom Element.",
+      "description": "Animated CPPN-based neural noise rendered in WebGL. Produces continuously evolving organic color patterns driven by a compositional pattern-producing network.",
       "dependencies": [
         "lit",
         "ogl"
@@ -279,11 +282,11 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/neural-noise-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "pixelated-image",
+      "type": "registry:component",
       "title": "Pixelated Image",
       "description": "OGL image revealer that starts as coarse blocks and sharpens to full resolution over time.",
       "dependencies": [
@@ -296,13 +299,13 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/pixelated-image-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "plasma-grid",
+      "type": "registry:component",
       "title": "Plasma Grid",
-      "description": "Animated plasma grid effect rendered in WebGL. Creates a checkerboard grid pattern with flowing plasma noise gradients. Colors are customizable via props. Lit Custom Element.",
+      "description": "Animated plasma grid effect rendered in WebGL. Creates a checkerboard grid pattern with flowing plasma noise gradients. Colors are customizable via props.",
       "dependencies": [
         "lit",
         "ogl"
@@ -313,13 +316,13 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/plasma-grid-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "rubiks-cube",
+      "type": "registry:component",
       "title": "Rubik's Cube",
-      "description": "A 3D Rubik's Cube that continuously rotates and scrambles itself with smooth face animations. Features a Fresnel rim glow shader and interactive orbit controls. Lit Custom Element.",
+      "description": "A 3D Rubik's Cube that continuously rotates and scrambles itself with smooth face animations. Features a Fresnel rim glow shader and interactive orbit controls.",
       "dependencies": [
         "lit",
         "ogl"
@@ -330,13 +333,13 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/rubiks-cube-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "specular-band",
+      "type": "registry:component",
       "title": "Specular Band",
-      "description": "Animated specular band effect with lens distortion and hue-shifted color palettes. Creates flowing, organic light bands with adaptive blending for different background brightness levels. Lit Custom Element.",
+      "description": "Animated specular band effect with lens distortion and hue-shifted color palettes. Creates flowing, organic light bands with adaptive blending for different background brightness levels.",
       "dependencies": [
         "lit",
         "ogl"
@@ -347,13 +350,13 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/specular-band-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "water-ripple",
+      "type": "registry:component",
       "title": "Water Ripple",
-      "description": "Interactive water ripple effect on images. Creates realistic ripple distortions that follow pointer movement with expanding wave animations. Lit Custom Element.",
+      "description": "Interactive water ripple effect on images. Creates realistic ripple distortions that follow pointer movement with expanding wave animations.",
       "dependencies": [
         "lit",
         "ogl"
@@ -367,15 +370,17 @@
         {
           "path": "src/registry/canvas/water-ripple/brush.png",
           "type": "registry:file",
-          "target": "public/motion-kit/water-ripple/brush.png"
+          "target": "public/motion-kit/water-ripple/brush.png",
+          "asset": true,
+          "url": "http://localhost:4321/motion-kit/water-ripple/brush.png"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "card-stack",
+      "type": "registry:component",
       "title": "Card Stack",
-      "description": "Scroll-driven sticky card stack with GSAP ScrollTrigger. Nest <motion-card-stack-item> elements inside.",
+      "description": "Scroll-driven sticky card stack with ScrollTrigger. Nest <motion-card-stack-item> elements inside.",
       "dependencies": [
         "lit",
         "gsap"
@@ -391,11 +396,11 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/card-stack-item-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "flip-card-stack",
+      "type": "registry:component",
       "title": "Flip Card Stack",
       "description": "A draggable card stack where the top card snaps to the back after a threshold drag. Framework-agnostic Custom Element.",
       "dependencies": [
@@ -407,11 +412,11 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/flip-card-stack-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "flip-grid",
+      "type": "registry:component",
       "title": "Flip Grid",
       "description": "A FLIP-powered grid that animates reordering and layout changes. Framework-agnostic Custom Elements.",
       "dependencies": [
@@ -427,14 +432,19 @@
           "path": "src/registry/interaction/flip-grid/flip-grid-item-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/flip-grid-item-element.ts"
+        },
+        {
+          "path": "src/lib/helpers/gsap.ts",
+          "type": "registry:lib",
+          "target": "src/lib/helpers/gsap.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "floating-menu",
+      "type": "registry:component",
       "title": "Floating Menu",
-      "description": "A floating GSAP-powered navigation menu with staggered link reveals and animated toggle lines. Lit Custom Element.",
+      "description": "A floating navigation menu with staggered link reveals and animated toggle lines.",
       "dependencies": [
         "lit",
         "gsap"
@@ -445,13 +455,13 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/floating-menu-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "image-trail",
+      "type": "registry:component",
       "title": "Image Trail",
-      "description": "An interactive effect that spawns a trail of images following the cursor with scaling and rotation. Lit Custom Element.",
+      "description": "An interactive effect that spawns a trail of images following the cursor with scaling and rotation.",
       "dependencies": [
         "lit",
         "gsap"
@@ -462,13 +472,13 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/image-trail-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "magnetic",
+      "type": "registry:component",
       "title": "Magnetic",
-      "description": "Framework-agnostic <motion-magnetic> Custom Element with spring physics, powered by Lit and GSAP.",
+      "description": "Framework-agnostic <motion-magnetic> Custom Element with spring physics.",
       "dependencies": [
         "lit",
         "gsap"
@@ -479,13 +489,13 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/magnetic-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "marquee",
+      "type": "registry:component",
       "title": "Marquee",
-      "description": "Scroll-velocity-boosted infinite marquee. Vanilla Custom Element — no Lit dependency.",
+      "description": "Scroll-velocity-boosted infinite marquee. Vanilla Custom Element.",
       "dependencies": [
         "gsap"
       ],
@@ -495,13 +505,13 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/marquee-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "infinite-gallery",
+      "type": "registry:component",
       "title": "Infinite Gallery",
-      "description": "A 3D gallery that endlessly scrolls through textured planes with cloth-like distortion and scroll-driven transitions. Lit Custom Element.",
+      "description": "A 3D gallery that endlessly scrolls through textured planes with cloth-like distortion and scroll-driven transitions.",
       "dependencies": [
         "lit",
         "ogl"
@@ -512,11 +522,11 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/infinite-gallery-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "infinite-physics-gallery",
+      "type": "registry:component",
       "title": "Infinite Physics Gallery",
       "description": "Infinite 2-D draggable grid with physics-based momentum, edge scrolling, and support for mixed image/video cells. Framework-agnostic Custom Element.",
       "dependencies": [
@@ -529,11 +539,11 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/infinite-physics-gallery-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "logo-carousel",
+      "type": "registry:component",
       "title": "Logo Carousel",
       "description": "Grid of logos that cycles through items with a blurred vertical swap animation. Framework-agnostic Custom Element.",
       "dependencies": [
@@ -546,11 +556,11 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/logo-carousel-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "radial-gallery",
+      "type": "registry:component",
       "title": "Radial Gallery",
       "description": "Circular rotating image gallery. Items are evenly spaced around a ring that spins continuously. Framework-agnostic Custom Element.",
       "dependencies": [
@@ -563,11 +573,11 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/radial-gallery-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "slideshow",
+      "type": "registry:component",
       "title": "Slideshow",
       "description": "Full-bleed image slideshow with parallax slide transitions and thumbnail navigation. Framework-agnostic Custom Element.",
       "dependencies": [
@@ -580,13 +590,13 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/slideshow-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "video-player",
+      "type": "registry:component",
       "title": "Video Player",
-      "description": "Custom video player with play/pause, a hover-expanding scrubber, mute, and GSAP Flip fullscreen expand animation.",
+      "description": "Custom video player with play/pause, a hover-expanding scrubber, mute, and Flip fullscreen expand animation.",
       "dependencies": [
         "lit",
         "gsap"
@@ -597,11 +607,11 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/video-player-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "split-hover",
+      "type": "registry:component",
       "title": "Split Hover",
       "description": "Splits text into characters and animates stacked layers on hover for a seamless swap. Framework-agnostic Custom Element.",
       "dependencies": [
@@ -614,11 +624,11 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/split-hover-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "split-reveal",
+      "type": "registry:component",
       "title": "Split Reveal",
       "description": "Masks text and reveals lines, words, or characters on mount or scroll. Framework-agnostic Custom Element.",
       "dependencies": [
@@ -631,11 +641,11 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/split-reveal-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "stacking-words",
+      "type": "registry:component",
       "title": "Stacking Words",
       "description": "Splits text into lines and slides each line's words in from the right on scroll. Framework-agnostic Custom Element.",
       "dependencies": [
@@ -648,11 +658,11 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/stacking-words-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "text-loop",
+      "type": "registry:component",
       "title": "Text Loop",
       "description": "Cycles through an array of text strings with a blurred vertical slide transition. Framework-agnostic Custom Element.",
       "dependencies": [
@@ -665,11 +675,11 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/text-loop-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "text-repel",
+      "type": "registry:component",
       "title": "Text Repel",
       "description": "Splits text into words or characters that repel from the pointer. Framework-agnostic Custom Element.",
       "dependencies": [
@@ -682,11 +692,11 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/text-repel-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "text-scramble",
+      "type": "registry:component",
       "title": "Text Scramble",
       "description": "Scrambles characters on hover before settling back to the original text. Framework-agnostic Custom Element.",
       "dependencies": [
@@ -699,11 +709,11 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/text-scramble-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     },
     {
       "name": "weight-wave",
+      "type": "registry:component",
       "title": "Weight Wave",
       "description": "Hover-reactive text effect that smoothly increases font weight with a falloff across neighboring characters. Requires a variable font.",
       "dependencies": [
@@ -716,8 +726,7 @@
           "type": "registry:component",
           "target": "src/components/motion-kit/weight-wave-element.ts"
         }
-      ],
-      "type": "registry:component"
+      ]
     }
   ]
 }
