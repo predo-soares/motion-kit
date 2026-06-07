@@ -111,6 +111,23 @@ body.mk-card-fullscreen-open {
   overflow: visible;
 }
 
+/* ─── Controls panel: fullscreen floating state ────────────────── */
+[data-controls-panel][data-fullscreen-panel="true"] {
+  border-top: none;
+  border-radius: 32px;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow:
+    /*0 0 0 1px rgba(15, 23, 42, 0.04),*/
+    0 8px 32px rgba(15, 23, 42, 0.14),
+    0 2px 8px rgba(15, 23, 42, 0.06);
+  max-height: 65vh;
+  overflow-y: auto;
+}
+
+[data-controls-panel][data-fullscreen-panel="true"] .mk-controls {
+  grid-template-columns: 1fr;
+}
+
 /* ─── Component controls panel ─────────────────────────────────── */
 .mk-controls {
   display: grid;
