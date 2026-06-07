@@ -1,0 +1,307 @@
+---
+import ComponentBrowserShell from "@/components/docs/component-browser-shell.astro";
+import ComponentToc from "@/components/docs/component-toc.astro";
+import CardLink from "@/components/docs/card-link.astro";
+import CodeBlock from "@/components/docs/code-block.astro";
+import SiteLayout from "@/layouts/site-layout.astro";
+import AstroLogo from "@/components/ui/logos/astro-logo.astro";
+import NextJsLogo from "@/components/ui/logos/nextjs-logo.astro";
+import SvelteLogo from "@/components/ui/logos/svelte-logo.astro";
+import VueLogo from "@/components/ui/logos/vue-logo.astro";
+import ReactLogo from "@/components/ui/logos/react-logo.astro";
+import JavaScriptLogo from "@/components/ui/logos/javascript-logo.astro";
+
+const tocItems = [
+  { href: "#quick-start", label: "Quick Start" },
+  { href: "#manual-setup", label: "Manual Setup" },
+  { href: "#project-structure", label: "Project Structure" },
+  { href: "#frameworks", label: "Framework Support" },
+];
+
+const quickInstallCommand =
+  "pnpm dlx shadcn@latest add https://motion-kit-astro.vercel.app/r/<component-name>.json";
+const magneticInstallCommand =
+  "pnpm dlx shadcn@latest add https://motion-kit-astro.vercel.app/r/magnetic.json";
+const tsconfigDecorators = `{
+  "compilerOptions": {
+    "experimentalDecorators": true
+  }
+}`;
+const installDependenciesCommand = "pnpm add gsap lit";
+const importExample = `import "./magnetic-element";
+
+// The component registers itself automatically.
+// Use it in your HTML:
+<magnetic-lit></magnetic-lit>`;
+const projectStructure = `src/
+├── components/
+│   └── motion-kit/          # Motion Kit components
+│       ├── magnetic/
+│       │   └── magnetic-element.ts
+│       ├── card-stack/
+│       │   └── card-stack-element.ts
+│       └── ...
+├── lib/
+│   └── utils.ts              # Shared utilities
+└── pages/`;
+---
+
+<SiteLayout
+  title="Installation — Motion Kit"
+  description="How to install Motion Kit components and structure your app."
+>
+  <ComponentBrowserShell currentHref="/docs/installation">
+    <article class="flex w-full max-w-[600px] min-w-0 flex-col gap-10 pb-16">
+      <header class="flex flex-col gap-3">
+        <div class="flex flex-col gap-2">
+          <p class="text-xs font-semibold text-slate-400">Docs</p>
+          <h1
+            class="text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl"
+          >
+            Installation
+          </h1>
+        </div>
+        <p class="text-sm leading-6 text-balance text-slate-600">
+          How to install Motion Kit components and structure your app.
+        </p>
+      </header>
+
+      <!-- Installation Method Cards -->
+      <section id="quick-start" class="flex flex-col gap-6 scroll-mt-24">
+        <h2 class="text-xl font-semibold tracking-tight text-slate-950">
+          Choose Your Installation Method
+        </h2>
+
+        <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+          <CardLink
+            href="#quick-install"
+            title="Quick Install"
+            description="Add components directly using the shadcn CLI with our registry URL."
+          />
+
+          <CardLink
+            href="#manual-setup"
+            title="Manual Setup"
+            description="Configure your project manually and copy component source files."
+          />
+        </div>
+      </section>
+
+      <!-- Quick Install Section -->
+      <section id="quick-install" class="flex flex-col gap-4 scroll-mt-24">
+        <h2 class="text-xl font-semibold tracking-tight text-slate-950">
+          Quick Install
+        </h2>
+        <div class="flex flex-col gap-3 text-sm leading-7 text-slate-600">
+          <p>
+            The fastest way to add Motion Kit components to your project is
+            using the shadcn CLI. Simply run the add command with our registry
+            URL:
+          </p>
+
+          <CodeBlock code={quickInstallCommand} />
+
+          <p>
+            Replace <code
+              class="rounded bg-slate-100 px-1.5 py-0.5 text-[0.9em] text-slate-800"
+              >&lt;component-name&gt;</code
+            > with the component you want to install. For example, to install the
+            magnetic component:
+          </p>
+
+          <CodeBlock code={magneticInstallCommand} />
+
+          <p>The CLI will automatically:</p>
+          <ul class="ml-4 list-disc space-y-1 text-sm text-slate-600">
+            <li>Download the component source files</li>
+            <li>Install required dependencies (GSAP, Lit, etc.)</li>
+            <li>Place files in the correct directories</li>
+            <li>Update your package dependencies</li>
+          </ul>
+
+          <p>
+            Motion Kit ships Lit-based custom elements as source. If your
+            project compiles TypeScript, enable decorators in your
+            <code
+              class="rounded bg-slate-100 px-1.5 py-0.5 text-[0.9em] text-slate-800"
+              >tsconfig.json</code
+            > before importing the component:
+          </p>
+
+          <CodeBlock code={tsconfigDecorators} />
+        </div>
+      </section>
+
+      <!-- Manual Setup Section -->
+      <section id="manual-setup" class="flex flex-col gap-4 scroll-mt-24">
+        <h2 class="text-xl font-semibold tracking-tight text-slate-950">
+          Manual Setup
+        </h2>
+        <div class="flex flex-col gap-3 text-sm leading-7 text-slate-600">
+          <p>
+            If you prefer manual setup or need more control, you can configure
+            Motion Kit components manually:
+          </p>
+
+          <h3 class="mt-4 text-base font-semibold text-slate-900">
+            1. Install Dependencies
+          </h3>
+          <CodeBlock code={installDependenciesCommand} />
+
+          <h3 class="mt-4 text-base font-semibold text-slate-900">
+            2. Copy Component Files
+          </h3>
+          <p>
+            Browse our components and copy the source files directly into your
+            project. Each component page shows you the exact files you need.
+          </p>
+
+          <h3 class="mt-4 text-base font-semibold text-slate-900">
+            3. Configure Your Project
+          </h3>
+          <p>
+            Make sure your build tool can handle Web Components and TypeScript.
+            If you compile TypeScript source from the registry, enable
+            <code
+              class="rounded bg-slate-100 px-1.5 py-0.5 text-[0.9em] text-slate-800"
+              >experimentalDecorators</code
+            >
+            in your <code
+              class="rounded bg-slate-100 px-1.5 py-0.5 text-[0.9em] text-slate-800"
+              >tsconfig.json</code
+            >.
+          </p>
+
+          <h3 class="mt-4 text-base font-semibold text-slate-900">
+            4. Register Custom Elements
+          </h3>
+          <p>Import and register the custom elements in your client code:</p>
+          <CodeBlock code={importExample} />
+        </div>
+      </section>
+
+      <!-- Project Structure -->
+      <section id="project-structure" class="flex flex-col gap-4 scroll-mt-24">
+        <h2 class="text-xl font-semibold tracking-tight text-slate-950">
+          Project Structure
+        </h2>
+        <div class="flex flex-col gap-3 text-sm leading-7 text-slate-600">
+          <p>
+            Motion Kit components work best in a standard project structure.
+            Here's a recommended setup:
+          </p>
+          <CodeBlock code={projectStructure} />
+          <p>
+            Each component is self-contained with its own styles and logic. You
+            can modify them to fit your needs.
+          </p>
+        </div>
+      </section>
+
+      <!-- Framework Support -->
+      <section id="frameworks" class="flex flex-col gap-4 scroll-mt-24">
+        <h2 class="text-xl font-semibold tracking-tight text-slate-950">
+          Framework Support
+        </h2>
+        <p class="text-sm text-slate-600">
+          Motion Kit components work with any framework that supports Web
+          Components. Choose yours for specific setup instructions:
+        </p>
+
+        <div class="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-6">
+          <CardLink
+            href="#astro"
+            title="Astro"
+            description="First-class support"
+            align="center"
+          >
+            <AstroLogo slot="icon" />
+          </CardLink>
+
+          <CardLink
+            href="#next"
+            title="Next.js"
+            description="Client components"
+            align="center"
+          >
+            <NextJsLogo slot="icon" />
+          </CardLink>
+
+          <CardLink
+            href="#svelte"
+            title="SvelteKit"
+            description="Full support"
+            align="center"
+          >
+            <SvelteLogo slot="icon" />
+          </CardLink>
+
+          <CardLink
+            href="#vue"
+            title="Vue"
+            description="Web Components"
+            align="center"
+          >
+            <VueLogo slot="icon" />
+          </CardLink>
+
+          <CardLink
+            href="#react"
+            title="React"
+            description="Custom Elements"
+            align="center"
+          >
+            <ReactLogo slot="icon" />
+          </CardLink>
+
+          <CardLink
+            href="#vanilla"
+            title="Vanilla JS"
+            description="Any setup"
+            align="center"
+          >
+            <JavaScriptLogo slot="icon" />
+          </CardLink>
+        </div>
+      </section>
+
+      <!-- Troubleshooting -->
+      <section class="flex flex-col gap-4 scroll-mt-24">
+        <h2 class="text-xl font-semibold tracking-tight text-slate-950">
+          Troubleshooting
+        </h2>
+        <div class="flex flex-col gap-3 text-sm leading-7 text-slate-600">
+          <p>
+            <strong class="font-semibold text-slate-900"
+              >Components not rendering?</strong
+            > Make sure you've registered the custom elements before using them in
+            your markup.
+          </p>
+          <p>
+            <strong class="font-semibold text-slate-900">Build errors?</strong> Ensure
+            your build tool supports TypeScript, Web Components, and Lit decorators.
+            If you see decorator parse errors, first enable
+            <code
+              class="rounded bg-slate-100 px-1.5 py-0.5 text-[0.9em] text-slate-800"
+              >experimentalDecorators</code
+            >
+            in <code
+              class="rounded bg-slate-100 px-1.5 py-0.5 text-[0.9em] text-slate-800"
+              >tsconfig.json</code
+            > and make sure any Babel step also parses decorators.
+          </p>
+          <p>
+            <strong class="font-semibold text-slate-900"
+              >GSAP not working?</strong
+            > Verify GSAP is installed and the plugins are registered. See the component
+            source for required plugins.
+          </p>
+        </div>
+      </section>
+    </article>
+
+    <Fragment slot="aside">
+      <ComponentToc items={tocItems} />
+    </Fragment>
+  </ComponentBrowserShell>
+</SiteLayout>

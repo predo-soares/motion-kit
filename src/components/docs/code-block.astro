@@ -1,0 +1,24 @@
+---
+interface Props {
+  code: string;
+  label?: string;
+  wrap?: boolean;
+}
+
+const { code, label, wrap = false } = Astro.props;
+---
+
+<figure class="my-4 w-full min-w-0 overflow-hidden rounded-3xl bg-slate-100">
+  {
+    label ? (
+      <figcaption class="border-b border-slate-400/60 px-4 py-2 text-xs font-medium text-slate-700">
+        {label}
+      </figcaption>
+    ) : null
+  }
+  <pre
+    class:list={[
+      "w-full min-w-0 overflow-x-auto px-4 py-3 text-sm leading-6 text-slate-950",
+      wrap && "whitespace-pre-wrap",
+    ]}><code>{code}</code></pre>
+</figure>
