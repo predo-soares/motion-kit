@@ -32,7 +32,7 @@ type UniformState = {
   uVignetteOpacity: { value: number }
 }
 
-const DEFAULT_PRIMARY: [number, number, number] = [1, 105 / 255, 0]
+const DEFAULT_PRIMARY: [number, number, number] = [108 / 255, 135 / 255, 188 / 255]
 
 const toLinearTriplet = (
   value: [number, number, number],
@@ -134,7 +134,7 @@ export class MotionGlitterCloth extends LitElement {
     }
   `
 
-  @property() color: ColorRepresentation = "#ff6900"
+  @property() color: ColorRepresentation = "#6c87bc"
   @property({ type: Number }) speed = 1
   @property({ type: Number }) brightness = 1
   @property({ type: Number, attribute: "blend-strength" }) blendStrength = 0.02

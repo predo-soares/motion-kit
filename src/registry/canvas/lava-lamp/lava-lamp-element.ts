@@ -140,7 +140,7 @@ export class MotionLavaLamp extends LitElement {
   @property({ type: Number, attribute: "offset-y" }) offsetY = 0
   @property({ type: Number }) rotation = 0
   @property({ type: String }) color: ColorRepresentation = "#17181A"
-  @property({ type: String, attribute: "fresnel-color" }) fresnelColor: ColorRepresentation = "#ff6900"
+  @property({ type: String, attribute: "fresnel-color" }) fresnelColor: ColorRepresentation = "#6c87bc"
   @property({ type: Number }) speed = 1.0
   @property({ type: Number, attribute: "fresnel-power" }) fresnelPower = 3.0
   @property({ type: Number }) radius = 1
@@ -179,7 +179,7 @@ export class MotionLavaLamp extends LitElement {
       u.uColor.value.set(r, g, b)
     }
     if (changed.has("fresnelColor")) {
-      const [r, g, b] = toLinearRgb(this.fresnelColor, [1, 105 / 255, 0])
+      const [r, g, b] = toLinearRgb(this.fresnelColor, [108 / 255, 135 / 255, 188 / 255])
       u.uFresnelColor.value.set(r, g, b)
     }
     if (changed.has("scale")) u.uScale.value = this.scale
@@ -215,7 +215,7 @@ export class MotionLavaLamp extends LitElement {
     const geometry = new Triangle(gl)
 
     const initialColor = toLinearRgb(this.color, [24 / 255, 24 / 255, 27 / 255])
-    const initialFresnelColor = toLinearRgb(this.fresnelColor, [1, 105 / 255, 0])
+    const initialFresnelColor = toLinearRgb(this.fresnelColor, [108 / 255, 135 / 255, 188 / 255])
 
     const uniforms = {
       uTime: { value: 0 },

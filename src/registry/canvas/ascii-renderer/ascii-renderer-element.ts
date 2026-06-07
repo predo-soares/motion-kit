@@ -13,7 +13,7 @@ export class MotionAsciiRenderer extends LitElement {
   @property() image = ""
   @property({ type: Number }) density = 25.0
   @property({ type: Number }) strength = 3.0
-  @property() color: ColorRepresentation = "#00ff00"
+  @property() color: ColorRepresentation = "#6c87bc"
   @property({ attribute: "background-color" }) backgroundColor: ColorRepresentation = "#17181A"
 
   private _raf = 0
@@ -40,7 +40,7 @@ export class MotionAsciiRenderer extends LitElement {
     if (!this._uniforms) return
     if (changed.has("density")) this._uniforms.uDensity.value = this.density
     if (changed.has("strength")) this._uniforms.uStrength.value = this.strength
-    if (changed.has("color")) { const [r, g, b] = toLinearRgb(this.color, [0, 1, 0]); this._uniforms.uColor.value.set(r, g, b) }
+    if (changed.has("color")) { const [r, g, b] = toLinearRgb(this.color, [108 / 255, 135 / 255, 188 / 255]); this._uniforms.uColor.value.set(r, g, b) }
     if (changed.has("backgroundColor")) { const [r, g, b] = toLinearRgb(this.backgroundColor, [23 / 255, 24 / 255, 26 / 255]); this._uniforms.uBackgroundColor.value.set(r, g, b) }
     if (changed.has("image") && this._setImage) this._setImage(this.image)
   }
@@ -76,7 +76,7 @@ export class MotionAsciiRenderer extends LitElement {
     const resolution = new Vec2(1, 1)
     const coverScale = new Vec2(1, 1)
     const coverOffset = new Vec2(0, 0)
-    const [cr, cg, cb] = toLinearRgb(this.color, [0, 1, 0])
+    const [cr, cg, cb] = toLinearRgb(this.color, [108 / 255, 135 / 255, 188 / 255])
     const [br, bg, bb] = toLinearRgb(this.backgroundColor, [23 / 255, 24 / 255, 26 / 255])
 
     let imgW = 1, imgH = 1

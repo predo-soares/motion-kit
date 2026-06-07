@@ -22,7 +22,7 @@ export class MotionDitheredImage extends LitElement {
   @property() image = ""
   @property({ attribute: "dither-map" }) ditherMap: DitherMap = "bayer4x4"
   @property({ type: Number, attribute: "pixel-size" }) pixelSize = 1
-  @property() color: ColorRepresentation = "#ff6900"
+  @property() color: ColorRepresentation = "#6c87bc"
   @property({ attribute: "background-color" }) backgroundColor: ColorRepresentation = "#17181A"
   @property({ type: Number }) threshold = 0.0
 
@@ -54,7 +54,7 @@ export class MotionDitheredImage extends LitElement {
     if (!this._uniforms) return
     if (changed.has("pixelSize")) this._uniforms.uPixelSize.value = Math.max(1, this.pixelSize)
     if (changed.has("threshold")) this._uniforms.uThreshold.value = this.threshold
-    if (changed.has("color")) { const [r, g, b] = toLinearRgb(this.color, [1, 105 / 255, 0]); this._uniforms.uColor.value.set(r, g, b) }
+    if (changed.has("color")) { const [r, g, b] = toLinearRgb(this.color, [108 / 255, 135 / 255, 188 / 255]); this._uniforms.uColor.value.set(r, g, b) }
     if (changed.has("backgroundColor")) { const [r, g, b] = toLinearRgb(this.backgroundColor, [23 / 255, 24 / 255, 26 / 255]); this._uniforms.uBackgroundColor.value.set(r, g, b) }
     if (changed.has("image") && this._setImage) this._setImage(this.image)
     if (changed.has("ditherMap") && this._setDitherMap) this._setDitherMap(this.ditherMap)
@@ -98,7 +98,7 @@ export class MotionDitheredImage extends LitElement {
     const mapSize = new Vec2(4, 4)
     const coverScale = new Vec2(1, 1)
     const coverOffset = new Vec2(0, 0)
-    const [cr, cg, cb] = toLinearRgb(this.color, [1, 105 / 255, 0])
+    const [cr, cg, cb] = toLinearRgb(this.color, [108 / 255, 135 / 255, 188 / 255])
     const [br, bg, bb] = toLinearRgb(this.backgroundColor, [23 / 255, 24 / 255, 26 / 255])
     const colorVec = new Vec3(cr, cg, cb)
     const bgVec = new Vec3(br, bg, bb)
