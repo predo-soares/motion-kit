@@ -1,4 +1,4 @@
-import type { ComponentCatalogEntry } from "@/lib/component-catalog";
+import type { ComponentCatalogEntry } from "@/lib/catalog";
 
 export const testFrameworks = ["Astro", "React", "Vue", "Svelte"] as const;
 

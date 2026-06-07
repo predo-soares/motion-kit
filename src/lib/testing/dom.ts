@@ -1,4 +1,4 @@
-import type { ComponentTestRenderSpec } from "@/lib/component-test-spec";
+import type { ComponentTestRenderSpec } from "@/lib/testing/spec";
 
 export function mountComponentTestSpec(
   container: HTMLElement,

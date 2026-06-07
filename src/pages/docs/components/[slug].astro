@@ -10,8 +10,8 @@ import infoCircleIcon from "@tabler/icons/outline/info-circle.svg?raw";
 import {
   componentCatalog,
   type ComponentCatalogEntry,
-} from "@/lib/component-catalog";
-import { getComponentTestSpec } from "@/lib/component-test-spec";
+} from "@/lib/catalog";
+import { getComponentTestSpec } from "@/lib/testing/spec";
 
 export function getStaticPaths() {
   return componentCatalog.map((component) => ({
@@ -67,6 +67,8 @@ const hasTestPage = Boolean(getComponentTestSpec(component));
                 hasTestPage ? (
                   <a
                     href={`/docs/components/${component.slug}/test`}
+                    data-audio-hover="hover"
+                    data-audio-click="select"
                     class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-600 transition-colors hover:border-slate-300 hover:text-slate-950"
                   >
                     Test
