@@ -21,7 +21,7 @@ export class MotionGlassLogo extends LitElement {
   @property({ type: Number, attribute: "chromatic-aberration" }) chromaticAberration = 1
   @property({ type: Number }) blur = 1
   @property({ attribute: "swirl-color-a" }) swirlColorA: ColorRepresentation = "#222326"
-  @property({ attribute: "swirl-color-b" }) swirlColorB: ColorRepresentation = "#ff6900"
+  @property({ attribute: "swirl-color-b" }) swirlColorB: ColorRepresentation = "#6c87bc"
 
   private _raf = 0
   private _cancelled = false
@@ -52,7 +52,7 @@ export class MotionGlassLogo extends LitElement {
     if (changed.has("chromaticAberration")) this._uniforms.uChromaticAberration.value = this.chromaticAberration
     if (changed.has("blur")) this._uniforms.uBlur.value = this.blur
     if (changed.has("swirlColorA")) { const [r, g, b] = toRgb(this.swirlColorA, [0.006, 0.006, 0.005]); this._uniforms.uSwirlColorA.value.set(r, g, b) }
-    if (changed.has("swirlColorB")) { const [r, g, b] = toRgb(this.swirlColorB, [1, 105 / 255, 0]); this._uniforms.uSwirlColorB.value.set(r, g, b) }
+    if (changed.has("swirlColorB")) { const [r, g, b] = toRgb(this.swirlColorB, [108 / 255, 135 / 255, 188 / 255]); this._uniforms.uSwirlColorB.value.set(r, g, b) }
     if (changed.has("svgSource") && this._setSvg) this._setSvg(this.svgSource)
   }
 
@@ -84,7 +84,7 @@ export class MotionGlassLogo extends LitElement {
     })
 
     const [ar, ag, ab] = toRgb(this.swirlColorA, [0.006, 0.006, 0.005])
-    const [br, bg, bb] = toRgb(this.swirlColorB, [1, 105 / 255, 0])
+    const [br, bg, bb] = toRgb(this.swirlColorB, [108 / 255, 135 / 255, 188 / 255])
     const localUniforms = {
       uResolution: { value: new Vec2(1, 1) },
       uTime: { value: 0 },

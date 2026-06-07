@@ -15,23 +15,23 @@
   "usage": [
     {
       "label": "Astro",
-      "code": "---\nimport \"@/components/motion-kit/ascii-renderer-element.ts\";\n---\n\n<motion-ascii-renderer\n  image=\"/images/your-image.jpg\"\n  density={25.0}\n  strength={3.0}\n  color=\"#00ff00\"\n  background-color=\"#17181A\"\n  class=\"w-full h-[400px]\"\n/>"
+      "code": "---\nimport \"@/components/motion-kit/ascii-renderer-element.ts\";\n---\n\n<motion-ascii-renderer\n  image=\"/images/your-image.jpg\"\n  density={25.0}\n  strength={3.0}\n  color=\"#6c87bc\"\n  background-color=\"#17181A\"\n  class=\"w-full h-[400px]\"\n/>"
     },
     {
       "label": "React",
-      "code": "import \"@/components/motion-kit/ascii-renderer-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-ascii-renderer\n      image=\"/images/your-image.jpg\"\n      density={25.0}\n      strength={3.0}\n      color=\"#00ff00\"\n      background-color=\"#17181A\"\n      class=\"w-full h-[400px]\"\n    />\n  );\n}"
+      "code": "import \"@/components/motion-kit/ascii-renderer-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-ascii-renderer\n      image=\"/images/your-image.jpg\"\n      density={25.0}\n      strength={3.0}\n      color=\"#6c87bc\"\n      background-color=\"#17181A\"\n      class=\"w-full h-[400px]\"\n    />\n  );\n}"
     },
     {
       "label": "Vue",
-      "code": "<script setup>\nimport \"@/components/motion-kit/ascii-renderer-element.ts\";\n</script>\n\n<template>\n  <motion-ascii-renderer\n    image=\"/images/your-image.jpg\"\n    :density=\"25.0\"\n    :strength=\"3.0\"\n    color=\"#00ff00\"\n    background-color=\"#17181A\"\n    class=\"w-full h-[400px]\"\n  />\n</template>"
+      "code": "<script setup>\nimport \"@/components/motion-kit/ascii-renderer-element.ts\";\n</script>\n\n<template>\n  <motion-ascii-renderer\n    image=\"/images/your-image.jpg\"\n    :density=\"25.0\"\n    :strength=\"3.0\"\n    color=\"#6c87bc\"\n    background-color=\"#17181A\"\n    class=\"w-full h-[400px]\"\n  />\n</template>"
     },
     {
       "label": "Svelte",
-      "code": "<script>\n  import \"@/components/motion-kit/ascii-renderer-element.ts\";\n</script>\n\n<motion-ascii-renderer\n  image=\"/images/your-image.jpg\"\n  density={25.0}\n  strength={3.0}\n  color=\"#00ff00\"\n  background-color=\"#17181A\"\n  class=\"w-full h-[400px]\"\n/>"
+      "code": "<script>\n  import \"@/components/motion-kit/ascii-renderer-element.ts\";\n</script>\n\n<motion-ascii-renderer\n  image=\"/images/your-image.jpg\"\n  density={25.0}\n  strength={3.0}\n  color=\"#6c87bc\"\n  background-color=\"#17181A\"\n  class=\"w-full h-[400px]\"\n/>"
     },
     {
       "label": "HTML",
-      "code": "<script type=\"module\" src=\"/components/motion-kit/ascii-renderer-element.js\"></script>\n\n<motion-ascii-renderer\n  image=\"/images/your-image.jpg\"\n  density=\"25.0\"\n  strength=\"3.0\"\n  color=\"#00ff00\"\n  background-color=\"#17181A\"\n  class=\"w-full h-[400px]\"\n/>"
+      "code": "<script type=\"module\" src=\"/components/motion-kit/ascii-renderer-element.js\"></script>\n\n<motion-ascii-renderer\n  image=\"/images/your-image.jpg\"\n  density=\"25.0\"\n  strength=\"3.0\"\n  color=\"#6c87bc\"\n  background-color=\"#17181A\"\n  class=\"w-full h-[400px]\"\n/>"
     }
   ],
   "props": [
@@ -56,7 +56,7 @@
     {
       "name": "color",
       "type": "string",
-      "default": "\"#00ff00\"",
+      "default": "\"#6c87bc\"",
       "description": "Color of the ASCII characters (any CSS color value)."
     },
     {

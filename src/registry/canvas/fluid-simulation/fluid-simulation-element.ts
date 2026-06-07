@@ -91,7 +91,7 @@ export class MotionFluidSimulation extends LitElement {
 
   @property({ type: Number }) dissipation = 0.96
   @property({ type: Number, attribute: "pointer-size" }) pointerSize = 0.005
-  @property() color: ColorRepresentation = "#ff6900"
+  @property() color: ColorRepresentation = "#6c87bc"
   @property({ attribute: "background-color" }) backgroundColor: ColorRepresentation = "#17181A"
   @property({ type: Number, attribute: "velocity-dissipation" }) velocityDissipation = 0.96
   @property({ type: Number, attribute: "pressure-iterations" }) pressureIterations = 10
@@ -140,7 +140,7 @@ export class MotionFluidSimulation extends LitElement {
     const divergence = mkFBO(SIM, SIM)
     const texel = new Vec2(1 / SIM, 1 / SIM)
     const pointerUv = new Vec2()
-    const [sr, sg, sb] = toLinearRgb(this.color, [1, 105 / 255, 0])
+    const [sr, sg, sb] = toLinearRgb(this.color, [108 / 255, 135 / 255, 188 / 255])
     const [br, bg, bb] = toLinearRgb(this.backgroundColor, [23 / 255, 24 / 255, 26 / 255])
     const splatColor = new Vec3(sr, sg, sb)
     const backgroundColor = new Vec3(br, bg, bb)
@@ -220,7 +220,7 @@ export class MotionFluidSimulation extends LitElement {
         updatePtr(px, py, cw, ch)
       }
 
-      const [sr, sg, sb] = toLinearRgb(this.color, [1, 105 / 255, 0])
+      const [sr, sg, sb] = toLinearRgb(this.color, [108 / 255, 135 / 255, 188 / 255])
       splatColor.set(sr, sg, sb)
       const [br, bg, bb] = toLinearRgb(this.backgroundColor, [23 / 255, 24 / 255, 26 / 255])
       backgroundColor.set(br, bg, bb)
