@@ -7,7 +7,7 @@
   "dependencies": ["lit", "ogl"],
   "files": [
     {
-      "path": "src/registry/new-york/blocks/dithered-image/dithered-image-element.ts",
+      "path": "src/registry/canvas/dithered-image/dithered-image-element.ts",
       "type": "registry:component",
       "target": "src/components/motion-kit/dithered-image-element.ts"
     }

@@ -7,7 +7,7 @@
   "dependencies": ["lit", "ogl"],
   "files": [
     {
-      "path": "src/registry/new-york/blocks/ascii-renderer/ascii-renderer-element.ts",
+      "path": "src/registry/canvas/ascii-renderer/ascii-renderer-element.ts",
       "type": "registry:component",
       "target": "src/components/motion-kit/ascii-renderer-element.ts"
     }

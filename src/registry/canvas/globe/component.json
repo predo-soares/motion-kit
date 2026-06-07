@@ -7,12 +7,12 @@
   "dependencies": ["lit", "ogl", "gsap"],
   "files": [
     {
-      "path": "src/registry/new-york/blocks/globe/globe-element.ts",
+      "path": "src/registry/canvas/globe/globe-element.ts",
       "type": "registry:component",
       "target": "src/components/motion-kit/globe-element.ts"
     },
     {
-      "path": "src/registry/new-york/blocks/globe/land-texture.png",
+      "path": "src/registry/canvas/globe/land-texture.png",
       "type": "registry:file",
       "target": "public/motion-kit/globe/land-texture.png"
     }

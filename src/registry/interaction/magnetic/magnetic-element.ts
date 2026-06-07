@@ -20,14 +20,24 @@ export class MotionMagnetic extends LitElement {
   `
 
   /** Animation duration in seconds. */
-  @property({ type: Number }) duration = 1
+  @property({ type: Number }) declare duration: number
 
   /** GSAP easing function. */
-  @property() ease = "elastic.out(1, 0.3)"
+  @property() declare ease: string
+
+  /** Multiplier for the magnetic pull (0 = none, 1 = full offset). */
+  @property({ type: Number }) declare strength: number
 
   private _xTo?: gsap.QuickToFunc
   private _yTo?: gsap.QuickToFunc
   private _builtWith?: { duration: number; ease: string }
+
+  constructor() {
+    super()
+    this.duration = 1
+    this.ease = "elastic.out(1, 0.3)"
+    this.strength = 1
+  }
 
   override connectedCallback() {
     super.connectedCallback()
@@ -72,11 +82,13 @@ export class MotionMagnetic extends LitElement {
 
   private _onMouseMove = (e: MouseEvent) => {
     const { height, width, left, top } = this.getBoundingClientRect()
-    this._xTo?.(e.clientX - (left + width / 2))
-    this._yTo?.(e.clientY - (top + height / 2))
+    this.style.zIndex = "9999"
+    this._xTo?.((e.clientX - (left + width / 2)) * this.strength)
+    this._yTo?.((e.clientY - (top + height / 2)) * this.strength)
   }
 
   private _onMouseLeave = () => {
+    this.style.zIndex = ""
     this._xTo?.(0)
     this._yTo?.(0)
   }

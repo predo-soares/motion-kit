@@ -7,7 +7,7 @@
   "dependencies": ["lit", "gsap", "ogl"],
   "files": [
     {
-      "path": "src/registry/new-york/blocks/glass-slideshow/glass-slideshow-element.ts",
+      "path": "src/registry/canvas/glass-slideshow/glass-slideshow-element.ts",
       "type": "registry:component",
       "target": "src/components/motion-kit/glass-slideshow-element.ts"
     }

@@ -7,7 +7,7 @@
   "dependencies": ["gsap"],
   "files": [
     {
-      "path": "src/registry/new-york/blocks/marquee/marquee-element.ts",
+      "path": "src/registry/interaction/marquee/marquee-element.ts",
       "type": "registry:component",
       "target": "src/components/motion-kit/marquee-element.ts"
     }

@@ -7,7 +7,7 @@
   "dependencies": ["lit", "ogl"],
   "files": [
     {
-      "path": "src/registry/new-york/blocks/card-3d/card-3d-element.ts",
+      "path": "src/registry/canvas/card-3d/card-3d-element.ts",
       "type": "registry:component",
       "target": "src/components/motion-kit/card-3d-element.ts"
     }

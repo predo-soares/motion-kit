@@ -7,7 +7,7 @@
   "dependencies": ["lit", "ogl"],
   "files": [
     {
-      "path": "src/registry/new-york/blocks/pixelated-image/pixelated-image-element.ts",
+      "path": "src/registry/canvas/pixelated-image/pixelated-image-element.ts",
       "type": "registry:component",
       "target": "src/components/motion-kit/pixelated-image-element.ts"
     }

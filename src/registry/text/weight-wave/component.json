@@ -7,7 +7,7 @@
   "dependencies": ["lit", "gsap"],
   "files": [
     {
-      "path": "src/registry/new-york/blocks/weight-wave/weight-wave-element.ts",
+      "path": "src/registry/text/weight-wave/weight-wave-element.ts",
       "type": "registry:component",
       "target": "src/components/motion-kit/weight-wave-element.ts"
     }
