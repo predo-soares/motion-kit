@@ -54,7 +54,7 @@ Tailwind v4 via `@tailwindcss/vite`. Configured in `src/styles/global.css` with 
 
 ### Reference codebase
 
-`ref/motion-core/` is a read-only Svelte 5 library (~48 animated components) included as migration reference. It is **not installed or built** as part of this project. See `thoughts/2026-05-31-motion-core-astro-migration.md` for the migration trade-off analysis (Svelte islands vs Lit vs vanilla `.astro`).
+`ref/motion-core/` is a read-only Svelte 5 library (~48 animated components) included as migration reference. It is **not installed or built** as part of this project. See `thoughts/research/2026-05-31-motion-core-astro-migration.md` for the migration trade-off analysis (Svelte islands vs Lit vs vanilla `.astro`).
 
 ## Adding a new component
 

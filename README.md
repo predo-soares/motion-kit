@@ -1,60 +1,95 @@
-# motion-kit-astro
+# Motion Kit
 
-Astro-native experiment for serving a custom `shadcn` registry with animated web components.
+A shadcn-compatible component registry of animated web components — install any of them into your own project with a single `shadcn add` command, browse and preview them all in a live Astro gallery.
 
-This repo now exposes registry JSON from `public/r` and keeps the source items in `src/registry/new-york/blocks`.
+## Quick start
 
-## Items
-
-- `card-stack`
-- `magnetic`
-- `magnetic-lit`
-- `split-hover`
-- `split-reveal`
-- `stacking-words`
-- `text-loop`
-- `text-repel`
-- `text-scramble`
-- `weight-wave`
-
-## Local test
-
-1. Start the registry host:
-
-```sh
-pnpm dev
+```bash
+pnpm install
+pnpm dev          # http://localhost:4321 — live preview/demo gallery
+pnpm build        # production build → dist/
+pnpm preview      # preview the production build
 ```
 
-2. In another Astro project, add the local registry namespace:
+## Project structure
 
-```sh
-pnpm dlx shadcn@latest registry add @motion-kit=http://localhost:4321/r/{name}.json
+```
+motion-kit-astro/
+├── src/
+│   ├── registry/                  # Component source — one folder per component
+│   │   ├── canvas/                #   WebGL/canvas-driven effects (god-rays, globe, fluid-simulation, ...)
+│   │   ├── interaction/           #   Pointer/scroll-driven interactions (magnetic, marquee, card-stack, ...)
+│   │   ├── showcase/              #   Larger composed showcase pieces (galleries, sliders, video player)
+│   │   ├── text/                  #   Text/typography effects (text-loop, split-reveal, weight-wave, ...)
+│   │   └── <group>/registry.json  #   Include-based manifest listing the group's published items
+│   │
+│   ├── pages/
+│   │   ├── index.astro            # Live preview/demo gallery (imports & registers every component)
+│   │   └── docs/                  # Docs site (introduction, installation, components, changelog)
+│   │
+│   ├── components/
+│   │   ├── ui/                    # Primitive components (e.g. component-card)
+│   │   ├── docs/                  # Docs-site chrome (nav, sidebar, TOC, preview scripts)
+│   │   ├── demos/                 # Demo wrappers for the gallery
+│   │   └── tests/                 # Cross-framework test hosts (React/Svelte/Vue)
+│   │
+│   ├── layouts/                   # Astro layouts
+│   ├── content/changelog/         # Changelog content collection
+│   ├── styles/                    # Tailwind v4 config (global.css, @theme tokens)
+│   │
+│   └── lib/
+│       ├── utils/                 # cn() and other small utilities
+│       ├── helpers/               # gsap.ts, color.ts, fluid-pointer.ts, svg-sdf.ts
+│       ├── audio/, testing/       # UI audio + DOM/spec test helpers
+│       └── catalog.ts, changelog.ts
+│
+├── public/r/                      # Static registry JSON served to consumers
+│   ├── <name>.json                #   Individual registry item payloads (what `shadcn add` fetches)
+│   └── registry.json              #   Top-level registry manifest
+│
+├── registry.json                  # Root composed source registry (include-based)
+│
+├── packages/
+│   └── motion-kit-cli/            # CLI package (init/add/list/build/info commands)
+│       └── src/
+│           ├── commands/          #   init, add, list, build, info
+│           ├── producer/          #   discover, validate, generate registry artifacts
+│           ├── config/            #   CLI config schema + I/O
+│           └── detection/         #   framework & package-manager detection
+│
+├── templates/                     # Starter templates for supported frameworks
+│   ├── astro/  nextjs/  nuxt/  sveltekit/  vite-react/  vue/
+│
+├── scripts/
+│   └── validate-registry.mjs      # Registry validation script (pnpm registry:validate)
+│
+├── ref/motion-core/               # Read-only Svelte 5 reference library (migration source, not built)
+│
+└── thoughts/
+    ├── plans/                     # Implementation plans (e.g. CLI milestone plans)
+    ├── research/                  # Research write-ups (migration trade-offs, CLI research)
+    └── progress.txt               # Running log of completed milestones
 ```
 
-3. Install one of the items:
+## How the registry works
 
-```sh
-pnpm dlx shadcn@latest add @motion-kit/magnetic
-pnpm dlx shadcn@latest add @motion-kit/text-loop
-pnpm dlx shadcn@latest add @motion-kit/card-stack
-```
+1. Each component lives in `src/registry/<group>/<name>/` as a Web Component (Lit `LitElement` or vanilla `HTMLElement`), with an opt-in `component.json` manifest describing its registry metadata.
+2. Group-level `src/registry/<group>/registry.json` files include published components into the composed source registry (`registry.json` at the root).
+3. `public/r/<name>.json` mirrors each item as the static payload that `shadcn add` actually fetches, alongside `public/r/registry.json` as the top-level manifest.
+4. Consumers install a component with:
+   ```bash
+   pnpm dlx shadcn@latest add <registry-url>/r/<name>.json
+   ```
 
-4. Import the installed files in the consumer app:
+See `CLAUDE.md` for the detailed authoring conventions and the steps for adding a new component.
 
-```astro
----
-import "@/components/motion-kit/magnetic-element.ts"
----
+## Useful scripts
 
-<motion-magnetic>
-  <button>Hover me</button>
-</motion-magnetic>
-```
-
-## Notes
-
-- A component is included in the registry when it defines `src/registry/<group>/<name>/component.json`.
-- Update `registry.json`, the grouped `src/registry/<group>/registry.json` include files, and `public/r/registry.json` directly when you change the registry structure.
-- The registry files served from `public/r` are still static JSON.
-- The distributed items are Custom Elements and helper files, not React components.
-- `pnpm registry:build` is reserved for later validation against the `shadcn` builder.
+| Command | Description |
+| --- | --- |
+| `pnpm dev` | Start the Astro dev server (preview/demo gallery) |
+| `pnpm build` | Production build to `dist/` |
+| `pnpm preview` | Preview the production build |
+| `pnpm registry:validate` | Validate the registry source against the schema |
+| `pnpm registry:build` | Build the CLI and regenerate registry artifacts (run manually by maintainers) |
+| `pnpm registry:build:check` | Same as above, in check-only mode |
