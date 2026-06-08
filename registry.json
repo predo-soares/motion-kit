@@ -5,6 +5,7 @@
   "include": [
     "src/registry/canvas/registry.json",
     "src/registry/interaction/registry.json",
+    "src/registry/lib/registry.json",
     "src/registry/showcase/registry.json",
     "src/registry/text/registry.json"
   ]

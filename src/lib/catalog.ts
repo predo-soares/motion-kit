@@ -26,6 +26,9 @@ interface ComponentManifest {
   files: ComponentManifestFile[];
   usage?: UsageTab[];
   props?: PropEntry[];
+  meta?: {
+    hidden?: boolean;
+  };
 }
 
 interface ComponentSeed {
@@ -55,7 +58,9 @@ const manifestModules = import.meta.glob<ComponentManifest>(
 );
 
 const manifestsBySlug = Object.fromEntries(
-  Object.values(manifestModules).map((manifest) => [manifest.name, manifest]),
+  Object.values(manifestModules)
+    .filter((manifest) => manifest.meta?.hidden !== true)
+    .map((manifest) => [manifest.name, manifest]),
 ) as Record<string, ComponentManifest>;
 
 const seeds: ComponentSeed[] = [

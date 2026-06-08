@@ -422,6 +422,9 @@
       "dependencies": [
         "gsap"
       ],
+      "registryDependencies": [
+        "gsap"
+      ],
       "files": [
         {
           "path": "src/registry/interaction/flip-grid/flip-grid-element.ts",
@@ -432,11 +435,6 @@
           "path": "src/registry/interaction/flip-grid/flip-grid-item-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/flip-grid-item-element.ts"
-        },
-        {
-          "path": "src/lib/helpers/gsap.ts",
-          "type": "registry:lib",
-          "target": "src/lib/helpers/gsap.ts"
         }
       ]
     },
@@ -504,6 +502,25 @@
           "path": "src/registry/interaction/marquee/marquee-element.ts",
           "type": "registry:component",
           "target": "src/components/motion-kit/marquee-element.ts"
+        }
+      ]
+    },
+    {
+      "name": "gsap",
+      "type": "registry:lib",
+      "title": "GSAP helpers",
+      "description": "Shared GSAP plugin registration and Motion Kit ease utilities.",
+      "dependencies": [
+        "gsap"
+      ],
+      "meta": {
+        "hidden": true
+      },
+      "files": [
+        {
+          "path": "src/registry/lib/gsap/gsap.ts",
+          "type": "registry:lib",
+          "target": "src/lib/helpers/gsap.ts"
         }
       ]
     },
@@ -616,6 +633,9 @@
       "description": "Splits text into characters and animates stacked layers on hover for a seamless swap. Framework-agnostic Custom Element.",
       "dependencies": [
         "lit",
+        "gsap"
+      ],
+      "registryDependencies": [
         "gsap"
       ],
       "files": [

@@ -7,6 +7,9 @@
   "dependencies": [
     "gsap"
   ],
+  "registryDependencies": [
+    "gsap"
+  ],
   "files": [
     {
       "path": "src/registry/interaction/flip-grid/flip-grid-element.ts",
@@ -19,12 +22,6 @@
       "type": "registry:component",
       "target": "src/components/motion-kit/flip-grid-item-element.ts",
       "content": "class MotionFlipGridItem extends HTMLElement {\n  static observedAttributes = [\"flip-id\", \"id\"]\n\n  connectedCallback() {\n    this.classList.add(\"flip-grid-item\")\n    this.style.display ||= \"block\"\n    this._syncId()\n  }\n\n  attributeChangedCallback() {\n    this._syncId()\n  }\n\n  replay() {}\n\n  private _syncId() {\n    const id = this.getAttribute(\"flip-id\") ?? this.getAttribute(\"id\")\n    if (id) {\n      this.dataset.flipId = id\n    } else {\n      delete this.dataset.flipId\n    }\n  }\n}\n\ncustomElements.define(\"motion-flip-grid-item\", MotionFlipGridItem)\n\ndeclare global {\n  interface HTMLElementTagNameMap {\n    \"motion-flip-grid-item\": MotionFlipGridItem\n  }\n}\n"
-    },
-    {
-      "path": "src/lib/helpers/gsap.ts",
-      "type": "registry:lib",
-      "target": "src/lib/helpers/gsap.ts",
-      "content": "import { gsap } from \"gsap\";\nimport { CustomEase } from \"gsap/dist/CustomEase\";\n\nconst registeredPlugins = new Set<object>();\n\nconst MOTION_CORE_EASE_NAME = \"motion-kit-ease\";\nconst MOTION_CORE_EASE_CURVE = \"0.625, 0.05, 0, 1\";\n\nlet motionCoreEaseRegistered = false;\n\nexport function registerPluginOnce(...plugins: object[]) {\n  const unique = plugins.filter((plugin) => !registeredPlugins.has(plugin));\n  if (!unique.length) return;\n\n  gsap.registerPlugin(...unique);\n  unique.forEach((plugin) => {\n    registeredPlugins.add(plugin);\n  });\n}\n\nexport function ensureMotionCoreEase() {\n  registerPluginOnce(CustomEase);\n  if (!motionCoreEaseRegistered) {\n    CustomEase.create(MOTION_CORE_EASE_NAME, MOTION_CORE_EASE_CURVE);\n    motionCoreEaseRegistered = true;\n  }\n  return MOTION_CORE_EASE_NAME;\n}\n"
     }
   ],
   "usage": [

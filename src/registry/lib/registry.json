@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "items": [
+    {
+      "name": "gsap",
+      "type": "registry:lib",
+      "title": "GSAP helpers",
+      "description": "Shared GSAP plugin registration and Motion Kit ease utilities.",
+      "dependencies": ["gsap"],
+      "files": [
+        {
+          "type": "registry:lib",
+          "target": "src/lib/helpers/gsap.ts",
+          "path": "gsap/gsap.ts"
+        }
+      ]
+    }
+  ]
+}

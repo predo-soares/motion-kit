@@ -79,6 +79,10 @@ async function validateSourceManifest(file) {
   const manifest = JSON.parse(await readFile(file, "utf8"));
   validateShape(file, manifest);
 
+  if (manifest.meta?.hidden === true && manifest.type !== "registry:lib") {
+    fail(file, `"meta.hidden" is only supported on registry:lib items`);
+  }
+
   const manifestDir = dirname(file);
   // src/registry/<group>/<name>/component.json
   const [group, name] = relative(join(root, "src/registry"), manifestDir).split("/");

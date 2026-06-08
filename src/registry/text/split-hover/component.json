@@ -5,6 +5,7 @@
   "title": "Split Hover",
   "description": "Splits text into characters and animates stacked layers on hover for a seamless swap. Framework-agnostic Custom Element.",
   "dependencies": ["lit", "gsap"],
+  "registryDependencies": ["gsap"],
   "files": [
     {
       "path": "src/registry/text/split-hover/split-hover-element.ts",

@@ -8,6 +8,9 @@
     "lit",
     "gsap"
   ],
+  "registryDependencies": [
+    "gsap"
+  ],
   "files": [
     {
       "path": "src/registry/text/split-hover/split-hover-element.ts",
