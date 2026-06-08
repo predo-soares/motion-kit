@@ -1,0 +1,16 @@
+{
+  "name": "cycle-b",
+  "type": "registry:component",
+  "title": "Cycle B",
+  "description": "Fixture item for dependency cycle tests.",
+  "registryDependencies": ["cycle-a"],
+  "usage": [{ "label": "HTML", "code": "<cycle-b></cycle-b>" }],
+  "files": [
+    {
+      "path": "cycle-b.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/cycle-b.ts",
+      "content": "export {}"
+    }
+  ]
+}

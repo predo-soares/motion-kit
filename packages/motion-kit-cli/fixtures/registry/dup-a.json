@@ -1,0 +1,16 @@
+{
+  "name": "dup-a",
+  "type": "registry:component",
+  "title": "Dup A",
+  "description": "Fixture item that shares a registry dependency.",
+  "registryDependencies": ["shared-lib"],
+  "usage": [{ "label": "HTML", "code": "<dup-a></dup-a>" }],
+  "files": [
+    {
+      "path": "dup-a.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-kit/dup-a.ts",
+      "content": "export {}"
+    }
+  ]
+}

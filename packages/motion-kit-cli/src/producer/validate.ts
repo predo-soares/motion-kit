@@ -63,6 +63,17 @@ export async function validateSourceItem(discovered: DiscoveredItem, cwd: string
   const report = (message: string) => issues.push({ manifest, message });
 
   validateShape(item, report);
+
+  if (item.type === "registry:component") {
+    if (!Array.isArray(item.usage) || item.usage.length === 0) {
+      report(`registry:component "${item.name}" must include a non-empty "usage" array`);
+    }
+  }
+
+  if (item.meta?.hidden === true && item.type !== "registry:lib") {
+    report(`"meta.hidden" is only supported on registry:lib items`);
+  }
+
   if (!Array.isArray(item.files)) return issues;
 
   const ownFolder = `src/registry/${group}/${item.name}/`;

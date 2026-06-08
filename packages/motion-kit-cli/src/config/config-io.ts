@@ -2,6 +2,8 @@ import { existsSync } from "node:fs";
 import { readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import type { MotionKitConfig } from "./types.js";
+import { validateConfig } from "./validate-config.js";
+import { MotionKitError } from "../utils/errors.js";
 
 const CONFIG_FILENAME = "motion-kit.json";
 
@@ -24,9 +26,17 @@ export async function readConfig(cwd: string): Promise<MotionKitConfig | null> {
 
   try {
     const content = await readFile(configPath, "utf-8");
-    return JSON.parse(content) as MotionKitConfig;
+    return validateConfig(JSON.parse(content), configPath);
   } catch (error) {
-    throw new Error(`Failed to read or parse ${CONFIG_FILENAME}: ${error}`);
+    if (error instanceof MotionKitError) {
+      throw error;
+    }
+
+    const message = error instanceof Error ? error.message : String(error);
+    throw new MotionKitError(
+      `Failed to read or parse motion-kit.json at ${configPath}: ${message}\n\nNext: Fix the JSON syntax or run \`motion-kit init --overwrite\` to recreate the config.`,
+      "invalid_config",
+    );
   }
 }
 
@@ -42,8 +52,9 @@ export async function writeConfig(
 
   // Check if file already exists
   if (existsSync(configPath) && !options.overwrite) {
-    throw new Error(
-      `${CONFIG_FILENAME} already exists. Use --overwrite to replace it, or edit it manually.`
+    throw new MotionKitError(
+      `motion-kit.json already exists at ${configPath}.\n\nNext: Edit the existing file, or run \`motion-kit init --overwrite\` to replace it.`,
+      "config_exists",
     );
   }
 

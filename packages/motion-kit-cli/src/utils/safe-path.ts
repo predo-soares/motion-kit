@@ -12,7 +12,7 @@ export function resolveWithinCwd(cwd: string, target: string): string {
 
   if (fromCwd === "" || fromCwd.startsWith("..") || isAbsolute(fromCwd)) {
     throw new MotionKitError(
-      `Refusing to write outside of "${cwd}": "${target}"`,
+      `Refusing to write outside of "${cwd}": "${target}"\n\nNext: Report this registry item — its \`target\` path must stay inside your project.`,
       "unsafe_path",
     );
   }

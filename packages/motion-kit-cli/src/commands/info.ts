@@ -1,6 +1,7 @@
 import type { Command } from "commander";
 
 import { createLogger } from "../utils/logger.js";
+import { isMotionKitError, toErrorMessage } from "../utils/errors.js";
 import { withCommonOptions, type CommonOptions } from "../utils/common-options.js";
 import { readConfig, getConfigPath } from "../config/config-io.js";
 import { detectPackageManager } from "../detection/detect-pm.js";
@@ -38,12 +39,13 @@ export function registerInfoCommand(program: Command): void {
         console.log(`  Components:    ${config.componentsDir}`);
         console.log(`  Helpers:       ${config.helpersDir}`);
       } else {
-        console.log("\nNo motion-kit.json found. Run `motion-kit init` to create one.");
+        console.log(`\nNo motion-kit.json found at ${getConfigPath(options.cwd)}.`);
+        console.log("Run `motion-kit init` to create one.");
       }
 
       logger.verbose("");
     } catch (error) {
-      logger.error(String(error));
+      logger.error(isMotionKitError(error) ? error.message : toErrorMessage(error));
       process.exit(1);
     }
   });

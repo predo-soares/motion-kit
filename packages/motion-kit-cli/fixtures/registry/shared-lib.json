@@ -1,0 +1,14 @@
+{
+  "name": "shared-lib",
+  "type": "registry:lib",
+  "title": "Shared lib",
+  "description": "Fixture helper installed once for duplicate dependency tests.",
+  "files": [
+    {
+      "path": "shared-lib.ts",
+      "type": "registry:lib",
+      "target": "src/lib/helpers/shared-lib.ts",
+      "content": "export const shared = true;"
+    }
+  ]
+}

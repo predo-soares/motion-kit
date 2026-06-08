@@ -16,6 +16,6 @@ export interface MotionKitConfig {
 }
 
 export const DEFAULT_CONFIG: Partial<MotionKitConfig> = {
-  $schema: "https://motionkit.dev/schemas/motion-kit.json",
-  registry: "https://motionkit.dev/r",
+  $schema: "https://motionkit.org/schemas/motion-kit.json",
+  registry: "https://motionkit.org/r",
 };

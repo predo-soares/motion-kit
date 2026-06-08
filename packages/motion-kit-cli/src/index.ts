@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+import { readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { Command } from "commander";
 
 import { registerAddCommand } from "./commands/add.js";
@@ -7,12 +10,16 @@ import { registerInfoCommand } from "./commands/info.js";
 import { registerInitCommand } from "./commands/init.js";
 import { registerListCommand } from "./commands/list.js";
 
+const packageJson = JSON.parse(
+  readFileSync(join(dirname(fileURLToPath(import.meta.url)), "../package.json"), "utf-8"),
+) as { version: string };
+
 const program = new Command();
 
 program
   .name("motion-kit")
   .description("Motion Kit registry CLI — install, build, and inspect animated Web Component items.")
-  .version("0.0.1");
+  .version(packageJson.version);
 
 registerBuildCommand(program);
 registerInitCommand(program);
