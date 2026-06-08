@@ -12,30 +12,30 @@
     {
       "path": "src/registry/interaction/magnetic/magnetic-element.ts",
       "type": "registry:component",
-      "target": "src/components/motion-kit/magnetic-element.ts",
+      "target": "src/components/motion-blocks/magnetic-element.ts",
       "content": "import { LitElement, html, css } from \"lit\"\nimport { customElement, property } from \"lit/decorators.js\"\nimport { gsap } from \"gsap\"\n\n/**\n * A wrapper element that applies spring physics to its children,\n * making them stick to the cursor on hover.\n *\n * @example\n * <motion-magnetic duration=\"1.2\">\n *   <button>Hover me</button>\n * </motion-magnetic>\n */\n@customElement(\"motion-magnetic\")\nexport class MotionMagnetic extends LitElement {\n  static override styles = css`\n    :host {\n      display: inline-block;\n    }\n  `\n\n  /** Animation duration in seconds. */\n  @property({ type: Number }) declare duration: number\n\n  /** GSAP easing function. */\n  @property() declare ease: string\n\n  /** Multiplier for the magnetic pull (0 = none, 1 = full offset). */\n  @property({ type: Number }) declare strength: number\n\n  private _xTo?: gsap.QuickToFunc\n  private _yTo?: gsap.QuickToFunc\n  private _builtWith?: { duration: number; ease: string }\n\n  constructor() {\n    super()\n    this.duration = 1\n    this.ease = \"elastic.out(1, 0.3)\"\n    this.strength = 1\n  }\n\n  override connectedCallback() {\n    super.connectedCallback()\n    this.addEventListener(\"mousemove\", this._onMouseMove)\n    this.addEventListener(\"mouseleave\", this._onMouseLeave)\n    if (this.hasUpdated) this._initQuickTo()\n  }\n\n  override firstUpdated() {\n    this._initQuickTo()\n  }\n\n  override updated(changed: Map<string, unknown>) {\n    if (!this.hasUpdated) return\n    if (changed.has(\"duration\") || changed.has(\"ease\")) this._initQuickTo()\n  }\n\n  override disconnectedCallback() {\n    super.disconnectedCallback()\n    this.removeEventListener(\"mousemove\", this._onMouseMove)\n    this.removeEventListener(\"mouseleave\", this._onMouseLeave)\n    gsap.killTweensOf(this)\n    this._xTo = undefined\n    this._yTo = undefined\n    this._builtWith = undefined\n  }\n\n  replay() {\n    this._xTo?.(0)\n    this._yTo?.(0)\n  }\n\n  private _initQuickTo() {\n    const duration = Number(this.duration)\n    const ease = this.ease\n    if (this._builtWith?.duration === duration && this._builtWith?.ease === ease) return\n    gsap.killTweensOf(this)\n    this._xTo = gsap.quickTo(this, \"x\", { duration, ease })\n    this._yTo = gsap.quickTo(this, \"y\", { duration, ease })\n    this._builtWith = { duration, ease }\n  }\n\n  private _onMouseMove = (e: MouseEvent) => {\n    const { height, width, left, top } = this.getBoundingClientRect()\n    this.style.zIndex = \"9999\"\n    this._xTo?.((e.clientX - (left + width / 2)) * this.strength)\n    this._yTo?.((e.clientY - (top + height / 2)) * this.strength)\n  }\n\n  private _onMouseLeave = () => {\n    this.style.zIndex = \"\"\n    this._xTo?.(0)\n    this._yTo?.(0)\n  }\n\n  override render() {\n    return html`<slot></slot>`\n  }\n}\n\ndeclare global {\n  interface HTMLElementTagNameMap {\n    \"motion-magnetic\": MotionMagnetic\n  }\n}\n"
     }
   ],
   "usage": [
     {
       "label": "Astro",
-      "code": "---\nimport \"@/components/motion-kit/magnetic-element.ts\";\n---\n\n<motion-magnetic duration=\"1.2\">\n  <button>Hover me</button>\n</motion-magnetic>"
+      "code": "---\nimport \"@/components/motion-blocks/magnetic-element.ts\";\n---\n\n<motion-magnetic duration=\"1.2\">\n  <button>Hover me</button>\n</motion-magnetic>"
     },
     {
       "label": "React",
-      "code": "import \"@/components/motion-kit/magnetic-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-magnetic duration=\"1.2\">\n      <button>Hover me</button>\n    </motion-magnetic>\n  );\n}"
+      "code": "import \"@/components/motion-blocks/magnetic-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-magnetic duration=\"1.2\">\n      <button>Hover me</button>\n    </motion-magnetic>\n  );\n}"
     },
     {
       "label": "Vue",
-      "code": "<script setup>\nimport \"@/components/motion-kit/magnetic-element.ts\";\n</script>\n\n<template>\n  <motion-magnetic duration=\"1.2\">\n    <button>Hover me</button>\n  </motion-magnetic>\n</template>"
+      "code": "<script setup>\nimport \"@/components/motion-blocks/magnetic-element.ts\";\n</script>\n\n<template>\n  <motion-magnetic duration=\"1.2\">\n    <button>Hover me</button>\n  </motion-magnetic>\n</template>"
     },
     {
       "label": "Svelte",
-      "code": "<script>\n  import \"@/components/motion-kit/magnetic-element.ts\";\n</script>\n\n<motion-magnetic duration=\"1.2\">\n  <button>Hover me</button>\n</motion-magnetic>"
+      "code": "<script>\n  import \"@/components/motion-blocks/magnetic-element.ts\";\n</script>\n\n<motion-magnetic duration=\"1.2\">\n  <button>Hover me</button>\n</motion-magnetic>"
     },
     {
       "label": "HTML",
-      "code": "<script type=\"module\" src=\"/components/motion-kit/magnetic-element.js\"></script>\n\n<motion-magnetic duration=\"1.2\">\n  <button>Hover me</button>\n</motion-magnetic>"
+      "code": "<script type=\"module\" src=\"/components/motion-blocks/magnetic-element.js\"></script>\n\n<motion-magnetic duration=\"1.2\">\n  <button>Hover me</button>\n</motion-magnetic>"
     }
   ],
   "props": [

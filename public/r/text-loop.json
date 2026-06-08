@@ -12,30 +12,30 @@
     {
       "path": "src/registry/text/text-loop/text-loop-element.ts",
       "type": "registry:component",
-      "target": "src/components/motion-kit/text-loop-element.ts",
+      "target": "src/components/motion-blocks/text-loop-element.ts",
       "content": "import { LitElement, html, css } from \"lit\"\nimport { customElement, property } from \"lit/decorators.js\"\nimport { gsap } from \"gsap\"\n\n/**\n * Cycles through an array of text strings with a blurred vertical slide transition.\n *\n * @example\n * <motion-text-loop\n *   texts='[\"Design\",\"Develop\",\"Deploy\"]'\n *   interval=\"2500\"\n * ></motion-text-loop>\n */\n@customElement(\"motion-text-loop\")\nexport class MotionTextLoop extends LitElement {\n  static override styles = css`\n    :host {\n      font: inherit;\n      color: inherit;\n      position: relative;\n      display: inline-block;\n      clip-path: inset(-100vh 0 -100vh 0);\n    }\n    .container {\n      position: relative;\n      display: inline-block;\n      overflow: visible;\n    }\n    .sizer {\n      visibility: hidden;\n      display: inline-block;\n      width: 0;\n    }\n    .text-item {\n      font: inherit;\n      color: inherit;\n      white-space: nowrap;\n      display: inline-block;\n    }\n  `\n\n  @property({ type: Array }) texts: string[] = []\n  @property({ type: Number }) interval = 2000\n\n  private _timer?: ReturnType<typeof setInterval>\n  private _animating = false\n  private _isFirst = true\n\n  override connectedCallback() {\n    super.connectedCallback()\n    this._timer = setInterval(() => {\n      if (!document.hidden && !this._animating) this._advance()\n    }, this.interval)\n  }\n\n  override disconnectedCallback() {\n    super.disconnectedCallback()\n    clearInterval(this._timer)\n    const span = this._span()\n    if (span) gsap.killTweensOf(span)\n    const container = this._container()\n    if (container) gsap.killTweensOf(container)\n  }\n\n  override firstUpdated() {\n    const container = this._container()\n    const span = this._span()\n    if (!container || !span) return\n\n    span.textContent = this.texts[0] ?? \"\"\n    container.style.width = `${span.offsetWidth}px`\n  }\n\n  private _span() {\n    return this.renderRoot.querySelector<HTMLElement>(\".text-item\")\n  }\n\n  private _container() {\n    return this.renderRoot.querySelector<HTMLElement>(\".container\")\n  }\n\n  replay() {\n    const container = this._container()\n    const span = this._span()\n    if (!container || !span) return\n\n    gsap.killTweensOf(span)\n    gsap.killTweensOf(container)\n    this._animating = false\n    this._isFirst = true\n    span.dataset.index = \"0\"\n    span.textContent = this.texts[0] ?? \"\"\n    container.style.width = `${span.offsetWidth}px`\n    Object.assign(span.style, { position: \"\", top: \"\", left: \"\", width: \"\" })\n    gsap.set(span, { clearProps: \"yPercent,opacity,filter\" })\n  }\n\n  private async _advance() {\n    const container = this._container()\n    const span = this._span()\n    if (!container || !span || !this.texts.length) return\n\n    this._animating = true\n\n    container.style.width = `${container.offsetWidth}px`\n    Object.assign(span.style, { position: \"absolute\", top: \"0\", left: \"0\", width: \"100%\" })\n\n    await gsap.to(span, {\n      yPercent: -50,\n      opacity: 0,\n      filter: \"blur(6px)\",\n      duration: 0.2,\n      ease: \"power2.in\",\n    })\n\n    const nextIndex = (Number(span.dataset.index ?? 0) + 1) % this.texts.length\n    span.dataset.index = String(nextIndex)\n    span.textContent = this.texts[nextIndex] ?? \"\"\n\n    Object.assign(span.style, { position: \"absolute\", top: \"0\", left: \"0\", width: \"auto\" })\n    gsap.set(span, { yPercent: 50, opacity: 0, filter: \"blur(8px)\" })\n\n    const nextWidth = span.offsetWidth\n\n    gsap.to(container, {\n      width: nextWidth,\n      duration: 0.35,\n      ease: \"power2.inOut\",\n    })\n\n    await gsap.to(span, {\n      yPercent: 0,\n      opacity: 1,\n      filter: \"blur(0px)\",\n      duration: 0.3,\n      delay: 0.25,\n      ease: \"back.out(1.2)\",\n    })\n\n    if (this._isFirst) this._isFirst = false\n    this._animating = false\n  }\n\n  override render() {\n    return html`\n      <span class=\"container\">\n        <span class=\"sizer\" aria-hidden=\"true\">&nbsp;</span>\n        <span class=\"text-item\" data-index=\"0\"></span>\n      </span>\n    `\n  }\n}\n\ndeclare global {\n  interface HTMLElementTagNameMap {\n    \"motion-text-loop\": MotionTextLoop\n  }\n}\n"
     }
   ],
   "usage": [
     {
       "label": "Astro",
-      "code": "---\nimport \"@/components/motion-kit/text-loop-element.ts\";\n---\n\n<motion-text-loop\n  texts='[\"Design\",\"Develop\",\"Deploy\"]'\n  interval=\"2000\"\n></motion-text-loop>"
+      "code": "---\nimport \"@/components/motion-blocks/text-loop-element.ts\";\n---\n\n<motion-text-loop\n  texts='[\"Design\",\"Develop\",\"Deploy\"]'\n  interval=\"2000\"\n></motion-text-loop>"
     },
     {
       "label": "React",
-      "code": "import \"@/components/motion-kit/text-loop-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-text-loop\n      texts='[\"Design\",\"Develop\",\"Deploy\"]'\n      interval=\"2000\"\n    />\n  );\n}"
+      "code": "import \"@/components/motion-blocks/text-loop-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-text-loop\n      texts='[\"Design\",\"Develop\",\"Deploy\"]'\n      interval=\"2000\"\n    />\n  );\n}"
     },
     {
       "label": "Vue",
-      "code": "<script setup>\nimport \"@/components/motion-kit/text-loop-element.ts\";\n</script>\n\n<template>\n  <motion-text-loop\n    :texts='JSON.stringify([\"Design\", \"Develop\", \"Deploy\"])'\n    interval=\"2000\"\n  />\n</template>"
+      "code": "<script setup>\nimport \"@/components/motion-blocks/text-loop-element.ts\";\n</script>\n\n<template>\n  <motion-text-loop\n    :texts='JSON.stringify([\"Design\", \"Develop\", \"Deploy\"])'\n    interval=\"2000\"\n  />\n</template>"
     },
     {
       "label": "Svelte",
-      "code": "<script>\n  import \"@/components/motion-kit/text-loop-element.ts\";\n</script>\n\n<motion-text-loop\n  texts='[\"Design\",\"Develop\",\"Deploy\"]'\n  interval=\"2000\"\n></motion-text-loop>"
+      "code": "<script>\n  import \"@/components/motion-blocks/text-loop-element.ts\";\n</script>\n\n<motion-text-loop\n  texts='[\"Design\",\"Develop\",\"Deploy\"]'\n  interval=\"2000\"\n></motion-text-loop>"
     },
     {
       "label": "HTML",
-      "code": "<script type=\"module\" src=\"/components/motion-kit/text-loop-element.js\"></script>\n\n<motion-text-loop\n  texts='[\"Design\",\"Develop\",\"Deploy\"]'\n  interval=\"2000\"\n></motion-text-loop>"
+      "code": "<script type=\"module\" src=\"/components/motion-blocks/text-loop-element.js\"></script>\n\n<motion-text-loop\n  texts='[\"Design\",\"Develop\",\"Deploy\"]'\n  interval=\"2000\"\n></motion-text-loop>"
     }
   ],
   "props": [

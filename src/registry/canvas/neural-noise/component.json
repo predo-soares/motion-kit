@@ -9,29 +9,29 @@
     {
       "path": "src/registry/canvas/neural-noise/neural-noise-element.ts",
       "type": "registry:component",
-      "target": "src/components/motion-kit/neural-noise-element.ts"
+      "target": "src/components/motion-blocks/neural-noise-element.ts"
     }
   ],
   "usage": [
     {
       "label": "Astro",
-      "code": "---\nimport \"@/components/motion-kit/neural-noise-element.ts\";\n---\n\n<motion-neural-noise\n  speed={1}\n  class=\"w-full h-[500px]\"\n/>"
+      "code": "---\nimport \"@/components/motion-blocks/neural-noise-element.ts\";\n---\n\n<motion-neural-noise\n  speed={1}\n  class=\"w-full h-[500px]\"\n/>"
     },
     {
       "label": "React",
-      "code": "import \"@/components/motion-kit/neural-noise-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-neural-noise\n      speed={1}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+      "code": "import \"@/components/motion-blocks/neural-noise-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-neural-noise\n      speed={1}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
     },
     {
       "label": "Vue",
-      "code": "<script setup>\nimport \"@/components/motion-kit/neural-noise-element.ts\";\n</script>\n\n<template>\n  <motion-neural-noise\n    :speed=\"1\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+      "code": "<script setup>\nimport \"@/components/motion-blocks/neural-noise-element.ts\";\n</script>\n\n<template>\n  <motion-neural-noise\n    :speed=\"1\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
     },
     {
       "label": "Svelte",
-      "code": "<script>\n  import \"@/components/motion-kit/neural-noise-element.ts\";\n</script>\n\n<motion-neural-noise\n  speed={1}\n  class=\"w-full h-[500px]\"\n/>"
+      "code": "<script>\n  import \"@/components/motion-blocks/neural-noise-element.ts\";\n</script>\n\n<motion-neural-noise\n  speed={1}\n  class=\"w-full h-[500px]\"\n/>"
     },
     {
       "label": "HTML",
-      "code": "<script type=\"module\" src=\"/components/motion-kit/neural-noise-element.js\"></script>\n\n<motion-neural-noise\n  speed=\"1\"\n  class=\"w-full h-[500px]\"\n/>"
+      "code": "<script type=\"module\" src=\"/components/motion-blocks/neural-noise-element.js\"></script>\n\n<motion-neural-noise\n  speed=\"1\"\n  class=\"w-full h-[500px]\"\n/>"
     }
   ],
   "props": [

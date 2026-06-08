@@ -1,22 +1,22 @@
-# motion-kit Vite React example
+# Motion Blocks Vite React example
 
-A minimal React + Vite project used to test installing components from the Motion Kit
-registry via the `motion-kit` CLI.
+A minimal React + Vite project used to test installing components from the Motion Blocks
+registry via the `motion-blocks` CLI.
 
 ## Setup
 
-This template ships a committed `motion-kit.json`. To recreate it in a fresh
+This template ships a committed `motion-blocks.json`. To recreate it in a fresh
 project:
 
 ```sh
-pnpm dlx motion-kit init
+pnpm dlx motion-blocks init
 ```
 
 When testing from the monorepo root:
 
 ```sh
-pnpm --filter motion-kit-cli build
-node packages/motion-kit-cli/dist/index.js init --cwd templates/vite-react
+pnpm --filter motion-blocks build
+node packages/motion-blocks-cli/dist/index.js init --cwd templates/vite-react
 ```
 
 Point `registry` at your local docs server when testing against
@@ -31,19 +31,19 @@ Point `registry` at your local docs server when testing against
 ## Install a component
 
 ```sh
-pnpm dlx motion-kit add magnetic
+pnpm dlx motion-blocks add magnetic
 ```
 
 From the monorepo:
 
 ```sh
-node packages/motion-kit-cli/dist/index.js add magnetic --cwd templates/vite-react
+node packages/motion-blocks-cli/dist/index.js add magnetic --cwd templates/vite-react
 ```
 
 Use `--overwrite` to replace existing installed files:
 
 ```sh
-node packages/motion-kit-cli/dist/index.js add magnetic --overwrite --cwd templates/vite-react
+node packages/motion-blocks-cli/dist/index.js add magnetic --overwrite --cwd templates/vite-react
 ```
 
 ## Using the component
@@ -51,7 +51,7 @@ node packages/motion-kit-cli/dist/index.js add magnetic --overwrite --cwd templa
 Import the element module in any client-side React file:
 
 ```tsx
-import "@/components/motion-kit/magnetic-element";
+import "@/components/motion-blocks/magnetic-element";
 
 export default function App() {
   return (

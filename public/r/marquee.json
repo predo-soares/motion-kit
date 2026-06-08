@@ -11,30 +11,30 @@
     {
       "path": "src/registry/interaction/marquee/marquee-element.ts",
       "type": "registry:component",
-      "target": "src/components/motion-kit/marquee-element.ts",
+      "target": "src/components/motion-blocks/marquee-element.ts",
       "content": "import { gsap } from \"gsap\"\nimport { ScrollTrigger } from \"gsap/ScrollTrigger\"\n\ngsap.registerPlugin(ScrollTrigger)\n\n/**\n * Scroll-aware infinite marquee. Place any HTML inside as children — they are\n * duplicated `repeat` times to create a seamless loop. Speed reacts to scroll\n * velocity via ScrollTrigger.\n *\n * @example\n * <motion-marquee gap=\"32\" duration=\"10\">\n *   <img src=\"/logo-a.svg\" alt=\"A\" class=\"h-8 w-auto\" />\n *   <img src=\"/logo-b.svg\" alt=\"B\" class=\"h-8 w-auto\" />\n * </motion-marquee>\n */\nclass MotionMarquee extends HTMLElement {\n  private _ctx?: gsap.Context\n\n  connectedCallback() {\n    // Defer so children are available in the parsed DOM.\n    requestAnimationFrame(() => this._init())\n  }\n\n  disconnectedCallback() {\n    this._ctx?.revert()\n  }\n\n  replay() {\n    this._ctx?.revert()\n    requestAnimationFrame(() => this._init())\n  }\n\n  private _init() {\n    const gap = Number(this.getAttribute(\"gap\") ?? 32)\n    const duration = Number(this.getAttribute(\"duration\") ?? 5)\n    const velocity = Number(this.getAttribute(\"velocity\") ?? 0.5)\n    const repeat = Number(this.getAttribute(\"repeat\") ?? 3)\n    const reversed = this.hasAttribute(\"reversed\")\n\n    // Capture original children before rebuilding DOM.\n    const originalNodes = Array.from(this.childNodes).map((n) =>\n      n.cloneNode(true),\n    )\n    if (!originalNodes.length) return\n\n    this.style.cssText = \"display:flex;overflow:hidden;width:100%;\"\n    this.innerHTML = \"\"\n\n    const parts: HTMLDivElement[] = []\n    for (let i = 0; i < repeat; i++) {\n      const part = document.createElement(\"div\")\n      part.style.cssText = `display:flex;flex-shrink:0;gap:${gap}px;padding-left:${gap / 2}px;padding-right:${gap / 2}px;`\n      if (i > 0) part.setAttribute(\"aria-hidden\", \"true\")\n      originalNodes.forEach((n) => part.appendChild(n.cloneNode(true)))\n      this.appendChild(part)\n      parts.push(part)\n    }\n\n    let tl!: gsap.core.Timeline\n\n    this._ctx = gsap.context(() => {\n      tl = gsap.timeline({\n        repeat: -1,\n        onReverseComplete() {\n          tl.totalTime(tl.rawTime() + tl.duration() * 10)\n        },\n      })\n      tl.to(parts, { xPercent: -100, ease: \"none\", duration })\n\n      if (reversed) {\n        tl.progress(1)\n        tl.timeScale(-1)\n      }\n\n      let direction = reversed ? -1 : 1\n\n      ScrollTrigger.create({\n        onUpdate(self) {\n          const targetDir = reversed ? -self.direction : self.direction\n          if (direction !== targetDir) {\n            direction = targetDir\n            gsap.to(tl, { timeScale: direction, overwrite: true })\n          }\n          const scrollVel = self.getVelocity()\n          if (Math.abs(scrollVel) > 0) {\n            const timeScale =\n              direction * (1 + Math.abs(scrollVel * velocity) / 1000)\n            gsap.to(tl, { timeScale, overwrite: true, duration: 0.1 })\n            gsap.to(tl, {\n              timeScale: direction,\n              duration: 0.5,\n              delay: 0.1,\n              overwrite: \"auto\",\n            })\n          }\n        },\n      })\n    }, this)\n  }\n}\n\ncustomElements.define(\"motion-marquee\", MotionMarquee)\n\ndeclare global {\n  interface HTMLElementTagNameMap {\n    \"motion-marquee\": MotionMarquee\n  }\n}\n"
     }
   ],
   "usage": [
     {
       "label": "Astro",
-      "code": "---\nimport \"@/components/motion-kit/marquee-element.ts\";\n---\n\n<motion-marquee gap=\"32\" duration=\"10\">\n  <img src=\"/logo-a.svg\" alt=\"A\" />\n  <img src=\"/logo-b.svg\" alt=\"B\" />\n</motion-marquee>"
+      "code": "---\nimport \"@/components/motion-blocks/marquee-element.ts\";\n---\n\n<motion-marquee gap=\"32\" duration=\"10\">\n  <img src=\"/logo-a.svg\" alt=\"A\" />\n  <img src=\"/logo-b.svg\" alt=\"B\" />\n</motion-marquee>"
     },
     {
       "label": "React",
-      "code": "import \"@/components/motion-kit/marquee-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-marquee gap=\"32\" duration=\"10\">\n      <img src=\"/logo-a.svg\" alt=\"A\" />\n      <img src=\"/logo-b.svg\" alt=\"B\" />\n    </motion-marquee>\n  );\n}"
+      "code": "import \"@/components/motion-blocks/marquee-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-marquee gap=\"32\" duration=\"10\">\n      <img src=\"/logo-a.svg\" alt=\"A\" />\n      <img src=\"/logo-b.svg\" alt=\"B\" />\n    </motion-marquee>\n  );\n}"
     },
     {
       "label": "Vue",
-      "code": "<script setup>\nimport \"@/components/motion-kit/marquee-element.ts\";\n</script>\n\n<template>\n  <motion-marquee gap=\"32\" duration=\"10\">\n    <img src=\"/logo-a.svg\" alt=\"A\" />\n    <img src=\"/logo-b.svg\" alt=\"B\" />\n  </motion-marquee>\n</template>"
+      "code": "<script setup>\nimport \"@/components/motion-blocks/marquee-element.ts\";\n</script>\n\n<template>\n  <motion-marquee gap=\"32\" duration=\"10\">\n    <img src=\"/logo-a.svg\" alt=\"A\" />\n    <img src=\"/logo-b.svg\" alt=\"B\" />\n  </motion-marquee>\n</template>"
     },
     {
       "label": "Svelte",
-      "code": "<script>\n  import \"@/components/motion-kit/marquee-element.ts\";\n</script>\n\n<motion-marquee gap=\"32\" duration=\"10\">\n  <img src=\"/logo-a.svg\" alt=\"A\" />\n  <img src=\"/logo-b.svg\" alt=\"B\" />\n</motion-marquee>"
+      "code": "<script>\n  import \"@/components/motion-blocks/marquee-element.ts\";\n</script>\n\n<motion-marquee gap=\"32\" duration=\"10\">\n  <img src=\"/logo-a.svg\" alt=\"A\" />\n  <img src=\"/logo-b.svg\" alt=\"B\" />\n</motion-marquee>"
     },
     {
       "label": "HTML",
-      "code": "<script type=\"module\" src=\"/components/motion-kit/marquee-element.js\"></script>\n\n<motion-marquee gap=\"32\" duration=\"10\">\n  <img src=\"/logo-a.svg\" alt=\"A\" />\n  <img src=\"/logo-b.svg\" alt=\"B\" />\n</motion-marquee>"
+      "code": "<script type=\"module\" src=\"/components/motion-blocks/marquee-element.js\"></script>\n\n<motion-marquee gap=\"32\" duration=\"10\">\n  <img src=\"/logo-a.svg\" alt=\"A\" />\n  <img src=\"/logo-b.svg\" alt=\"B\" />\n</motion-marquee>"
     }
   ],
   "props": [

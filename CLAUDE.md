@@ -14,17 +14,17 @@ pnpm preview      # preview built output
 
 ## What this project is
 
-`motion-kit-astro` is a **Motion Kit-owned component registry** that hosts animated web components for installation via the `motion-kit` CLI. The Astro site (`src/pages/index.astro`) is a live preview/demo gallery; the actual distributable artifacts are:
+`motion-blocks` is a **Motion Blocks-owned component registry** that hosts animated web components for installation via the `motion-blocks` CLI. The Astro site (`src/pages/index.astro`) is a live preview/demo gallery; the actual distributable artifacts are:
 
 - **Registry source:** `src/registry/<group>/<name>/` — one directory per component
 - **Static JSON served to consumers:** `public/r/<name>.json` + `public/r/registry.json`
 - **Component manifest:** `src/registry/<group>/<name>/component.json` — opt-in source of truth for a published item
 - **Composed source registries:** `registry.json` at the root plus `src/registry/<group>/registry.json` — include-based manifests
-- **CLI config:** `motion-kit.json` in consumer projects — the only config file the CLI reads
+- **CLI config:** `motion-blocks.json` in consumer projects — the only config file the CLI reads
 
-When a consumer runs `motion-kit add`, they receive the files listed under `"files"` in the registry payload, installed at the `"target"` paths in their project.
+When a consumer runs `motion-blocks add`, they receive the files listed under `"files"` in the registry payload, installed at the `"target"` paths in their project.
 
-The v0 schema inherits field names from shadcn's registry format where they overlap, but Motion Kit narrows the contract to what the CLI and docs site actually use. Motion Kit does **not** read shadcn `components.json`.
+The v0 schema inherits field names from shadcn's registry format where they overlap, but Motion Blocks narrows the contract to what the CLI and docs site actually use. Motion Blocks does **not** read shadcn `components.json`.
 
 ## Architecture
 
@@ -39,19 +39,19 @@ Every component exposes a `replay()` method for the preview UI's replay button.
 
 ### Registry → consumer flow
 
-Any component folder that defines `component.json` can be referenced from the include-based source registries. `public/r/*.json` item payloads are the static files that `motion-kit add` fetches.
+Any component folder that defines `component.json` can be referenced from the include-based source registries. `public/r/*.json` item payloads are the static files that `motion-blocks add` fetches.
 
-### Motion Kit CLI
+### Motion Blocks CLI
 
-Package: `packages/motion-kit-cli/`. Commands:
+Package: `packages/motion-blocks-cli/`. Commands:
 
-- `motion-kit init` — detect framework/package manager and write `motion-kit.json`
-- `motion-kit add <name>` — install registry items (resolves `registryDependencies`, copies files/assets, installs npm deps)
-- `motion-kit list` / `motion-kit list --all` — browse the registry catalog (hidden libs require `--all`)
-- `motion-kit info` — show detected project info and config
-- `motion-kit build` / `motion-kit build --check` — regenerate or validate `public/r` from source manifests
+- `motion-blocks init` — detect framework/package manager and write `motion-blocks.json`
+- `motion-blocks add <name>` — install registry items (resolves `registryDependencies`, copies files/assets, installs npm deps)
+- `motion-blocks list` / `motion-blocks list --all` — browse the registry catalog (hidden libs require `--all`)
+- `motion-blocks info` — show detected project info and config
+- `motion-blocks build` / `motion-blocks build --check` — regenerate or validate `public/r` from source manifests
 
-Consumer test apps live under `templates/`. See `packages/motion-kit-cli/RELEASE.md` for the release checklist.
+Consumer test apps live under `templates/`. See `packages/motion-blocks-cli/RELEASE.md` for the release checklist.
 
 ### Preview site (`src/pages/index.astro`)
 

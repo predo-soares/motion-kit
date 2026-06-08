@@ -3,6 +3,7 @@ import ComponentBrowserShell from "@/components/docs/component-browser-shell.ast
 import ComponentToc from "@/components/docs/component-toc.astro";
 import CardLink from "@/components/docs/card-link.astro";
 import CodeBlock from "@/components/docs/code-block.astro";
+import PackageCommand from "@/components/docs/package-command.astro";
 import SiteLayout from "@/layouts/site-layout.astro";
 import AstroLogo from "@/components/ui/logos/astro-logo.astro";
 import NextJsLogo from "@/components/ui/logos/nextjs-logo.astro";
@@ -20,18 +21,13 @@ const tocItems = [
   { href: "#troubleshooting", label: "Troubleshooting" },
 ];
 
-const initCommand = "pnpm dlx motion-kit init";
-const addCommand = "pnpm dlx motion-kit add magnetic";
-const listCommand = "pnpm dlx motion-kit list";
-const listAllCommand = "pnpm dlx motion-kit list --all";
-const infoCommand = "pnpm dlx motion-kit info";
 const motionKitConfig = `{
-  "$schema": "https://motionkit.org/schemas/motion-kit.json",
+  "$schema": "https://motionkit.org/schemas/motion-blocks.json",
   "registry": "https://motionkit.org/r",
   "framework": "astro",
   "packageManager": "pnpm",
-  "componentsDir": "src/components/motion-kit",
-  "helpersDir": "src/lib/motion-kit"
+  "componentsDir": "src/components/motion-blocks",
+  "helpersDir": "src/lib/motion-blocks"
 }`;
 const tsconfigDecorators = `{
   "compilerOptions": {
@@ -45,20 +41,20 @@ const importExample = `import "./magnetic-element";
 <motion-magnetic></motion-magnetic>`;
 const projectStructure = `src/
 ├── components/
-│   └── motion-kit/          # Motion Kit components
+│   └── motion-blocks/          # Motion Blocks components
 │       ├── magnetic/
 │       │   └── magnetic-element.ts
 │       ├── card-stack/
 │       │   └── card-stack-element.ts
 │       └── ...
 ├── lib/
-│   └── motion-kit/           # Shared helpers (e.g. gsap)
+│   └── motion-blocks/           # Shared helpers (e.g. gsap)
 └── pages/`;
 ---
 
 <SiteLayout
-  title="Installation — Motion Kit"
-  description="How to install Motion Kit components with the motion-kit CLI."
+  title="Installation — Motion Blocks"
+  description="How to install Motion Blocks components with the motion-blocks CLI."
 >
   <ComponentBrowserShell currentHref="/docs/installation">
     <article class="flex w-full max-w-[600px] min-w-0 flex-col gap-10 pb-16">
@@ -72,14 +68,11 @@ const projectStructure = `src/
           </h1>
         </div>
         <p class="text-sm leading-6 text-balance text-slate-600">
-          Install animated Web Components into your project with the Motion Kit
-          CLI. Motion Kit uses <code
+          Install animated Web Components into your project with the Motion Blocks
+          CLI. Motion Blocks uses <code
             class="rounded bg-slate-100 px-1.5 py-0.5 text-[0.9em] text-slate-800"
-            >motion-kit.json</code
-          > only — it does not read shadcn <code
-            class="rounded bg-slate-100 px-1.5 py-0.5 text-[0.9em] text-slate-800"
-            >components.json</code
-          >.
+            >motion-blocks.json</code
+          > only.
         </p>
       </header>
 
@@ -89,16 +82,16 @@ const projectStructure = `src/
         </h2>
         <div class="flex flex-col gap-3 text-sm leading-7 text-slate-600">
           <p>
-            Initialize Motion Kit in your project, then add any component by
+            Initialize Motion Blocks in your project, then add any component by
             name:
           </p>
 
-          <CodeBlock code={initCommand} />
-          <CodeBlock code={addCommand} />
+          <PackageCommand command="motion-blocks init" />
+          <PackageCommand command="motion-blocks add magnetic" />
 
           <p>The CLI will automatically:</p>
           <ul class="ml-4 list-disc space-y-1 text-sm text-slate-600">
-            <li>Write <code>motion-kit.json</code> with framework-aware paths</li>
+            <li>Write <code>motion-blocks.json</code> with framework-aware paths</li>
             <li>Download component source files from the registry</li>
             <li>Resolve registry dependencies (e.g. shared gsap helper)</li>
             <li>Install required npm dependencies (GSAP, Lit, etc.)</li>
@@ -107,7 +100,7 @@ const projectStructure = `src/
           </ul>
 
           <p>
-            Each component page shows the exact <code>motion-kit add</code> command
+            Each component page shows the exact <code>motion-blocks add</code> command
             ready to copy.
           </p>
         </div>
@@ -120,15 +113,15 @@ const projectStructure = `src/
         <div class="flex flex-col gap-3 text-sm leading-7 text-slate-600">
           <p>Browse and inspect the registry before installing:</p>
 
-          <CodeBlock code={listCommand} />
+          <PackageCommand command="motion-blocks list" />
           <p>
             Use <code>--all</code> to include hidden helper libs such as the
             shared gsap module:
           </p>
-          <CodeBlock code={listAllCommand} />
+          <PackageCommand command="motion-blocks list --all" />
 
           <p>Inspect detected project info and your config:</p>
-          <CodeBlock code={infoCommand} />
+          <PackageCommand command="motion-blocks info" />
 
           <p>
             Maintainers can validate registry source manifests without writing
@@ -144,7 +137,7 @@ const projectStructure = `src/
         </h2>
         <div class="flex flex-col gap-3 text-sm leading-7 text-slate-600">
           <p>
-            <code>motion-kit init</code> writes a <code>motion-kit.json</code> file
+            <code>motion-blocks init</code> writes a <code>motion-blocks.json</code> file
             at your project root. You can edit it to override detection results:
           </p>
 
@@ -159,11 +152,6 @@ const projectStructure = `src/
             <li><code>componentsDir</code> — where component files are written</li>
             <li><code>helpersDir</code> — where shared helper libs are written</li>
           </ul>
-
-          <p>
-            If your project also uses shadcn/ui, keep <code>components.json</code> for
-            the shadcn CLI only. Motion Kit never reads it.
-          </p>
 
           <p>
             Lit-based components need decorators enabled when your project compiles
@@ -194,7 +182,7 @@ const projectStructure = `src/
           Framework Support
         </h2>
         <p class="text-sm text-slate-600">
-          Motion Kit components work with any framework that supports Web
+          Motion Blocks components work with any framework that supports Web
           Components. Starter templates live in the repo under <code
             class="rounded bg-slate-100 px-1.5 py-0.5 text-[0.9em] text-slate-800"
             >templates/</code
@@ -266,12 +254,12 @@ const projectStructure = `src/
           <div>
             <p>
               <strong class="font-semibold text-slate-900"
-                >No motion-kit.json found</strong
+                >No motion-blocks.json found</strong
               >
             </p>
             <p>
-              Run <code>motion-kit init</code> in your project root before
-              <code>motion-kit add</code>.
+              Run <code>motion-blocks init</code> in your project root before
+              <code>motion-blocks add</code>.
             </p>
           </div>
 
@@ -282,8 +270,8 @@ const projectStructure = `src/
               >
             </p>
             <p>
-              Run <code>motion-kit list</code> to see available names. Check that
-              <code>registry</code> in <code>motion-kit.json</code> points at a
+              Run <code>motion-blocks list</code> to see available names. Check that
+              <code>registry</code> in <code>motion-blocks.json</code> points at a
               valid catalog URL.
             </p>
           </div>
@@ -296,7 +284,7 @@ const projectStructure = `src/
             </p>
             <p>
               The fetched payload failed validation. If you maintain the
-              registry, run <code>motion-kit build --check</code> from the Motion
+              registry, run <code>motion-blocks build --check</code> from the Motion
               Kit repo to inspect source manifests.
             </p>
           </div>
@@ -357,8 +345,8 @@ const projectStructure = `src/
               >
             </p>
             <p>
-              If <code>motion-kit init</code> cannot detect your framework, set
-              <code>framework</code> manually in <code>motion-kit.json</code> and
+              If <code>motion-blocks init</code> cannot detect your framework, set
+              <code>framework</code> manually in <code>motion-blocks.json</code> and
               adjust <code>componentsDir</code> / <code>helpersDir</code> to match
               your project layout.
             </p>

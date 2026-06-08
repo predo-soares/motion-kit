@@ -9,29 +9,29 @@
     {
       "path": "src/registry/interaction/velocity-card/velocity-card-element.ts",
       "type": "registry:component",
-      "target": "src/components/motion-kit/velocity-card-element.ts"
+      "target": "src/components/motion-blocks/velocity-card-element.ts"
     }
   ],
   "usage": [
     {
       "label": "Astro",
-      "code": "---\nimport \"@/components/motion-kit/velocity-card-element.ts\";\n---\n\n<motion-velocity-card rotation-factor=\"3\" stretch-factor=\"0.04\" decay=\"250\">\n  <div class=\"card\">Move your cursor fast</div>\n</motion-velocity-card>"
+      "code": "---\nimport \"@/components/motion-blocks/velocity-card-element.ts\";\n---\n\n<motion-velocity-card rotation-factor=\"3\" stretch-factor=\"0.04\" decay=\"250\">\n  <div class=\"card\">Move your cursor fast</div>\n</motion-velocity-card>"
     },
     {
       "label": "React",
-      "code": "import \"@/components/motion-kit/velocity-card-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-velocity-card rotation-factor=\"3\" stretch-factor=\"0.04\" decay=\"250\">\n      <div className=\"card\">Move your cursor fast</div>\n    </motion-velocity-card>\n  );\n}"
+      "code": "import \"@/components/motion-blocks/velocity-card-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-velocity-card rotation-factor=\"3\" stretch-factor=\"0.04\" decay=\"250\">\n      <div className=\"card\">Move your cursor fast</div>\n    </motion-velocity-card>\n  );\n}"
     },
     {
       "label": "Vue",
-      "code": "<script setup>\nimport \"@/components/motion-kit/velocity-card-element.ts\";\n</script>\n\n<template>\n  <motion-velocity-card rotation-factor=\"3\" stretch-factor=\"0.04\" decay=\"250\">\n    <div class=\"card\">Move your cursor fast</div>\n  </motion-velocity-card>\n</template>"
+      "code": "<script setup>\nimport \"@/components/motion-blocks/velocity-card-element.ts\";\n</script>\n\n<template>\n  <motion-velocity-card rotation-factor=\"3\" stretch-factor=\"0.04\" decay=\"250\">\n    <div class=\"card\">Move your cursor fast</div>\n  </motion-velocity-card>\n</template>"
     },
     {
       "label": "Svelte",
-      "code": "<script>\n  import \"@/components/motion-kit/velocity-card-element.ts\";\n</script>\n\n<motion-velocity-card rotation-factor=\"3\" stretch-factor=\"0.04\" decay=\"250\">\n  <div class=\"card\">Move your cursor fast</div>\n</motion-velocity-card>"
+      "code": "<script>\n  import \"@/components/motion-blocks/velocity-card-element.ts\";\n</script>\n\n<motion-velocity-card rotation-factor=\"3\" stretch-factor=\"0.04\" decay=\"250\">\n  <div class=\"card\">Move your cursor fast</div>\n</motion-velocity-card>"
     },
     {
       "label": "HTML",
-      "code": "<script type=\"module\" src=\"/components/motion-kit/velocity-card-element.js\"></script>\n\n<motion-velocity-card rotation-factor=\"3\" stretch-factor=\"0.04\" decay=\"250\">\n  <div class=\"card\">Move your cursor fast</div>\n</motion-velocity-card>"
+      "code": "<script type=\"module\" src=\"/components/motion-blocks/velocity-card-element.js\"></script>\n\n<motion-velocity-card rotation-factor=\"3\" stretch-factor=\"0.04\" decay=\"250\">\n  <div class=\"card\">Move your cursor fast</div>\n</motion-velocity-card>"
     }
   ],
   "props": [

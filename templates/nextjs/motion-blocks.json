@@ -1,0 +1,8 @@
+{
+  "$schema": "https://motionkit.org/schemas/motion-blocks.json",
+  "registry": "https://motionkit.org/r",
+  "framework": "next",
+  "packageManager": "pnpm",
+  "componentsDir": "components/motion-blocks",
+  "helpersDir": "lib/motion-blocks"
+}

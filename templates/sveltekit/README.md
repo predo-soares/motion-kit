@@ -1,22 +1,22 @@
-# motion-kit SvelteKit example
+# Motion Blocks SvelteKit example
 
-A minimal SvelteKit project used to test installing components from the Motion Kit
-registry via the `motion-kit` CLI.
+A minimal SvelteKit project used to test installing components from the Motion Blocks
+registry via the `motion-blocks` CLI.
 
 ## Setup
 
-This template ships a committed `motion-kit.json`. To recreate it in a fresh
+This template ships a committed `motion-blocks.json`. To recreate it in a fresh
 project:
 
 ```sh
-pnpm dlx motion-kit init
+pnpm dlx motion-blocks init
 ```
 
 When testing from the monorepo root:
 
 ```sh
-pnpm --filter motion-kit-cli build
-node packages/motion-kit-cli/dist/index.js init --cwd templates/sveltekit
+pnpm --filter motion-blocks build
+node packages/motion-blocks-cli/dist/index.js init --cwd templates/sveltekit
 ```
 
 Point `registry` at your local docs server when testing against
@@ -31,13 +31,13 @@ Point `registry` at your local docs server when testing against
 ## Install a component
 
 ```sh
-pnpm dlx motion-kit add magnetic
+pnpm dlx motion-blocks add magnetic
 ```
 
 From the monorepo:
 
 ```sh
-node packages/motion-kit-cli/dist/index.js add magnetic --cwd templates/sveltekit
+node packages/motion-blocks-cli/dist/index.js add magnetic --cwd templates/sveltekit
 ```
 
 Import the element once in `+layout.svelte` (or per-page) so it registers before
@@ -45,7 +45,7 @@ use:
 
 ```svelte
 <script lang="ts">
-  import "$lib/components/motion-kit/magnetic-element";
+  import "$lib/components/motion-blocks/magnetic-element";
 </script>
 ```
 
@@ -53,7 +53,7 @@ use:
 
 ```svelte
 <script lang="ts">
-  import "$lib/components/motion-kit/magnetic-element";
+  import "$lib/components/motion-blocks/magnetic-element";
 </script>
 
 <motion-magnetic duration={1.2}>

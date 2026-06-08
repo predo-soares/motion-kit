@@ -1,5 +1,5 @@
 {
-  "name": "motion-kit",
+  "name": "motion-blocks",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -11,8 +11,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "registry:validate": "node scripts/validate-registry.mjs",
-    "registry:build": "pnpm --filter motion-kit-cli build && node packages/motion-kit-cli/dist/index.js build",
-    "registry:build:check": "pnpm --filter motion-kit-cli build && node packages/motion-kit-cli/dist/index.js build --check"
+    "registry:build": "pnpm --filter motion-blocks build && node packages/motion-blocks-cli/dist/index.js build",
+    "registry:build:check": "pnpm --filter motion-blocks build && node packages/motion-blocks-cli/dist/index.js build --check"
   },
   "dependencies": {
     "@astrojs/react": "^5.0.7",

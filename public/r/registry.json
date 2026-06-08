@@ -1,6 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
-  "name": "motion-kit-astro",
+  "name": "motion-blocks",
   "homepage": "http://localhost:4321",
   "items": [
     {
@@ -16,7 +16,7 @@
         {
           "path": "src/registry/canvas/ascii-renderer/ascii-renderer-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/ascii-renderer-element.ts"
+          "target": "src/components/motion-blocks/ascii-renderer-element.ts"
         }
       ]
     },
@@ -33,7 +33,7 @@
         {
           "path": "src/registry/canvas/card-3d/card-3d-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/card-3d-element.ts"
+          "target": "src/components/motion-blocks/card-3d-element.ts"
         }
       ]
     },
@@ -50,7 +50,7 @@
         {
           "path": "src/registry/canvas/dithered-image/dithered-image-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/dithered-image-element.ts"
+          "target": "src/components/motion-blocks/dithered-image-element.ts"
         }
       ]
     },
@@ -67,7 +67,7 @@
         {
           "path": "src/registry/canvas/fake-3d-image/fake-3d-image-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/fake-3d-image-element.ts"
+          "target": "src/components/motion-blocks/fake-3d-image-element.ts"
         }
       ]
     },
@@ -84,7 +84,7 @@
         {
           "path": "src/registry/canvas/fluid-image-reveal/fluid-image-reveal-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/fluid-image-reveal-element.ts"
+          "target": "src/components/motion-blocks/fluid-image-reveal-element.ts"
         }
       ]
     },
@@ -101,7 +101,7 @@
         {
           "path": "src/registry/canvas/fluid-simulation/fluid-simulation-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/fluid-simulation-element.ts"
+          "target": "src/components/motion-blocks/fluid-simulation-element.ts"
         }
       ]
     },
@@ -118,7 +118,7 @@
         {
           "path": "src/registry/canvas/glass-logo/glass-logo-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/glass-logo-element.ts"
+          "target": "src/components/motion-blocks/glass-logo-element.ts"
         }
       ]
     },
@@ -135,7 +135,7 @@
         {
           "path": "src/registry/canvas/glass-pane/glass-pane-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/glass-pane-element.ts"
+          "target": "src/components/motion-blocks/glass-pane-element.ts"
         }
       ]
     },
@@ -153,7 +153,7 @@
         {
           "path": "src/registry/canvas/glass-slideshow/glass-slideshow-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/glass-slideshow-element.ts"
+          "target": "src/components/motion-blocks/glass-slideshow-element.ts"
         }
       ]
     },
@@ -170,7 +170,7 @@
         {
           "path": "src/registry/canvas/glitter-cloth/glitter-cloth-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/glitter-cloth-element.ts"
+          "target": "src/components/motion-blocks/glitter-cloth-element.ts"
         }
       ]
     },
@@ -188,14 +188,14 @@
         {
           "path": "src/registry/canvas/globe/globe-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/globe-element.ts"
+          "target": "src/components/motion-blocks/globe-element.ts"
         },
         {
           "path": "src/registry/canvas/globe/land-texture.png",
           "type": "registry:file",
-          "target": "public/motion-kit/globe/land-texture.png",
+          "target": "public/motion-blocks/globe/land-texture.png",
           "asset": true,
-          "url": "http://localhost:4321/motion-kit/globe/land-texture.png"
+          "url": "http://localhost:4321/motion-blocks/globe/land-texture.png"
         }
       ]
     },
@@ -212,7 +212,7 @@
         {
           "path": "src/registry/canvas/god-rays/god-rays-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/god-rays-element.ts"
+          "target": "src/components/motion-blocks/god-rays-element.ts"
         }
       ]
     },
@@ -229,7 +229,7 @@
         {
           "path": "src/registry/canvas/halo/halo-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/halo-element.ts"
+          "target": "src/components/motion-blocks/halo-element.ts"
         }
       ]
     },
@@ -246,7 +246,7 @@
         {
           "path": "src/registry/canvas/interactive-grid/interactive-grid-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/interactive-grid-element.ts"
+          "target": "src/components/motion-blocks/interactive-grid-element.ts"
         }
       ]
     },
@@ -263,7 +263,7 @@
         {
           "path": "src/registry/canvas/lava-lamp/lava-lamp-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/lava-lamp-element.ts"
+          "target": "src/components/motion-blocks/lava-lamp-element.ts"
         }
       ]
     },
@@ -280,7 +280,7 @@
         {
           "path": "src/registry/canvas/neural-noise/neural-noise-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/neural-noise-element.ts"
+          "target": "src/components/motion-blocks/neural-noise-element.ts"
         }
       ]
     },
@@ -297,7 +297,7 @@
         {
           "path": "src/registry/canvas/pixelated-image/pixelated-image-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/pixelated-image-element.ts"
+          "target": "src/components/motion-blocks/pixelated-image-element.ts"
         }
       ]
     },
@@ -314,7 +314,7 @@
         {
           "path": "src/registry/canvas/plasma-grid/plasma-grid-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/plasma-grid-element.ts"
+          "target": "src/components/motion-blocks/plasma-grid-element.ts"
         }
       ]
     },
@@ -331,7 +331,7 @@
         {
           "path": "src/registry/canvas/rubiks-cube/rubiks-cube-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/rubiks-cube-element.ts"
+          "target": "src/components/motion-blocks/rubiks-cube-element.ts"
         }
       ]
     },
@@ -348,7 +348,7 @@
         {
           "path": "src/registry/canvas/specular-band/specular-band-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/specular-band-element.ts"
+          "target": "src/components/motion-blocks/specular-band-element.ts"
         }
       ]
     },
@@ -365,14 +365,14 @@
         {
           "path": "src/registry/canvas/water-ripple/water-ripple-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/water-ripple-element.ts"
+          "target": "src/components/motion-blocks/water-ripple-element.ts"
         },
         {
           "path": "src/registry/canvas/water-ripple/brush.png",
           "type": "registry:file",
-          "target": "public/motion-kit/water-ripple/brush.png",
+          "target": "public/motion-blocks/water-ripple/brush.png",
           "asset": true,
-          "url": "http://localhost:4321/motion-kit/water-ripple/brush.png"
+          "url": "http://localhost:4321/motion-blocks/water-ripple/brush.png"
         }
       ]
     },
@@ -389,12 +389,12 @@
         {
           "path": "src/registry/interaction/card-stack/card-stack-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/card-stack-element.ts"
+          "target": "src/components/motion-blocks/card-stack-element.ts"
         },
         {
           "path": "src/registry/interaction/card-stack/card-stack-item-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/card-stack-item-element.ts"
+          "target": "src/components/motion-blocks/card-stack-item-element.ts"
         }
       ]
     },
@@ -410,7 +410,7 @@
         {
           "path": "src/registry/interaction/flip-card-stack/flip-card-stack-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/flip-card-stack-element.ts"
+          "target": "src/components/motion-blocks/flip-card-stack-element.ts"
         }
       ]
     },
@@ -429,12 +429,12 @@
         {
           "path": "src/registry/interaction/flip-grid/flip-grid-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/flip-grid-element.ts"
+          "target": "src/components/motion-blocks/flip-grid-element.ts"
         },
         {
           "path": "src/registry/interaction/flip-grid/flip-grid-item-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/flip-grid-item-element.ts"
+          "target": "src/components/motion-blocks/flip-grid-item-element.ts"
         }
       ]
     },
@@ -451,7 +451,7 @@
         {
           "path": "src/registry/interaction/floating-menu/floating-menu-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/floating-menu-element.ts"
+          "target": "src/components/motion-blocks/floating-menu-element.ts"
         }
       ]
     },
@@ -468,7 +468,7 @@
         {
           "path": "src/registry/interaction/image-trail/image-trail-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/image-trail-element.ts"
+          "target": "src/components/motion-blocks/image-trail-element.ts"
         }
       ]
     },
@@ -485,7 +485,7 @@
         {
           "path": "src/registry/interaction/magnetic/magnetic-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/magnetic-element.ts"
+          "target": "src/components/motion-blocks/magnetic-element.ts"
         }
       ]
     },
@@ -501,7 +501,7 @@
         {
           "path": "src/registry/interaction/marquee/marquee-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/marquee-element.ts"
+          "target": "src/components/motion-blocks/marquee-element.ts"
         }
       ]
     },
@@ -509,7 +509,7 @@
       "name": "gsap",
       "type": "registry:lib",
       "title": "GSAP helpers",
-      "description": "Shared GSAP plugin registration and Motion Kit ease utilities.",
+      "description": "Shared GSAP plugin registration and Motion Blocks ease utilities.",
       "dependencies": [
         "gsap"
       ],
@@ -537,7 +537,7 @@
         {
           "path": "src/registry/showcase/infinite-gallery/infinite-gallery-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/infinite-gallery-element.ts"
+          "target": "src/components/motion-blocks/infinite-gallery-element.ts"
         }
       ]
     },
@@ -554,7 +554,7 @@
         {
           "path": "src/registry/showcase/infinite-physics-gallery/infinite-physics-gallery-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/infinite-physics-gallery-element.ts"
+          "target": "src/components/motion-blocks/infinite-physics-gallery-element.ts"
         }
       ]
     },
@@ -571,7 +571,7 @@
         {
           "path": "src/registry/showcase/logo-carousel/logo-carousel-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/logo-carousel-element.ts"
+          "target": "src/components/motion-blocks/logo-carousel-element.ts"
         }
       ]
     },
@@ -588,7 +588,7 @@
         {
           "path": "src/registry/showcase/radial-gallery/radial-gallery-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/radial-gallery-element.ts"
+          "target": "src/components/motion-blocks/radial-gallery-element.ts"
         }
       ]
     },
@@ -605,7 +605,7 @@
         {
           "path": "src/registry/showcase/slideshow/slideshow-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/slideshow-element.ts"
+          "target": "src/components/motion-blocks/slideshow-element.ts"
         }
       ]
     },
@@ -622,7 +622,7 @@
         {
           "path": "src/registry/showcase/video-player/video-player-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/video-player-element.ts"
+          "target": "src/components/motion-blocks/video-player-element.ts"
         }
       ]
     },
@@ -642,7 +642,7 @@
         {
           "path": "src/registry/text/split-hover/split-hover-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/split-hover-element.ts"
+          "target": "src/components/motion-blocks/split-hover-element.ts"
         }
       ]
     },
@@ -659,7 +659,7 @@
         {
           "path": "src/registry/text/split-reveal/split-reveal-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/split-reveal-element.ts"
+          "target": "src/components/motion-blocks/split-reveal-element.ts"
         }
       ]
     },
@@ -676,7 +676,7 @@
         {
           "path": "src/registry/text/stacking-words/stacking-words-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/stacking-words-element.ts"
+          "target": "src/components/motion-blocks/stacking-words-element.ts"
         }
       ]
     },
@@ -693,7 +693,7 @@
         {
           "path": "src/registry/text/text-loop/text-loop-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/text-loop-element.ts"
+          "target": "src/components/motion-blocks/text-loop-element.ts"
         }
       ]
     },
@@ -710,7 +710,7 @@
         {
           "path": "src/registry/text/text-repel/text-repel-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/text-repel-element.ts"
+          "target": "src/components/motion-blocks/text-repel-element.ts"
         }
       ]
     },
@@ -727,7 +727,7 @@
         {
           "path": "src/registry/text/text-scramble/text-scramble-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/text-scramble-element.ts"
+          "target": "src/components/motion-blocks/text-scramble-element.ts"
         }
       ]
     },
@@ -744,7 +744,7 @@
         {
           "path": "src/registry/text/weight-wave/weight-wave-element.ts",
           "type": "registry:component",
-          "target": "src/components/motion-kit/weight-wave-element.ts"
+          "target": "src/components/motion-blocks/weight-wave-element.ts"
         }
       ]
     }

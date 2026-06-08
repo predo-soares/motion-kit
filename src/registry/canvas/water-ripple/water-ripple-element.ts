@@ -360,7 +360,7 @@ export class MotionWaterRipple extends LitElement {
     this._onPointerMove = onPointerMove
     canvas.addEventListener("pointermove", onPointerMove)
 
-    this._loadBrush("/motion-kit/water-ripple/brush.png")
+    this._loadBrush("/motion-blocks/water-ripple/brush.png")
     if (this.src) {
       this._loadImage(this.src)
     }

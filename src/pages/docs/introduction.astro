@@ -5,20 +5,20 @@ import CodeBlock from "@/components/docs/code-block.astro";
 import SiteLayout from "@/layouts/site-layout.astro";
 
 const tocItems = [
-  { href: "#what-is-motion-kit", label: "What is Motion Kit" },
+  { href: "#what-is-motion-blocks", label: "What is Motion Blocks" },
   { href: "#not-a-component-library", label: "Not a Component Library" },
   { href: "#web-components", label: "Web Components" },
   { href: "#registry-distribution", label: "Registry & Distribution" },
   { href: "#open-code", label: "Open Code" },
 ];
 
-const initCommand = "pnpm dlx motion-kit init";
-const addCommand = "pnpm dlx motion-kit add magnetic";
+const initCommand = "pnpm dlx motion-blocks init";
+const addCommand = "pnpm dlx motion-blocks add magnetic";
 ---
 
 <SiteLayout
-  title="Introduction — Motion Kit"
-  description="Motion Kit is a registry of animated web components powered by GSAP, installed with the motion-kit CLI."
+  title="Introduction — Motion Blocks"
+  description="Motion Blocks is a registry of animated web components powered by GSAP, installed with the motion-blocks CLI."
 >
   <ComponentBrowserShell currentHref="/docs/introduction">
     <article class="flex w-full max-w-[600px] min-w-0 flex-col gap-10 pb-16">
@@ -32,19 +32,19 @@ const addCommand = "pnpm dlx motion-kit add magnetic";
           </h1>
         </div>
         <p class="text-sm leading-6 text-balance text-slate-600">
-          Motion Kit is a registry of animated web components powered by GSAP.
-          Install any component directly into your project with the Motion Kit
+          Motion Blocks is a registry of animated web components powered by GSAP.
+          Install any component directly into your project with the Motion Blocks
           CLI. No runtime dependency, no version lock — just your code.
         </p>
       </header>
 
-      <section id="what-is-motion-kit" class="flex flex-col gap-4 scroll-mt-24">
+      <section id="what-is-motion-blocks" class="flex flex-col gap-4 scroll-mt-24">
         <h2 class="text-xl font-semibold tracking-tight text-slate-950">
-          What is Motion Kit
+          What is Motion Blocks
         </h2>
         <div class="flex flex-col gap-3 text-sm leading-7 text-slate-600">
           <p>
-            Motion Kit is a collection of production-ready animated components
+            Motion Blocks is a collection of production-ready animated components
             built as Custom Elements and distributed through a flat-file registry.
             Each component ships as source code dropped directly into your
             project — no package manager dependency, no abstraction layer between
@@ -69,14 +69,14 @@ const addCommand = "pnpm dlx motion-kit add magnetic";
         <div class="flex flex-col gap-3 text-sm leading-7 text-slate-600">
           <p>
             This is not a library you install from npm and import. It is a
-            registry you pull from. When you add a Motion Kit component, the
+            registry you pull from. When you add a Motion Blocks component, the
             source files are copied into your project and become part of your
             codebase. You own them.
           </p>
           <p>
             Traditional animation libraries ask you to accept their runtime,
             wrap their components, and fight their APIs whenever your design
-            deviates from their defaults. Motion Kit sidesteps that entirely —
+            deviates from their defaults. Motion Blocks sidesteps that entirely —
             if you want to change an easing curve or adjust a timing value, you
             open the file and change it.
           </p>
@@ -117,9 +117,9 @@ const addCommand = "pnpm dlx motion-kit add magnetic";
         </h2>
         <div class="flex flex-col gap-3 text-sm leading-7 text-slate-600">
           <p>
-            Motion Kit uses a flat-file registry schema: each component defines
+            Motion Blocks uses a flat-file registry schema: each component defines
             its files, dependencies, and installation targets. The
-            <code>motion-kit</code> CLI reads <code>motion-kit.json</code> in
+            <code>motion-blocks</code> CLI reads <code>motion-blocks.json</code> in
             your project and places source files exactly where they belong. It
             does not read shadcn <code>components.json</code>.
           </p>
@@ -127,7 +127,7 @@ const addCommand = "pnpm dlx motion-kit add magnetic";
           <CodeBlock code={initCommand} />
           <CodeBlock code={addCommand} />
           <p>
-            Each component's page has the exact <code>motion-kit add</code> command
+            Each component's page has the exact <code>motion-blocks add</code> command
             ready to copy. Re-run it at any time to pull in an updated version.
           </p>
         </div>
@@ -145,7 +145,7 @@ const addCommand = "pnpm dlx motion-kit add magnetic";
             yours to read and change.
           </p>
           <p>
-            This also makes Motion Kit components straightforward for LLMs to
+            This also makes Motion Blocks components straightforward for LLMs to
             work with. The source is small, self-contained, and follows a
             consistent pattern — making it easy to ask an AI to extend, restyle,
             or compose components without fighting an opaque API.

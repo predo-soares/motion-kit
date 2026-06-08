@@ -1,0 +1,8 @@
+{
+  "$schema": "https://motionkit.org/schemas/motion-blocks.json",
+  "registry": "https://motionkit.org/r",
+  "framework": "sveltekit",
+  "packageManager": "pnpm",
+  "componentsDir": "src/lib/components/motion-blocks",
+  "helpersDir": "src/lib/motion-blocks"
+}

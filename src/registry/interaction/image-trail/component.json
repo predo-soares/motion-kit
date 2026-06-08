@@ -9,29 +9,29 @@
     {
       "path": "src/registry/interaction/image-trail/image-trail-element.ts",
       "type": "registry:component",
-      "target": "src/components/motion-kit/image-trail-element.ts"
+      "target": "src/components/motion-blocks/image-trail-element.ts"
     }
   ],
   "usage": [
     {
       "label": "Astro",
-      "code": "---\nimport \"@/components/motion-kit/image-trail-element.ts\";\n\nconst images = [\n  \"/images/trail-1.png\",\n  \"/images/trail-2.png\",\n  \"/images/trail-3.png\"\n];\n\nconst config = {\n  imageLifespan: 600,\n  removalTickMs: 16,\n  mouseThreshold: 40,\n  minMovementForImage: 5,\n  inDuration: 600,\n  outDuration: 800,\n  maxRotationFactor: 3,\n  baseRotation: 30,\n  speedSmoothingFactor: 0.25,\n  minImageSize: 80,\n  maxImageSize: 120,\n  staggerOut: 40\n};\n---\n\n<motion-image-trail\n  images={images}\n  config={config}\n  class=\"w-full h-[600px]\"\n/>"
+      "code": "---\nimport \"@/components/motion-blocks/image-trail-element.ts\";\n\nconst images = [\n  \"/images/trail-1.png\",\n  \"/images/trail-2.png\",\n  \"/images/trail-3.png\"\n];\n\nconst config = {\n  imageLifespan: 600,\n  removalTickMs: 16,\n  mouseThreshold: 40,\n  minMovementForImage: 5,\n  inDuration: 600,\n  outDuration: 800,\n  maxRotationFactor: 3,\n  baseRotation: 30,\n  speedSmoothingFactor: 0.25,\n  minImageSize: 80,\n  maxImageSize: 120,\n  staggerOut: 40\n};\n---\n\n<motion-image-trail\n  images={images}\n  config={config}\n  class=\"w-full h-[600px]\"\n/>"
     },
     {
       "label": "React",
-      "code": "import \"@/components/motion-kit/image-trail-element.ts\";\n\nconst images = [\n  \"/images/trail-1.png\",\n  \"/images/trail-2.png\",\n  \"/images/trail-3.png\"\n];\n\nconst config = {\n  imageLifespan: 600,\n  removalTickMs: 16,\n  mouseThreshold: 40,\n  minMovementForImage: 5,\n  inDuration: 600,\n  outDuration: 800,\n  maxRotationFactor: 3,\n  baseRotation: 30,\n  speedSmoothingFactor: 0.25,\n  minImageSize: 80,\n  maxImageSize: 120,\n  staggerOut: 40\n};\n\nexport default function Page() {\n  return (\n    <motion-image-trail\n      images={images}\n      config={config}\n      className=\"w-full h-[600px]\"\n    />\n  );\n}"
+      "code": "import \"@/components/motion-blocks/image-trail-element.ts\";\n\nconst images = [\n  \"/images/trail-1.png\",\n  \"/images/trail-2.png\",\n  \"/images/trail-3.png\"\n];\n\nconst config = {\n  imageLifespan: 600,\n  removalTickMs: 16,\n  mouseThreshold: 40,\n  minMovementForImage: 5,\n  inDuration: 600,\n  outDuration: 800,\n  maxRotationFactor: 3,\n  baseRotation: 30,\n  speedSmoothingFactor: 0.25,\n  minImageSize: 80,\n  maxImageSize: 120,\n  staggerOut: 40\n};\n\nexport default function Page() {\n  return (\n    <motion-image-trail\n      images={images}\n      config={config}\n      className=\"w-full h-[600px]\"\n    />\n  );\n}"
     },
     {
       "label": "Vue",
-      "code": "<script setup>\nimport \"@/components/motion-kit/image-trail-element.ts\";\n\nconst images = [\n  \"/images/trail-1.png\",\n  \"/images/trail-2.png\",\n  \"/images/trail-3.png\"\n];\n\nconst config = {\n  imageLifespan: 600,\n  removalTickMs: 16,\n  mouseThreshold: 40,\n  minMovementForImage: 5,\n  inDuration: 600,\n  outDuration: 800,\n  maxRotationFactor: 3,\n  baseRotation: 30,\n  speedSmoothingFactor: 0.25,\n  minImageSize: 80,\n  maxImageSize: 120,\n  staggerOut: 40\n};\n</script>\n\n<template>\n  <motion-image-trail\n    :images=\"images\"\n    :config=\"config\"\n    class=\"w-full h-[600px]\"\n  />\n</template>"
+      "code": "<script setup>\nimport \"@/components/motion-blocks/image-trail-element.ts\";\n\nconst images = [\n  \"/images/trail-1.png\",\n  \"/images/trail-2.png\",\n  \"/images/trail-3.png\"\n];\n\nconst config = {\n  imageLifespan: 600,\n  removalTickMs: 16,\n  mouseThreshold: 40,\n  minMovementForImage: 5,\n  inDuration: 600,\n  outDuration: 800,\n  maxRotationFactor: 3,\n  baseRotation: 30,\n  speedSmoothingFactor: 0.25,\n  minImageSize: 80,\n  maxImageSize: 120,\n  staggerOut: 40\n};\n</script>\n\n<template>\n  <motion-image-trail\n    :images=\"images\"\n    :config=\"config\"\n    class=\"w-full h-[600px]\"\n  />\n</template>"
     },
     {
       "label": "Svelte",
-      "code": "<script>\n  import \"@/components/motion-kit/image-trail-element.ts\";\n\n  const images = [\n    \"/images/trail-1.png\",\n    \"/images/trail-2.png\",\n    \"/images/trail-3.png\"\n  ];\n\n  const config = {\n    imageLifespan: 600,\n    removalTickMs: 16,\n    mouseThreshold: 40,\n    minMovementForImage: 5,\n    inDuration: 600,\n    outDuration: 800,\n    maxRotationFactor: 3,\n    baseRotation: 30,\n    speedSmoothingFactor: 0.25,\n    minImageSize: 80,\n    maxImageSize: 120,\n    staggerOut: 40\n  };\n</script>\n\n<motion-image-trail\n  images={images}\n  config={config}\n  class=\"w-full h-[600px]\"\n/>"
+      "code": "<script>\n  import \"@/components/motion-blocks/image-trail-element.ts\";\n\n  const images = [\n    \"/images/trail-1.png\",\n    \"/images/trail-2.png\",\n    \"/images/trail-3.png\"\n  ];\n\n  const config = {\n    imageLifespan: 600,\n    removalTickMs: 16,\n    mouseThreshold: 40,\n    minMovementForImage: 5,\n    inDuration: 600,\n    outDuration: 800,\n    maxRotationFactor: 3,\n    baseRotation: 30,\n    speedSmoothingFactor: 0.25,\n    minImageSize: 80,\n    maxImageSize: 120,\n    staggerOut: 40\n  };\n</script>\n\n<motion-image-trail\n  images={images}\n  config={config}\n  class=\"w-full h-[600px]\"\n/>"
     },
     {
       "label": "HTML",
-      "code": "<script type=\"module\" src=\"/components/motion-kit/image-trail-element.js\"></script>\n\n<motion-image-trail\n  images='[\"/images/trail-1.png\",\"/images/trail-2.png\",\"/images/trail-3.png\"]'\n  config='{\"imageLifespan\":600,\"removalTickMs\":16,\"mouseThreshold\":40,\"minMovementForImage\":5,\"inDuration\":600,\"outDuration\":800,\"maxRotationFactor\":3,\"baseRotation\":30,\"speedSmoothingFactor\":0.25,\"minImageSize\":260,\"maxImageSize\":340,\"staggerOut\":40}'\n  class=\"w-full h-[600px]\"\n/>"
+      "code": "<script type=\"module\" src=\"/components/motion-blocks/image-trail-element.js\"></script>\n\n<motion-image-trail\n  images='[\"/images/trail-1.png\",\"/images/trail-2.png\",\"/images/trail-3.png\"]'\n  config='{\"imageLifespan\":600,\"removalTickMs\":16,\"mouseThreshold\":40,\"minMovementForImage\":5,\"inDuration\":600,\"outDuration\":800,\"maxRotationFactor\":3,\"baseRotation\":30,\"speedSmoothingFactor\":0.25,\"minImageSize\":260,\"maxImageSize\":340,\"staggerOut\":40}'\n  class=\"w-full h-[600px]\"\n/>"
     }
   ],
   "props": [

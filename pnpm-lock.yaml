@@ -69,7 +69,7 @@ importers:
         specifier: ^3.5.35
         version: 3.5.35(typescript@6.0.3)
 
-  packages/motion-kit-cli:
+  packages/motion-blocks-cli:
     dependencies:
       commander:
         specifier: ^11.1.0

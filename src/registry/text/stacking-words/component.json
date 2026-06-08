@@ -9,29 +9,29 @@
     {
       "path": "src/registry/text/stacking-words/stacking-words-element.ts",
       "type": "registry:component",
-      "target": "src/components/motion-kit/stacking-words-element.ts"
+      "target": "src/components/motion-blocks/stacking-words-element.ts"
     }
   ],
   "usage": [
     {
       "label": "Astro",
-      "code": "---\nimport \"@/components/motion-kit/stacking-words-element.ts\";\n---\n\n<motion-stacking-words\n  text=\"Every word arrives on its own.\"\n  start=\"top 90%\"\n  end=\"top 30%\"\n></motion-stacking-words>"
+      "code": "---\nimport \"@/components/motion-blocks/stacking-words-element.ts\";\n---\n\n<motion-stacking-words\n  text=\"Every word arrives on its own.\"\n  start=\"top 90%\"\n  end=\"top 30%\"\n></motion-stacking-words>"
     },
     {
       "label": "React",
-      "code": "import \"@/components/motion-kit/stacking-words-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-stacking-words\n      text=\"Every word arrives on its own.\"\n      start=\"top 90%\"\n      end=\"top 30%\"\n    />\n  );\n}"
+      "code": "import \"@/components/motion-blocks/stacking-words-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-stacking-words\n      text=\"Every word arrives on its own.\"\n      start=\"top 90%\"\n      end=\"top 30%\"\n    />\n  );\n}"
     },
     {
       "label": "Vue",
-      "code": "<script setup>\nimport \"@/components/motion-kit/stacking-words-element.ts\";\n</script>\n\n<template>\n  <motion-stacking-words\n    text=\"Every word arrives on its own.\"\n    start=\"top 90%\"\n    end=\"top 30%\"\n  />\n</template>"
+      "code": "<script setup>\nimport \"@/components/motion-blocks/stacking-words-element.ts\";\n</script>\n\n<template>\n  <motion-stacking-words\n    text=\"Every word arrives on its own.\"\n    start=\"top 90%\"\n    end=\"top 30%\"\n  />\n</template>"
     },
     {
       "label": "Svelte",
-      "code": "<script>\n  import \"@/components/motion-kit/stacking-words-element.ts\";\n</script>\n\n<motion-stacking-words\n  text=\"Every word arrives on its own.\"\n  start=\"top 90%\"\n  end=\"top 30%\"\n/>"
+      "code": "<script>\n  import \"@/components/motion-blocks/stacking-words-element.ts\";\n</script>\n\n<motion-stacking-words\n  text=\"Every word arrives on its own.\"\n  start=\"top 90%\"\n  end=\"top 30%\"\n/>"
     },
     {
       "label": "HTML",
-      "code": "<script type=\"module\" src=\"/components/motion-kit/stacking-words-element.js\"></script>\n\n<motion-stacking-words\n  text=\"Every word arrives on its own.\"\n  start=\"top 90%\"\n  end=\"top 30%\"\n></motion-stacking-words>"
+      "code": "<script type=\"module\" src=\"/components/motion-blocks/stacking-words-element.js\"></script>\n\n<motion-stacking-words\n  text=\"Every word arrives on its own.\"\n  start=\"top 90%\"\n  end=\"top 30%\"\n></motion-stacking-words>"
     }
   ],
   "props": [

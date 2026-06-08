@@ -1,0 +1,8 @@
+{
+  "$schema": "https://motionkit.org/schemas/motion-blocks.json",
+  "registry": "https://motionkit.org/r",
+  "framework": "vue",
+  "packageManager": "pnpm",
+  "componentsDir": "src/components/motion-blocks",
+  "helpersDir": "src/utils/motion-blocks"
+}

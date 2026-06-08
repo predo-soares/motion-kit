@@ -1,8 +1,0 @@
-{
-  "$schema": "https://motionkit.org/schemas/motion-kit.json",
-  "registry": "https://motionkit.org/r",
-  "framework": "astro",
-  "packageManager": "pnpm",
-  "componentsDir": "src/components/motion-kit",
-  "helpersDir": "src/lib/motion-kit"
-}

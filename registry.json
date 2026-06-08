@@ -1,6 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
-  "name": "motion-kit-astro",
+  "name": "motion-blocks",
   "homepage": "http://localhost:4321",
   "include": [
     "src/registry/canvas/registry.json",

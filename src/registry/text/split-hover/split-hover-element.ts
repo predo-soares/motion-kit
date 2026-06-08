@@ -104,12 +104,12 @@ export class MotionSplitHover extends LitElement {
             .timeline({ paused: true })
             .to(
               self.chars,
-              { yPercent: -100, stagger: 0.02, duration: 0.35, ease: "motion-kit-ease" },
+              { yPercent: -100, stagger: 0.02, duration: 0.35, ease: "motion-blocks-ease" },
               0,
             )
             .to(
               this._cloneSplit.chars,
-              { yPercent: 0, stagger: 0.02, duration: 0.35, ease: "motion-kit-ease" },
+              { yPercent: 0, stagger: 0.02, duration: 0.35, ease: "motion-blocks-ease" },
               0,
             )
         },

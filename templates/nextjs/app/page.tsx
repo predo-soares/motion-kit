@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import "@/components/motion-kit/magnetic-element";
+import "@/components/motion-blocks/magnetic-element";
 
 export default function Home() {
   return (

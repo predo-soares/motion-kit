@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Validates Motion Kit registry manifests against the v0 item contract
+// Validates Motion Blocks registry manifests against the v0 item contract
 // (public/schema/registry-item.json) plus the source-vs-generated rules that
 // a single JSON schema cannot express on its own:
 //   - source component.json must not inline files[].content

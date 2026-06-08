@@ -9,29 +9,29 @@
     {
       "path": "src/registry/canvas/pixelated-image/pixelated-image-element.ts",
       "type": "registry:component",
-      "target": "src/components/motion-kit/pixelated-image-element.ts"
+      "target": "src/components/motion-blocks/pixelated-image-element.ts"
     }
   ],
   "usage": [
     {
       "label": "Astro",
-      "code": "---\nimport \"@/components/motion-kit/pixelated-image-element.ts\";\n---\n\n<motion-pixelated-image\n  image=\"https://picsum.photos/seed/pixelated/800/600\"\n  initial-grid-size=\"6\"\n  step-duration=\"0.15\"\n></motion-pixelated-image>"
+      "code": "---\nimport \"@/components/motion-blocks/pixelated-image-element.ts\";\n---\n\n<motion-pixelated-image\n  image=\"https://picsum.photos/seed/pixelated/800/600\"\n  initial-grid-size=\"6\"\n  step-duration=\"0.15\"\n></motion-pixelated-image>"
     },
     {
       "label": "React",
-      "code": "import \"@/components/motion-kit/pixelated-image-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-pixelated-image\n      image=\"https://picsum.photos/seed/pixelated/800/600\"\n      initial-grid-size=\"6\"\n      step-duration=\"0.15\"\n    />\n  );\n}"
+      "code": "import \"@/components/motion-blocks/pixelated-image-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-pixelated-image\n      image=\"https://picsum.photos/seed/pixelated/800/600\"\n      initial-grid-size=\"6\"\n      step-duration=\"0.15\"\n    />\n  );\n}"
     },
     {
       "label": "Vue",
-      "code": "<script setup>\nimport \"@/components/motion-kit/pixelated-image-element.ts\";\n</script>\n\n<template>\n  <motion-pixelated-image\n    image=\"https://picsum.photos/seed/pixelated/800/600\"\n    initial-grid-size=\"6\"\n    step-duration=\"0.15\"\n  />\n</template>"
+      "code": "<script setup>\nimport \"@/components/motion-blocks/pixelated-image-element.ts\";\n</script>\n\n<template>\n  <motion-pixelated-image\n    image=\"https://picsum.photos/seed/pixelated/800/600\"\n    initial-grid-size=\"6\"\n    step-duration=\"0.15\"\n  />\n</template>"
     },
     {
       "label": "Svelte",
-      "code": "<script>\n  import \"@/components/motion-kit/pixelated-image-element.ts\";\n</script>\n\n<motion-pixelated-image\n  image=\"https://picsum.photos/seed/pixelated/800/600\"\n  initial-grid-size=\"6\"\n  step-duration=\"0.15\"\n/>"
+      "code": "<script>\n  import \"@/components/motion-blocks/pixelated-image-element.ts\";\n</script>\n\n<motion-pixelated-image\n  image=\"https://picsum.photos/seed/pixelated/800/600\"\n  initial-grid-size=\"6\"\n  step-duration=\"0.15\"\n/>"
     },
     {
       "label": "HTML",
-      "code": "<script type=\"module\" src=\"/components/motion-kit/pixelated-image-element.js\"></script>\n\n<motion-pixelated-image\n  image=\"https://picsum.photos/seed/pixelated/800/600\"\n  initial-grid-size=\"6\"\n  step-duration=\"0.15\"\n></motion-pixelated-image>"
+      "code": "<script type=\"module\" src=\"/components/motion-blocks/pixelated-image-element.js\"></script>\n\n<motion-pixelated-image\n  image=\"https://picsum.photos/seed/pixelated/800/600\"\n  initial-grid-size=\"6\"\n  step-duration=\"0.15\"\n></motion-pixelated-image>"
     }
   ],
   "props": [

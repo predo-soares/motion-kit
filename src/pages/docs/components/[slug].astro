@@ -38,12 +38,12 @@ if (!demoModule) {
 
 const DemoComponent = demoModule.default;
 
-const installCommand = `motion-kit add ${component.slug}`;
+const installCommand = `motion-blocks add ${component.slug}`;
 const hasTestPage = Boolean(getComponentTestSpec(component));
 ---
 
 <SiteLayout
-  title={`${component.title} — Motion Kit`}
+  title={`${component.title} — Motion Blocks`}
   description={component.summary}
 >
   <ComponentBrowserShell currentSlug={component.slug}>

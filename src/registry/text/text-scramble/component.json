@@ -9,29 +9,29 @@
     {
       "path": "src/registry/text/text-scramble/text-scramble-element.ts",
       "type": "registry:component",
-      "target": "src/components/motion-kit/text-scramble-element.ts"
+      "target": "src/components/motion-blocks/text-scramble-element.ts"
     }
   ],
   "usage": [
     {
       "label": "Astro",
-      "code": "---\nimport \"@/components/motion-kit/text-scramble-element.ts\";\n---\n\n<motion-text-scramble text=\"Hello World\"></motion-text-scramble>"
+      "code": "---\nimport \"@/components/motion-blocks/text-scramble-element.ts\";\n---\n\n<motion-text-scramble text=\"Hello World\"></motion-text-scramble>"
     },
     {
       "label": "React",
-      "code": "import \"@/components/motion-kit/text-scramble-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-text-scramble text=\"Hello World\" />\n  );\n}"
+      "code": "import \"@/components/motion-blocks/text-scramble-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-text-scramble text=\"Hello World\" />\n  );\n}"
     },
     {
       "label": "Vue",
-      "code": "<script setup>\nimport \"@/components/motion-kit/text-scramble-element.ts\";\n</script>\n\n<template>\n  <motion-text-scramble text=\"Hello World\" />\n</template>"
+      "code": "<script setup>\nimport \"@/components/motion-blocks/text-scramble-element.ts\";\n</script>\n\n<template>\n  <motion-text-scramble text=\"Hello World\" />\n</template>"
     },
     {
       "label": "Svelte",
-      "code": "<script>\n  import \"@/components/motion-kit/text-scramble-element.ts\";\n</script>\n\n<motion-text-scramble text=\"Hello World\" />"
+      "code": "<script>\n  import \"@/components/motion-blocks/text-scramble-element.ts\";\n</script>\n\n<motion-text-scramble text=\"Hello World\" />"
     },
     {
       "label": "HTML",
-      "code": "<script type=\"module\" src=\"/components/motion-kit/text-scramble-element.js\"></script>\n\n<motion-text-scramble text=\"Hello World\"></motion-text-scramble>"
+      "code": "<script type=\"module\" src=\"/components/motion-blocks/text-scramble-element.js\"></script>\n\n<motion-text-scramble text=\"Hello World\"></motion-text-scramble>"
     }
   ],
   "props": [

@@ -1,6 +1,6 @@
-# Motion Kit
+# Motion Blocks
 
-A component registry of animated web components — install any of them into your own project with the `motion-kit` CLI, browse and preview them all in a live Astro gallery.
+A component registry of animated web components — install any of them into your own project with the `motion-blocks` CLI, browse and preview them all in a live Astro gallery.
 
 ## Quick start (site)
 
@@ -13,27 +13,56 @@ pnpm preview      # preview the production build
 
 ## Quick start (consumers)
 
-Install components into your own project with the Motion Kit CLI:
+Install components into your own project with the Motion Blocks CLI:
 
 ```bash
-pnpm dlx motion-kit init
-pnpm dlx motion-kit add magnetic
+# pnpm
+pnpm dlx motion-blocks init
+pnpm dlx motion-blocks add magnetic
+
+# npm
+npx motion-blocks init
+npx motion-blocks add magnetic
+
+# yarn
+yarn dlx motion-blocks init
+yarn dlx motion-blocks add magnetic
+
+# bun
+bunx --bun motion-blocks init
+bunx --bun motion-blocks add magnetic
 ```
 
 Browse available items:
 
 ```bash
-pnpm dlx motion-kit list
-pnpm dlx motion-kit list --all    # include hidden helper libs
-pnpm dlx motion-kit info
+# pnpm
+pnpm dlx motion-blocks list
+pnpm dlx motion-blocks list --all    # include hidden helper libs
+pnpm dlx motion-blocks info
+
+# npm
+npx motion-blocks list
+npx motion-blocks list --all
+npx motion-blocks info
+
+# yarn
+yarn dlx motion-blocks list
+yarn dlx motion-blocks list --all
+yarn dlx motion-blocks info
+
+# bun
+bunx --bun motion-blocks list
+bunx --bun motion-blocks list --all
+bunx --bun motion-blocks info
 ```
 
-Motion Kit reads **`motion-kit.json` only**. It does not read or write shadcn `components.json`.
+Motion Blocks reads **`motion-blocks.json` only**.
 
 ## Project structure
 
 ```
-motion-kit-astro/
+motion-blocks/
 ├── src/
 │   ├── registry/                  # Component source — one folder per component
 │   │   ├── canvas/                #   WebGL/canvas-driven effects (god-rays, globe, fluid-simulation, ...)
@@ -69,11 +98,11 @@ motion-kit-astro/
 ├── registry.json                  # Root composed source registry (include-based)
 │
 ├── packages/
-│   └── motion-kit-cli/            # CLI package (init/add/list/build/info commands)
+│   └── motion-blocks-cli/            # CLI package (init/add/list/build/info commands)
 │       └── src/
 │           ├── commands/          #   init, add, list, build, info
 │           ├── producer/          #   discover, validate, generate registry artifacts
-│           ├── config/            #   motion-kit.json schema + I/O
+│           ├── config/            #   motion-blocks.json schema + I/O
 │           └── detection/         #   framework & package-manager detection
 │
 ├── templates/                     # Starter templates for supported frameworks
@@ -97,8 +126,8 @@ motion-kit-astro/
 3. `public/r/<name>.json` mirrors each item as the static payload the CLI fetches, alongside `public/r/registry.json` as the top-level manifest.
 4. Consumers install a component with:
    ```bash
-   pnpm dlx motion-kit init
-   pnpm dlx motion-kit add magnetic
+   pnpm dlx motion-blocks init
+   pnpm dlx motion-blocks add magnetic
    ```
 
 See `CLAUDE.md` for the detailed authoring conventions and the steps for adding a new component.
@@ -112,16 +141,16 @@ See `CLAUDE.md` for the detailed authoring conventions and the steps for adding 
 | `pnpm preview` | Preview the production build |
 | `pnpm registry:validate` | Validate the registry source against the schema |
 | `pnpm registry:build` | Build the CLI and regenerate registry artifacts (run manually by maintainers) |
-| `pnpm registry:build:check` | Same as above, in check-only mode (`motion-kit build --check`) |
+| `pnpm registry:build:check` | Same as above, in check-only mode (`motion-blocks build --check`) |
 
 ## CLI development
 
 From the monorepo root:
 
 ```bash
-pnpm --filter motion-kit-cli build
-node packages/motion-kit-cli/dist/index.js --help
-node packages/motion-kit-cli/dist/index.js add magnetic --dry-run --cwd templates/astro
+pnpm --filter motion-blocks build
+node packages/motion-blocks-cli/dist/index.js --help
+node packages/motion-blocks-cli/dist/index.js add magnetic --dry-run --cwd templates/astro
 ```
 
-See `packages/motion-kit-cli/RELEASE.md` for the pre-publish checklist.
+See `packages/motion-blocks-cli/RELEASE.md` for the pre-publish checklist.

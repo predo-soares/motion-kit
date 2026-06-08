@@ -1,15 +1,15 @@
-# motion-kit Vue example
+# Motion Blocks Vue example
 
-A minimal Vue + Vite project used to test installing components from the Motion Kit
-registry via the `motion-kit` CLI.
+A minimal Vue + Vite project used to test installing components from the Motion Blocks
+registry via the `motion-blocks` CLI.
 
 ## Setup
 
-This template ships a committed `motion-kit.json`. To recreate it in a fresh
+This template ships a committed `motion-blocks.json`. To recreate it in a fresh
 project:
 
 ```sh
-pnpm dlx motion-kit init
+pnpm dlx motion-blocks init
 ```
 
 `init` for Vue also patches `vite.config.ts` with `optimizeDeps.include: ['lit', 'gsap']`
@@ -18,8 +18,8 @@ and enables `experimentalDecorators` in `tsconfig.app.json`.
 When testing from the monorepo root:
 
 ```sh
-pnpm --filter motion-kit-cli build
-node packages/motion-kit-cli/dist/index.js init --cwd templates/vue
+pnpm --filter motion-blocks build
+node packages/motion-blocks-cli/dist/index.js init --cwd templates/vue
 ```
 
 Point `registry` at your local docs server when testing against
@@ -34,19 +34,19 @@ Point `registry` at your local docs server when testing against
 ## Install a component
 
 ```sh
-pnpm dlx motion-kit add magnetic
+pnpm dlx motion-blocks add magnetic
 ```
 
 From the monorepo:
 
 ```sh
-node packages/motion-kit-cli/dist/index.js add magnetic --cwd templates/vue
+node packages/motion-blocks-cli/dist/index.js add magnetic --cwd templates/vue
 ```
 
 Dry-run:
 
 ```sh
-node packages/motion-kit-cli/dist/index.js add magnetic --dry-run --cwd templates/vue
+node packages/motion-blocks-cli/dist/index.js add magnetic --dry-run --cwd templates/vue
 ```
 
 ## Using the component
@@ -56,7 +56,7 @@ browser:
 
 ```vue
 <script setup>
-import "@/components/motion-kit/magnetic-element.ts";
+import "@/components/motion-blocks/magnetic-element.ts";
 </script>
 
 <template>

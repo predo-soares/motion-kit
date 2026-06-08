@@ -84,7 +84,7 @@ const SHADER_MARKER_SIZE_SCALE = 0.5;
 const MIN_SHADER_MARKER_SIZE = 0.003;
 const MAX_SHADER_MARKER_SIZE = 0.06;
 const MAX_TOOLTIP_BLUR = 8;
-const LAND_TEXTURE_URL = "/motion-kit/globe/land-texture.png";
+const LAND_TEXTURE_URL = "/motion-blocks/globe/land-texture.png";
 
 const defaultFresnelConfig: Required<FresnelConfig> = {
   color: "#0F3161",

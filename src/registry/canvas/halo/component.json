@@ -9,29 +9,29 @@
     {
       "path": "src/registry/canvas/halo/halo-element.ts",
       "type": "registry:component",
-      "target": "src/components/motion-kit/halo-element.ts"
+      "target": "src/components/motion-blocks/halo-element.ts"
     }
   ],
   "usage": [
     {
       "label": "Astro",
-      "code": "---\nimport \"@/components/motion-kit/halo-element.ts\";\n---\n\n<motion-halo\n  scale={1}\n  offset-x={0}\n  offset-y={0}\n  rotation={0}\n  rotation-speed={0.5}\n  background-color=\"#17181A\"\n  camera-distance={3}\n  sun-x={0}\n  sun-y={0}\n  sun-z={1}\n  intensity={1}\n  class=\"w-full h-[500px]\"\n/>"
+      "code": "---\nimport \"@/components/motion-blocks/halo-element.ts\";\n---\n\n<motion-halo\n  scale={1}\n  offset-x={0}\n  offset-y={0}\n  rotation={0}\n  rotation-speed={0.5}\n  background-color=\"#17181A\"\n  camera-distance={3}\n  sun-x={0}\n  sun-y={0}\n  sun-z={1}\n  intensity={1}\n  class=\"w-full h-[500px]\"\n/>"
     },
     {
       "label": "React",
-      "code": "import \"@/components/motion-kit/halo-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-halo\n      scale={1}\n      offset-x={0}\n      offset-y={0}\n      rotation={0}\n      rotation-speed={0.5}\n      background-color=\"#17181A\"\n      camera-distance={3}\n      sun-x={0}\n      sun-y={0}\n      sun-z={1}\n      intensity={1}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
+      "code": "import \"@/components/motion-blocks/halo-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-halo\n      scale={1}\n      offset-x={0}\n      offset-y={0}\n      rotation={0}\n      rotation-speed={0.5}\n      background-color=\"#17181A\"\n      camera-distance={3}\n      sun-x={0}\n      sun-y={0}\n      sun-z={1}\n      intensity={1}\n      className=\"w-full h-[500px]\"\n    />\n  );\n}"
     },
     {
       "label": "Vue",
-      "code": "<script setup>\nimport \"@/components/motion-kit/halo-element.ts\";\n</script>\n\n<template>\n  <motion-halo\n    :scale=\"1\"\n    :offset-x=\"0\"\n    :offset-y=\"0\"\n    :rotation=\"0\"\n    :rotation-speed=\"0.5\"\n    background-color=\"#17181A\"\n    :camera-distance=\"3\"\n    :sun-x=\"0\"\n    :sun-y=\"0\"\n    :sun-z=\"1\"\n    :intensity=\"1\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
+      "code": "<script setup>\nimport \"@/components/motion-blocks/halo-element.ts\";\n</script>\n\n<template>\n  <motion-halo\n    :scale=\"1\"\n    :offset-x=\"0\"\n    :offset-y=\"0\"\n    :rotation=\"0\"\n    :rotation-speed=\"0.5\"\n    background-color=\"#17181A\"\n    :camera-distance=\"3\"\n    :sun-x=\"0\"\n    :sun-y=\"0\"\n    :sun-z=\"1\"\n    :intensity=\"1\"\n    class=\"w-full h-[500px]\"\n  />\n</template>"
     },
     {
       "label": "Svelte",
-      "code": "<script>\n  import \"@/components/motion-kit/halo-element.ts\";\n</script>\n\n<motion-halo\n  scale={1}\n  offset-x={0}\n  offset-y={0}\n  rotation={0}\n  rotation-speed={0.5}\n  background-color=\"#17181A\"\n  camera-distance={3}\n  sun-x={0}\n  sun-y={0}\n  sun-z={1}\n  intensity={1}\n  class=\"w-full h-[500px]\"\n/>"
+      "code": "<script>\n  import \"@/components/motion-blocks/halo-element.ts\";\n</script>\n\n<motion-halo\n  scale={1}\n  offset-x={0}\n  offset-y={0}\n  rotation={0}\n  rotation-speed={0.5}\n  background-color=\"#17181A\"\n  camera-distance={3}\n  sun-x={0}\n  sun-y={0}\n  sun-z={1}\n  intensity={1}\n  class=\"w-full h-[500px]\"\n/>"
     },
     {
       "label": "HTML",
-      "code": "<script type=\"module\" src=\"/components/motion-kit/halo-element.js\"></script>\n\n<motion-halo\n  scale=\"1\"\n  offset-x=\"0\"\n  offset-y=\"0\"\n  rotation=\"0\"\n  rotation-speed=\"0.5\"\n  background-color=\"#17181A\"\n  camera-distance=\"3\"\n  sun-x=\"0\"\n  sun-y=\"0\"\n  sun-z=\"1\"\n  intensity=\"1\"\n  class=\"w-full h-[500px]\"\n/>"
+      "code": "<script type=\"module\" src=\"/components/motion-blocks/halo-element.js\"></script>\n\n<motion-halo\n  scale=\"1\"\n  offset-x=\"0\"\n  offset-y=\"0\"\n  rotation=\"0\"\n  rotation-speed=\"0.5\"\n  background-color=\"#17181A\"\n  camera-distance=\"3\"\n  sun-x=\"0\"\n  sun-y=\"0\"\n  sun-z=\"1\"\n  intensity=\"1\"\n  class=\"w-full h-[500px]\"\n/>"
     }
   ],
   "props": [

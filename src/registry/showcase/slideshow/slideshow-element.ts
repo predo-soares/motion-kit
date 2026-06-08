@@ -5,7 +5,7 @@ import { CustomEase } from "gsap/dist/CustomEase"
 
 gsap.registerPlugin(CustomEase)
 
-const EASE = "motion-kit-ease"
+const EASE = "motion-blocks-ease"
 let _easeRegistered = false
 function ensureEase() {
   if (!_easeRegistered) {

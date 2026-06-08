@@ -603,7 +603,7 @@ export class MotionFloatingMenu extends LitElement {
 
       this._timeline = gsap.timeline({
         paused: true,
-        defaults: { ease: "motion-kit-ease", duration: 0.5 },
+        defaults: { ease: "motion-blocks-ease", duration: 0.5 },
         onReverseComplete: () => {
           this._setOverlayInteractivity(false);
           this._isOpen = false;

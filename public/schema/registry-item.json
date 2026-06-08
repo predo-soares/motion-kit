@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://motion-kit.dev/schema/registry-item.json",
-  "title": "Motion Kit Registry Item",
-  "description": "Contract for a single Motion Kit registry item. Field names are inherited from shadcn's registry-item schema where they overlap, but the set of allowed fields and item types is narrowed to what Motion Kit's CLI and docs site actually use.",
+  "$id": "https://motionkit.org/schema/registry-item.json",
+  "title": "Motion Blocks Registry Item",
+  "description": "Contract for a single Motion Blocks registry item. Field names are inherited from shadcn's registry-item schema where they overlap, but the set of allowed fields and item types is narrowed to what Motion Blocks's CLI and docs site actually use.",
   "type": "object",
   "required": ["name", "type", "title", "description", "files"],
   "additionalProperties": false,
@@ -44,7 +44,7 @@
     "registryDependencies": {
       "type": "array",
       "items": { "type": "string" },
-      "description": "Names of other Motion Kit registry items (including hidden registry:lib helpers) this item depends on. No version syntax."
+      "description": "Names of other Motion Blocks registry items (including hidden registry:lib helpers) this item depends on. No version syntax."
     },
     "docs": {
       "type": "string",

@@ -1,15 +1,15 @@
-# motion-kit Astro example
+# Motion Blocks Astro example
 
-A minimal Astro project used to test installing components from the Motion Kit
-registry via the `motion-kit` CLI.
+A minimal Astro project used to test installing components from the Motion Blocks
+registry via the `motion-blocks` CLI.
 
 ## Setup
 
-This fixture ships a committed `motion-kit.json`. To recreate it in a fresh
+This fixture ships a committed `motion-blocks.json`. To recreate it in a fresh
 project:
 
 ```sh
-pnpm dlx motion-kit init
+pnpm dlx motion-blocks init
 ```
 
 Point `registry` at your local docs server when testing against
@@ -24,23 +24,23 @@ Point `registry` at your local docs server when testing against
 ## Install a component
 
 ```sh
-pnpm dlx motion-kit add magnetic
+pnpm dlx motion-blocks add magnetic
 ```
 
 For a local registry during development:
 
 ```sh
-pnpm dlx motion-kit add magnetic --dry-run
+pnpm dlx motion-blocks add magnetic --dry-run
 ```
 
 When testing from the monorepo root:
 
 ```sh
-pnpm --filter motion-kit-cli build
-node packages/motion-kit-cli/dist/index.js add magnetic --cwd templates/astro
+pnpm --filter motion-blocks build
+node packages/motion-blocks-cli/dist/index.js add magnetic --cwd templates/astro
 ```
 
-`components.json` is not used by Motion Kit. If your project also uses shadcn/ui,
+`components.json` is not used by Motion Blocks. If your project also uses shadcn/ui,
 keep that file for the shadcn CLI only.
 
 ## Using the component
@@ -63,7 +63,7 @@ import "@/styles/global.css";
   </motion-magnetic>
 
   <script>
-    import "@/components/motion-kit/magnetic-element.ts";
+    import "@/components/motion-blocks/magnetic-element.ts";
   </script>
 </body>
 ```

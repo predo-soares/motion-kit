@@ -9,29 +9,29 @@
     {
       "path": "src/registry/text/text-repel/text-repel-element.ts",
       "type": "registry:component",
-      "target": "src/components/motion-kit/text-repel-element.ts"
+      "target": "src/components/motion-blocks/text-repel-element.ts"
     }
   ],
   "usage": [
     {
       "label": "Astro",
-      "code": "---\nimport \"@/components/motion-kit/text-repel-element.ts\";\n---\n\n<motion-text-repel text=\"Hover over me\" mode=\"words\"></motion-text-repel>"
+      "code": "---\nimport \"@/components/motion-blocks/text-repel-element.ts\";\n---\n\n<motion-text-repel text=\"Hover over me\" mode=\"words\"></motion-text-repel>"
     },
     {
       "label": "React",
-      "code": "import \"@/components/motion-kit/text-repel-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-text-repel text=\"Hover over me\" mode=\"words\" />\n  );\n}"
+      "code": "import \"@/components/motion-blocks/text-repel-element.ts\";\n\nexport default function Page() {\n  return (\n    <motion-text-repel text=\"Hover over me\" mode=\"words\" />\n  );\n}"
     },
     {
       "label": "Vue",
-      "code": "<script setup>\nimport \"@/components/motion-kit/text-repel-element.ts\";\n</script>\n\n<template>\n  <motion-text-repel text=\"Hover over me\" mode=\"words\" />\n</template>"
+      "code": "<script setup>\nimport \"@/components/motion-blocks/text-repel-element.ts\";\n</script>\n\n<template>\n  <motion-text-repel text=\"Hover over me\" mode=\"words\" />\n</template>"
     },
     {
       "label": "Svelte",
-      "code": "<script>\n  import \"@/components/motion-kit/text-repel-element.ts\";\n</script>\n\n<motion-text-repel text=\"Hover over me\" mode=\"words\" />"
+      "code": "<script>\n  import \"@/components/motion-blocks/text-repel-element.ts\";\n</script>\n\n<motion-text-repel text=\"Hover over me\" mode=\"words\" />"
     },
     {
       "label": "HTML",
-      "code": "<script type=\"module\" src=\"/components/motion-kit/text-repel-element.js\"></script>\n\n<motion-text-repel text=\"Hover over me\" mode=\"words\"></motion-text-repel>"
+      "code": "<script type=\"module\" src=\"/components/motion-blocks/text-repel-element.js\"></script>\n\n<motion-text-repel text=\"Hover over me\" mode=\"words\"></motion-text-repel>"
     }
   ],
   "props": [

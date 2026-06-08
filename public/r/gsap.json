@@ -3,7 +3,7 @@
   "name": "gsap",
   "type": "registry:lib",
   "title": "GSAP helpers",
-  "description": "Shared GSAP plugin registration and Motion Kit ease utilities.",
+  "description": "Shared GSAP plugin registration and Motion Blocks ease utilities.",
   "dependencies": [
     "gsap"
   ],
@@ -15,7 +15,7 @@
       "path": "src/registry/lib/gsap/gsap.ts",
       "type": "registry:lib",
       "target": "src/lib/helpers/gsap.ts",
-      "content": "import { gsap } from \"gsap\";\nimport { CustomEase } from \"gsap/dist/CustomEase\";\n\nconst registeredPlugins = new Set<object>();\n\nconst MOTION_CORE_EASE_NAME = \"motion-kit-ease\";\nconst MOTION_CORE_EASE_CURVE = \"0.625, 0.05, 0, 1\";\n\nlet motionCoreEaseRegistered = false;\n\nexport function registerPluginOnce(...plugins: object[]) {\n  const unique = plugins.filter((plugin) => !registeredPlugins.has(plugin));\n  if (!unique.length) return;\n\n  gsap.registerPlugin(...unique);\n  unique.forEach((plugin) => {\n    registeredPlugins.add(plugin);\n  });\n}\n\nexport function ensureMotionCoreEase() {\n  registerPluginOnce(CustomEase);\n  if (!motionCoreEaseRegistered) {\n    CustomEase.create(MOTION_CORE_EASE_NAME, MOTION_CORE_EASE_CURVE);\n    motionCoreEaseRegistered = true;\n  }\n  return MOTION_CORE_EASE_NAME;\n}\n"
+      "content": "import { gsap } from \"gsap\";\nimport { CustomEase } from \"gsap/dist/CustomEase\";\n\nconst registeredPlugins = new Set<object>();\n\nconst MOTION_CORE_EASE_NAME = \"motion-blocks-ease\";\nconst MOTION_CORE_EASE_CURVE = \"0.625, 0.05, 0, 1\";\n\nlet motionCoreEaseRegistered = false;\n\nexport function registerPluginOnce(...plugins: object[]) {\n  const unique = plugins.filter((plugin) => !registeredPlugins.has(plugin));\n  if (!unique.length) return;\n\n  gsap.registerPlugin(...unique);\n  unique.forEach((plugin) => {\n    registeredPlugins.add(plugin);\n  });\n}\n\nexport function ensureMotionCoreEase() {\n  registerPluginOnce(CustomEase);\n  if (!motionCoreEaseRegistered) {\n    CustomEase.create(MOTION_CORE_EASE_NAME, MOTION_CORE_EASE_CURVE);\n    motionCoreEaseRegistered = true;\n  }\n  return MOTION_CORE_EASE_NAME;\n}\n"
     }
   ]
 }

@@ -1,15 +1,15 @@
-# motion-kit Next.js example
+# Motion Blocks Next.js example
 
-A minimal Next.js project used to test installing components from the Motion Kit
-registry via the `motion-kit` CLI.
+A minimal Next.js project used to test installing components from the Motion Blocks
+registry via the `motion-blocks` CLI.
 
 ## Setup
 
-This fixture ships a committed `motion-kit.json`. To recreate it in a fresh
+This fixture ships a committed `motion-blocks.json`. To recreate it in a fresh
 project:
 
 ```sh
-pnpm dlx motion-kit init
+pnpm dlx motion-blocks init
 ```
 
 Point `registry` at your local docs server when testing against
@@ -24,16 +24,16 @@ Point `registry` at your local docs server when testing against
 ## Install a component
 
 ```sh
-pnpm dlx motion-kit add magnetic
+pnpm dlx motion-blocks add magnetic
 ```
 
 From the monorepo:
 
 ```sh
-node packages/motion-kit-cli/dist/index.js add magnetic --cwd templates/nextjs
+node packages/motion-blocks-cli/dist/index.js add magnetic --cwd templates/nextjs
 ```
 
-`components.json` is not used by Motion Kit. If your project also uses shadcn/ui,
+`components.json` is not used by Motion Blocks. If your project also uses shadcn/ui,
 keep that file for the shadcn CLI only.
 
 ## Using the component
@@ -44,7 +44,7 @@ add `"use client"` at the top of any file that uses them:
 
 ```tsx
 "use client";
-import "@/components/motion-kit/magnetic-element";
+import "@/components/motion-blocks/magnetic-element";
 
 export default function Home() {
   return (
@@ -59,7 +59,7 @@ export default function Home() {
 
 ### Why client components only?
 
-Motion Kit components use GSAP animations and browser APIs that require the
+Motion Blocks components use GSAP animations and browser APIs that require the
 JavaScript runtime to execute. They cannot run during server-side rendering,
 so any page or component using them must be a Client Component with the
 `"use client"` directive.

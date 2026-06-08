@@ -3,7 +3,7 @@
   "name": "gsap",
   "type": "registry:lib",
   "title": "GSAP helpers",
-  "description": "Shared GSAP plugin registration and Motion Kit ease utilities.",
+  "description": "Shared GSAP plugin registration and Motion Blocks ease utilities.",
   "dependencies": ["gsap"],
   "meta": {
     "hidden": true
