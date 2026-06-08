@@ -14,14 +14,17 @@ pnpm preview      # preview built output
 
 ## What this project is
 
-`motion-kit-astro` is a **shadcn-compatible component registry** that hosts animated web components for installation via `pnpm dlx shadcn@latest add`. The Astro site (`src/pages/index.astro`) is a live preview/demo gallery; the actual distributable artifacts are:
+`motion-kit-astro` is a **Motion Kit-owned component registry** that hosts animated web components for installation via the `motion-kit` CLI. The Astro site (`src/pages/index.astro`) is a live preview/demo gallery; the actual distributable artifacts are:
 
 - **Registry source:** `src/registry/<group>/<name>/` — one directory per component
 - **Static JSON served to consumers:** `public/r/<name>.json` + `public/r/registry.json`
 - **Component manifest:** `src/registry/<group>/<name>/component.json` — opt-in source of truth for a published item
 - **Composed source registries:** `registry.json` at the root plus `src/registry/<group>/registry.json` — include-based manifests
+- **CLI config:** `motion-kit.json` in consumer projects — the only config file the CLI reads
 
-When a consumer runs `shadcn add`, they receive the files listed under `"files"` in the composed `registry.json`, installed at the `"target"` paths in their project.
+When a consumer runs `motion-kit add`, they receive the files listed under `"files"` in the registry payload, installed at the `"target"` paths in their project.
+
+The v0 schema inherits field names from shadcn's registry format where they overlap, but Motion Kit narrows the contract to what the CLI and docs site actually use. Motion Kit does **not** read shadcn `components.json`.
 
 ## Architecture
 
@@ -36,11 +39,23 @@ Every component exposes a `replay()` method for the preview UI's replay button.
 
 ### Registry → consumer flow
 
-Any component folder that defines `component.json` can be referenced from the include-based source registries. `public/r/*.json` item payloads are still the static files that shadcn fetches.
+Any component folder that defines `component.json` can be referenced from the include-based source registries. `public/r/*.json` item payloads are the static files that `motion-kit add` fetches.
+
+### Motion Kit CLI
+
+Package: `packages/motion-kit-cli/`. Commands:
+
+- `motion-kit init` — detect framework/package manager and write `motion-kit.json`
+- `motion-kit add <name>` — install registry items (resolves `registryDependencies`, copies files/assets, installs npm deps)
+- `motion-kit list` / `motion-kit list --all` — browse the registry catalog (hidden libs require `--all`)
+- `motion-kit info` — show detected project info and config
+- `motion-kit build` / `motion-kit build --check` — regenerate or validate `public/r` from source manifests
+
+Consumer test apps live under `templates/`. See `packages/motion-kit-cli/RELEASE.md` for the release checklist.
 
 ### Preview site (`src/pages/index.astro`)
 
-Imports all component `.ts` files in a `<script>` block to register the custom elements. Uses `ComponentCard` (`src/components/ui/component-card.astro`) as the gallery wrapper — it renders a preview slot, a replay button that calls `element.replay()`, and a copy-install button that writes the `shadcn add` command to the clipboard.
+Imports all component `.ts` files in a `<script>` block to register the custom elements. Uses `ComponentCard` (`src/components/ui/component-card.astro`) as the gallery wrapper — it renders a preview slot, a replay button that calls `element.replay()`, and a copy-install button.
 
 ### Shared utilities
 

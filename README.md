@@ -1,8 +1,8 @@
 # Motion Kit
 
-A shadcn-compatible component registry of animated web components — install any of them into your own project with a single `shadcn add` command, browse and preview them all in a live Astro gallery.
+A component registry of animated web components — install any of them into your own project with the `motion-kit` CLI, browse and preview them all in a live Astro gallery.
 
-## Quick start
+## Quick start (site)
 
 ```bash
 pnpm install
@@ -10,6 +10,25 @@ pnpm dev          # http://localhost:4321 — live preview/demo gallery
 pnpm build        # production build → dist/
 pnpm preview      # preview the production build
 ```
+
+## Quick start (consumers)
+
+Install components into your own project with the Motion Kit CLI:
+
+```bash
+pnpm dlx motion-kit init
+pnpm dlx motion-kit add magnetic
+```
+
+Browse available items:
+
+```bash
+pnpm dlx motion-kit list
+pnpm dlx motion-kit list --all    # include hidden helper libs
+pnpm dlx motion-kit info
+```
+
+Motion Kit reads **`motion-kit.json` only**. It does not read or write shadcn `components.json`.
 
 ## Project structure
 
@@ -44,7 +63,7 @@ motion-kit-astro/
 │       └── catalog.ts, changelog.ts
 │
 ├── public/r/                      # Static registry JSON served to consumers
-│   ├── <name>.json                #   Individual registry item payloads (what `shadcn add` fetches)
+│   ├── <name>.json                #   Individual registry item payloads
 │   └── registry.json              #   Top-level registry manifest
 │
 ├── registry.json                  # Root composed source registry (include-based)
@@ -54,11 +73,11 @@ motion-kit-astro/
 │       └── src/
 │           ├── commands/          #   init, add, list, build, info
 │           ├── producer/          #   discover, validate, generate registry artifacts
-│           ├── config/            #   CLI config schema + I/O
+│           ├── config/            #   motion-kit.json schema + I/O
 │           └── detection/         #   framework & package-manager detection
 │
 ├── templates/                     # Starter templates for supported frameworks
-│   ├── astro/  nextjs/  nuxt/  sveltekit/  vite-react/  vue/
+│   ├── astro/  nextjs/  sveltekit/  vite-react/  vue/
 │
 ├── scripts/
 │   └── validate-registry.mjs      # Registry validation script (pnpm registry:validate)
@@ -75,10 +94,11 @@ motion-kit-astro/
 
 1. Each component lives in `src/registry/<group>/<name>/` as a Web Component (Lit `LitElement` or vanilla `HTMLElement`), with an opt-in `component.json` manifest describing its registry metadata.
 2. Group-level `src/registry/<group>/registry.json` files include published components into the composed source registry (`registry.json` at the root).
-3. `public/r/<name>.json` mirrors each item as the static payload that `shadcn add` actually fetches, alongside `public/r/registry.json` as the top-level manifest.
+3. `public/r/<name>.json` mirrors each item as the static payload the CLI fetches, alongside `public/r/registry.json` as the top-level manifest.
 4. Consumers install a component with:
    ```bash
-   pnpm dlx shadcn@latest add <registry-url>/r/<name>.json
+   pnpm dlx motion-kit init
+   pnpm dlx motion-kit add magnetic
    ```
 
 See `CLAUDE.md` for the detailed authoring conventions and the steps for adding a new component.
@@ -92,4 +112,16 @@ See `CLAUDE.md` for the detailed authoring conventions and the steps for adding 
 | `pnpm preview` | Preview the production build |
 | `pnpm registry:validate` | Validate the registry source against the schema |
 | `pnpm registry:build` | Build the CLI and regenerate registry artifacts (run manually by maintainers) |
-| `pnpm registry:build:check` | Same as above, in check-only mode |
+| `pnpm registry:build:check` | Same as above, in check-only mode (`motion-kit build --check`) |
+
+## CLI development
+
+From the monorepo root:
+
+```bash
+pnpm --filter motion-kit-cli build
+node packages/motion-kit-cli/dist/index.js --help
+node packages/motion-kit-cli/dist/index.js add magnetic --dry-run --cwd templates/astro
+```
+
+See `packages/motion-kit-cli/RELEASE.md` for the pre-publish checklist.
