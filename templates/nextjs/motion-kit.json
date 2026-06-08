@@ -1,0 +1,8 @@
+{
+  "$schema": "https://motionkit.org/schemas/motion-kit.json",
+  "registry": "https://motionkit.org/r",
+  "framework": "next",
+  "packageManager": "pnpm",
+  "componentsDir": "components/motion-kit",
+  "helpersDir": "lib/motion-kit"
+}

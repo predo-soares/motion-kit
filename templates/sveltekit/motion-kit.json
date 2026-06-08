@@ -1,0 +1,8 @@
+{
+  "$schema": "https://motionkit.org/schemas/motion-kit.json",
+  "registry": "https://motionkit.org/r",
+  "framework": "sveltekit",
+  "packageManager": "pnpm",
+  "componentsDir": "src/lib/components/motion-kit",
+  "helpersDir": "src/lib/motion-kit"
+}

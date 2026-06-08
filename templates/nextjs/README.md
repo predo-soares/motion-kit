@@ -1,43 +1,40 @@
 # motion-kit Next.js example
 
-A minimal Next.js project used to test installing components from the local
-`motion-kit-astro` registry (served at `http://localhost:4321/r/*.json`) via the
-`shadcn` CLI.
+A minimal Next.js project used to test installing components from the Motion Kit
+registry via the `motion-kit` CLI.
 
-## Steps taken to set this up
+## Setup
 
-1. **Add the `@` path mapping** to `tsconfig.json` (matches the alias the
-   registry components import with):
+This fixture ships a committed `motion-kit.json`. To recreate it in a fresh
+project:
 
-   ```json
-   {
-     "compilerOptions": {
-       "experimentalDecorators": true,
-       "paths": {
-         "@/*": ["./*"]
-       }
-     }
-   }
-   ```
+```sh
+pnpm dlx motion-kit init
+```
 
-2. **Install a component directly from the local registry JSON URL**:
+Point `registry` at your local docs server when testing against
+`http://localhost:4321/r`:
 
-   ```sh
-   pnpm dlx shadcn@latest add http://localhost:4321/r/magnetic.json
-   ```
+```json
+{
+  "registry": "http://localhost:4321/r"
+}
+```
 
-   Since there's no `components.json` yet, the CLI prompts to bootstrap one
-   inline — this single step installs Tailwind CSS v4, creates
-   `app/globals.css`, and generates `components.json`, `lib/utils.ts`, and a
-   base `components/ui/button.tsx`. It then drops the Web Component source at
-   `components/motion-kit/magnetic-element.ts` and installs its dependencies
-   (`lit`, `gsap`).
+## Install a component
 
-   Don't forget to load the generated stylesheet from `app/layout.tsx`:
+```sh
+pnpm dlx motion-kit add magnetic
+```
 
-   ```tsx
-   import "./globals.css";
-   ```
+From the monorepo:
+
+```sh
+node packages/motion-kit-cli/dist/index.js add magnetic --cwd templates/nextjs
+```
+
+`components.json` is not used by Motion Kit. If your project also uses shadcn/ui,
+keep that file for the shadcn CLI only.
 
 ## Using the component
 

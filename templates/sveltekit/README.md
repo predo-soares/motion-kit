@@ -1,42 +1,71 @@
-# sv
+# motion-kit SvelteKit example
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A minimal SvelteKit project used to test installing components from the Motion Kit
+registry via the `motion-kit` CLI.
 
-## Creating a project
+## Setup
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```sh
-# create a new project
-npx sv create my-app
-```
-
-To recreate this project with the same configuration:
+This template ships a committed `motion-kit.json`. To recreate it in a fresh
+project:
 
 ```sh
-# recreate this project
-pnpm dlx sv@0.15.4 create --template minimal --types ts --install pnpm sveltekit
+pnpm dlx motion-kit init
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+When testing from the monorepo root:
 
 ```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+pnpm --filter motion-kit-cli build
+node packages/motion-kit-cli/dist/index.js init --cwd templates/sveltekit
 ```
 
-## Building
+Point `registry` at your local docs server when testing against
+`http://localhost:4321/r`:
 
-To create a production version of your app:
+```json
+{
+  "registry": "http://localhost:4321/r"
+}
+```
+
+## Install a component
 
 ```sh
-npm run build
+pnpm dlx motion-kit add magnetic
 ```
 
-You can preview the production build with `npm run preview`.
+From the monorepo:
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+```sh
+node packages/motion-kit-cli/dist/index.js add magnetic --cwd templates/sveltekit
+```
+
+Import the element once in `+layout.svelte` (or per-page) so it registers before
+use:
+
+```svelte
+<script lang="ts">
+  import "$lib/components/motion-kit/magnetic-element";
+</script>
+```
+
+## Using the component
+
+```svelte
+<script lang="ts">
+  import "$lib/components/motion-kit/magnetic-element";
+</script>
+
+<motion-magnetic duration={1.2}>
+  <button>Hover me</button>
+</motion-magnetic>
+```
+
+## Commands
+
+| Command        | Action                                      |
+| :------------- | :------------------------------------------ |
+| `pnpm install` | Installs dependencies                        |
+| `pnpm dev`     | Starts local dev server at `localhost:5173` |
+| `pnpm build`   | Production build                             |
+| `pnpm preview` | Preview the production build                 |

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import favicon from '$lib/assets/favicon.svg';
+	import '$lib/components/motion-kit/magnetic-element';
 
 	let { children } = $props();
 </script>
