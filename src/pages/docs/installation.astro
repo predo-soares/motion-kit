@@ -13,26 +13,36 @@ import JavaScriptLogo from "@/components/ui/logos/javascript-logo.astro";
 
 const tocItems = [
   { href: "#quick-start", label: "Quick Start" },
-  { href: "#manual-setup", label: "Manual Setup" },
+  { href: "#cli-commands", label: "CLI Commands" },
+  { href: "#configuration", label: "Configuration" },
   { href: "#project-structure", label: "Project Structure" },
   { href: "#frameworks", label: "Framework Support" },
+  { href: "#troubleshooting", label: "Troubleshooting" },
 ];
 
-const quickInstallCommand =
-  "pnpm dlx shadcn@latest add https://motion-kit-astro.vercel.app/r/<component-name>.json";
-const magneticInstallCommand =
-  "pnpm dlx shadcn@latest add https://motion-kit-astro.vercel.app/r/magnetic.json";
+const initCommand = "pnpm dlx motion-kit init";
+const addCommand = "pnpm dlx motion-kit add magnetic";
+const listCommand = "pnpm dlx motion-kit list";
+const listAllCommand = "pnpm dlx motion-kit list --all";
+const infoCommand = "pnpm dlx motion-kit info";
+const motionKitConfig = `{
+  "$schema": "https://motionkit.org/schemas/motion-kit.json",
+  "registry": "https://motionkit.org/r",
+  "framework": "astro",
+  "packageManager": "pnpm",
+  "componentsDir": "src/components/motion-kit",
+  "helpersDir": "src/lib/motion-kit"
+}`;
 const tsconfigDecorators = `{
   "compilerOptions": {
     "experimentalDecorators": true
   }
 }`;
-const installDependenciesCommand = "pnpm add gsap lit";
 const importExample = `import "./magnetic-element";
 
 // The component registers itself automatically.
 // Use it in your HTML:
-<magnetic-lit></magnetic-lit>`;
+<motion-magnetic></motion-magnetic>`;
 const projectStructure = `src/
 ├── components/
 │   └── motion-kit/          # Motion Kit components
@@ -42,13 +52,13 @@ const projectStructure = `src/
 │       │   └── card-stack-element.ts
 │       └── ...
 ├── lib/
-│   └── utils.ts              # Shared utilities
+│   └── motion-kit/           # Shared helpers (e.g. gsap)
 └── pages/`;
 ---
 
 <SiteLayout
   title="Installation — Motion Kit"
-  description="How to install Motion Kit components and structure your app."
+  description="How to install Motion Kit components with the motion-kit CLI."
 >
   <ComponentBrowserShell currentHref="/docs/installation">
     <article class="flex w-full max-w-[600px] min-w-0 flex-col gap-10 pb-16">
@@ -62,153 +72,136 @@ const projectStructure = `src/
           </h1>
         </div>
         <p class="text-sm leading-6 text-balance text-slate-600">
-          How to install Motion Kit components and structure your app.
+          Install animated Web Components into your project with the Motion Kit
+          CLI. Motion Kit uses <code
+            class="rounded bg-slate-100 px-1.5 py-0.5 text-[0.9em] text-slate-800"
+            >motion-kit.json</code
+          > only — it does not read shadcn <code
+            class="rounded bg-slate-100 px-1.5 py-0.5 text-[0.9em] text-slate-800"
+            >components.json</code
+          >.
         </p>
       </header>
 
-      <!-- Installation Method Cards -->
-      <section id="quick-start" class="flex flex-col gap-6 scroll-mt-24">
+      <section id="quick-start" class="flex flex-col gap-4 scroll-mt-24">
         <h2 class="text-xl font-semibold tracking-tight text-slate-950">
-          Choose Your Installation Method
-        </h2>
-
-        <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
-          <CardLink
-            href="#quick-install"
-            title="Quick Install"
-            description="Add components directly using the shadcn CLI with our registry URL."
-          />
-
-          <CardLink
-            href="#manual-setup"
-            title="Manual Setup"
-            description="Configure your project manually and copy component source files."
-          />
-        </div>
-      </section>
-
-      <!-- Quick Install Section -->
-      <section id="quick-install" class="flex flex-col gap-4 scroll-mt-24">
-        <h2 class="text-xl font-semibold tracking-tight text-slate-950">
-          Quick Install
+          Quick Start
         </h2>
         <div class="flex flex-col gap-3 text-sm leading-7 text-slate-600">
           <p>
-            The fastest way to add Motion Kit components to your project is
-            using the shadcn CLI. Simply run the add command with our registry
-            URL:
+            Initialize Motion Kit in your project, then add any component by
+            name:
           </p>
 
-          <CodeBlock code={quickInstallCommand} />
-
-          <p>
-            Replace <code
-              class="rounded bg-slate-100 px-1.5 py-0.5 text-[0.9em] text-slate-800"
-              >&lt;component-name&gt;</code
-            > with the component you want to install. For example, to install the
-            magnetic component:
-          </p>
-
-          <CodeBlock code={magneticInstallCommand} />
+          <CodeBlock code={initCommand} />
+          <CodeBlock code={addCommand} />
 
           <p>The CLI will automatically:</p>
           <ul class="ml-4 list-disc space-y-1 text-sm text-slate-600">
-            <li>Download the component source files</li>
-            <li>Install required dependencies (GSAP, Lit, etc.)</li>
-            <li>Place files in the correct directories</li>
-            <li>Update your package dependencies</li>
+            <li>Write <code>motion-kit.json</code> with framework-aware paths</li>
+            <li>Download component source files from the registry</li>
+            <li>Resolve registry dependencies (e.g. shared gsap helper)</li>
+            <li>Install required npm dependencies (GSAP, Lit, etc.)</li>
+            <li>Enable <code>experimentalDecorators</code> in your tsconfig when needed</li>
+            <li>Print a framework-specific usage snippet after install</li>
           </ul>
 
           <p>
-            Motion Kit ships Lit-based custom elements as source. If your
-            project compiles TypeScript, enable decorators in your
-            <code
-              class="rounded bg-slate-100 px-1.5 py-0.5 text-[0.9em] text-slate-800"
-              >tsconfig.json</code
-            > before importing the component:
+            Each component page shows the exact <code>motion-kit add</code> command
+            ready to copy.
           </p>
-
-          <CodeBlock code={tsconfigDecorators} />
         </div>
       </section>
 
-      <!-- Manual Setup Section -->
-      <section id="manual-setup" class="flex flex-col gap-4 scroll-mt-24">
+      <section id="cli-commands" class="flex flex-col gap-4 scroll-mt-24">
         <h2 class="text-xl font-semibold tracking-tight text-slate-950">
-          Manual Setup
+          CLI Commands
+        </h2>
+        <div class="flex flex-col gap-3 text-sm leading-7 text-slate-600">
+          <p>Browse and inspect the registry before installing:</p>
+
+          <CodeBlock code={listCommand} />
+          <p>
+            Use <code>--all</code> to include hidden helper libs such as the
+            shared gsap module:
+          </p>
+          <CodeBlock code={listAllCommand} />
+
+          <p>Inspect detected project info and your config:</p>
+          <CodeBlock code={infoCommand} />
+
+          <p>
+            Maintainers can validate registry source manifests without writing
+            files:
+          </p>
+          <CodeBlock code="pnpm registry:build:check" />
+        </div>
+      </section>
+
+      <section id="configuration" class="flex flex-col gap-4 scroll-mt-24">
+        <h2 class="text-xl font-semibold tracking-tight text-slate-950">
+          Configuration
         </h2>
         <div class="flex flex-col gap-3 text-sm leading-7 text-slate-600">
           <p>
-            If you prefer manual setup or need more control, you can configure
-            Motion Kit components manually:
+            <code>motion-kit init</code> writes a <code>motion-kit.json</code> file
+            at your project root. You can edit it to override detection results:
           </p>
 
-          <h3 class="mt-4 text-base font-semibold text-slate-900">
-            1. Install Dependencies
-          </h3>
-          <CodeBlock code={installDependenciesCommand} />
+          <CodeBlock code={motionKitConfig} showLineNumbers />
 
-          <h3 class="mt-4 text-base font-semibold text-slate-900">
-            2. Copy Component Files
-          </h3>
           <p>
-            Browse our components and copy the source files directly into your
-            project. Each component page shows you the exact files you need.
+            Key fields:
           </p>
+          <ul class="ml-4 list-disc space-y-1 text-sm text-slate-600">
+            <li><code>registry</code> — base URL for registry payloads (required)</li>
+            <li><code>framework</code> — affects install paths and usage snippets</li>
+            <li><code>componentsDir</code> — where component files are written</li>
+            <li><code>helpersDir</code> — where shared helper libs are written</li>
+          </ul>
 
-          <h3 class="mt-4 text-base font-semibold text-slate-900">
-            3. Configure Your Project
-          </h3>
           <p>
-            Make sure your build tool can handle Web Components and TypeScript.
-            If you compile TypeScript source from the registry, enable
-            <code
-              class="rounded bg-slate-100 px-1.5 py-0.5 text-[0.9em] text-slate-800"
-              >experimentalDecorators</code
-            >
-            in your <code
-              class="rounded bg-slate-100 px-1.5 py-0.5 text-[0.9em] text-slate-800"
-              >tsconfig.json</code
-            >.
+            If your project also uses shadcn/ui, keep <code>components.json</code> for
+            the shadcn CLI only. Motion Kit never reads it.
           </p>
 
-          <h3 class="mt-4 text-base font-semibold text-slate-900">
-            4. Register Custom Elements
-          </h3>
-          <p>Import and register the custom elements in your client code:</p>
-          <CodeBlock code={importExample} />
+          <p>
+            Lit-based components need decorators enabled when your project compiles
+            TypeScript:
+          </p>
+          <CodeBlock code={tsconfigDecorators} showLineNumbers />
         </div>
       </section>
 
-      <!-- Project Structure -->
       <section id="project-structure" class="flex flex-col gap-4 scroll-mt-24">
         <h2 class="text-xl font-semibold tracking-tight text-slate-950">
           Project Structure
         </h2>
         <div class="flex flex-col gap-3 text-sm leading-7 text-slate-600">
           <p>
-            Motion Kit components work best in a standard project structure.
-            Here's a recommended setup:
+            After installing components, your project typically looks like this:
           </p>
           <CodeBlock code={projectStructure} />
           <p>
-            Each component is self-contained with its own styles and logic. You
-            can modify them to fit your needs.
+            Register custom elements in client code before using them in markup:
           </p>
+          <CodeBlock code={importExample} showLineNumbers />
         </div>
       </section>
 
-      <!-- Framework Support -->
       <section id="frameworks" class="flex flex-col gap-4 scroll-mt-24">
         <h2 class="text-xl font-semibold tracking-tight text-slate-950">
           Framework Support
         </h2>
         <p class="text-sm text-slate-600">
           Motion Kit components work with any framework that supports Web
-          Components. Choose yours for specific setup instructions:
+          Components. Starter templates live in the repo under <code
+            class="rounded bg-slate-100 px-1.5 py-0.5 text-[0.9em] text-slate-800"
+            >templates/</code
+          >:
         </p>
 
-        <div class="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-6">
+        <div class="mt-4 grid gap-4 sm:grid-cols-2 sm:gap-6">
           <CardLink
             href="#astro"
             title="Astro"
@@ -265,37 +258,135 @@ const projectStructure = `src/
         </div>
       </section>
 
-      <!-- Troubleshooting -->
-      <section class="flex flex-col gap-4 scroll-mt-24">
+      <section id="troubleshooting" class="flex flex-col gap-4 scroll-mt-24">
         <h2 class="text-xl font-semibold tracking-tight text-slate-950">
           Troubleshooting
         </h2>
-        <div class="flex flex-col gap-3 text-sm leading-7 text-slate-600">
-          <p>
-            <strong class="font-semibold text-slate-900"
-              >Components not rendering?</strong
-            > Make sure you've registered the custom elements before using them in
-            your markup.
-          </p>
-          <p>
-            <strong class="font-semibold text-slate-900">Build errors?</strong> Ensure
-            your build tool supports TypeScript, Web Components, and Lit decorators.
-            If you see decorator parse errors, first enable
-            <code
-              class="rounded bg-slate-100 px-1.5 py-0.5 text-[0.9em] text-slate-800"
-              >experimentalDecorators</code
-            >
-            in <code
-              class="rounded bg-slate-100 px-1.5 py-0.5 text-[0.9em] text-slate-800"
-              >tsconfig.json</code
-            > and make sure any Babel step also parses decorators.
-          </p>
-          <p>
-            <strong class="font-semibold text-slate-900"
-              >GSAP not working?</strong
-            > Verify GSAP is installed and the plugins are registered. See the component
-            source for required plugins.
-          </p>
+        <div class="flex flex-col gap-4 text-sm leading-7 text-slate-600">
+          <div>
+            <p>
+              <strong class="font-semibold text-slate-900"
+                >No motion-kit.json found</strong
+              >
+            </p>
+            <p>
+              Run <code>motion-kit init</code> in your project root before
+              <code>motion-kit add</code>.
+            </p>
+          </div>
+
+          <div>
+            <p>
+              <strong class="font-semibold text-slate-900"
+                >Registry item not found</strong
+              >
+            </p>
+            <p>
+              Run <code>motion-kit list</code> to see available names. Check that
+              <code>registry</code> in <code>motion-kit.json</code> points at a
+              valid catalog URL.
+            </p>
+          </div>
+
+          <div>
+            <p>
+              <strong class="font-semibold text-slate-900"
+                >Invalid registry item</strong
+              >
+            </p>
+            <p>
+              The fetched payload failed validation. If you maintain the
+              registry, run <code>motion-kit build --check</code> from the Motion
+              Kit repo to inspect source manifests.
+            </p>
+          </div>
+
+          <div>
+            <p>
+              <strong class="font-semibold text-slate-900"
+                >Unsafe target path</strong
+              >
+            </p>
+            <p>
+              The CLI refused to write outside your project. This indicates a bad
+              <code>target</code> path in the registry item — report it upstream.
+            </p>
+          </div>
+
+          <div>
+            <p>
+              <strong class="font-semibold text-slate-900"
+                >File already exists</strong
+              >
+            </p>
+            <p>
+              Re-run with <code>--overwrite</code> to replace installed files, or
+              delete the conflicting file manually.
+            </p>
+          </div>
+
+          <div>
+            <p>
+              <strong class="font-semibold text-slate-900"
+                >Dependency install failed</strong
+              >
+            </p>
+            <p>
+              Retry with <code>--no-install</code> and run the printed package
+              manager command manually. pnpm store mismatches can be fixed with
+              <code>rm -rf node_modules && pnpm install</code>.
+            </p>
+          </div>
+
+          <div>
+            <p>
+              <strong class="font-semibold text-slate-900"
+                >Asset copy failed</strong
+              >
+            </p>
+            <p>
+              Check your network connection and the <code>registry</code> URL.
+              Assets are fetched from the registry, not inlined in payloads.
+            </p>
+          </div>
+
+          <div>
+            <p>
+              <strong class="font-semibold text-slate-900"
+                >Unsupported framework</strong
+              >
+            </p>
+            <p>
+              If <code>motion-kit init</code> cannot detect your framework, set
+              <code>framework</code> manually in <code>motion-kit.json</code> and
+              adjust <code>componentsDir</code> / <code>helpersDir</code> to match
+              your project layout.
+            </p>
+          </div>
+
+          <div>
+            <p>
+              <strong class="font-semibold text-slate-900"
+                >Components not rendering?</strong
+              >
+            </p>
+            <p>
+              Register the custom element in client code before using it in
+              markup. In Astro, import in a <code>&lt;script&gt;</code> block, not
+              frontmatter.
+            </p>
+          </div>
+
+          <div>
+            <p>
+              <strong class="font-semibold text-slate-900">Build errors?</strong>
+            </p>
+            <p>
+              Ensure your build tool supports TypeScript, Web Components, and Lit
+              decorators. Enable <code>experimentalDecorators</code> in
+              <code>tsconfig.json</code> when you compile registry source.
+            </p>
+          </div>
         </div>
       </section>
     </article>

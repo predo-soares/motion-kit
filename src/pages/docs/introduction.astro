@@ -12,13 +12,13 @@ const tocItems = [
   { href: "#open-code", label: "Open Code" },
 ];
 
-const installCommand =
-  "pnpm dlx shadcn@latest add https://motion-kit-astro.vercel.app/r/<name>.json";
+const initCommand = "pnpm dlx motion-kit init";
+const addCommand = "pnpm dlx motion-kit add magnetic";
 ---
 
 <SiteLayout
   title="Introduction — Motion Kit"
-  description="Motion Kit is a shadcn-compatible registry of animated web components powered by GSAP."
+  description="Motion Kit is a registry of animated web components powered by GSAP, installed with the motion-kit CLI."
 >
   <ComponentBrowserShell currentHref="/docs/introduction">
     <article class="flex w-full max-w-[600px] min-w-0 flex-col gap-10 pb-16">
@@ -32,10 +32,9 @@ const installCommand =
           </h1>
         </div>
         <p class="text-sm leading-6 text-balance text-slate-600">
-          Motion Kit is a shadcn-compatible registry of animated web components
-          powered by GSAP. Install any component directly into your project with
-          a single command. No runtime dependency, no version lock — just your
-          code.
+          Motion Kit is a registry of animated web components powered by GSAP.
+          Install any component directly into your project with the Motion Kit
+          CLI. No runtime dependency, no version lock — just your code.
         </p>
       </header>
 
@@ -46,10 +45,10 @@ const installCommand =
         <div class="flex flex-col gap-3 text-sm leading-7 text-slate-600">
           <p>
             Motion Kit is a collection of production-ready animated components
-            built as Custom Elements and distributed through the shadcn
-            registry. Each component ships as source code dropped directly into
-            your project — no package manager dependency, no abstraction layer
-            between you and the animation.
+            built as Custom Elements and distributed through a flat-file registry.
+            Each component ships as source code dropped directly into your
+            project — no package manager dependency, no abstraction layer between
+            you and the animation.
           </p>
           <p>
             It is built around a small set of ideas: open code you own and
@@ -118,16 +117,18 @@ const installCommand =
         </h2>
         <div class="flex flex-col gap-3 text-sm leading-7 text-slate-600">
           <p>
-            Motion Kit uses the shadcn registry schema: a flat-file structure
-            that defines each component, its dependencies, and installation
-            targets. The shadcn CLI reads that schema and places source files
-            exactly where they belong in your project.
+            Motion Kit uses a flat-file registry schema: each component defines
+            its files, dependencies, and installation targets. The
+            <code>motion-kit</code> CLI reads <code>motion-kit.json</code> in
+            your project and places source files exactly where they belong. It
+            does not read shadcn <code>components.json</code>.
           </p>
-          <p>Install any component with a single command:</p>
-          <CodeBlock code={installCommand} />
+          <p>Initialize and install with two commands:</p>
+          <CodeBlock code={initCommand} />
+          <CodeBlock code={addCommand} />
           <p>
-            Each component's page has the exact command ready to copy. Re-run it
-            at any time to pull in an updated version.
+            Each component's page has the exact <code>motion-kit add</code> command
+            ready to copy. Re-run it at any time to pull in an updated version.
           </p>
         </div>
       </section>

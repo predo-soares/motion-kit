@@ -1,7 +1,12 @@
 ---
+import CodeLines from "./code-lines.astro";
+
 export interface Tab {
   label: string;
   code: string;
+  wrap?: boolean;
+  showLineNumbers?: boolean;
+  highlightLines?: number[];
 }
 
 interface Props {
@@ -41,10 +46,11 @@ const multiTab = tabs.length > 1;
     <pre
       data-tab-panel={i}
       class:list={[
-        "overflow-x-auto bg-slate-50 px-3 py-2.5 text-[13px] leading-6 text-slate-800",
+        "overflow-x-auto bg-slate-50 py-2.5 text-[13px] leading-6 text-slate-800",
+        tab.wrap && "whitespace-pre-wrap",
         i !== 0 && "hidden",
       ]}
-    ><code>{tab.code}</code></pre>
+    ><CodeLines code={tab.code} showLineNumbers={tab.showLineNumbers} highlightLines={tab.highlightLines} /></pre>
   ))}
 </div>
 

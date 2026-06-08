@@ -1,11 +1,15 @@
 ---
+import CodeLines from "./code-lines.astro";
+
 interface Props {
   code: string;
   label?: string;
   wrap?: boolean;
+  showLineNumbers?: boolean;
+  highlightLines?: number[];
 }
 
-const { code, label, wrap = false } = Astro.props;
+const { code, label, wrap = false, showLineNumbers = false, highlightLines = [] } = Astro.props;
 ---
 
 <figure class="my-4 w-full min-w-0 overflow-hidden rounded-3xl bg-slate-100">
@@ -18,7 +22,7 @@ const { code, label, wrap = false } = Astro.props;
   }
   <pre
     class:list={[
-      "w-full min-w-0 overflow-x-auto px-4 py-3 text-sm leading-6 text-slate-950",
+      "w-full min-w-0 overflow-x-auto py-3 text-sm leading-6 text-slate-950",
       wrap && "whitespace-pre-wrap",
-    ]}><code>{code}</code></pre>
+    ]}><CodeLines code={code} showLineNumbers={showLineNumbers} highlightLines={highlightLines} /></pre>
 </figure>

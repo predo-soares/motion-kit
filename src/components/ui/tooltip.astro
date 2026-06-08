@@ -1,0 +1,106 @@
+---
+import { cn } from "@/lib/utils/cn";
+
+interface Props {
+  id: string;
+  placement?: "top" | "bottom";
+  arrow?: boolean;
+  class?: string;
+}
+
+const { id, placement = "top", arrow = false, class: className } = Astro.props;
+---
+
+<span
+  id={id}
+  role="tooltip"
+  popover="manual"
+  data-tooltip-placement={placement}
+  class={cn("fixed m-0", className)}
+>
+  <slot />
+  {
+    arrow ? (
+      <span class="absolute top-full left-1/2 h-0 w-0 -translate-x-1/2 border-4 border-transparent border-t-slate-900" />
+    ) : null
+  }
+</span>
+
+<script>
+  const triggers = Array.from(
+    document.querySelectorAll<HTMLElement>("[data-tooltip-trigger]"),
+  );
+
+  triggers.forEach((trigger) => {
+    const tooltip = document.getElementById(trigger.dataset.tooltipId ?? "") as
+      | (HTMLElement & { showPopover(): void; hidePopover(): void })
+      | null;
+    if (!tooltip) return;
+
+    let closeTimer: ReturnType<typeof setTimeout> | null = null;
+
+    const open = () => {
+      if (closeTimer) {
+        clearTimeout(closeTimer);
+        closeTimer = null;
+      }
+      tooltip.showPopover();
+      const r = trigger.getBoundingClientRect();
+      tooltip.style.left = `${r.left + r.width / 2 - tooltip.offsetWidth / 2}px`;
+      tooltip.style.top =
+        tooltip.dataset.tooltipPlacement === "bottom"
+          ? `${r.bottom + 8}px`
+          : `${r.top - tooltip.offsetHeight - 8}px`;
+    };
+
+    const close = () => tooltip.hidePopover();
+
+    trigger.addEventListener("mouseenter", open);
+    trigger.addEventListener("mouseleave", () => {
+      closeTimer = setTimeout(close, 100);
+    });
+    trigger.addEventListener("click", (e) => {
+      e.stopPropagation();
+      tooltip.matches(":popover-open") ? close() : open();
+    });
+  });
+
+  document.addEventListener("click", () => {
+    triggers.forEach((t) => {
+      const tooltip = document.getElementById(t.dataset.tooltipId ?? "");
+      if (tooltip?.matches(":popover-open")) (tooltip as any).hidePopover();
+    });
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    triggers.forEach((t) => {
+      const tooltip = document.getElementById(t.dataset.tooltipId ?? "");
+      if (tooltip) (tooltip as any).hidePopover();
+    });
+  });
+</script>
+
+<style is:global>
+  [popover][role="tooltip"] {
+    opacity: 0;
+    transform: translateY(4px);
+    filter: blur(6px);
+    transition:
+      opacity 150ms ease-out,
+      transform 150ms ease-out,
+      filter 150ms ease-out;
+  }
+  [popover][role="tooltip"]:popover-open {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+  @starting-style {
+    [popover][role="tooltip"]:popover-open {
+      opacity: 0;
+      transform: translateY(4px);
+      filter: blur(6px);
+    }
+  }
+</style>

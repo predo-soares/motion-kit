@@ -1,0 +1,20 @@
+---
+interface Props {
+  code: string;
+  showLineNumbers?: boolean;
+  highlightLines?: number[];
+}
+
+const { code, showLineNumbers = false, highlightLines = [] } = Astro.props;
+
+const lines = code.split("\n");
+const highlighted = new Set(highlightLines);
+---
+
+<code class="grid">{lines.map((line, index) => {
+      const lineNumber = index + 1;
+      const isHighlighted = highlighted.has(lineNumber);
+      return (
+        <span class:list={["flex px-4", isHighlighted && "bg-slate-400/30"]}>{showLineNumbers ? <span class="mr-4 inline-block w-6 shrink-0 text-right text-slate-400 select-none">{lineNumber}</span> : null}<span class="flex-1">{line.length ? line : " "}</span></span>
+      );
+    })}</code>

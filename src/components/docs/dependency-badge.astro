@@ -1,0 +1,78 @@
+---
+import Tooltip from "@/components/ui/tooltip.astro";
+
+interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+
+const previews: Record<
+  string,
+  { url: string; image: string; title: string; description: string }
+> = {
+  lit: {
+    url: "https://lit.dev",
+    image: "/images/dependency-previews/lit.png",
+    title: "Lit",
+    description: "Simple. Fast. Web Components.",
+  },
+  ogl: {
+    url: "https://github.com/oframe/ogl",
+    image: "/images/dependency-previews/ogl.png",
+    title: "OGL",
+    description: "Minimal WebGL framework.",
+  },
+};
+
+const preview = previews[name];
+const tooltipId = `tip-dep-${name}`;
+---
+
+{
+  preview ? (
+    <li>
+      <a
+        href={preview.url}
+        target="_blank"
+        rel="noreferrer"
+        data-tooltip-trigger
+        data-tooltip-id={tooltipId}
+        data-audio-hover="hover"
+        data-audio-click="select"
+        aria-label={`${name}: visit ${preview.url}`}
+        class="inline-flex rounded-full border border-slate-200 bg-white px-3 py-1 text-sm font-medium text-slate-600 transition-colors hover:border-slate-300 hover:text-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300"
+      >
+        {name}
+      </a>
+      <Tooltip
+        id={tooltipId}
+        placement="bottom"
+        class="w-[240px] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg"
+      >
+        <span class="block aspect-video overflow-hidden">
+          <img
+            src={preview.image}
+            alt={`Preview of ${preview.url}`}
+            loading="lazy"
+            width="1280"
+            height="720"
+            class="block h-full w-full object-cover object-top [image-rendering:-webkit-optimize-contrast]"
+          />
+        </span>
+        <span class="block px-3 py-2">
+          <span class="block text-sm font-semibold text-slate-900">
+            {preview.title}
+          </span>
+          <span class="block text-xs leading-relaxed text-slate-500">
+            {preview.description}
+          </span>
+        </span>
+      </Tooltip>
+    </li>
+  ) : (
+    <li class="rounded-full border border-slate-200 bg-white px-3 py-1 text-sm font-medium text-slate-600">
+      {name}
+    </li>
+  )
+}

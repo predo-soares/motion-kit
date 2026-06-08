@@ -1,16 +1,15 @@
 ---
 import ComponentBrowserShell from "@/components/docs/component-browser-shell.astro";
+import DependencyBadge from "@/components/docs/dependency-badge.astro";
 import ComponentPreviewScripts from "@/components/docs/component-preview-scripts.astro";
 import CodeTabs from "@/components/docs/code-tabs.astro";
 import PackageCommand from "@/components/docs/package-command.astro";
 import ComponentNav from "@/components/docs/component-nav.astro";
 import ComponentToc from "@/components/docs/component-toc.astro";
+import Tooltip from "@/components/ui/tooltip.astro";
 import SiteLayout from "@/layouts/site-layout.astro";
 import infoCircleIcon from "@tabler/icons/outline/info-circle.svg?raw";
-import {
-  componentCatalog,
-  type ComponentCatalogEntry,
-} from "@/lib/catalog";
+import { componentCatalog, type ComponentCatalogEntry } from "@/lib/catalog";
 import { getComponentTestSpec } from "@/lib/testing/spec";
 
 export function getStaticPaths() {
@@ -39,7 +38,7 @@ if (!demoModule) {
 
 const DemoComponent = demoModule.default;
 
-const installCommand = `shadcn@latest add https://motion-kit-astro.vercel.app/r/${component.slug}.json`;
+const installCommand = `motion-kit add ${component.slug}`;
 const hasTestPage = Boolean(getComponentTestSpec(component));
 ---
 
@@ -86,9 +85,7 @@ const hasTestPage = Boolean(getComponentTestSpec(component));
           component.dependencies.length ? (
             <ul class="flex flex-wrap gap-2 mt-2">
               {component.dependencies.map((dependency) => (
-                <li class="rounded-full border border-slate-200 bg-white px-3 py-1 text-sm font-medium text-slate-600">
-                  {dependency}
-                </li>
+                <DependencyBadge name={dependency} />
               ))}
             </ul>
           ) : null
@@ -164,6 +161,8 @@ const hasTestPage = Boolean(getComponentTestSpec(component));
                             type="button"
                             data-tooltip-trigger
                             data-tooltip-id={`tip-${prop.name}`}
+                            data-audio-hover="hover"
+                            data-audio-click="info"
                             title={prop.description}
                             aria-label={`About ${prop.name}: ${prop.description}`}
                             class="inline-flex text-slate-400 transition-colors hover:text-slate-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 rounded-full [&_svg]:block [&_svg]:h-3 [&_svg]:w-3"
@@ -173,15 +172,13 @@ const hasTestPage = Boolean(getComponentTestSpec(component));
                               aria-hidden="true"
                             />
                           </button>
-                          <span
+                          <Tooltip
                             id={`tip-${prop.name}`}
-                            role="tooltip"
-                            popover="manual"
-                            class="fixed m-0 w-max max-w-[220px] rounded-lg bg-slate-900 px-2.5 py-1.5 text-xs leading-relaxed text-white"
+                            arrow
+                            class="w-max max-w-[220px] rounded-2xl bg-slate-900 px-2.5 py-1.5 text-xs leading-relaxed text-white"
                           >
                             {prop.description}
-                            <span class="absolute top-full left-1/2 h-0 w-0 -translate-x-1/2 border-4 border-transparent border-t-slate-900" />
-                          </span>
+                          </Tooltip>
                         </span>
                       </td>
                       <td class="px-3 py-2.5 align-middle">
@@ -212,75 +209,3 @@ const hasTestPage = Boolean(getComponentTestSpec(component));
   </ComponentBrowserShell>
   <ComponentPreviewScripts />
 </SiteLayout>
-
-<script>
-  const triggers = Array.from(
-    document.querySelectorAll<HTMLButtonElement>("[data-tooltip-trigger]"),
-  );
-
-  triggers.forEach((trigger) => {
-    const tooltip = document.getElementById(trigger.dataset.tooltipId ?? "") as
-      | (HTMLElement & { showPopover(): void; hidePopover(): void })
-      | null;
-    if (!tooltip) return;
-
-    let closeTimer: ReturnType<typeof setTimeout> | null = null;
-
-    const open = () => {
-      if (closeTimer) {
-        clearTimeout(closeTimer);
-        closeTimer = null;
-      }
-      tooltip.showPopover();
-      const r = trigger.getBoundingClientRect();
-      tooltip.style.left = `${r.left + r.width / 2 - tooltip.offsetWidth / 2}px`;
-      tooltip.style.top = `${r.top - tooltip.offsetHeight - 8}px`;
-    };
-
-    const close = () => tooltip.hidePopover();
-
-    trigger.addEventListener("mouseenter", open);
-    trigger.addEventListener("mouseleave", () => {
-      closeTimer = setTimeout(close, 100);
-    });
-    trigger.addEventListener("click", (e) => {
-      e.stopPropagation();
-      tooltip.matches(":popover-open") ? close() : open();
-    });
-  });
-
-  document.addEventListener("click", () => {
-    triggers.forEach((t) => {
-      const tooltip = document.getElementById(t.dataset.tooltipId ?? "");
-      if (tooltip?.matches(":popover-open")) (tooltip as any).hidePopover();
-    });
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key !== "Escape") return;
-    triggers.forEach((t) => {
-      const tooltip = document.getElementById(t.dataset.tooltipId ?? "");
-      if (tooltip) (tooltip as any).hidePopover();
-    });
-  });
-</script>
-
-<style is:global>
-  [popover][role="tooltip"] {
-    opacity: 0;
-    transform: translateY(4px);
-    transition:
-      opacity 150ms ease-out,
-      transform 150ms ease-out;
-  }
-  [popover][role="tooltip"]:popover-open {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  @starting-style {
-    [popover][role="tooltip"]:popover-open {
-      opacity: 0;
-      transform: translateY(4px);
-    }
-  }
-</style>
