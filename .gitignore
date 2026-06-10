@@ -29,6 +29,8 @@ ref
 
 # agent
 thoughts
+.scratch
+docs/agents
 
 # local automation scripts (contains secrets)
 ralph.sh
