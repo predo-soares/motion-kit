@@ -18,6 +18,7 @@ import {
 import { formatUsageOutput, resolveUsageSnippet } from "./resolve-usage.js";
 import { resolveWriteTarget, resolveWriteTargetLabel } from "./resolve-target.js";
 import { ensureExperimentalDecorators } from "./patch-tsconfig.js";
+import { ensureReactJsxCustomElements } from "./patch-react-jsx-types.js";
 
 export interface AddItemOptions {
   cwd: string;
@@ -204,6 +205,15 @@ export async function addItems(options: AddItemOptions & { refs: string[] }): Pr
     dryRun,
     logger,
   });
+
+  if (config.framework === "react") {
+    await ensureReactJsxCustomElements({
+      cwd,
+      dryRun,
+      logger,
+      items: plan.items.map(({ item }) => item),
+    });
+  }
 
   const npmDeps = mergeRegistryNpmDependencies(plan.items.map(({ item }) => item));
   const dependencyPlan = planDependencyInstall(
