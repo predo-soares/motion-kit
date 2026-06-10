@@ -1,6 +1,5 @@
 import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
-import { createInterface } from "node:readline";
 import type { Command } from "commander";
 
 import type { WriteDecisionOutcome } from "../install/add-item.js";
@@ -13,28 +12,15 @@ import { generateAssetPreview, generateUnifiedDiff } from "../utils/write-previe
 import { createLogger } from "../utils/logger.js";
 import { isMotionBlocksError, toErrorMessage } from "../utils/errors.js";
 import { withCommonOptions, type CommonOptions } from "../utils/common-options.js";
+import { createYesNoPrompt } from "../utils/prompts.js";
 
 function buildPrompt(): (target: string) => Promise<boolean> {
-  return (target: string): Promise<boolean> =>
-    new Promise((resolve) => {
-      const rl = createInterface({ input: process.stdin, output: process.stdout });
-      rl.question(`Overwrite ${target}? [y/N] `, (answer) => {
-        rl.close();
-        resolve(answer.trim().toLowerCase() === "y");
-      });
-    });
+  return (target: string): Promise<boolean> => createYesNoPrompt(`Overwrite ${target}? [y/N] `);
 }
 
 function buildDepConfirm(): (command: string) => Promise<boolean> {
   return (command: string): Promise<boolean> =>
-    new Promise((resolve) => {
-      const rl = createInterface({ input: process.stdin, output: process.stdout });
-      rl.question(`\nAbout to run: ${command}\nProceed? [Y/n] `, (answer) => {
-        rl.close();
-        const trimmed = answer.trim().toLowerCase();
-        resolve(trimmed === "" || trimmed === "y" || trimmed === "yes");
-      });
-    });
+    createYesNoPrompt(`\nAbout to run: ${command}\nProceed? [Y/n] `, false);
 }
 
 function formatWriteSummary(writes: { decision: WriteDecisionOutcome }[]): string {

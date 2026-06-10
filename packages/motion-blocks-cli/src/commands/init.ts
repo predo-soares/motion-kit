@@ -1,4 +1,3 @@
-import { createInterface } from "node:readline";
 import type { Command } from "commander";
 
 import { createLogger } from "../utils/logger.js";
@@ -10,16 +9,15 @@ import { DEFAULT_CONFIG, type MotionBlocksConfig } from "../config/types.js";
 import { writeConfig } from "../config/config-io.js";
 import { ensureExperimentalDecorators } from "../install/patch-tsconfig.js";
 import { ensureViteOptimizeDeps } from "../install/patch-vite-config.js";
+import { createYesNoPrompt } from "../utils/prompts.js";
 
-async function confirmOverwrite(diff: string): Promise<boolean> {
-  process.stdout.write(`\n${diff}\n`);
-  const rl = createInterface({ input: process.stdin, output: process.stdout });
-  return new Promise((resolve) => {
-    rl.question("Overwrite? [y/N] ", (answer) => {
-      rl.close();
-      resolve(answer.trim().toLowerCase() === "y");
-    });
-  });
+async function confirmOverwrite(message: string): Promise<boolean> {
+  process.stdout.write(`\n${message}\n`);
+  return createYesNoPrompt("Overwrite? [y/N] ");
+}
+
+async function confirmPatch(description: string): Promise<boolean> {
+  return createYesNoPrompt(`${description}? [y/N] `);
 }
 
 export function registerInitCommand(program: Command): void {
@@ -91,6 +89,7 @@ export function registerInitCommand(program: Command): void {
         framework,
         dryRun: options.dryRun,
         logger,
+        confirm: confirmPatch,
       });
 
       if (framework === "vue" || framework === "react") {
@@ -98,6 +97,7 @@ export function registerInitCommand(program: Command): void {
           cwd: options.cwd,
           dryRun: options.dryRun,
           logger,
+          confirm: confirmPatch,
         });
       }
     } catch (error) {

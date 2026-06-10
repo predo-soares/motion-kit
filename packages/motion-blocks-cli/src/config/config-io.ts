@@ -50,7 +50,7 @@ export type WriteConfigOptions = {
    * `false` to skip. When omitted, the legacy throw-on-exists behaviour is
    * preserved for backwards compatibility.
    */
-  confirm?: (diff: string) => Promise<boolean>;
+  confirm?: (message: string) => Promise<boolean>;
 };
 
 /**
@@ -59,7 +59,7 @@ export type WriteConfigOptions = {
  * Behaviour matrix:
  * - No existing file            → always writes (no prompt)
  * - Existing + --overwrite      → writes without prompting
- * - Existing + confirm callback → calls confirm(diff); writes only if true
+ * - Existing + confirm callback → calls confirm(message); writes only if true
  * - Existing + no confirm       → throws config_exists (legacy)
  * - --dry-run                   → logs what would be written, no disk write
  */
@@ -74,8 +74,8 @@ export async function writeConfig(
   // Check if file already exists
   if (existsSync(configPath) && !options.overwrite) {
     if (options.confirm) {
-      const diff = `motion-blocks.json already exists at ${configPath}.\n\nProposed new content:\n${configJson}`;
-      const shouldWrite = await options.confirm(diff);
+      const message = `motion-blocks.json already exists at ${configPath}.\n\nProposed new content:\n${configJson}`;
+      const shouldWrite = await options.confirm(message);
       if (!shouldWrite) {
         return;
       }

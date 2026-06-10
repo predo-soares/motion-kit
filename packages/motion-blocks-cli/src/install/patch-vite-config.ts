@@ -3,6 +3,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { join, relative } from "node:path";
 
 import type { Logger } from "../utils/logger.js";
+import { findMatchingDelimiter } from "../utils/delimiters.js";
 
 const MOTION_KIT_OPTIMIZE_DEPS = ["lit", "gsap"] as const;
 const REACT_COMPILER_INCLUDE = String.raw`/\.[jt]sx$/`;
@@ -74,54 +75,19 @@ export function patchViteOptimizeDeps(content: string): { content: string; chang
 `;
 
   const closingMatch = content.match(/\n}\)\s*$/);
-  if (closingMatch?.index === undefined) {
+  if (!closingMatch) {
     return { content, changed: false };
   }
 
+  const closingIndex = closingMatch.index!;
   return {
-    content: `${content.slice(0, closingMatch.index)}\n${block}${content.slice(closingMatch.index + 1)}`,
+    content: `${content.slice(0, closingIndex)}\n${block}${content.slice(closingIndex + 1)}`,
     changed: true,
   };
 }
 
 function findCallClose(content: string, openParenIndex: number): number {
-  let depth = 0;
-  let quote: string | null = null;
-  let escaped = false;
-
-  for (let index = openParenIndex; index < content.length; index += 1) {
-    const char = content[index]!;
-
-    if (quote) {
-      if (escaped) {
-        escaped = false;
-      } else if (char === "\\") {
-        escaped = true;
-      } else if (char === quote) {
-        quote = null;
-      }
-      continue;
-    }
-
-    if (char === '"' || char === "'" || char === "`") {
-      quote = char;
-      continue;
-    }
-
-    if (char === "(") {
-      depth += 1;
-      continue;
-    }
-
-    if (char === ")") {
-      depth -= 1;
-      if (depth === 0) {
-        return index;
-      }
-    }
-  }
-
-  return -1;
+  return findMatchingDelimiter(content, openParenIndex, "(", ")");
 }
 
 function insertReactCompilerInclude(args: string): { args: string; changed: boolean } {

@@ -130,8 +130,7 @@ async function patchTsConfigFile(
 
   if (options.confirm) {
     const description = `Add compilerOptions.experimentalDecorators: true to ${label}`;
-    const canPrompt = Boolean(process.stdin.isTTY);
-    const accepted = canPrompt ? await options.confirm(description) : false;
+    const accepted = await options.confirm(description);
 
     if (!accepted) {
       options.logger.info(
@@ -199,8 +198,7 @@ async function patchNuxtConfig(
     if (options.confirm) {
       const description = `Add typescript.tsConfig.compilerOptions.experimentalDecorators: true to ${name}`;
       const manualStep = `  typescript: {\n    tsConfig: {\n      compilerOptions: {\n        experimentalDecorators: true,\n      },\n    },\n  },`;
-      const canPrompt = Boolean(process.stdin.isTTY);
-      const accepted = canPrompt ? await options.confirm(description) : false;
+      const accepted = await options.confirm(description);
 
       if (!accepted) {
         options.logger.info(

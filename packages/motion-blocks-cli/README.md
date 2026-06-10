@@ -61,6 +61,9 @@ Options:
 
 - `--no-install` skips package-manager dependency installation
 - `--overwrite` replaces existing installed files
+- `--yes` auto-confirms dependency installation without prompting
+- `--diff [path]` prints unified diffs for files that would change, then exits without writing; accepts an optional path parameter
+- `--view [path]` prints incoming file content (or asset metadata), then exits without writing; accepts an optional path parameter
 - `--cwd <path>` runs against another directory
 - `--dry-run` prints what would happen without writing files
 - `--verbose` prints diagnostic output

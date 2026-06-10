@@ -72,6 +72,20 @@ test("generateUnifiedDiff handles single-line change (no newline)", () => {
   assert.match(diff, /\+hello earth/);
 });
 
+test("generateUnifiedDiff handles empty to non-empty without phantom removal", () => {
+  const diff = generateUnifiedDiff("", "hello\n");
+  assert.ok(diff !== null);
+  assert.match(diff, /\+hello/);
+  assert.doesNotMatch(diff, /^-$/m);
+});
+
+test("generateUnifiedDiff strips trailing newlines before splitting", () => {
+  const diff = generateUnifiedDiff("alpha\n", "alpha\nbeta\n");
+  assert.ok(diff !== null);
+  assert.match(diff, /\+beta/);
+  assert.doesNotMatch(diff, /^\+$/m);
+});
+
 // ---------------------------------------------------------------------------
 // generateAssetPreview
 // ---------------------------------------------------------------------------

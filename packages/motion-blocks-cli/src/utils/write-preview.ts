@@ -26,8 +26,8 @@ export function generateUnifiedDiff(existing: string, incoming: string): string 
     return null;
   }
 
-  const existingLines = existing.split("\n");
-  const incomingLines = incoming.split("\n");
+  const existingLines = splitDiffLines(existing);
+  const incomingLines = splitDiffLines(incoming);
 
   const lcs = buildLcs(existingLines, incomingLines);
   const hunks = buildHunks(existingLines, incomingLines, lcs);
@@ -38,6 +38,14 @@ export function generateUnifiedDiff(existing: string, incoming: string): string 
 
   const header = `--- existing\n+++ incoming\n`;
   return header + hunks.join("\n");
+}
+
+function splitDiffLines(content: string): string[] {
+  if (content === "") {
+    return [];
+  }
+
+  return content.replace(/\n+$/, "").split("\n");
 }
 
 /**
