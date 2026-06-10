@@ -1,13 +1,35 @@
 {
   "name": "motion-blocks",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "description": "CLI for the Motion Blocks registry — install, build, and inspect animated Web Component items.",
+  "keywords": [
+    "motion-blocks",
+    "web-components",
+    "animation",
+    "registry",
+    "cli",
+    "astro",
+    "react",
+    "nextjs",
+    "svelte",
+    "vue"
+  ],
+  "homepage": "https://motionkit.org",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/predo-soares/motion-kit.git",
+    "directory": "packages/motion-blocks-cli"
+  },
+  "bugs": {
+    "url": "https://github.com/predo-soares/motion-kit/issues"
+  },
   "bin": {
     "motion-blocks": "./dist/index.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "engines": {
     "node": ">=22.12.0"
