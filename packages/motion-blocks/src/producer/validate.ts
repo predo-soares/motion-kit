@@ -255,7 +255,7 @@ async function discoverComponentManifests(cwd: string): Promise<Array<{ item: Re
       manifests.push({
         item: JSON.parse(raw) as RegistryItem,
         path,
-        group: relative(registryRoot, path).split("/")[0] ?? "",
+        group: relative(registryRoot, path).replace(/\\/g, "/").split("/")[0] ?? "",
       });
     } catch {
       manifests.push({
@@ -267,7 +267,7 @@ async function discoverComponentManifests(cwd: string): Promise<Array<{ item: Re
           files: [],
         },
         path,
-        group: relative(registryRoot, path).split("/")[0] ?? "",
+        group: relative(registryRoot, path).replace(/\\/g, "/").split("/")[0] ?? "",
       });
     }
   });
