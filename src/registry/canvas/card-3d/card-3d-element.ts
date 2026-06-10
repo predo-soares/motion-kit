@@ -102,7 +102,7 @@ export class MotionCard3D extends LitElement {
       transparent: false, depthTest: true, depthWrite: true,
     })
 
-    let imgW = 1, imgH = 1, imgToken = 0
+    let imgW = 1, imgH = 1
 
     const buildGeo = () => {
       const cw = Math.max(0.001, this.width), ch = Math.max(0.001, this.height)

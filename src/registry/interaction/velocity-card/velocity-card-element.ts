@@ -45,10 +45,8 @@ class MotionVelocityCard extends HTMLElement {
     if (dt < 1) return;
 
     const v = dx / dt;
-    const rf = Number(this.getAttribute("rotation-factor") ?? 3);
     const sf = Number(this.getAttribute("stretch-factor") ?? 0.04);
 
-    // this._rotTo(v * rf)
     this._scaleXTo(1 + Math.abs(v) * sf);
   };
 

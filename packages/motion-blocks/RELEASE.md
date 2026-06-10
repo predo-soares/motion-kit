@@ -1,7 +1,6 @@
 # Motion Blocks CLI — release checklist
 
-Run this checklist before publishing `motion-blocks` to npm. It mirrors
-[Milestone 10](../../thoughts/plans/2026-06-07-motion-blocks-cli-milestones/10-fixture-matrix-and-release-readiness.md).
+Run this checklist before publishing `motion-blocks` to npm.
 
 ## Prerequisites
 
@@ -13,12 +12,12 @@ pnpm registry:build:check
 ## CLI smoke tests
 
 ```bash
-node packages/motion-blocks-cli/dist/index.js --version
-node packages/motion-blocks-cli/dist/index.js --help
-node packages/motion-blocks-cli/dist/index.js info --cwd templates/astro
-node packages/motion-blocks-cli/dist/index.js list --cwd templates/astro
-node packages/motion-blocks-cli/dist/index.js list --all --cwd templates/astro
-node packages/motion-blocks-cli/dist/index.js add magnetic --dry-run --cwd templates/astro
+node packages/motion-blocks/dist/index.js --version
+node packages/motion-blocks/dist/index.js --help
+node packages/motion-blocks/dist/index.js info --cwd templates/astro
+node packages/motion-blocks/dist/index.js list --cwd templates/astro
+node packages/motion-blocks/dist/index.js list --all --cwd templates/astro
+node packages/motion-blocks/dist/index.js add magnetic --dry-run --cwd templates/astro
 ```
 
 ## Unit tests
@@ -32,7 +31,7 @@ pnpm --filter motion-blocks test
 From the monorepo root:
 
 ```bash
-alias motion-blocks='node packages/motion-blocks-cli/dist/index.js'
+alias motion-blocks='node packages/motion-blocks/dist/index.js'
 
 for t in astro vite-react vue sveltekit nextjs; do
   motion-blocks init --dry-run --cwd "templates/$t"
@@ -50,10 +49,17 @@ done
 pnpm build
 ```
 
+`pnpm registry:build:check` must pass before the docs build. It validates that
+visible published components have `component.json`, composed source registry
+inclusion, demo partials, valid docs order, and preview registration metadata.
+It also preserves hidden registry lib behavior for catalog browsing and registry
+dependencies.
+
 ## Manual spot checks
 
 - Follow README quick start in one template app.
 - Confirm component docs show `motion-blocks add <name>`, not `shadcn add`.
+- Confirm visible component docs came from the published item metadata, without separate docs catalog records or item-level preview wiring.
 - Trigger a missing-config error (`motion-blocks add magnetic` outside a project) and confirm the hint mentions `motion-blocks init`.
 - Trigger an invalid item error and confirm the hint mentions `motion-blocks list`.
 

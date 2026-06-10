@@ -19,17 +19,6 @@ export interface PatchTsConfigResult {
   skippedReason?: "already enabled" | "no tsconfig found" | "no nuxt config file found" | "user skipped";
 }
 
-function stripJsonComments(text: string): string {
-  return text
-    .replace(/\/\*[\s\S]*?\*\//g, "")
-    .replace(/^\s*\/\/.*$/gm, "");
-}
-
-function parseJsonc(text: string): Record<string, unknown> {
-  const withoutComments = stripJsonComments(text).replace(/,\s*([}\]])/g, "$1");
-  return JSON.parse(withoutComments) as Record<string, unknown>;
-}
-
 function hasExperimentalDecoratorsEnabled(content: string): boolean {
   return /["']experimentalDecorators["']\s*:\s*true/.test(content);
 }

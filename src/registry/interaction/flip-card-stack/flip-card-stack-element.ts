@@ -41,7 +41,7 @@ class MotionFlipCardStack extends HTMLElement {
     })
   }
 
-  attributeChangedCallback(name: string, _oldValue: string | null, _newValue: string | null) {
+  attributeChangedCallback(_name: string, _oldValue: string | null, _newValue: string | null) {
     // Re-layout when any observed attribute changes
     this._layout(false)
   }
@@ -99,7 +99,7 @@ class MotionFlipCardStack extends HTMLElement {
       this._cardOrder = nextIndexes
     }
 
-    this._cards.forEach((card, index) => {
+    this._cards.forEach((card) => {
       card.style.gridArea = "1 / 1"
       card.style.userSelect = "none"
       card.style.transformOrigin = "center center"

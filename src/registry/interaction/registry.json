@@ -462,6 +462,9 @@
           "description": "Present to reverse the scroll direction."
         }
       ]
+    },
+    {
+      "name": "velocity-card"
     }
   ]
 }

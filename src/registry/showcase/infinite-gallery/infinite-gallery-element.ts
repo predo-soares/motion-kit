@@ -13,8 +13,6 @@ import {
 
 type ImageItem = string | { src: string; alt?: string }
 
-type NormalizedImage = { src: string; alt?: string }
-
 type PlaneData = {
   index: number
   z: number

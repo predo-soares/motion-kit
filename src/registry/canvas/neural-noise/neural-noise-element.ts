@@ -91,7 +91,6 @@ export class MotionNeuralNoise extends LitElement {
 
   private _raf = 0
   private _cancelled = false
-  private _uTime?: { value: number }
   private _uniforms?: {
     uColor: { value: Vec3 }
     uHighlightColor: { value: Vec3 }
@@ -122,7 +121,6 @@ export class MotionNeuralNoise extends LitElement {
   replay() {
     this._cancelled = true
     cancelAnimationFrame(this._raf)
-    this._uTime = undefined
     this._uniforms = undefined
     this._init(this.shadowRoot!.querySelector("canvas")!)
   }
@@ -150,7 +148,6 @@ export class MotionNeuralNoise extends LitElement {
       uColor: { value: new Vec3(cr, cg, cb) },
       uHighlightColor: { value: new Vec3(hr, hg, hb) },
     }
-    this._uTime = uniforms.uTime
     this._uniforms = uniforms
 
     const program = new Program(gl, {

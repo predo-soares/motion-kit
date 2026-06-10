@@ -187,7 +187,7 @@ export class MotionSlideshow extends LitElement {
     const images: SlideImage[] = JSON.parse(this.images)
     return html`
       ${images.map(
-        (img, i) => html`
+        (img) => html`
           <div class="slide">
             <img
               class="inner"

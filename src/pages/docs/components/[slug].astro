@@ -10,7 +10,6 @@ import Tooltip from "@/components/ui/tooltip.astro";
 import SiteLayout from "@/layouts/site-layout.astro";
 import infoCircleIcon from "@tabler/icons/outline/info-circle.svg?raw";
 import { componentCatalog, type ComponentCatalogEntry } from "@/lib/catalog";
-import { getComponentTestSpec } from "@/lib/testing/spec";
 
 export function getStaticPaths() {
   return componentCatalog.map((component) => ({
@@ -39,7 +38,6 @@ if (!demoModule) {
 const DemoComponent = demoModule.default;
 
 const installCommand = `motion-blocks add ${component.slug}`;
-const hasTestPage = Boolean(getComponentTestSpec(component));
 ---
 
 <SiteLayout

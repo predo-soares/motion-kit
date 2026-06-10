@@ -207,7 +207,6 @@ export class MotionVideoPlayer extends LitElement {
   @state() private _hoverTime = 0
   @state() private _fullscreen = false
 
-  private _video?: HTMLVideoElement
   private _rafId = 0
   private _originalParent: ParentNode | null = null
   private _originalNext: Node | null = null

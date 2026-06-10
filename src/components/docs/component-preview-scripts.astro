@@ -1,55 +1,18 @@
 <script>
   import { gsap } from "gsap";
   import { Flip } from "gsap/Flip";
-  import "@/registry/interaction/card-stack/card-stack-element.ts";
-  import "@/registry/interaction/card-stack/card-stack-item-element.ts";
-  import "@/registry/interaction/magnetic/magnetic-element.ts";
-  import "@/registry/interaction/velocity-card/velocity-card-element.ts";
-  import "@/registry/text/text-loop/text-loop-element.ts";
-  import "@/registry/text/text-scramble/text-scramble-element.ts";
-  import "@/registry/text/text-repel/text-repel-element.ts";
-  import "@/registry/text/split-reveal/split-reveal-element.ts";
-  import "@/registry/text/stacking-words/stacking-words-element.ts";
-  import "@/registry/text/split-hover/split-hover-element.ts";
-  import "@/registry/text/weight-wave/weight-wave-element.ts";
-  import "@/registry/interaction/marquee/marquee-element.ts";
-  import "@/registry/showcase/logo-carousel/logo-carousel-element.ts";
-  import "@/registry/showcase/slideshow/slideshow-element.ts";
-  import "@/registry/interaction/flip-card-stack/flip-card-stack-element.ts";
-  import "@/registry/interaction/flip-grid/flip-grid-element.ts";
-  import "@/registry/interaction/flip-grid/flip-grid-item-element.ts";
-  import "@/registry/interaction/floating-menu/floating-menu-element.ts";
-  import "@/registry/canvas/glass-slideshow/glass-slideshow-element.ts";
-  import "@/registry/canvas/glitter-cloth/glitter-cloth-element.ts";
-  import "@/registry/canvas/globe/globe-element.ts";
-  import "@/registry/canvas/god-rays/god-rays-element.ts";
-  import "@/registry/canvas/halo/halo-element.ts";
-  import "@/registry/interaction/image-trail/image-trail-element.ts";
-  import "@/registry/showcase/infinite-gallery/infinite-gallery-element.ts";
-  import "@/registry/showcase/radial-gallery/radial-gallery-element.ts";
-  import "@/registry/showcase/infinite-physics-gallery/infinite-physics-gallery-element.ts";
-  import "@/registry/showcase/video-player/video-player-element.ts";
-  import "@/registry/canvas/card-3d/card-3d-element.ts";
-  import "@/registry/canvas/dithered-image/dithered-image-element.ts";
-  import "@/registry/canvas/fake-3d-image/fake-3d-image-element.ts";
-  import "@/registry/canvas/pixelated-image/pixelated-image-element.ts";
-  import "@/registry/canvas/fluid-simulation/fluid-simulation-element.ts";
-  import "@/registry/canvas/fluid-image-reveal/fluid-image-reveal-element.ts";
-  import "@/registry/canvas/glass-logo/glass-logo-element.ts";
-  import "@/registry/canvas/glass-pane/glass-pane-element.ts";
-  import "@/registry/canvas/ascii-renderer/ascii-renderer-element.ts";
-  import "@/registry/canvas/lava-lamp/lava-lamp-element.ts";
-  import "@/registry/canvas/rubiks-cube/rubiks-cube-element.ts";
-  import "@/registry/canvas/neural-noise/neural-noise-element.ts";
-  import "@/registry/canvas/plasma-grid/plasma-grid-element.ts";
-  import "@/registry/canvas/specular-band/specular-band-element.ts";
-  import "@/registry/canvas/interactive-grid/interactive-grid-element.ts";
-  import "@/registry/canvas/water-ripple/water-ripple-element.ts";
   import "@/components/ui/mk-slider.ts";
   import "@/components/ui/mk-color.ts";
   import "@/components/ui/mk-select.ts";
   import "@/components/ui/mk-text-input.ts";
   import "@/components/ui/mk-file-input.ts";
+
+  const registryPreviewModules = import.meta.glob(
+    "../../registry/**/*-element.ts",
+    { eager: true },
+  );
+
+  void registryPreviewModules;
 
   gsap.registerPlugin(Flip);
 

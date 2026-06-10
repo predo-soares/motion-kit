@@ -88,7 +88,6 @@ export class MotionPlasmaGrid extends LitElement {
 
   private _raf = 0
   private _cancelled = false
-  private _uTime?: { value: number }
   private _uniforms?: {
     uTime: { value: number }
     uResolution: { value: Vec3 }
@@ -122,7 +121,6 @@ export class MotionPlasmaGrid extends LitElement {
   replay() {
     this._cancelled = true
     cancelAnimationFrame(this._raf)
-    this._uTime = undefined
     this._init(this.shadowRoot!.querySelector("canvas")!)
   }
 
@@ -162,7 +160,6 @@ export class MotionPlasmaGrid extends LitElement {
       },
     }
     this._uniforms = uniforms
-    this._uTime = uniforms.uTime
 
     const program = new Program(gl, {
       vertex: VERTEX,

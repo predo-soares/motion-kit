@@ -100,19 +100,15 @@ export class MotionWaterRipple extends LitElement {
   private _brushToken = 0
   private _currentWave = 0
   private _prevMouse = new Vec2(0, 0)
-  private _resolution?: Vec2
   private _textureSize?: Vec2
   private _imageTexture?: Texture
   private _brushTexture?: Texture
-  private _displacementTarget?: RenderTarget
-  private _brushCamera?: Camera
   private _waves?: Array<{
     mesh: Mesh
     opacityUniform: { value: number }
     scaleX: number
     scaleY: number
   }>
-  private _onPointerMove?: (event: PointerEvent) => void
 
   override firstUpdated() {
     this._init(this.shadowRoot!.querySelector("canvas")!)
@@ -137,17 +133,6 @@ export class MotionWaterRipple extends LitElement {
 
   replay() {
     // Water ripple doesn't need replay as it's interactive
-  }
-
-  private _disposeTarget = (gl: Renderer["gl"], target: RenderTarget) => {
-    target.textures.forEach((texture) => {
-      if (texture.texture) gl.deleteTexture(texture.texture)
-    })
-    if (target.depthTexture?.texture) gl.deleteTexture(target.depthTexture.texture)
-    if (target.depthBuffer) gl.deleteRenderbuffer(target.depthBuffer)
-    if (target.stencilBuffer) gl.deleteRenderbuffer(target.stencilBuffer)
-    if (target.depthStencilBuffer) gl.deleteRenderbuffer(target.depthStencilBuffer)
-    if (target.buffer) gl.deleteFramebuffer(target.buffer)
   }
 
   private _loadImage = (source: string) => {
@@ -225,7 +210,6 @@ export class MotionWaterRipple extends LitElement {
       far: 10,
     })
     brushCamera.position.z = 1
-    this._brushCamera = brushCamera
 
     const scene = new Transform()
     const brushScene = new Transform()
@@ -274,11 +258,9 @@ export class MotionWaterRipple extends LitElement {
       format: gl.RGBA,
       type: gl.UNSIGNED_BYTE,
     })
-    this._displacementTarget = displacementTarget
 
     const resolutionUniform = new Vec2(1, 1)
     const textureSizeUniform = new Vec2(1, 1)
-    this._resolution = resolutionUniform
     this._textureSize = textureSizeUniform
 
     const mainUniforms = {
@@ -357,7 +339,6 @@ export class MotionWaterRipple extends LitElement {
         this._prevMouse.set(x, y)
       }
     }
-    this._onPointerMove = onPointerMove
     canvas.addEventListener("pointermove", onPointerMove)
 
     this._loadBrush("/motion-blocks/water-ripple/brush.png")

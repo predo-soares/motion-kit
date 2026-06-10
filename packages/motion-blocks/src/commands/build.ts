@@ -6,7 +6,7 @@ import type { Command } from "commander";
 import { discoverRegistryItems } from "../producer/discover.js";
 import { generateItemPayload, toCatalogEntry } from "../producer/generate.js";
 import type { RegistryItem } from "../producer/types.js";
-import { validateRegistryGraph } from "../producer/validate.js";
+import { validatePublishedRegistryGraph } from "../producer/validate.js";
 import { isMotionBlocksError, toErrorMessage } from "../utils/errors.js";
 import { createLogger, type Logger } from "../utils/logger.js";
 import { withCommonOptions, type CommonOptions } from "../utils/common-options.js";
@@ -50,7 +50,7 @@ async function runBuild(options: CommonOptions & { check: boolean }, logger: Log
   logger.info(`discovered ${source.items.length} registry item(s) across ${countGroups(source.items.map((i) => i.group))} group(s)`);
 
   logger.verbose("validating source manifest graph");
-  const results = await validateRegistryGraph(source.items, cwd);
+  const results = await validatePublishedRegistryGraph(source.items, cwd);
   const invalid = results.filter((result) => result.issues.length > 0);
   const totalIssues = invalid.reduce((sum, result) => sum + result.issues.length, 0);
 

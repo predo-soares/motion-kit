@@ -133,7 +133,6 @@ export class MotionSpecularBand extends LitElement {
 
   private _raf = 0
   private _cancelled = false
-  private _uTime?: { value: number }
   private _uniforms?: {
     uTime: { value: number }
     uResolution: { value: Vec2 }
@@ -183,7 +182,6 @@ export class MotionSpecularBand extends LitElement {
   replay() {
     this._cancelled = true
     cancelAnimationFrame(this._raf)
-    this._uTime = undefined
     this._init(this.shadowRoot!.querySelector("canvas")!)
   }
 
@@ -219,7 +217,6 @@ export class MotionSpecularBand extends LitElement {
       uIntensity: { value: this.intensity },
     }
     this._uniforms = uniforms
-    this._uTime = uniforms.uTime
 
     const program = new Program(gl, {
       vertex: VERTEX,
