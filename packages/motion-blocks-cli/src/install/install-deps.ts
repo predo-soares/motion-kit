@@ -79,9 +79,18 @@ export async function installDependencies(
     dryRun: boolean;
     noInstall: boolean;
     logger: Logger;
+    /**
+     * Optional confirmation callback. Called with the install command string
+     * before spawning the package manager. Return `true` to proceed, `false`
+     * to print the command for manual use and skip the spawn.
+     *
+     * When absent (e.g. non-interactive / no `--yes`), the command is printed
+     * but not spawned.
+     */
+    confirm?: (command: string) => Promise<boolean>;
   },
 ): Promise<void> {
-  const { cwd, dryRun, noInstall, logger } = options;
+  const { cwd, dryRun, noInstall, logger, confirm } = options;
 
   if (dryRun) {
     const depSummary = [
@@ -99,6 +108,19 @@ export async function installDependencies(
       plan.devDependencies.length > 0 ? `devDependencies: ${plan.devDependencies.join(", ")}` : null,
     ].filter(Boolean).join("; ");
     logger.info(depSummary);
+    logger.info(`run manually: ${plan.command}`);
+    return;
+  }
+
+  // No confirm callback means non-interactive mode (no TTY, no --yes):
+  // print the command so the user can run it manually but do not spawn.
+  if (!confirm) {
+    logger.info(`run manually: ${plan.command}`);
+    return;
+  }
+
+  const approved = await confirm(plan.command);
+  if (!approved) {
     logger.info(`run manually: ${plan.command}`);
     return;
   }
