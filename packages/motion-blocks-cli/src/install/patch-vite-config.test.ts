@@ -111,3 +111,20 @@ test("ensureViteOptimizeDeps writes vite.config.ts", async () => {
   assert.match(content, /optimizeDeps:/);
   assert.match(content, /'gsap'/);
 });
+
+test("ensureViteOptimizeDeps returns user skipped when confirm returns false", async () => {
+  const cwd = await mkdtemp(join(tmpdir(), "motion-blocks-vite-"));
+  await writeFile(join(cwd, "vite.config.ts"), baseConfig);
+
+  const result = await ensureViteOptimizeDeps({
+    cwd,
+    dryRun: false,
+    logger,
+    confirm: async () => false,
+  });
+
+  assert.equal(result.patched, false);
+  assert.equal(result.skippedReason, "user skipped");
+  const content = await readFile(join(cwd, "vite.config.ts"), "utf-8");
+  assert.equal(content, baseConfig);
+});

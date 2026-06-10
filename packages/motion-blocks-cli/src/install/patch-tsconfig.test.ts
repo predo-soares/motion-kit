@@ -153,3 +153,29 @@ test("ensureExperimentalDecorators patches nuxt.config.ts", async () => {
   const content = await readFile(join(cwd, "nuxt.config.ts"), "utf-8");
   assert.match(content, /experimentalDecorators:\s*true/);
 });
+
+test("ensureExperimentalDecorators returns user skipped when confirm returns false", async () => {
+  const cwd = await mkdtemp(join(tmpdir(), "motion-blocks-tsconfig-"));
+  const original = `{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
+`;
+  await writeFile(join(cwd, "tsconfig.app.json"), original);
+
+  const result = await ensureExperimentalDecorators({
+    cwd,
+    framework: "vue",
+    dryRun: false,
+    logger,
+    confirm: async () => false,
+  });
+
+  assert.equal(result.patched, false);
+  assert.equal(result.skippedReason, "user skipped");
+  const content = await readFile(join(cwd, "tsconfig.app.json"), "utf-8");
+  assert.equal(content, original);
+});

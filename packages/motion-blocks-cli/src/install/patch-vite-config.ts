@@ -11,12 +11,13 @@ export interface PatchViteConfigOptions {
   cwd: string;
   dryRun: boolean;
   logger: Logger;
+  confirm?: (description: string) => Promise<boolean>;
 }
 
 export interface PatchViteConfigResult {
   patched: boolean;
   path?: string;
-  skippedReason?: string;
+  skippedReason?: "already configured" | "no vite config found" | "user skipped";
 }
 
 function includesAllDeps(includeSource: string, deps: readonly string[]): boolean {
@@ -237,6 +238,19 @@ export async function ensureViteOptimizeDeps(
       options.logger.info(`would restrict React Compiler Babel plugin to JSX files in ${label}`);
     }
     return { patched: true, path: label };
+  }
+
+  if (options.confirm) {
+    const parts: string[] = [];
+    if (optimizeDepsPatch.changed) parts.push(`Add optimizeDeps.include: ['lit', 'gsap']`);
+    if (babelIncludePatch.changed) parts.push(`Scope React Compiler Babel plugin to JSX files`);
+    const canPrompt = Boolean(process.stdin.isTTY);
+    const accepted = canPrompt ? await options.confirm(`${parts.join(" + ")} in ${label}`) : false;
+    if (!accepted) {
+      const manualStep = `  optimizeDeps: {\n    include: ['lit', 'gsap']\n  },`;
+      options.logger.info(`skipped — add this to ${label} manually:\n${manualStep}`);
+      return { patched: false, skippedReason: "user skipped" };
+    }
   }
 
   await writeFile(viteConfigPath, nextContent, "utf-8");
