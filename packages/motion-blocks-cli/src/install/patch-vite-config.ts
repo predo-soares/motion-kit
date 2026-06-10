@@ -213,7 +213,14 @@ export async function ensureViteOptimizeDeps(
     const canPrompt = Boolean(process.stdin.isTTY);
     const accepted = canPrompt ? await options.confirm(`${parts.join(" + ")} in ${label}`) : false;
     if (!accepted) {
-      const manualStep = `  optimizeDeps: {\n    include: ['lit', 'gsap']\n  },`;
+      const manualParts: string[] = [];
+      if (optimizeDepsPatch.changed) {
+        manualParts.push(`  optimizeDeps: {\n    include: ['lit', 'gsap']\n  }`);
+      }
+      if (babelIncludePatch.changed) {
+        manualParts.push(`  // React Compiler Babel plugin\n  babel({\n    plugins: {\n      '@babel/plugin-react-compiler': {\n        include: ${REACT_COMPILER_INCLUDE}\n      }\n    }\n  })`);
+      }
+      const manualStep = manualParts.join("\n\n");
       options.logger.info(`skipped — add this to ${label} manually:\n${manualStep}`);
       return { patched: false, skippedReason: "user skipped" };
     }

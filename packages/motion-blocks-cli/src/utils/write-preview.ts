@@ -26,8 +26,8 @@ export function generateUnifiedDiff(existing: string, incoming: string): string 
     return null;
   }
 
-  const existingLines = splitDiffLines(existing);
-  const incomingLines = splitDiffLines(incoming);
+  const { lines: existingLines } = splitDiffLines(existing);
+  const { lines: incomingLines } = splitDiffLines(incoming);
 
   const lcs = buildLcs(existingLines, incomingLines);
   const hunks = buildHunks(existingLines, incomingLines, lcs);
@@ -40,12 +40,14 @@ export function generateUnifiedDiff(existing: string, incoming: string): string 
   return header + hunks.join("\n");
 }
 
-function splitDiffLines(content: string): string[] {
+function splitDiffLines(content: string): { lines: string[]; hasTrailingNewline: boolean } {
   if (content === "") {
-    return [];
+    return { lines: [], hasTrailingNewline: false };
   }
 
-  return content.replace(/\n+$/, "").split("\n");
+  const hasTrailingNewline = content.endsWith("\n");
+  const lines = content.replace(/\n+$/, "").split("\n");
+  return { lines, hasTrailingNewline };
 }
 
 /**

@@ -67,7 +67,7 @@ export async function writeConfig(
   cwd: string,
   config: MotionBlocksConfig,
   options: WriteConfigOptions = {}
-): Promise<void> {
+): Promise<boolean> {
   const configPath = getConfigPath(cwd);
   const configJson = JSON.stringify(config, null, 2) + "\n";
 
@@ -77,7 +77,7 @@ export async function writeConfig(
       const message = `motion-blocks.json already exists at ${configPath}.\n\nProposed new content:\n${configJson}`;
       const shouldWrite = await options.confirm(message);
       if (!shouldWrite) {
-        return;
+        return false;
       }
     } else {
       throw new MotionBlocksError(
@@ -90,8 +90,9 @@ export async function writeConfig(
   if (options.dryRun) {
     console.log(`Would write to ${configPath}:`);
     console.log(configJson);
-    return;
+    return true;
   }
 
   await writeFile(configPath, configJson, "utf-8");
+  return true;
 }

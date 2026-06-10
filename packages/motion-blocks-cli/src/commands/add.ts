@@ -141,6 +141,12 @@ export function registerAddCommand(program: Command): void {
       const logger = createLogger({ verbose: options.verbose });
       logger.verbose(`add — cwd="${options.cwd}"`);
 
+      // --diff and --view are mutually exclusive
+      if (options.diff !== undefined && options.diff !== false && options.view !== undefined && options.view !== false) {
+        logger.error("Cannot use --diff and --view together. Choose one preview mode.");
+        process.exit(1);
+      }
+
       // --diff and --view are write-free preview paths
       if (options.diff !== undefined && options.diff !== false) {
         try {

@@ -59,23 +59,23 @@ function findMatchingBrace(content: string, openBraceIndex: number): number {
 function replaceExistingEntry(
   content: string,
   definition: ReactCustomElementDefinition,
-): { content: string; changed: boolean } {
+): { content: string; changed: boolean; foundEntry: boolean } {
   const quotedTagPattern = new RegExp(`["']${definition.tagName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}["']\\s*:`);
   const tagMatch = quotedTagPattern.exec(content);
   if (tagMatch?.index === undefined) {
-    return { content, changed: false };
+    return { content, changed: false, foundEntry: false };
   }
 
   const entryStart = content.lastIndexOf("\n", tagMatch.index) + 1;
   const entryIndent = content.slice(entryStart, tagMatch.index).match(/^\s*/)?.[0] ?? "";
   const propsOpen = content.indexOf("{", tagMatch.index);
   if (propsOpen === -1) {
-    return { content, changed: false };
+    return { content, changed: false, foundEntry: false };
   }
 
   const propsClose = findMatchingBrace(content, propsOpen);
   if (propsClose === -1) {
-    return { content, changed: false };
+    return { content, changed: false, foundEntry: false };
   }
 
   const semicolonIndex = content.indexOf(";", propsClose);
@@ -85,17 +85,40 @@ function replaceExistingEntry(
     entryIndent,
   )}${content.slice(entryEnd)}`;
 
-  return { content: nextContent, changed: nextContent !== content };
+  return { content: nextContent, changed: nextContent !== content, foundEntry: true };
 }
 
 function ensureReactImports(content: string): string {
   const reactTypeImport = content.match(/import\s+type\s+\{([^}]+)\}\s+from\s+["']react["']/);
   const importedNames = reactTypeImport?.[1] ?? "";
 
-  if (/\bDetailedHTMLProps\b/.test(importedNames) && /\bHTMLAttributes\b/.test(importedNames)) {
-    return content;
+  if (reactTypeImport) {
+    // Existing import found - check if we need to add missing types
+    const hasDetailedHTMLProps = /\bDetailedHTMLProps\b/.test(importedNames);
+    const hasHTMLAttributes = /\bHTMLAttributes\b/.test(importedNames);
+
+    if (hasDetailedHTMLProps && hasHTMLAttributes) {
+      return content;
+    }
+
+    // Parse existing import names
+    const existingTypes = importedNames
+      .split(",")
+      .map((name) => name.trim())
+      .filter((name) => name.length > 0);
+
+    // Add missing types while preserving order
+    if (!hasDetailedHTMLProps) existingTypes.push("DetailedHTMLProps");
+    if (!hasHTMLAttributes) existingTypes.push("HTMLAttributes");
+
+    // Replace the original import with the merged one
+    const newImport = `import type { ${existingTypes.join(", ")} } from "react";`;
+    const importStart = reactTypeImport.index!;
+    const importEnd = importStart + reactTypeImport[0].length;
+    return `${content.slice(0, importStart)}${newImport}${content.slice(importEnd)}`;
   }
 
+  // No existing import - prepend the new one
   return `import type { DetailedHTMLProps, HTMLAttributes } from "react";\n\n${content}`;
 }
 
@@ -158,7 +181,10 @@ export async function ensureReactJsxCustomElements(
       const patched = replaceExistingEntry(content, definition);
       content = patched.content;
       changed ||= patched.changed;
-      continue;
+      // Only continue to next definition if we actually found and replaced a real entry
+      if (patched.foundEntry) {
+        continue;
+      }
     }
 
     missingDefinitions.push(definition);

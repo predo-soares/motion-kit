@@ -41,11 +41,11 @@ bunx --bun motion-blocks add magnetic
 motion-blocks init
 ```
 
-Create `motion-blocks.json` for the current project.
+Create `motion-blocks.json` for the current project. When a config file already exists, the CLI prompts for confirmation unless you supply the `--overwrite` flag to force replacement. The `--dry-run` flag shows the overwrite action without writing, and `--verbose` prints diagnostic information.
 
 Options:
 
-- `--overwrite` replaces an existing config file
+- `--overwrite` replaces an existing config file without prompting
 - `--cwd <path>` runs against another directory
 - `--dry-run` prints what would happen without writing files
 - `--verbose` prints diagnostic output
@@ -55,7 +55,7 @@ motion-blocks add magnetic
 motion-blocks add magnetic card-stack
 ```
 
-Install one or more registry items.
+Install one or more registry items. After running, the CLI prints a summary showing counts grouped by outcome (created, updated, skipped, identical) so you know what to expect when installation completes.
 
 Options:
 
@@ -67,6 +67,8 @@ Options:
 - `--cwd <path>` runs against another directory
 - `--dry-run` prints what would happen without writing files
 - `--verbose` prints diagnostic output
+
+The `add` command detects non-interactive environments (CI or piped stdin) and will automatically skip writing conflicting files unless `--overwrite` is provided. For CI/CD workflows, include `--overwrite` to force file replacement.
 
 ```bash
 motion-blocks list

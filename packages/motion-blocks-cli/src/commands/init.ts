@@ -69,15 +69,17 @@ export function registerInitCommand(program: Command): void {
     logger.info("\nGenerated config:");
     console.log(JSON.stringify(config, null, 2));
 
+    // Detect interactivity
+    const interactive = Boolean(process.stdin?.isTTY && process.stdout?.isTTY);
+
     // Step 2: write config — declining is not fatal; patchers still run
     let configWritten = false;
     try {
-      await writeConfig(options.cwd, config, {
+      configWritten = await writeConfig(options.cwd, config, {
         overwrite: options.overwrite,
         dryRun: options.dryRun,
-        confirm: confirmOverwrite,
+        confirm: interactive ? confirmOverwrite : undefined,
       });
-      configWritten = true;
     } catch (error) {
       logger.error(isMotionBlocksError(error) ? error.message : toErrorMessage(error));
     }
@@ -89,7 +91,7 @@ export function registerInitCommand(program: Command): void {
         framework,
         dryRun: options.dryRun,
         logger,
-        confirm: confirmPatch,
+        confirm: interactive ? confirmPatch : undefined,
       });
 
       if (framework === "vue" || framework === "react") {
@@ -97,7 +99,7 @@ export function registerInitCommand(program: Command): void {
           cwd: options.cwd,
           dryRun: options.dryRun,
           logger,
-          confirm: confirmPatch,
+          confirm: interactive ? confirmPatch : undefined,
         });
       }
     } catch (error) {

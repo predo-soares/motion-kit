@@ -7,10 +7,43 @@ export function findMatchingDelimiter(
   let depth = 0;
   let quote: string | null = null;
   let escaped = false;
+  let inSingleLineComment = false;
+  let inMultiLineComment = false;
 
   for (let index = startIndex; index < content.length; index += 1) {
     const char = content[index]!;
+    const nextChar = content[index + 1];
 
+    // Handle single-line comments (// to newline)
+    if (!inSingleLineComment && !inMultiLineComment && !quote && char === "/" && nextChar === "/") {
+      inSingleLineComment = true;
+      index += 1;
+      continue;
+    }
+
+    if (inSingleLineComment) {
+      if (char === "\n") {
+        inSingleLineComment = false;
+      }
+      continue;
+    }
+
+    // Handle multi-line comments (/* to */)
+    if (!inMultiLineComment && !quote && char === "/" && nextChar === "*") {
+      inMultiLineComment = true;
+      index += 1;
+      continue;
+    }
+
+    if (inMultiLineComment) {
+      if (char === "*" && nextChar === "/") {
+        inMultiLineComment = false;
+        index += 1;
+      }
+      continue;
+    }
+
+    // Handle quotes
     if (quote) {
       if (escaped) {
         escaped = false;
