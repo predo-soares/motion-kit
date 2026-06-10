@@ -2,10 +2,6 @@
 import ComponentBrowserShell from "@/components/docs/component-browser-shell.astro";
 import SiteLayout from "@/layouts/site-layout.astro";
 import { componentCatalog } from "@/lib/catalog";
-
-const sorted = [...componentCatalog].sort((a, b) =>
-  a.title.localeCompare(b.title),
-);
 ---
 
 <SiteLayout
@@ -22,13 +18,13 @@ const sorted = [...componentCatalog].sort((a, b) =>
           </h1>
         </div>
         <p class="max-w-3xl text-sm text-balance text-slate-600">
-          All animated web components available in the registry, sorted alphabetically.
+          All animated web components available in the published registry.
         </p>
       </header>
 
       <ul class="grid grid-cols-3 gap-x-4 gap-y-1">
         {
-          sorted.map((component) => (
+          componentCatalog.map((component) => (
             <li>
               <a
                 href={`/docs/components/${component.slug}`}
