@@ -89,7 +89,6 @@ export class MkFileInput extends LitElement {
   @property({ attribute: "data-target" }) dataTarget = "";
   @property({ attribute: "data-attr" }) dataAttr = "";
   @state() private _fileName = "";
-  @state() private _fileContent = "";
 
   private _onFileChange(e: Event) {
     const input = e.target as HTMLInputElement;
@@ -101,7 +100,6 @@ export class MkFileInput extends LitElement {
     const reader = new FileReader();
     reader.onload = (loadEvent) => {
       const content = loadEvent.target?.result as string;
-      this._fileContent = content;
       this.value = content;
       this.dispatchEvent(new Event("input", { bubbles: true, composed: true }));
     };

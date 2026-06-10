@@ -149,7 +149,6 @@ export class MotionGlitterCloth extends LitElement {
   private _raf = 0
   private _cancelled = false
   private _uniforms?: UniformState
-  private _renderer?: Renderer
   private _geometry?: Triangle
   private _program?: Program
   private _mesh?: Mesh
@@ -215,7 +214,6 @@ export class MotionGlitterCloth extends LitElement {
     this._mesh = undefined
     this._program = undefined
     this._geometry = undefined
-    this._renderer = undefined
     this._uniforms = undefined
   }
 
@@ -237,7 +235,6 @@ export class MotionGlitterCloth extends LitElement {
     camera.position.z = 1
     const scene = new Transform()
     const geometry = new Triangle(gl)
-    this._renderer = renderer
     this._geometry = geometry
 
     const primarySrgb = toRgb(this.color, DEFAULT_PRIMARY)

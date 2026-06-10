@@ -110,16 +110,6 @@ export const componentGroups: ComponentCatalogGroup[] = Object.values(
   }))
   .filter((group) => group.items.length > 0);
 
-export const firstComponent = componentCatalog[0];
-
-export function getComponentBySlug(slug: string) {
-  return componentCatalog.find((component) => component.slug === slug);
-}
-
-export function getPreviewRegistrations(slug: string) {
-  return getComponentBySlug(slug)?.previewRegistrations ?? [];
-}
-
 function buildPublishedRegistryItems(): PublishedRegistryItem[] {
   const items: PublishedRegistryItem[] = [];
 

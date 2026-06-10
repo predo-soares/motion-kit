@@ -674,12 +674,6 @@ export class MotionFloatingMenu extends LitElement {
     this._timeline.play();
   };
 
-  private _handleOverlayKeydown = (event: KeyboardEvent) => {
-    if (event.key !== "Escape" || !this._isOpen) return;
-    event.preventDefault();
-    this._toggle();
-  };
-
   override render() {
     const groups = this._parseGroups();
     const primaryButton = this._parseButton(this.primaryButton);

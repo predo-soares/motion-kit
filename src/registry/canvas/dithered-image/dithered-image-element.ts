@@ -36,7 +36,6 @@ export class MotionDitheredImage extends LitElement {
     uThresholdMap: { value: Texture }
     uMapSize: { value: Vec2 }
   }
-  private _gl?: WebGLRenderingContext
   private _setImage?: (src: string) => void
   private _setDitherMap?: (map: DitherMap) => void
 
@@ -82,7 +81,6 @@ export class MotionDitheredImage extends LitElement {
     this._cancelled = false
     const renderer = new Renderer({ canvas, alpha: true, dpr: window.devicePixelRatio })
     const gl = renderer.gl
-    this._gl = gl
     gl.clearColor(0, 0, 0, 0)
     canvas.style.width = "100%"
     canvas.style.height = "100%"
