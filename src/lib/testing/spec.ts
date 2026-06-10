@@ -1,8 +1,13 @@
-import type { ComponentCatalogEntry } from "@/lib/catalog";
-
 export const testFrameworks = ["Astro", "React", "Vue", "Svelte"] as const;
 
 export type TestFramework = (typeof testFrameworks)[number];
+
+interface ComponentTestCandidate {
+  usage?: readonly {
+    label: string;
+    code: string;
+  }[];
+}
 
 export interface ComponentTestRenderSpec {
   tagName: string;
@@ -16,7 +21,7 @@ export interface ComponentTestPageSpec {
 }
 
 export function getComponentTestSpec(
-  component: ComponentCatalogEntry,
+  component: ComponentTestCandidate,
 ): ComponentTestPageSpec | null {
   if (!component.usage?.length) return null;
 
