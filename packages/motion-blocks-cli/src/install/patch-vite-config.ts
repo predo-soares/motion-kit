@@ -5,6 +5,7 @@ import { join, relative } from "node:path";
 import type { Logger } from "../utils/logger.js";
 
 const MOTION_KIT_OPTIMIZE_DEPS = ["lit", "gsap"] as const;
+const REACT_COMPILER_INCLUDE = String.raw`/\.[jt]sx$/`;
 
 export interface PatchViteConfigOptions {
   cwd: string;
@@ -72,7 +73,7 @@ export function patchViteOptimizeDeps(content: string): { content: string; chang
 `;
 
   const closingMatch = content.match(/\n}\)\s*$/);
-  if (!closingMatch?.index) {
+  if (closingMatch?.index === undefined) {
     return { content, changed: false };
   }
 
@@ -80,6 +81,114 @@ export function patchViteOptimizeDeps(content: string): { content: string; chang
     content: `${content.slice(0, closingMatch.index)}\n${block}${content.slice(closingMatch.index + 1)}`,
     changed: true,
   };
+}
+
+function findCallClose(content: string, openParenIndex: number): number {
+  let depth = 0;
+  let quote: string | null = null;
+  let escaped = false;
+
+  for (let index = openParenIndex; index < content.length; index += 1) {
+    const char = content[index]!;
+
+    if (quote) {
+      if (escaped) {
+        escaped = false;
+      } else if (char === "\\") {
+        escaped = true;
+      } else if (char === quote) {
+        quote = null;
+      }
+      continue;
+    }
+
+    if (char === '"' || char === "'" || char === "`") {
+      quote = char;
+      continue;
+    }
+
+    if (char === "(") {
+      depth += 1;
+      continue;
+    }
+
+    if (char === ")") {
+      depth -= 1;
+      if (depth === 0) {
+        return index;
+      }
+    }
+  }
+
+  return -1;
+}
+
+function insertReactCompilerInclude(args: string): { args: string; changed: boolean } {
+  if (!/reactCompilerPreset\s*\(/.test(args) || /\binclude\s*:/.test(args)) {
+    return { args, changed: false };
+  }
+
+  const closeBraceIndex = args.lastIndexOf("}");
+  if (!args.trimStart().startsWith("{") || closeBraceIndex === -1) {
+    return { args, changed: false };
+  }
+
+  const beforeClose = args.slice(0, closeBraceIndex);
+  const afterClose = args.slice(closeBraceIndex);
+  const trailing = beforeClose.trimEnd();
+  const needsComma = trailing.length > 0 && !trailing.endsWith("{") && !trailing.endsWith(",");
+
+  if (!args.includes("\n")) {
+    const compactBeforeClose = beforeClose.trimEnd();
+    return {
+      args: `${compactBeforeClose}${needsComma ? ", " : " "}include: ${REACT_COMPILER_INCLUDE}${afterClose}`,
+      changed: true,
+    };
+  }
+
+  const closeLineStart = args.lastIndexOf("\n", closeBraceIndex) + 1;
+  const closeIndent = args.slice(closeLineStart, closeBraceIndex).match(/^\s*/)?.[0] ?? "";
+  const propertyIndent = `${closeIndent}  `;
+
+  return {
+    args: `${beforeClose}${needsComma ? "," : ""}\n${propertyIndent}include: ${REACT_COMPILER_INCLUDE}${afterClose}`,
+    changed: true,
+  };
+}
+
+export function patchViteReactCompilerBabelInclude(content: string): { content: string; changed: boolean } {
+  let next = content;
+  let changed = false;
+  let searchFrom = 0;
+
+  while (searchFrom < next.length) {
+    const callMatch = /\bbabel\s*\(/.exec(next.slice(searchFrom));
+    if (!callMatch) {
+      break;
+    }
+
+    const callStart = searchFrom + callMatch.index;
+    const openParenIndex = next.indexOf("(", callStart);
+    const closeParenIndex = findCallClose(next, openParenIndex);
+    if (closeParenIndex === -1) {
+      break;
+    }
+
+    const argsStart = openParenIndex + 1;
+    const args = next.slice(argsStart, closeParenIndex);
+    const patched = insertReactCompilerInclude(args);
+
+    if (patched.changed) {
+      next = `${next.slice(0, argsStart)}${patched.args}${next.slice(closeParenIndex)}`;
+      changed = true;
+      searchFrom = argsStart + patched.args.length;
+      continue;
+    }
+
+    searchFrom = closeParenIndex + 1;
+  }
+
+  return { content: next, changed };
 }
 
 async function resolveViteConfigPath(cwd: string): Promise<string | null> {
@@ -105,7 +214,10 @@ export async function ensureViteOptimizeDeps(
   }
 
   const content = await readFile(viteConfigPath, "utf-8");
-  const { content: nextContent, changed } = patchViteOptimizeDeps(content);
+  const optimizeDepsPatch = patchViteOptimizeDeps(content);
+  const babelIncludePatch = patchViteReactCompilerBabelInclude(optimizeDepsPatch.content);
+  const nextContent = babelIncludePatch.content;
+  const changed = optimizeDepsPatch.changed || babelIncludePatch.changed;
 
   if (!changed) {
     return {
@@ -118,11 +230,21 @@ export async function ensureViteOptimizeDeps(
   const label = relative(options.cwd, viteConfigPath) || viteConfigPath;
 
   if (options.dryRun) {
-    options.logger.info(`would add optimizeDeps.include: ['lit', 'gsap'] to ${label}`);
+    if (optimizeDepsPatch.changed) {
+      options.logger.info(`would add optimizeDeps.include: ['lit', 'gsap'] to ${label}`);
+    }
+    if (babelIncludePatch.changed) {
+      options.logger.info(`would restrict React Compiler Babel plugin to JSX files in ${label}`);
+    }
     return { patched: true, path: label };
   }
 
   await writeFile(viteConfigPath, nextContent, "utf-8");
-  options.logger.info(`added optimizeDeps.include: ['lit', 'gsap'] to ${label}`);
+  if (optimizeDepsPatch.changed) {
+    options.logger.info(`added optimizeDeps.include: ['lit', 'gsap'] to ${label}`);
+  }
+  if (babelIncludePatch.changed) {
+    options.logger.info(`restricted React Compiler Babel plugin to JSX files in ${label}`);
+  }
   return { patched: true, path: label };
 }
