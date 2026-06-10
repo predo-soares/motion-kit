@@ -68,7 +68,7 @@ export function registerInitCommand(program: Command): void {
         logger,
       });
 
-      if (framework === "vue") {
+      if (framework === "vue" || framework === "react") {
         await ensureViteOptimizeDeps({
           cwd: options.cwd,
           dryRun: options.dryRun,
