@@ -1,0 +1,15 @@
+{
+  "name": "simple-item",
+  "type": "registry:component",
+  "title": "Simple Item",
+  "description": "Fixture item with a single code file, used for write-policy integration tests.",
+  "usage": [{ "label": "HTML", "code": "<simple-item></simple-item>" }],
+  "files": [
+    {
+      "path": "simple-item.ts",
+      "type": "registry:component",
+      "target": "src/components/motion-blocks/simple-item.ts",
+      "content": "export class SimpleItem extends HTMLElement {}\ncustomElements.define('simple-item', SimpleItem);\n"
+    }
+  ]
+}

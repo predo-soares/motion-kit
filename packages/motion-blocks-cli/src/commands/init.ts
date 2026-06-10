@@ -9,6 +9,16 @@ import { DEFAULT_CONFIG, type MotionBlocksConfig } from "../config/types.js";
 import { writeConfig } from "../config/config-io.js";
 import { ensureExperimentalDecorators } from "../install/patch-tsconfig.js";
 import { ensureViteOptimizeDeps } from "../install/patch-vite-config.js";
+import { createYesNoPrompt } from "../utils/prompts.js";
+
+async function confirmOverwrite(message: string): Promise<boolean> {
+  process.stdout.write(`\n${message}\n`);
+  return createYesNoPrompt("Overwrite? [y/N] ");
+}
+
+async function confirmPatch(description: string): Promise<boolean> {
+  return createYesNoPrompt(`${description}? [y/N] `);
+}
 
 export function registerInitCommand(program: Command): void {
   withCommonOptions(
@@ -21,71 +31,88 @@ export function registerInitCommand(program: Command): void {
 
     logger.verbose(`init — cwd="${options.cwd}"`);
 
+    // Step 1: detect environment — fatal on failure
+    let framework: Awaited<ReturnType<typeof detectFramework>>;
+    let packageManager: Awaited<ReturnType<typeof detectPackageManager>>;
+
     try {
-      // Detect package manager
       logger.info("Detecting package manager...");
-      const packageManager = await detectPackageManager(options.cwd);
+      packageManager = await detectPackageManager(options.cwd);
       logger.verbose(`Detected package manager: ${packageManager}`);
 
-      // Detect framework
       logger.info("Detecting framework...");
-      const framework = await detectFramework(options.cwd);
+      framework = await detectFramework(options.cwd);
       logger.verbose(`Detected framework: ${framework}`);
+    } catch (error) {
+      logger.error(isMotionBlocksError(error) ? error.message : toErrorMessage(error));
+      process.exit(1);
+      return;
+    }
 
-      if (framework === "plain") {
-        logger.warn(
-          "Could not detect a supported framework. Set \"framework\" in motion-blocks.json manually after init.",
-        );
-      }
+    if (framework === "plain") {
+      logger.warn(
+        "Could not detect a supported framework. Set \"framework\" in motion-blocks.json manually after init.",
+      );
+    }
 
-      // Get default directories for the framework
-      const { componentsDir, helpersDir } = getDefaultDirectories(framework);
+    const { componentsDir, helpersDir } = getDefaultDirectories(framework);
 
-      // Build the config object
-      const config: MotionBlocksConfig = {
-        ...DEFAULT_CONFIG,
-        registry: DEFAULT_CONFIG.registry ?? "https://motionkit.org/r",
-        framework,
-        packageManager,
-        componentsDir,
-        helpersDir,
-      };
+    const config: MotionBlocksConfig = {
+      ...DEFAULT_CONFIG,
+      registry: DEFAULT_CONFIG.registry ?? "https://motionkit.org/r",
+      framework,
+      packageManager,
+      componentsDir,
+      helpersDir,
+    };
 
-      // Log what we're going to write
-      logger.info("\nGenerated config:");
-      console.log(JSON.stringify(config, null, 2));
+    logger.info("\nGenerated config:");
+    console.log(JSON.stringify(config, null, 2));
 
-      // Write the config
-      await writeConfig(options.cwd, config, {
+    // Detect interactivity
+    const interactive = Boolean(process.stdin?.isTTY && process.stdout?.isTTY);
+
+    // Step 2: write config — declining is not fatal; patchers still run
+    let configWritten = false;
+    try {
+      configWritten = await writeConfig(options.cwd, config, {
         overwrite: options.overwrite,
         dryRun: options.dryRun,
+        confirm: interactive ? confirmOverwrite : undefined,
       });
+    } catch (error) {
+      logger.error(isMotionBlocksError(error) ? error.message : toErrorMessage(error));
+    }
 
+    // Step 3: apply patchers — don't depend on config being written
+    try {
       await ensureExperimentalDecorators({
         cwd: options.cwd,
         framework,
         dryRun: options.dryRun,
         logger,
+        confirm: interactive ? confirmPatch : undefined,
       });
 
-      if (framework === "vue") {
+      if (framework === "vue" || framework === "react") {
         await ensureViteOptimizeDeps({
           cwd: options.cwd,
           dryRun: options.dryRun,
           logger,
+          confirm: interactive ? confirmPatch : undefined,
         });
-      }
-
-      if (options.dryRun) {
-        logger.info("\nDry run: no files were written.");
-      } else {
-        logger.info("\n✓ Config written successfully");
-        logger.info(`  → ${config.componentsDir}`);
-        logger.info(`  → ${config.helpersDir}`);
       }
     } catch (error) {
       logger.error(isMotionBlocksError(error) ? error.message : toErrorMessage(error));
       process.exit(1);
+    }
+
+    if (options.dryRun) {
+      logger.info("\nDry run: no files were written.");
+    } else if (configWritten) {
+      logger.info("\n✓ Config written successfully");
+      logger.info(`  → ${config.componentsDir}`);
+      logger.info(`  → ${config.helpersDir}`);
     }
   });
 }

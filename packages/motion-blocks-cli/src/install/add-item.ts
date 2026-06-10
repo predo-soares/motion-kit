@@ -8,6 +8,7 @@ import type { MotionBlocksConfig } from "../config/types.js";
 import type { Logger } from "../utils/logger.js";
 import { MotionBlocksError } from "../utils/errors.js";
 import { resolveWithinCwd } from "../utils/safe-path.js";
+import { resolveWriteDecision } from "../utils/write-policy.js";
 import { installDependencies, planDependencyInstall } from "./install-deps.js";
 import { resolveAssetUrl, type ResolvedItemSource } from "./resolve-item.js";
 import { resolveEffectiveConfig } from "./resolve-config.js";
@@ -18,6 +19,7 @@ import {
 import { formatUsageOutput, resolveUsageSnippet } from "./resolve-usage.js";
 import { resolveWriteTarget, resolveWriteTargetLabel } from "./resolve-target.js";
 import { ensureExperimentalDecorators } from "./patch-tsconfig.js";
+import { ensureReactJsxCustomElements } from "./patch-react-jsx-types.js";
 
 export interface AddItemOptions {
   cwd: string;
@@ -26,8 +28,13 @@ export interface AddItemOptions {
   overwrite: boolean;
   noInstall: boolean;
   verbose: boolean;
+  interactive: boolean;
+  prompt: (target: string) => Promise<boolean>;
+  confirm?: (command: string) => Promise<boolean>;
   logger: Logger;
 }
+
+export type WriteDecisionOutcome = "created" | "updated" | "skipped" | "identical";
 
 export interface PlannedWrite {
   target: string;
@@ -36,6 +43,7 @@ export interface PlannedWrite {
   exists: boolean;
   source: string;
   itemName: string;
+  decision: WriteDecisionOutcome;
 }
 
 export interface AddItemResult {
@@ -83,6 +91,7 @@ async function planFileWrite(
       exists,
       source: assetUrl,
       itemName: resolved.item.name,
+      decision: "created",
     };
   }
 
@@ -93,67 +102,107 @@ async function planFileWrite(
     exists,
     source: resolved.source,
     itemName: resolved.item.name,
+    decision: "created",
   };
 }
 
-function assertCanWrite(write: PlannedWrite, dryRun: boolean, overwrite: boolean): void {
-  if (dryRun || !write.exists || overwrite) {
-    return;
-  }
-
-  throw new MotionBlocksError(
-    `Refusing to overwrite existing file: ${write.target}.\n\nNext: Run \`motion-blocks add <item> --overwrite\` to replace it, or remove the file manually.`,
-    "file_conflict",
-  );
+function mapDecisionToOutcome(
+  rawDecision: "write" | "skip" | "identical-skip",
+  existed: boolean,
+): WriteDecisionOutcome {
+  if (rawDecision === "identical-skip") return "identical";
+  if (rawDecision === "skip") return "skipped";
+  return existed ? "updated" : "created";
 }
 
 async function writeCodeFile(
   write: PlannedWrite,
   content: string,
   fileType: RegistryFile["type"],
-  options: Pick<AddItemOptions, "dryRun" | "overwrite" | "logger">,
-): Promise<void> {
-  const { dryRun, overwrite, logger } = options;
+  options: Pick<AddItemOptions, "dryRun" | "overwrite" | "interactive" | "prompt" | "logger">,
+): Promise<WriteDecisionOutcome> {
+  const { dryRun, overwrite, interactive, prompt, logger } = options;
 
-  assertCanWrite(write, dryRun, overwrite);
+  const raw = await resolveWriteDecision({
+    resolvedPath: write.resolvedPath,
+    incomingContent: content,
+    flags: { dryRun, overwrite, interactive },
+    prompt,
+  });
+
+  const outcome = mapDecisionToOutcome(raw, write.exists);
+
+  if (raw === "identical-skip") {
+    logger.verbose(`identical, skipping ${write.target}`);
+    return outcome;
+  }
+
+  if (raw === "skip") {
+    logger.info(`skipped (conflict) ${write.target}`);
+    return outcome;
+  }
 
   if (dryRun) {
     const action = write.exists ? "would overwrite" : "would write";
     logger.info(`${action} ${resolveWriteTargetLabel(fileType)} file: ${write.target}`);
-    return;
+    return outcome;
   }
 
   await mkdir(dirname(write.resolvedPath), { recursive: true });
   await writeFile(write.resolvedPath, content, "utf-8");
   logger.info(`wrote ${write.target}`);
+  return outcome;
 }
 
 async function copyAssetFile(
   write: PlannedWrite,
-  options: Pick<AddItemOptions, "dryRun" | "overwrite" | "logger">,
-): Promise<void> {
-  const { dryRun, overwrite, logger } = options;
+  options: Pick<AddItemOptions, "dryRun" | "overwrite" | "interactive" | "prompt" | "logger">,
+): Promise<WriteDecisionOutcome> {
+  const { dryRun, overwrite, interactive, prompt, logger } = options;
 
-  assertCanWrite(write, dryRun, overwrite);
+  let incomingBuffer: Buffer | undefined;
+  if (write.exists) {
+    incomingBuffer = await fetchAssetBuffer(write.source);
+  }
+
+  const raw = await resolveWriteDecision({
+    resolvedPath: write.resolvedPath,
+    incomingContent: incomingBuffer ?? Buffer.alloc(0),
+    flags: { dryRun, overwrite, interactive },
+    prompt,
+  });
+
+  const outcome = mapDecisionToOutcome(raw, write.exists);
+
+  if (raw === "identical-skip") {
+    logger.verbose(`identical asset, skipping ${write.target}`);
+    return outcome;
+  }
+
+  if (raw === "skip") {
+    logger.info(`skipped (conflict) asset: ${write.target}`);
+    return outcome;
+  }
 
   if (dryRun) {
     const action = write.exists ? "would overwrite asset" : "would copy asset";
     logger.info(`${action}: ${write.source} -> ${write.target}`);
-    return;
+    return outcome;
   }
 
-  const buffer = await fetchAssetBuffer(write.source);
+  const buffer = incomingBuffer ?? (await fetchAssetBuffer(write.source));
   await mkdir(dirname(write.resolvedPath), { recursive: true });
   await writeFile(write.resolvedPath, buffer);
   logger.info(`copied asset -> ${write.target}`);
+  return outcome;
 }
 
 async function installResolvedItem(
   resolved: ResolvedItemSource,
   config: MotionBlocksConfig,
-  options: Pick<AddItemOptions, "cwd" | "dryRun" | "overwrite" | "logger">,
+  options: Pick<AddItemOptions, "cwd" | "dryRun" | "overwrite" | "interactive" | "prompt" | "logger">,
 ): Promise<PlannedWrite[]> {
-  const { cwd, dryRun, overwrite, logger } = options;
+  const { cwd, dryRun, overwrite, interactive, prompt, logger } = options;
   const { item } = resolved;
 
   logger.verbose(`installing registry item "${item.name}" from ${resolved.source}`);
@@ -171,18 +220,24 @@ async function installResolvedItem(
     const write = writes[index]!;
 
     if (file.asset === true) {
-      await copyAssetFile(write, { dryRun, overwrite, logger });
+      write.decision = await copyAssetFile(write, { dryRun, overwrite, interactive, prompt, logger });
       continue;
     }
 
-    await writeCodeFile(write, file.content!, file.type, { dryRun, overwrite, logger });
+    write.decision = await writeCodeFile(write, file.content!, file.type, {
+      dryRun,
+      overwrite,
+      interactive,
+      prompt,
+      logger,
+    });
   }
 
   return writes;
 }
 
 export async function addItems(options: AddItemOptions & { refs: string[] }): Promise<AddItemResult[]> {
-  const { cwd, refs, dryRun, overwrite, noInstall, logger } = options;
+  const { cwd, refs, dryRun, overwrite, noInstall, interactive, prompt, confirm, logger } = options;
 
   const config = await resolveEffectiveConfig(cwd);
   const plan = await resolveRegistryInstallPlan(refs, config, cwd);
@@ -194,7 +249,14 @@ export async function addItems(options: AddItemOptions & { refs: string[] }): Pr
   const allWrites: PlannedWrite[] = [];
 
   for (const resolved of plan.items) {
-    const writes = await installResolvedItem(resolved, config, { cwd, dryRun, overwrite, logger });
+    const writes = await installResolvedItem(resolved, config, {
+      cwd,
+      dryRun,
+      overwrite,
+      interactive,
+      prompt,
+      logger,
+    });
     allWrites.push(...writes);
   }
 
@@ -205,6 +267,15 @@ export async function addItems(options: AddItemOptions & { refs: string[] }): Pr
     logger,
   });
 
+  if (config.framework === "react") {
+    await ensureReactJsxCustomElements({
+      cwd,
+      dryRun,
+      logger,
+      items: plan.items.map(({ item }) => item),
+    });
+  }
+
   const npmDeps = mergeRegistryNpmDependencies(plan.items.map(({ item }) => item));
   const dependencyPlan = planDependencyInstall(
     npmDeps.dependencies,
@@ -213,7 +284,7 @@ export async function addItems(options: AddItemOptions & { refs: string[] }): Pr
   );
 
   if (dependencyPlan) {
-    await installDependencies(dependencyPlan, { cwd, dryRun, noInstall, logger });
+    await installDependencies(dependencyPlan, { cwd, dryRun, noInstall, confirm, logger });
   } else {
     logger.verbose("resolved registry tree has no npm dependencies");
   }

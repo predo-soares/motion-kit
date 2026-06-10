@@ -50,6 +50,12 @@
       "type": "string",
       "default": "\"elastic.out(1, 0.3)\"",
       "description": "easing function string."
+    },
+    {
+      "name": "strength",
+      "type": "number",
+      "default": "1",
+      "description": "Multiplier for the magnetic pull."
     }
   ]
 }

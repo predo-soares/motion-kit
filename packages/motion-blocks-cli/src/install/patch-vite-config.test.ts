@@ -4,7 +4,11 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 
-import { ensureViteOptimizeDeps, patchViteOptimizeDeps } from "./patch-vite-config.js";
+import {
+  ensureViteOptimizeDeps,
+  patchViteOptimizeDeps,
+  patchViteReactCompilerBabelInclude,
+} from "./patch-vite-config.js";
 import { createLogger } from "../utils/logger.js";
 
 const logger = createLogger();
@@ -59,6 +63,33 @@ test("patchViteOptimizeDeps skips when already configured", () => {
   assert.equal(changed, false);
 });
 
+test("patchViteReactCompilerBabelInclude scopes React Compiler to JSX files", () => {
+  const input = `import { defineConfig } from 'vite'
+import react, { reactCompilerPreset } from '@vitejs/plugin-react'
+import babel from '@rolldown/plugin-babel'
+
+export default defineConfig({
+  plugins: [react(), babel({ presets: [reactCompilerPreset()] })],
+})
+`;
+
+  const { content, changed } = patchViteReactCompilerBabelInclude(input);
+
+  assert.equal(changed, true);
+  assert.match(content, /babel\(\{\s*presets:\s*\[reactCompilerPreset\(\)\],\s*include:\s*\/\\\.\[jt\]sx\$\/\s*\}\)/);
+});
+
+test("patchViteReactCompilerBabelInclude skips Babel plugins without React Compiler", () => {
+  const input = `export default defineConfig({
+  plugins: [babel({ plugins: ['@babel/plugin-proposal-throw-expressions'] })],
+})
+`;
+
+  const { content, changed } = patchViteReactCompilerBabelInclude(input);
+  assert.equal(changed, false);
+  assert.equal(content, input);
+});
+
 test("ensureViteOptimizeDeps dry-run does not write", async () => {
   const cwd = await mkdtemp(join(tmpdir(), "motion-blocks-vite-"));
   await writeFile(join(cwd, "vite.config.ts"), baseConfig);
@@ -79,4 +110,21 @@ test("ensureViteOptimizeDeps writes vite.config.ts", async () => {
   const content = await readFile(join(cwd, "vite.config.ts"), "utf-8");
   assert.match(content, /optimizeDeps:/);
   assert.match(content, /'gsap'/);
+});
+
+test("ensureViteOptimizeDeps returns user skipped when confirm returns false", async () => {
+  const cwd = await mkdtemp(join(tmpdir(), "motion-blocks-vite-"));
+  await writeFile(join(cwd, "vite.config.ts"), baseConfig);
+
+  const result = await ensureViteOptimizeDeps({
+    cwd,
+    dryRun: false,
+    logger,
+    confirm: async () => false,
+  });
+
+  assert.equal(result.patched, false);
+  assert.equal(result.skippedReason, "user skipped");
+  const content = await readFile(join(cwd, "vite.config.ts"), "utf-8");
+  assert.equal(content, baseConfig);
 });

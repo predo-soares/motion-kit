@@ -10,12 +10,13 @@ export interface PatchTsConfigOptions {
   framework?: Framework;
   dryRun: boolean;
   logger: Logger;
+  confirm?: (description: string) => Promise<boolean>;
 }
 
 export interface PatchTsConfigResult {
   patched: boolean;
   path?: string;
-  skippedReason?: string;
+  skippedReason?: "already enabled" | "no tsconfig found" | "no nuxt config file found" | "user skipped";
 }
 
 function stripJsonComments(text: string): string {
@@ -109,7 +110,7 @@ async function resolveTsConfigPath(cwd: string): Promise<string | null> {
 
 async function patchTsConfigFile(
   path: string,
-  options: Pick<PatchTsConfigOptions, "cwd" | "dryRun" | "logger">,
+  options: Pick<PatchTsConfigOptions, "cwd" | "dryRun" | "logger" | "confirm">,
 ): Promise<PatchTsConfigResult> {
   const content = await readFile(path, "utf-8");
   const { content: nextContent, changed } = patchCompilerOptionsBlock(content);
@@ -125,6 +126,18 @@ async function patchTsConfigFile(
       `would set compilerOptions.experimentalDecorators: true in ${label}`,
     );
     return { patched: true, path: label };
+  }
+
+  if (options.confirm) {
+    const description = `Add compilerOptions.experimentalDecorators: true to ${label}`;
+    const accepted = await options.confirm(description);
+
+    if (!accepted) {
+      options.logger.info(
+        `skipped — add this to ${label} manually:\n  "experimentalDecorators": true`,
+      );
+      return { patched: false, skippedReason: "user skipped" };
+    }
   }
 
   await writeFile(path, nextContent, "utf-8");
@@ -158,7 +171,7 @@ function patchNuxtConfigContent(content: string): { content: string; changed: bo
 
 async function patchNuxtConfig(
   cwd: string,
-  options: Pick<PatchTsConfigOptions, "dryRun" | "logger">,
+  options: Pick<PatchTsConfigOptions, "dryRun" | "logger" | "confirm">,
 ): Promise<PatchTsConfigResult> {
   const candidates = ["nuxt.config.ts", "nuxt.config.mjs", "nuxt.config.js"];
 
@@ -182,6 +195,19 @@ async function patchNuxtConfig(
       return { patched: true, path: name };
     }
 
+    if (options.confirm) {
+      const description = `Add typescript.tsConfig.compilerOptions.experimentalDecorators: true to ${name}`;
+      const manualStep = `  typescript: {\n    tsConfig: {\n      compilerOptions: {\n        experimentalDecorators: true,\n      },\n    },\n  },`;
+      const accepted = await options.confirm(description);
+
+      if (!accepted) {
+        options.logger.info(
+          `skipped — add this to ${name} manually:\n${manualStep}`,
+        );
+        return { patched: false, skippedReason: "user skipped" };
+      }
+    }
+
     await writeFile(path, nextContent, "utf-8");
     options.logger.info(
       `set typescript.tsConfig.compilerOptions.experimentalDecorators: true in ${name}`,
@@ -197,7 +223,11 @@ export async function ensureExperimentalDecorators(
 ): Promise<PatchTsConfigResult> {
   if (options.framework === "nuxt") {
     const nuxtResult = await patchNuxtConfig(options.cwd, options);
-    if (nuxtResult.patched || nuxtResult.skippedReason === "already enabled") {
+    if (
+      nuxtResult.patched ||
+      nuxtResult.skippedReason === "already enabled" ||
+      nuxtResult.skippedReason === "user skipped"
+    ) {
       return nuxtResult;
     }
   }
