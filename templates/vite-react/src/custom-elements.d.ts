@@ -9,6 +9,7 @@ declare module 'react' {
       > & {
         duration?: number | string
         ease?: string
+        strength?: number | string
       }
     }
   }
