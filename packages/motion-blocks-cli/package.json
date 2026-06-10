@@ -37,7 +37,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "dev": "node --experimental-strip-types ./src/index.ts",
-    "test": "pnpm build && node --test dist/catalog/filter-catalog.test.js dist/install/resolve-config.test.js dist/install/resolve-registry-graph.test.js dist/install/patch-tsconfig.test.js dist/install/patch-vite-config.test.js"
+    "test": "pnpm build && node --test dist/catalog/filter-catalog.test.js dist/install/resolve-config.test.js dist/install/resolve-registry-graph.test.js dist/install/patch-tsconfig.test.js dist/install/patch-vite-config.test.js dist/install/install-deps.test.js dist/utils/write-policy.test.js dist/install/add-item.test.js dist/config/config-io.test.js dist/utils/write-preview.test.js"
   },
   "dependencies": {
     "commander": "^11.1.0"
