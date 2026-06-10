@@ -1,3 +1,4 @@
+import { createInterface } from "node:readline";
 import type { Command } from "commander";
 
 import { createLogger } from "../utils/logger.js";
@@ -10,6 +11,17 @@ import { writeConfig } from "../config/config-io.js";
 import { ensureExperimentalDecorators } from "../install/patch-tsconfig.js";
 import { ensureViteOptimizeDeps } from "../install/patch-vite-config.js";
 
+async function confirmOverwrite(diff: string): Promise<boolean> {
+  process.stdout.write(`\n${diff}\n`);
+  const rl = createInterface({ input: process.stdin, output: process.stdout });
+  return new Promise((resolve) => {
+    rl.question("Overwrite? [y/N] ", (answer) => {
+      rl.close();
+      resolve(answer.trim().toLowerCase() === "y");
+    });
+  });
+}
+
 export function registerInitCommand(program: Command): void {
   withCommonOptions(
     program
@@ -21,46 +33,59 @@ export function registerInitCommand(program: Command): void {
 
     logger.verbose(`init — cwd="${options.cwd}"`);
 
+    // Step 1: detect environment — fatal on failure
+    let framework: Awaited<ReturnType<typeof detectFramework>>;
+    let packageManager: Awaited<ReturnType<typeof detectPackageManager>>;
+
     try {
-      // Detect package manager
       logger.info("Detecting package manager...");
-      const packageManager = await detectPackageManager(options.cwd);
+      packageManager = await detectPackageManager(options.cwd);
       logger.verbose(`Detected package manager: ${packageManager}`);
 
-      // Detect framework
       logger.info("Detecting framework...");
-      const framework = await detectFramework(options.cwd);
+      framework = await detectFramework(options.cwd);
       logger.verbose(`Detected framework: ${framework}`);
+    } catch (error) {
+      logger.error(isMotionBlocksError(error) ? error.message : toErrorMessage(error));
+      process.exit(1);
+      return;
+    }
 
-      if (framework === "plain") {
-        logger.warn(
-          "Could not detect a supported framework. Set \"framework\" in motion-blocks.json manually after init.",
-        );
-      }
+    if (framework === "plain") {
+      logger.warn(
+        "Could not detect a supported framework. Set \"framework\" in motion-blocks.json manually after init.",
+      );
+    }
 
-      // Get default directories for the framework
-      const { componentsDir, helpersDir } = getDefaultDirectories(framework);
+    const { componentsDir, helpersDir } = getDefaultDirectories(framework);
 
-      // Build the config object
-      const config: MotionBlocksConfig = {
-        ...DEFAULT_CONFIG,
-        registry: DEFAULT_CONFIG.registry ?? "https://motionkit.org/r",
-        framework,
-        packageManager,
-        componentsDir,
-        helpersDir,
-      };
+    const config: MotionBlocksConfig = {
+      ...DEFAULT_CONFIG,
+      registry: DEFAULT_CONFIG.registry ?? "https://motionkit.org/r",
+      framework,
+      packageManager,
+      componentsDir,
+      helpersDir,
+    };
 
-      // Log what we're going to write
-      logger.info("\nGenerated config:");
-      console.log(JSON.stringify(config, null, 2));
+    logger.info("\nGenerated config:");
+    console.log(JSON.stringify(config, null, 2));
 
-      // Write the config
+    // Step 2: write config — declining is not fatal; patchers still run
+    let configWritten = false;
+    try {
       await writeConfig(options.cwd, config, {
         overwrite: options.overwrite,
         dryRun: options.dryRun,
+        confirm: confirmOverwrite,
       });
+      configWritten = true;
+    } catch (error) {
+      logger.error(isMotionBlocksError(error) ? error.message : toErrorMessage(error));
+    }
 
+    // Step 3: apply patchers — don't depend on config being written
+    try {
       await ensureExperimentalDecorators({
         cwd: options.cwd,
         framework,
@@ -75,17 +100,17 @@ export function registerInitCommand(program: Command): void {
           logger,
         });
       }
-
-      if (options.dryRun) {
-        logger.info("\nDry run: no files were written.");
-      } else {
-        logger.info("\n✓ Config written successfully");
-        logger.info(`  → ${config.componentsDir}`);
-        logger.info(`  → ${config.helpersDir}`);
-      }
     } catch (error) {
       logger.error(isMotionBlocksError(error) ? error.message : toErrorMessage(error));
       process.exit(1);
+    }
+
+    if (options.dryRun) {
+      logger.info("\nDry run: no files were written.");
+    } else if (configWritten) {
+      logger.info("\n✓ Config written successfully");
+      logger.info(`  → ${config.componentsDir}`);
+      logger.info(`  → ${config.helpersDir}`);
     }
   });
 }

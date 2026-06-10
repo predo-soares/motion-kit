@@ -40,25 +40,52 @@ export async function readConfig(cwd: string): Promise<MotionBlocksConfig | null
   }
 }
 
+export type WriteConfigOptions = {
+  overwrite?: boolean;
+  dryRun?: boolean;
+  /**
+   * Optional callback invoked when the config file already exists and
+   * `--overwrite` is not set. Receives a human-readable description of the
+   * proposed change and should return `true` to proceed with writing or
+   * `false` to skip. When omitted, the legacy throw-on-exists behaviour is
+   * preserved for backwards compatibility.
+   */
+  confirm?: (diff: string) => Promise<boolean>;
+};
+
 /**
- * Write the motion-blocks.json config file with overwrite protection
+ * Write the motion-blocks.json config file with overwrite protection.
+ *
+ * Behaviour matrix:
+ * - No existing file            → always writes (no prompt)
+ * - Existing + --overwrite      → writes without prompting
+ * - Existing + confirm callback → calls confirm(diff); writes only if true
+ * - Existing + no confirm       → throws config_exists (legacy)
+ * - --dry-run                   → logs what would be written, no disk write
  */
 export async function writeConfig(
   cwd: string,
   config: MotionBlocksConfig,
-  options: { overwrite?: boolean; dryRun?: boolean } = {}
+  options: WriteConfigOptions = {}
 ): Promise<void> {
   const configPath = getConfigPath(cwd);
+  const configJson = JSON.stringify(config, null, 2) + "\n";
 
   // Check if file already exists
   if (existsSync(configPath) && !options.overwrite) {
-    throw new MotionBlocksError(
-      `motion-blocks.json already exists at ${configPath}.\n\nNext: Edit the existing file, or run \`motion-blocks init --overwrite\` to replace it.`,
-      "config_exists",
-    );
+    if (options.confirm) {
+      const diff = `motion-blocks.json already exists at ${configPath}.\n\nProposed new content:\n${configJson}`;
+      const shouldWrite = await options.confirm(diff);
+      if (!shouldWrite) {
+        return;
+      }
+    } else {
+      throw new MotionBlocksError(
+        `motion-blocks.json already exists at ${configPath}.\n\nNext: Edit the existing file, or run \`motion-blocks init --overwrite\` to replace it.`,
+        "config_exists",
+      );
+    }
   }
-
-  const configJson = JSON.stringify(config, null, 2) + "\n";
 
   if (options.dryRun) {
     console.log(`Would write to ${configPath}:`);
