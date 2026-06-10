@@ -72,7 +72,7 @@ motion-blocks/
 │   │   └── <group>/registry.json  #   Include-based manifest listing the group's published items
 │   │
 │   ├── pages/
-│   │   ├── index.astro            # Live preview/demo gallery (imports & registers every component)
+│   │   ├── index.astro            # Live preview/demo gallery
 │   │   └── docs/                  # Docs site (introduction, installation, components, changelog)
 │   │
 │   ├── components/
@@ -98,7 +98,7 @@ motion-blocks/
 ├── registry.json                  # Root composed source registry (include-based)
 │
 ├── packages/
-│   └── motion-blocks-cli/            # CLI package (init/add/list/build/info commands)
+│   └── motion-blocks/             # CLI package (init/add/list/build/info commands)
 │       └── src/
 │           ├── commands/          #   init, add, list, build, info
 │           ├── producer/          #   discover, validate, generate registry artifacts
@@ -122,15 +122,18 @@ motion-blocks/
 ## How the registry works
 
 1. Each component lives in `src/registry/<group>/<name>/` as a Web Component (Lit `LitElement` or vanilla `HTMLElement`), with an opt-in `component.json` manifest describing its registry metadata.
-2. Group-level `src/registry/<group>/registry.json` files include published components into the composed source registry (`registry.json` at the root).
-3. `public/r/<name>.json` mirrors each item as the static payload the CLI fetches, alongside `public/r/registry.json` as the top-level manifest.
-4. Consumers install a component with:
+2. Group-level `src/registry/<group>/registry.json` files include published items into the composed source registry (`registry.json` at the root).
+3. `motion-blocks build` validates the published item graph and regenerates `public/r/<name>.json` plus `public/r/registry.json`. Text files get inlined as `content`; assets get generated `url` entries.
+4. The docs catalog, component navigation, and preview registration data derive from the published registry item model. Visible components need `src/components/demos/<name>-demo.astro`; preview registrations are derived from `-element.ts` files unless `meta.docs.previewRegistrations` is needed for supporting elements.
+5. Hidden helper libraries use `type: "registry:lib"` with `meta.hidden: true`. They stay out of normal docs browsing and `motion-blocks list`, but remain available through `motion-blocks list --all`, `--type registry:lib`, and `registryDependencies`.
+6. Consumers install a component with:
    ```bash
    pnpm dlx motion-blocks init
    pnpm dlx motion-blocks add magnetic
    ```
+   The CLI fetches the static payload, resolves registry dependencies, writes files to their `target` paths, and installs npm dependencies unless disabled.
 
-See `CLAUDE.md` for the detailed authoring conventions and the steps for adding a new component.
+See `AGENTS.md` and `packages/motion-blocks/README.md` for detailed authoring and publishing conventions.
 
 ## Useful scripts
 
@@ -149,8 +152,8 @@ From the monorepo root:
 
 ```bash
 pnpm --filter motion-blocks build
-node packages/motion-blocks-cli/dist/index.js --help
-node packages/motion-blocks-cli/dist/index.js add magnetic --dry-run --cwd templates/astro
+node packages/motion-blocks/dist/index.js --help
+node packages/motion-blocks/dist/index.js add magnetic --dry-run --cwd templates/astro
 ```
 
-See `packages/motion-blocks-cli/RELEASE.md` for the pre-publish checklist.
+See `packages/motion-blocks/RELEASE.md` for the pre-publish checklist.

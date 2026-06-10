@@ -92,6 +92,26 @@ motion-blocks build --check
 
 Maintainer command for registry authors. It validates source manifests and regenerates static registry payloads in `public/r`. Use `--check` to validate without writing files.
 
+## Maintainer publishing path
+
+Published items start in the source registry, not in the generated `public/r` files.
+
+1. Create the Web Component in `src/registry/<group>/<name>/`. Components are custom elements, usually Lit-based, and visible preview items must expose `replay()` for the demo replay control.
+2. Add `src/registry/<group>/<name>/component.json`. This is the opt-in component manifest and the source of truth for the published item.
+3. Include the item name in the composed source registry: `src/registry/<group>/registry.json`, reached from the root `registry.json` include list.
+4. Add a demo partial at `src/components/demos/<name>-demo.astro` for visible components.
+5. Run `motion-blocks build --check`, then `motion-blocks build` when you are ready to regenerate `public/r/<name>.json` and `public/r/registry.json`.
+
+Author explicitly in `component.json`: `name`, `type`, `title`, `description`, npm `dependencies` or `devDependencies`, `registryDependencies`, `files` with install `target` paths, `usage`, `props`, and any intentional docs metadata under `meta.docs`.
+
+Derived during build: text file `content`, asset `url` entries, `$schema`, the flattened catalog entry in `public/r/registry.json`, docs catalog data, group assignment from the composed source registry, default docs order from include order, and default preview registrations from `registry:component` files ending in `-element.ts`.
+
+Use `meta.docs.order` only when include order is not enough. Use `meta.docs.previewRegistrations` only when a visible item needs supporting custom elements or a registration list that cannot be derived from its `-element.ts` files. Do not add a second docs catalog record or separate preview wiring for the same item.
+
+Hidden helper libraries use `type: "registry:lib"` with `meta.hidden: true`. They stay out of normal docs browsing and `motion-blocks list`, appear with `motion-blocks list --all` or `--type registry:lib`, and remain installable when referenced through `registryDependencies`. Hidden metadata is only supported for `registry:lib` items.
+
+When consumers run `motion-blocks add <name>`, the CLI fetches the static payload from the configured registry, resolves `registryDependencies`, writes every file to its declared `target`, installs npm dependencies unless disabled, and prints framework usage guidance.
+
 ## Configuration
 
 The CLI reads `motion-blocks.json` from your project root.
@@ -163,4 +183,4 @@ motion-blocks list --all
 
 - Docs: https://motionkit.org/docs
 - Registry: https://motionkit.org/r/registry.json
-- Package source: https://github.com/predo-soares/motion-kit/tree/main/packages/motion-blocks-cli
+- Package source: https://github.com/predo-soares/motion-kit/tree/main/packages/motion-blocks
