@@ -1,4 +1,4 @@
-import { stat } from "node:fs/promises";
+import { readdir, readFile, stat } from "node:fs/promises";
 import { isAbsolute, join, relative } from "node:path";
 
 import type { DiscoveredItem, RegistryFile, RegistryItem } from "./types.js";
@@ -114,4 +114,180 @@ export async function validateRegistryGraph(items: DiscoveredItem[], cwd: string
     results.push({ item: discovered, issues: await validateSourceItem(discovered, cwd) });
   }
   return results;
+}
+
+export async function validatePublishedRegistryGraph(items: DiscoveredItem[], cwd: string): Promise<ItemValidationResult[]> {
+  const results = await validateRegistryGraph(items, cwd);
+  const visiblePublishedComponents = items.filter(({ item }) => isVisibleComponent(item));
+  const includedVisibleNames = new Set(visiblePublishedComponents.map(({ item }) => item.name));
+  const orderOwnersByGroup = new Map<string, Map<number, string>>();
+
+  for (const result of results) {
+    const { item, group, hasOwnManifest, manifestPath } = result.item;
+    const manifest = relative(cwd, manifestPath);
+
+    if (isVisibleComponent(item) && !hasOwnManifest) {
+      result.issues.push({
+        manifest,
+        message: `published component "${item.name}" is included from a composed source registry but has no component.json at "src/registry/${group}/${item.name}/component.json"`,
+      });
+    }
+
+    if (!isVisibleComponent(item)) continue;
+
+    if (!(await pathExists(join(cwd, "src/components/demos", `${item.name}-demo.astro`)))) {
+      result.issues.push({
+        manifest,
+        message: `visible published component "${item.name}" is missing demo partial "src/components/demos/${item.name}-demo.astro"`,
+      });
+    }
+
+    validatePreviewRegistrationMetadata(item, result.issues, manifest);
+    validateDocsOrder(item, group, result.issues, manifest, orderOwnersByGroup);
+  }
+
+  for (const manifest of await discoverComponentManifests(cwd)) {
+    if (!isVisibleComponent(manifest.item)) continue;
+    if (includedVisibleNames.has(manifest.item.name)) continue;
+
+    results.push({
+      item: {
+        item: manifest.item,
+        group: manifest.group,
+        manifestPath: manifest.path,
+        hasOwnManifest: true,
+      },
+      issues: [
+        {
+          manifest: relative(cwd, manifest.path),
+          message: `visible component manifest "${manifest.item.name}" is not included in the composed source registries`,
+        },
+      ],
+    });
+  }
+
+  return results;
+}
+
+function isVisibleComponent(item: RegistryItem) {
+  return item.type === "registry:component" && item.meta?.hidden !== true;
+}
+
+function validatePreviewRegistrationMetadata(item: RegistryItem, issues: ValidationIssue[], manifest: string): void {
+  const explicitRegistrations = getDocsMeta(item).previewRegistrations;
+  const registrations = Array.isArray(explicitRegistrations)
+    ? explicitRegistrations
+    : item.files
+        .filter((file) => file.type === "registry:component" && file.path.endsWith("-element.ts"))
+        .map((file) => file.path);
+
+  if (registrations.length === 0) {
+    issues.push({
+      manifest,
+      message: `visible published component "${item.name}" has no preview registration metadata`,
+    });
+    return;
+  }
+
+  registrations.forEach((registration, index) => {
+    if (typeof registration !== "string" || registration.length === 0) {
+      issues.push({
+        manifest,
+        message: `visible published component "${item.name}" has invalid preview registration at meta.docs.previewRegistrations[${index}]`,
+      });
+    }
+  });
+}
+
+function validateDocsOrder(
+  item: RegistryItem,
+  group: string,
+  issues: ValidationIssue[],
+  manifest: string,
+  orderOwnersByGroup: Map<string, Map<number, string>>,
+): void {
+  const order = getDocsMeta(item).order;
+  if (order === undefined) return;
+
+  if (typeof order !== "number" || !Number.isInteger(order) || order < 0) {
+    issues.push({
+      manifest,
+      message: `visible published component "${item.name}" has invalid meta.docs.order "${String(order)}" (expected a non-negative integer)`,
+    });
+    return;
+  }
+
+  let groupOrders = orderOwnersByGroup.get(group);
+  if (!groupOrders) {
+    groupOrders = new Map();
+    orderOwnersByGroup.set(group, groupOrders);
+  }
+
+  const existing = groupOrders.get(order);
+  if (existing) {
+    issues.push({
+      manifest,
+      message: `visible published component "${item.name}" duplicates meta.docs.order ${order} already used by "${existing}" in group "${group}"`,
+    });
+    return;
+  }
+
+  groupOrders.set(order, item.name);
+}
+
+function getDocsMeta(item: RegistryItem): { order?: unknown; previewRegistrations?: unknown } {
+  const docs = item.meta?.docs;
+  return docs && typeof docs === "object" ? docs : {};
+}
+
+async function discoverComponentManifests(cwd: string): Promise<Array<{ item: RegistryItem; path: string; group: string }>> {
+  const registryRoot = join(cwd, "src/registry");
+  const manifests: Array<{ item: RegistryItem; path: string; group: string }> = [];
+  await walkRegistryManifests(registryRoot, async (path) => {
+    let raw: string;
+    try {
+      raw = await readFile(path, "utf8");
+    } catch {
+      return;
+    }
+
+    try {
+      manifests.push({
+        item: JSON.parse(raw) as RegistryItem,
+        path,
+        group: relative(registryRoot, path).split("/")[0] ?? "",
+      });
+    } catch {
+      manifests.push({
+        item: {
+          name: relative(cwd, path),
+          type: "registry:component",
+          title: "",
+          description: "",
+          files: [],
+        },
+        path,
+        group: relative(registryRoot, path).split("/")[0] ?? "",
+      });
+    }
+  });
+  return manifests;
+}
+
+async function walkRegistryManifests(dir: string, visit: (path: string) => Promise<void>): Promise<void> {
+  let entries;
+  try {
+    entries = await readdir(dir, { withFileTypes: true });
+  } catch {
+    return;
+  }
+
+  for (const entry of entries) {
+    const path = join(dir, entry.name);
+    if (entry.isDirectory()) {
+      await walkRegistryManifests(path, visit);
+    } else if (entry.name === "component.json") {
+      await visit(path);
+    }
+  }
 }
