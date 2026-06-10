@@ -11,8 +11,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "registry:validate": "node scripts/validate-registry.mjs",
-    "registry:build": "pnpm --filter motion-blocks build && node packages/motion-blocks-cli/dist/index.js build",
-    "registry:build:check": "pnpm --filter motion-blocks build && node packages/motion-blocks-cli/dist/index.js build --check"
+    "registry:build": "pnpm --filter motion-blocks build && node packages/motion-blocks/dist/index.js build",
+    "registry:build:check": "pnpm --filter motion-blocks build && node packages/motion-blocks/dist/index.js build --check"
   },
   "dependencies": {
     "@astrojs/react": "^5.0.7",
