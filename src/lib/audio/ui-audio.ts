@@ -4,6 +4,7 @@ import { _patch } from "../../../.web-kits/minimal";
 const patch = definePatch(_patch);
 const wiredElements = new WeakSet<HTMLElement>();
 const lastPlayedAt = new Map<string, number>();
+const AUDIO_UNLOCKED_KEY = "motion-kit:audio-unlocked";
 
 const audioTargetSelector = [
   "[data-audio-hover]",
@@ -27,12 +28,21 @@ const cardActionSounds: Record<string, string> = {
 let isReady = false;
 let readyPromise: Promise<void> | undefined;
 
+function markAudioUnlocked() {
+  try {
+    sessionStorage.setItem(AUDIO_UNLOCKED_KEY, "1");
+  } catch {
+    // sessionStorage may be unavailable in private mode.
+  }
+}
+
 function unlockAudio() {
   if (isReady) return Promise.resolve();
 
   readyPromise ??= ensureReady()
     .then(() => {
       isReady = true;
+      markAudioUnlocked();
     })
     .catch(() => {
       readyPromise = undefined;
@@ -41,8 +51,8 @@ function unlockAudio() {
   return readyPromise;
 }
 
-function play(soundName: string, volume = 1) {
-  if (!isReady) return;
+function playSound(soundName: string, volume = 1, allowBeforeReady = false) {
+  if (!isReady && !allowBeforeReady) return;
 
   try {
     patch.play(soundName, {
@@ -54,6 +64,15 @@ function play(soundName: string, volume = 1) {
   }
 }
 
+function playFromGesture(soundName: string, volume = 1) {
+  void unlockAudio();
+  playSound(soundName, volume, true);
+}
+
+function play(soundName: string, volume = 1) {
+  playSound(soundName, volume);
+}
+
 function playThrottled(soundName: string, key: string, intervalMs: number, volume = 1) {
   const now = performance.now();
   const last = lastPlayedAt.get(key) ?? 0;
@@ -61,6 +80,33 @@ function playThrottled(soundName: string, key: string, intervalMs: number, volum
 
   lastPlayedAt.set(key, now);
   play(soundName, volume);
+}
+
+function isNavigationLink(element: HTMLElement) {
+  if (!(element instanceof HTMLAnchorElement)) return false;
+  if (!element.href || element.hasAttribute("download")) return false;
+  if (element.target && element.target !== "_self") return false;
+  if (element.getAttribute("href")?.startsWith("#")) return false;
+  if (element.getAttribute("aria-disabled") === "true") return false;
+
+  try {
+    const url = new URL(element.href);
+    if (url.origin !== window.location.origin) return false;
+
+    const current = new URL(window.location.href);
+    if (
+      url.pathname === current.pathname &&
+      url.search === current.search &&
+      url.hash &&
+      !url.search
+    ) {
+      return false;
+    }
+
+    return url.href !== current.href;
+  } catch {
+    return false;
+  }
 }
 
 function inferClickSound(element: HTMLElement) {
@@ -101,18 +147,26 @@ function wireElement(element: HTMLElement) {
 
   element.addEventListener("pointerenter", () => {
     const hoverSound = inferHoverSound(element);
-    if (hoverSound) play(hoverSound, 0.65);
+    if (hoverSound) void unlockAudio().then(() => play(hoverSound, 0.65));
   });
 
   element.addEventListener("pointerdown", () => {
-    void unlockAudio();
+    if (!isNavigationLink(element)) {
+      void unlockAudio();
+      return;
+    }
+
+    const clickSound = inferClickSound(element);
+    playFromGesture("page-exit");
+    if (clickSound) playFromGesture(clickSound);
+    markAudioUnlocked();
   });
 
   element.addEventListener("click", () => {
+    if (isNavigationLink(element)) return;
+
     const clickSound = inferClickSound(element);
-    if (clickSound) {
-      void unlockAudio().then(() => play(clickSound));
-    }
+    if (clickSound) void unlockAudio().then(() => play(clickSound));
   });
 
   wiredElements.add(element);
@@ -124,9 +178,24 @@ function wireAudioTargets(root: ParentNode = document) {
     .forEach(wireElement);
 }
 
-wireAudioTargets();
+function restoreAudioUnlock() {
+  try {
+    if (sessionStorage.getItem(AUDIO_UNLOCKED_KEY) !== "1") return;
+  } catch {
+    return;
+  }
 
-document.addEventListener("astro:page-load", () => wireAudioTargets());
+  void unlockAudio().then(() => play("page-enter"));
+}
+
+function initAudio() {
+  wireAudioTargets();
+  restoreAudioUnlock();
+}
+
+initAudio();
+
+document.addEventListener("astro:page-load", initAudio);
 
 document.addEventListener("input", (event) => {
   const element = event.target;

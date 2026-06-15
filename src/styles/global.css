@@ -47,6 +47,11 @@
   --corner-shape-default: squircle;
 }
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: gray transparent;
+}
+
 html {
   -webkit-text-size-adjust: 100%;
 }
@@ -63,11 +68,6 @@ body {
 
 button {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-* {
-  scrollbar-width: thin;
-  scrollbar-color: gray transparent;
 }
 
 body.mk-card-fullscreen-open {

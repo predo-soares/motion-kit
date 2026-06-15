@@ -17,53 +17,105 @@ const { tabs } = Astro.props;
 const multiTab = tabs.length > 1;
 ---
 
-<div data-code-tabs class="overflow-hidden rounded-2xl border border-slate-200">
-  <div class="flex items-center border-b border-slate-100 bg-white">
-    {multiTab ? (
-      tabs.map((tab, i) => (
-        <button
-          type="button"
-          data-tab-btn={i}
-          title={tab.label}
-          class:list={[
-            "shrink-0 select-none px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300",
-            i === 0 ? "text-slate-900" : "text-slate-400 hover:text-slate-700",
-          ]}
-        >{tab.label}</button>
-      ))
-    ) : (
-      <span class="flex-1 px-3 py-2 text-xs text-slate-500">{tabs[0]?.label}</span>
-    )}
+<div data-code-tabs class="overflow-hidden rounded-2xl bg-slate-50">
+  <div class="flex items-center border-b border-slate-200/60">
+    {
+      multiTab ? (
+        tabs.map((tab, i) => (
+          <button
+            type="button"
+            data-tab-btn={i}
+            title={tab.label}
+            class:list={[
+              "shrink-0 select-none px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300",
+              i === 0
+                ? "text-slate-900"
+                : "text-slate-400 hover:text-slate-700",
+            ]}
+          >
+            {tab.label}
+          </button>
+        ))
+      ) : (
+        <span class="flex-1 px-3 py-2 text-xs text-slate-500">
+          {tabs[0]?.label}
+        </span>
+      )
+    }
     <button
       type="button"
       data-copy-text={tabs[0]?.code}
       data-copy-btn
       title="Copy to clipboard"
       class="ml-auto shrink-0 select-none px-3 py-2 text-xs font-medium text-slate-500 transition-colors hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300"
-    >Copy</button>
+      >Copy</button
+    >
   </div>
-  {tabs.map((tab, i) => (
-    // prettier-ignore
-    <pre
-      data-tab-panel={i}
-      class:list={[
+  {
+    tabs.map((tab, i) =>
+      // prettier-ignore
+      <pre data-tab-panel={i} class:list={[
         "overflow-x-auto bg-slate-50 py-2.5 text-[13px] leading-6 text-slate-800",
         tab.wrap && "whitespace-pre-wrap",
         i !== 0 && "hidden",
-      ]}
-    ><CodeLines code={tab.code} showLineNumbers={tab.showLineNumbers} highlightLines={tab.highlightLines} /></pre>
-  ))}
+      ]}><CodeLines code={tab.code} showLineNumbers={tab.showLineNumbers} highlightLines={tab.highlightLines} /></pre>,
+    )
+  }
 </div>
 
 <script>
   document.querySelectorAll<HTMLElement>("[data-code-tabs]").forEach((el) => {
-    const buttons = Array.from(el.querySelectorAll<HTMLButtonElement>("[data-tab-btn]"));
-    const panels = Array.from(el.querySelectorAll<HTMLElement>("[data-tab-panel]"));
+    const buttons = Array.from(
+      el.querySelectorAll<HTMLButtonElement>("[data-tab-btn]"),
+    );
+    const panels = Array.from(
+      el.querySelectorAll<HTMLElement>("[data-tab-panel]"),
+    );
     const copyBtn = el.querySelector<HTMLButtonElement>("[data-copy-btn]");
+    let copyResetTimeout: number | undefined;
+
+    const resetCopyLabel = () => {
+      window.clearTimeout(copyResetTimeout);
+      if (copyBtn) copyBtn.textContent = "Copy";
+    };
+
+    const writeClipboardText = async (text: string) => {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.append(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      textarea.remove();
+    };
+
+    copyBtn?.addEventListener("click", (event) => {
+      event.stopPropagation();
+
+      const text = copyBtn.dataset.copyText;
+      if (!text) return;
+
+      copyBtn.textContent = "Copied!";
+      window.clearTimeout(copyResetTimeout);
+      copyResetTimeout = window.setTimeout(resetCopyLabel, 1000);
+      void writeClipboardText(text).catch(() => {
+        copyBtn.textContent = "Copy failed";
+        window.clearTimeout(copyResetTimeout);
+        copyResetTimeout = window.setTimeout(resetCopyLabel, 1000);
+      });
+    });
 
     if (!buttons.length) return;
 
     const setActive = (index: number) => {
+      resetCopyLabel();
       buttons.forEach((btn, i) => {
         btn.classList.toggle("text-slate-900", i === index);
         btn.classList.toggle("text-slate-400", i !== index);
