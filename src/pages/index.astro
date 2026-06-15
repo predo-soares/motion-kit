@@ -1,5 +1,6 @@
 ---
 import SiteLayout from "@/layouts/site-layout.astro";
+import Logo from "@/components/vectors/logo.astro";
 ---
 
 <SiteLayout title="Motion Blocks — Astro Registry">
@@ -25,6 +26,9 @@ import SiteLayout from "@/layouts/site-layout.astro";
     >
     </div>
 
+    <div class="absolute left-1/2 -translate-x-1/2 top-10">
+      <Logo class="h-14" />
+    </div>
     <!-- Headline -->
     <div data-animate class="opacity-0 flex flex-col items-center gap-5">
       <h1

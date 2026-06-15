@@ -1,7 +1,7 @@
 export type SvgSdf = {
-	data: Float32Array;
-	width: number;
-	height: number;
+  data: Float32Array;
+  width: number;
+  height: number;
 };
 
 const sdfSize = 2048;
@@ -10,181 +10,196 @@ const inf = 1e20;
 const sdfPaddingRatio = 0.05;
 
 export const defaultLogoSvg = `
-<svg width="36" height="21" viewBox="0 0 36 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M8.77997 0.252267C8.86894 0.0962906 9.03472 0 9.21429 0H14.6334C14.813 0 14.9788 0.0962903 15.0678 0.252267L17.4896 4.49804C17.6814 4.8344 18.1663 4.8344 18.3582 4.49804L20.78 0.252266C20.8689 0.0962897 21.0347 0 21.2143 0H26.6334C26.813 0 26.9788 0.0962903 27.0678 0.252267L29.7826 5.01173C29.8701 5.16527 29.8701 5.35365 29.7826 5.50719L27.3504 9.77119C27.1602 10.1045 27.401 10.5189 27.7847 10.5189H32.6345C32.8135 10.5189 32.9789 10.6146 33.068 10.7698L35.7813 15.4924C35.8696 15.6461 35.8699 15.8351 35.782 15.9892L33.0678 20.7477C32.9788 20.9037 32.813 21 32.6334 21H27.2143C27.0347 21 26.8689 20.9037 26.78 20.7477L24.3582 16.502C24.1663 16.1656 23.6814 16.1656 23.4896 16.502L21.0678 20.7477C20.9788 20.9037 20.813 21 20.6334 21H15.2143C15.0347 21 14.8689 20.9037 14.78 20.7477L12.3582 16.502C12.1663 16.1656 11.6814 16.1656 11.4896 16.502L9.06776 20.7477C8.97879 20.9037 8.81301 21 8.63345 21H3.21429C3.03472 21 2.86894 20.9037 2.77997 20.7477L0.0656847 15.9892C-0.0221722 15.8351 -0.0218778 15.6461 0.0664582 15.4924L2.77971 10.7698C2.86888 10.6146 3.03424 10.5189 3.21325 10.5189H8.06304C8.44678 10.5189 8.68749 10.1045 8.49736 9.77119L6.06517 5.50719C5.97759 5.35365 5.97759 5.16527 6.06517 5.01173L8.77997 0.252267Z" fill="currentColor"/>
-</svg>
+  <svg width="73" height="53" viewBox="0 0 73 53" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M1.22925 30.6245C1.19434 30.056 1.48743 29.7245 2.05593 29.6896L7.45264 29.3582C11.0077 29.1399 12.8804 30.8413 13.0304 33.2834C13.1528 35.2772 11.9565 36.4758 10.3782 36.9505L10.3881 37.1107C12.139 37.0915 13.99 38.4406 14.1424 40.9228C14.2993 43.477 12.5752 45.5038 8.81992 45.7344L3.0629 46.0879C2.4944 46.1228 2.16296 45.8297 2.12805 45.2612L1.22925 30.6245ZM5.0003 43.4774L8.19509 43.2812C10.349 43.149 11.1897 42.1811 11.1095 40.876C11.0196 39.4107 9.81374 38.3595 7.98014 38.4721L4.70529 38.6732L5.0003 43.4774ZM4.57401 36.5354L7.51257 36.3549C9.05792 36.26 10.1719 35.2915 10.0834 33.8502C10.0057 32.5851 9.04435 31.7198 7.29883 31.827L4.29621 32.0114L4.57401 36.5354Z" fill="#040E55"/>
+  <path d="M28.1749 36.1221C24.8604 35.6953 23.0544 33.0892 23.5049 29.5905C23.9563 26.0845 26.3645 24.0134 29.679 24.4402C32.9936 24.8669 34.7986 27.4804 34.3471 30.9865C33.8967 34.4852 31.4895 36.5489 28.1749 36.1221ZM26.209 29.9312C25.9426 32.0009 26.6306 33.7518 28.4647 33.9879C30.2693 34.2203 31.3784 32.7008 31.6449 30.6311C31.9114 28.5613 31.2262 26.7884 29.4216 26.556C27.5875 26.3199 26.4755 27.8614 26.209 29.9312Z" fill="#040E55"/>
+  <path d="M58.7543 51.9029C57.3414 51.7534 56.5488 50.6632 56.7066 49.1719C56.8648 47.6774 57.8683 46.774 59.2811 46.9235C60.6939 47.073 61.4862 48.1664 61.3281 49.6609C61.1703 51.1522 60.1671 52.0524 58.7543 51.9029ZM57.8592 49.2906C57.7658 50.1729 58.0751 50.9104 58.8569 50.9931C59.6261 51.0745 60.0828 50.418 60.1762 49.5358C60.2695 48.6536 59.9613 47.9066 59.1921 47.8253C58.4103 47.7425 57.9525 48.4084 57.8592 49.2906Z" fill="#040E55"/>
+  <path d="M62.7253 48.1799C62.6988 47.9573 62.8065 47.8205 63.029 47.7939L63.4397 47.7449C63.6623 47.7184 63.7991 47.8261 63.8257 48.0486L63.8803 48.5063L63.9304 48.5004C64.0394 47.9214 64.4629 47.553 65.0146 47.4872L65.0961 47.4774C65.3136 47.461 65.4393 47.5827 65.4651 47.7991L65.5063 48.1439C65.5343 48.379 65.453 48.4968 65.2842 48.4947C65.1953 48.4958 65.1005 48.5007 65.0159 48.5108C64.392 48.5852 63.9828 49.0728 64.0557 49.6841L64.3522 52.17C64.3788 52.3926 64.2711 52.5295 64.0485 52.556L63.6034 52.6091C63.3808 52.6357 63.2439 52.528 63.2174 52.3054L62.7253 48.1799Z" fill="#040E55"/>
+  <path d="M70.8185 52.1768C69.8817 52.5716 69.136 52.485 68.6464 52.1363C68.4533 51.995 68.4848 51.7933 68.678 51.6502L68.9841 51.4253C69.1461 51.3057 69.2836 51.3231 69.4646 51.4112C69.7077 51.5246 70.0462 51.5636 70.5 51.3723C71.0993 51.1198 71.4217 50.6653 71.1446 50.0078L70.7879 49.1612L70.7355 49.1832C70.7111 49.5806 70.5261 50.1417 69.761 50.4641C68.7311 50.8981 67.6129 50.5128 66.9986 49.0553C66.3795 47.5861 66.8504 46.4352 67.8832 46C68.6716 45.6677 69.206 46.0009 69.5021 46.2564L69.5603 46.2319L69.3838 45.813C69.2967 45.6064 69.3623 45.4451 69.5689 45.3581L69.9675 45.1901C70.1741 45.1031 70.3353 45.1687 70.4224 45.3753L72.2013 49.5967C72.6832 50.7401 72.0259 51.668 70.8185 52.1768ZM68.0697 48.597C68.4167 49.4204 69.0113 49.807 69.7066 49.514C70.3787 49.2308 70.5411 48.5594 70.1819 47.707C69.8251 46.8603 69.2161 46.4558 68.5382 46.7414C67.8371 47.0369 67.7277 47.7853 68.0697 48.597Z" fill="#040E55"/>
+  <path d="M38.1918 46.4001C34.7984 46.723 32.5205 44.5003 32.1934 41.0625C31.8634 37.5952 33.7344 34.9927 37.0613 34.6761C39.4862 34.4453 41.3861 35.5178 42.0975 37.427C42.2974 37.96 41.9964 38.3244 41.4419 38.3771L40.4734 38.4693C40.0002 38.5143 39.7418 38.3077 39.4933 37.8912C39.06 37.1789 38.3091 36.7357 37.3037 36.8313C35.655 36.9882 34.6843 38.4681 34.9024 40.76C35.1233 43.0814 36.3357 44.376 38.0065 44.217C38.9454 44.1276 39.6499 43.613 39.9576 42.7706C40.1224 42.3073 40.3446 42.0549 40.8178 42.0099L41.7789 41.9184C42.3407 41.865 42.6861 42.123 42.6202 42.6067C42.3296 44.6486 40.735 46.158 38.1918 46.4001Z" fill="#040E55"/>
+  <path d="M65.2147 34.2051C64.7743 34.3715 64.4781 34.2327 64.1143 33.9195C63.6692 33.5582 63.0161 33.3727 62.1672 33.59C61.0808 33.8681 60.3861 34.5979 60.5848 35.3443C60.7415 35.9864 61.287 36.2608 62.4738 36.2253L64.4619 36.1457C66.6643 36.0648 67.9255 36.7692 68.336 38.343C68.8647 40.4384 67.2815 42.3692 64.5188 43.0764C62.2022 43.6694 60.3948 43.1968 59.3928 41.8281C59.0534 41.3707 59.2653 40.9409 59.792 40.7524L60.7537 40.4065C61.2031 40.2455 61.4939 40.3934 61.8489 40.7318C62.365 41.2206 63.1024 41.3462 64.0089 41.1141C65.2463 40.7974 65.921 40.0191 65.7276 39.2636C65.5674 38.6377 64.9876 38.3492 63.9161 38.3858L61.9299 38.4726C59.6951 38.5771 58.4297 37.7664 58.0244 36.153C57.4942 34.1116 58.972 32.3381 61.634 31.6567C63.8139 31.0987 65.4413 31.5867 66.3993 32.8133C66.7459 33.2689 66.5502 33.7023 66.0181 33.8998L65.2147 34.2051Z" fill="#040E55"/>
+  <path d="M47.8296 26.3409C47.9546 25.7804 48.3312 25.5413 48.8916 25.6663L50.0125 25.9164C50.5729 26.0414 50.8121 26.418 50.687 26.9784L48.8924 35.0219L49.0898 35.0659L54.0017 31.5463C54.3774 31.2738 54.723 31.21 55.173 31.3104L56.4359 31.5922C57.1937 31.7612 57.3117 32.3096 56.6797 32.7652L52.0083 36.0982L54.9141 42.8702C55.2021 43.5476 54.8596 43.9684 54.1413 43.8081L52.6889 43.4841C52.2232 43.3802 51.9444 43.144 51.7606 42.7052L49.473 37.3224L48.1827 38.2029L47.4677 41.4077C47.3427 41.9681 46.9661 42.2073 46.4057 42.0822L45.2848 41.8322C44.7244 41.7071 44.4852 41.3306 44.6103 40.7702L47.8296 26.3409Z" fill="#040E55"/>
+  <path d="M19.4511 40.7103C19.4246 41.2369 19.1207 41.5116 18.5941 41.4851L17.5408 41.4321C17.0142 41.4056 16.7394 41.1018 16.7659 40.5752L17.4482 27.016C17.4747 26.4894 17.7786 26.2147 18.3052 26.2412L19.3585 26.2942C19.8851 26.3207 20.1599 26.6245 20.1334 27.1511L19.4511 40.7103Z" fill="#040E55"/>
+  <path d="M2.45325 9.45254C2.9078 9.34172 3.24214 9.45894 3.51909 9.84241L10.1144 18.9283L10.2876 18.8861L11.9607 7.78419C12.0301 7.31628 12.273 7.05832 12.7275 6.94749L14.5457 6.50418C15.058 6.37928 15.408 6.59206 15.5329 7.10433L18.7487 20.2935C18.8736 20.8058 18.6608 21.1558 18.1485 21.2807L17.1673 21.5199C16.655 21.6448 16.305 21.4321 16.1801 20.9198L13.8984 11.5618L13.7614 11.5952L12.2435 22.0172C12.1723 22.4779 11.933 22.7503 11.4784 22.8611L10.8868 23.0054C10.4322 23.1162 10.0872 22.9863 9.81918 22.6083L3.66939 14.0329L3.5323 14.0663L5.81922 23.4459C5.94412 23.9582 5.73134 24.3082 5.21907 24.4331L4.23782 24.6724C3.72554 24.7973 3.37555 24.5845 3.25065 24.0722L0.0348939 10.883C-0.0900068 10.3708 0.122774 10.0208 0.635046 9.89585L2.45325 9.45254Z" fill="#040E55"/>
+  <path d="M24.5752 16.6024C21.2607 16.1757 19.4548 13.5695 19.9052 10.0708C20.3567 6.56479 22.7648 4.49375 26.0793 4.92051C29.3939 5.34727 31.1989 7.96078 30.7475 11.4668C30.297 14.9655 27.8898 17.0292 24.5752 16.6024ZM22.6094 10.4115C22.3429 12.4813 23.031 14.2321 24.865 14.4683C26.6696 14.7006 27.7787 13.1812 28.0452 11.1114C28.3117 9.04167 27.6265 7.2687 25.8219 7.03635C23.9879 6.80021 22.8759 8.34178 22.6094 10.4115Z" fill="#040E55"/>
+  <path d="M50.0858 22.7979C46.7713 22.3712 44.9654 19.765 45.4158 16.2663C45.8673 12.7603 48.2754 10.6893 51.59 11.116C54.9045 11.5428 56.7095 14.1563 56.2581 17.6623C55.8076 21.161 53.4004 23.2247 50.0858 22.7979ZM48.12 16.607C47.8535 18.6768 48.5416 20.4277 50.3756 20.6638C52.1802 20.8961 53.2893 19.3767 53.5558 17.3069C53.8223 15.2372 53.1371 13.4642 51.3325 13.2319C49.4985 12.9957 48.3865 14.5373 48.12 16.607Z" fill="#040E55"/>
+  <path d="M28.4345 0.896682C28.5276 0.235175 28.9422 -0.0770161 29.6037 0.016144L42.7779 1.87147C43.4394 1.96463 43.7516 2.37917 43.6584 3.04068L43.539 3.88852C43.4459 4.55003 43.0313 4.86222 42.3698 4.76906L37.497 4.08283L35.3622 19.2416C35.2691 19.9031 34.8545 20.2153 34.193 20.1221L32.8141 19.9279C32.1526 19.8348 31.8404 19.4202 31.9336 18.7587L34.0684 3.59997L29.1956 2.91373C28.5341 2.82057 28.2219 2.40604 28.3151 1.74453L28.4345 0.896682Z" fill="#040E55"/>
+  <path d="M42.631 11.5583C41.7921 11.362 41.2613 10.5665 41.4441 9.78551C41.6286 8.99728 42.4573 8.52002 43.2962 8.71636C44.1278 8.911 44.6586 9.70647 44.4741 10.4947C44.2913 11.2757 43.4626 11.753 42.631 11.5583ZM38.5323 23.1387L40.7597 13.6222C40.8799 13.1087 41.2279 12.8927 41.7413 13.0129L42.7682 13.2532C43.2816 13.3734 43.4977 13.7214 43.3775 14.2349L41.1501 23.7514C41.0299 24.2649 40.6819 24.4809 40.1684 24.3607L39.1416 24.1204C38.6281 24.0002 38.4121 23.6521 38.5323 23.1387Z" fill="#040E55"/>
+  <path d="M68.2785 18.6805C68.308 19.0939 68.0971 19.3372 67.6837 19.3668L66.8976 19.4229C66.5541 19.4474 66.312 19.336 66.0941 19.0706L60.2034 11.7367L60.1044 11.7437L60.6388 19.2262C60.6684 19.6396 60.4575 19.8829 60.0441 19.9124L59.1648 19.9752C58.7514 20.0048 58.5081 19.7939 58.4785 19.3805L57.7183 8.73619C57.6887 8.32277 57.8996 8.07945 58.313 8.04992L59.1108 7.99294C59.4543 7.96841 59.7022 8.07946 59.9143 8.34523L65.7996 15.6854L65.9044 15.6779L65.3696 8.18969C65.34 7.77626 65.5509 7.53295 65.9643 7.50342L66.8319 7.44145C67.2454 7.41192 67.4887 7.62279 67.5182 8.03622L68.2785 18.6805Z" fill="#040E55"/>
+  </svg>
+
 `.trim();
 
 export async function buildSvgSdf(svgSource: string): Promise<SvgSdf> {
-	const image = await loadSvg(svgSource);
-	const raster = rasterizeSvgAlpha(image, sdfSize * rasterSupersample);
-	const coverage = downsampleCoverage(raster.coverage, raster.size, sdfSize);
-	const mask = thresholdCoverage(coverage);
-	const inside = distanceTransform(mask, sdfSize, sdfSize, true);
-	const outside = distanceTransform(mask, sdfSize, sdfSize, false);
-	const data = new Float32Array(sdfSize * sdfSize);
+  const image = await loadSvg(svgSource);
+  const raster = rasterizeSvgAlpha(image, sdfSize * rasterSupersample);
+  const coverage = downsampleCoverage(raster.coverage, raster.size, sdfSize);
+  const mask = thresholdCoverage(coverage);
+  const inside = distanceTransform(mask, sdfSize, sdfSize, true);
+  const outside = distanceTransform(mask, sdfSize, sdfSize, false);
+  const data = new Float32Array(sdfSize * sdfSize);
 
-	for (let index = 0; index < data.length; index++) {
-		const signedDistance = Math.sqrt(inside[index]) - Math.sqrt(outside[index]);
-		const coverageOffset = 0.5 - coverage[index];
-		data[index] = (signedDistance + coverageOffset) / sdfSize;
-	}
+  for (let index = 0; index < data.length; index++) {
+    const signedDistance = Math.sqrt(inside[index]) - Math.sqrt(outside[index]);
+    const coverageOffset = 0.5 - coverage[index];
+    data[index] = (signedDistance + coverageOffset) / sdfSize;
+  }
 
-	return {
-		data,
-		width: sdfSize,
-		height: sdfSize,
-	};
+  return {
+    data,
+    width: sdfSize,
+    height: sdfSize,
+  };
 }
 
 async function loadSvg(svgSource: string): Promise<HTMLImageElement> {
-	const url = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgSource)}`;
+  const url = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgSource)}`;
 
-	return new Promise((resolve, reject) => {
-		const image = new Image();
-		image.onload = () => resolve(image);
-		image.onerror = () => reject(new Error("Failed to load SVG"));
-		image.src = url;
-	});
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.onload = () => resolve(image);
+    image.onerror = () => reject(new Error("Failed to load SVG"));
+    image.src = url;
+  });
 }
 
 function rasterizeSvgAlpha(image: HTMLImageElement, size: number) {
-	const canvas = document.createElement("canvas");
-	canvas.width = size;
-	canvas.height = size;
+  const canvas = document.createElement("canvas");
+  canvas.width = size;
+  canvas.height = size;
 
-	const context = canvas.getContext("2d", { willReadFrequently: true });
-	if (!context) throw new Error("Could not create canvas context");
+  const context = canvas.getContext("2d", { willReadFrequently: true });
+  if (!context) throw new Error("Could not create canvas context");
 
-	const naturalWidth = image.naturalWidth || image.width || 1;
-	const naturalHeight = image.naturalHeight || image.height || 1;
-	const drawableSize = size * (1 - sdfPaddingRatio * 2);
-	const scale = Math.min(
-		drawableSize / naturalWidth,
-		drawableSize / naturalHeight,
-	);
-	const drawWidth = naturalWidth * scale;
-	const drawHeight = naturalHeight * scale;
-	const x = (size - drawWidth) * 0.5;
-	const y = (size - drawHeight) * 0.5;
+  const naturalWidth = image.naturalWidth || image.width || 1;
+  const naturalHeight = image.naturalHeight || image.height || 1;
+  const drawableSize = size * (1 - sdfPaddingRatio * 2);
+  const scale = Math.min(
+    drawableSize / naturalWidth,
+    drawableSize / naturalHeight,
+  );
+  const drawWidth = naturalWidth * scale;
+  const drawHeight = naturalHeight * scale;
+  const x = (size - drawWidth) * 0.5;
+  const y = (size - drawHeight) * 0.5;
 
-	context.clearRect(0, 0, size, size);
-	context.drawImage(image, x, y, drawWidth, drawHeight);
+  context.clearRect(0, 0, size, size);
+  context.drawImage(image, x, y, drawWidth, drawHeight);
 
-	const pixels = context.getImageData(0, 0, size, size).data;
-	const coverage = new Float32Array(size * size);
-	for (let pixel = 3, index = 0; pixel < pixels.length; pixel += 4, index++) {
-		coverage[index] = pixels[pixel] / 255;
-	}
+  const pixels = context.getImageData(0, 0, size, size).data;
+  const coverage = new Float32Array(size * size);
+  for (let pixel = 3, index = 0; pixel < pixels.length; pixel += 4, index++) {
+    coverage[index] = pixels[pixel] / 255;
+  }
 
-	return { coverage, size };
+  return { coverage, size };
 }
 
 function downsampleCoverage(
-	source: Float32Array,
-	sourceSize: number,
-	targetSize: number,
+  source: Float32Array,
+  sourceSize: number,
+  targetSize: number,
 ) {
-	if (sourceSize === targetSize) return source;
+  if (sourceSize === targetSize) return source;
 
-	const scale = sourceSize / targetSize;
-	const output = new Float32Array(targetSize * targetSize);
+  const scale = sourceSize / targetSize;
+  const output = new Float32Array(targetSize * targetSize);
 
-	for (let y = 0; y < targetSize; y++) {
-		for (let x = 0; x < targetSize; x++) {
-			let sum = 0;
+  for (let y = 0; y < targetSize; y++) {
+    for (let x = 0; x < targetSize; x++) {
+      let sum = 0;
 
-			for (let sy = 0; sy < scale; sy++) {
-				for (let sx = 0; sx < scale; sx++) {
-					const sourceX = x * scale + sx;
-					const sourceY = y * scale + sy;
-					sum += source[sourceY * sourceSize + sourceX];
-				}
-			}
+      for (let sy = 0; sy < scale; sy++) {
+        for (let sx = 0; sx < scale; sx++) {
+          const sourceX = x * scale + sx;
+          const sourceY = y * scale + sy;
+          sum += source[sourceY * sourceSize + sourceX];
+        }
+      }
 
-			output[y * targetSize + x] = sum / (scale * scale);
-		}
-	}
+      output[y * targetSize + x] = sum / (scale * scale);
+    }
+  }
 
-	return output;
+  return output;
 }
 
 function thresholdCoverage(coverage: Float32Array) {
-	const mask = new Uint8Array(coverage.length);
+  const mask = new Uint8Array(coverage.length);
 
-	for (let index = 0; index < coverage.length; index++) {
-		mask[index] = coverage[index] >= 0.5 ? 1 : 0;
-	}
+  for (let index = 0; index < coverage.length; index++) {
+    mask[index] = coverage[index] >= 0.5 ? 1 : 0;
+  }
 
-	return mask;
+  return mask;
 }
 
 function distanceTransform(
-	alpha: Uint8Array,
-	width: number,
-	height: number,
-	targetInside: boolean,
+  alpha: Uint8Array,
+  width: number,
+  height: number,
+  targetInside: boolean,
 ) {
-	const grid = new Float64Array(width * height);
+  const grid = new Float64Array(width * height);
 
-	for (let index = 0; index < grid.length; index++) {
-		const isInside = alpha[index] === 1;
-		grid[index] = isInside === targetInside ? 0 : inf;
-	}
+  for (let index = 0; index < grid.length; index++) {
+    const isInside = alpha[index] === 1;
+    grid[index] = isInside === targetInside ? 0 : inf;
+  }
 
-	const temp = new Float64Array(Math.max(width, height));
-	const transformed = new Float64Array(width * height);
+  const temp = new Float64Array(Math.max(width, height));
+  const transformed = new Float64Array(width * height);
 
-	for (let y = 0; y < height; y++) {
-		const rowOffset = y * width;
-		for (let x = 0; x < width; x++) temp[x] = grid[rowOffset + x];
-		const row = edt1d(temp, width);
-		for (let x = 0; x < width; x++) transformed[rowOffset + x] = row[x];
-	}
+  for (let y = 0; y < height; y++) {
+    const rowOffset = y * width;
+    for (let x = 0; x < width; x++) temp[x] = grid[rowOffset + x];
+    const row = edt1d(temp, width);
+    for (let x = 0; x < width; x++) transformed[rowOffset + x] = row[x];
+  }
 
-	for (let x = 0; x < width; x++) {
-		for (let y = 0; y < height; y++) temp[y] = transformed[y * width + x];
-		const column = edt1d(temp, height);
-		for (let y = 0; y < height; y++) transformed[y * width + x] = column[y];
-	}
+  for (let x = 0; x < width; x++) {
+    for (let y = 0; y < height; y++) temp[y] = transformed[y * width + x];
+    const column = edt1d(temp, height);
+    for (let y = 0; y < height; y++) transformed[y * width + x] = column[y];
+  }
 
-	return transformed;
+  return transformed;
 }
 
 function edt1d(input: Float64Array, length: number) {
-	const output = new Float64Array(length);
-	const locations = new Int32Array(length);
-	const boundaries = new Float64Array(length + 1);
-	let k = 0;
+  const output = new Float64Array(length);
+  const locations = new Int32Array(length);
+  const boundaries = new Float64Array(length + 1);
+  let k = 0;
 
-	locations[0] = 0;
-	boundaries[0] = -inf;
-	boundaries[1] = inf;
+  locations[0] = 0;
+  boundaries[0] = -inf;
+  boundaries[1] = inf;
 
-	for (let q = 1; q < length; q++) {
-		let s = intersection(input, q, locations[k]);
+  for (let q = 1; q < length; q++) {
+    let s = intersection(input, q, locations[k]);
 
-		while (s <= boundaries[k]) {
-			k--;
-			s = intersection(input, q, locations[k]);
-		}
+    while (s <= boundaries[k]) {
+      k--;
+      s = intersection(input, q, locations[k]);
+    }
 
-		k++;
-		locations[k] = q;
-		boundaries[k] = s;
-		boundaries[k + 1] = inf;
-	}
+    k++;
+    locations[k] = q;
+    boundaries[k] = s;
+    boundaries[k + 1] = inf;
+  }
 
-	k = 0;
-	for (let q = 0; q < length; q++) {
-		while (boundaries[k + 1] < q) k++;
-		const dx = q - locations[k];
-		output[q] = dx * dx + input[locations[k]];
-	}
+  k = 0;
+  for (let q = 0; q < length; q++) {
+    while (boundaries[k + 1] < q) k++;
+    const dx = q - locations[k];
+    output[q] = dx * dx + input[locations[k]];
+  }
 
-	return output;
+  return output;
 }
 
 function intersection(input: Float64Array, q: number, vk: number) {
-	return (input[q] + q * q - (input[vk] + vk * vk)) / (2 * q - 2 * vk);
+  return (input[q] + q * q - (input[vk] + vk * vk)) / (2 * q - 2 * vk);
 }
