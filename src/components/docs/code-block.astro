@@ -9,10 +9,16 @@ interface Props {
   highlightLines?: number[];
 }
 
-const { code, label, wrap = false, showLineNumbers = false, highlightLines = [] } = Astro.props;
+const {
+  code,
+  label,
+  wrap = false,
+  showLineNumbers = false,
+  highlightLines = [],
+} = Astro.props;
 ---
 
-<figure class="my-4 w-full min-w-0 overflow-hidden rounded-3xl bg-slate-100">
+<figure class="my-4 w-full min-w-0 overflow-hidden rounded-3xl bg-slate-50">
   {
     label ? (
       <figcaption class="border-b border-slate-400/60 px-4 py-2 text-xs font-medium text-slate-700">
